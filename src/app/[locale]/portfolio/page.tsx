@@ -13,14 +13,14 @@ export async function generateMetadata({ params: { locale } }: PortfolioPageProp
   const t = await getTranslations({ locale, namespace: 'portfolio' });
 
   return {
-    title: 'Portfolio - Property Icon',
-    description: 'View our portfolio of successful real estate transactions and investments.',
+    title: 'Properties - Property Icon',
+    description: 'View our properties of successful real estate transactions and investments.',
     alternates: {
       canonical: `/${locale}/portfolio`,
     },
     openGraph: {
-      title: 'Portfolio - Property Icon',
-      description: 'View our portfolio of successful real estate transactions and investments.',
+      title: 'Properties - Property Icon',
+      description: 'View our properties of successful real estate transactions and investments.',
       images: ['/og-portfolio.jpg'],
     },
   };
@@ -94,7 +94,7 @@ export default async function PortfolioPage({ params: { locale } }: PortfolioPag
   ];
 
   const stats = [
-    { icon: TrendingUp, value: '€250M+', label: 'Total Portfolio Value' },
+    { icon: TrendingUp, value: '€250M+', label: 'Total Properties Value' },
     { icon: Building2, value: '150+', label: 'Properties Managed' },
     { icon: Award, value: '98%', label: 'Client Satisfaction' }
   ];
@@ -106,7 +106,7 @@ export default async function PortfolioPage({ params: { locale } }: PortfolioPag
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Our Portfolio
+              Our Properties
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
               A showcase of our successful transactions and managed properties across Mallorca's most prestigious locations.
@@ -197,7 +197,7 @@ export default async function PortfolioPage({ params: { locale } }: PortfolioPag
               Ready to Invest?
             </h2>
             <p className="text-lg text-gray-300 mb-8">
-              Join our exclusive portfolio of premium real estate investments. Contact our team to explore current opportunities.
+              Join our exclusive collection of premium real estate investments. Contact our team to explore current opportunities.
             </p>
             <Link
               href={`/${locale}/contact`}

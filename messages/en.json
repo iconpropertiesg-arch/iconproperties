@@ -2,12 +2,12 @@
   "navigation": {
     "home": "Home",
     "about": "About",
-    "portfolio": "Portfolio",
+    "portfolio": "Properties",
     "contact": "Contact",
     "faq": "FAQ"
   },
   "portfolio": {
-    "title": "Our Portfolio",
+    "title": "Our Properties",
     "subtitle": "Successful transactions and investments"
   },
   "faq": {
