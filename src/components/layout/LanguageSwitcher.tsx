@@ -37,12 +37,12 @@ export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors focus-ring"
+        className="flex items-center space-x-2 px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-colors text-white"
         aria-label="Select language"
       >
         <Globe className="w-4 h-4" />
-        <span className="text-sm font-medium hidden sm:inline">
-          {currentLanguage.name}
+        <span className="text-sm font-medium">
+          {currentLanguage.flag}
         </span>
         <ChevronDown className={cn(
           "w-4 h-4 transition-transform",
@@ -56,22 +56,22 @@ export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-md shadow-lg border z-20 glass-effect">
-            <div className="py-1">
+          <div className="absolute right-0 top-full mt-2 w-48 bg-gray-900/95 backdrop-blur-md rounded-lg shadow-2xl border border-gray-700 z-20">
+            <div className="py-2">
               {languages.map((language) => (
                 <Link
                   key={language.code}
                   href={getLocalizedPath(language.code)}
                   className={cn(
-                    "flex items-center space-x-3 px-4 py-2 text-sm hover:bg-gray-50 transition-colors",
-                    language.code === locale && "bg-primary/10 text-primary"
+                    "flex items-center space-x-3 px-4 py-3 text-sm hover:bg-gray-800 transition-colors text-white",
+                    language.code === locale && "bg-blue-600/20 text-blue-400"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
                   <span className="text-lg">{language.flag}</span>
                   <span className="font-medium">{language.name}</span>
                   {language.code === locale && (
-                    <div className="ml-auto w-2 h-2 bg-primary rounded-full" />
+                    <div className="ml-auto w-2 h-2 bg-blue-400 rounded-full" />
                   )}
                 </Link>
               ))}

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface HeaderProps {
   locale: string;
@@ -133,13 +134,16 @@ export default function Header({ locale }: HeaderProps) {
               />
             </Link>
 
-            {/* Get In Touch button - positioned absolutely on desktop */}
-            <Link 
-              href={`/${locale}/contact`}
-              className="hidden lg:block absolute right-0 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/40"
-            >
-              Get In Touch
-            </Link>
+            {/* Right side actions - positioned absolutely on desktop */}
+            <div className="hidden lg:flex items-center space-x-4 absolute right-0">
+              <LanguageSwitcher locale={locale} />
+              <Link 
+                href={`/${locale}/contact`}
+                className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/40"
+              >
+                Get In Touch
+              </Link>
+            </div>
 
             {/* Mobile Menu Button */}
             <button
@@ -207,7 +211,7 @@ export default function Header({ locale }: HeaderProps) {
                 >
                   {t('faq')}
                 </Link>
-                <div className="pt-6">
+                <div className="pt-6 space-y-4">
                   <Link 
                     href={`/${locale}/contact`}
                     className="block w-full text-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-full transition-all duration-300"
@@ -215,6 +219,9 @@ export default function Header({ locale }: HeaderProps) {
                   >
                     Get In Touch
                   </Link>
+                  <div className="flex justify-center">
+                    <LanguageSwitcher locale={locale} />
+                  </div>
                 </div>
               </nav>
             </div>
