@@ -1,0 +1,147 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "portfolio": "Portfolio",
+    "contact": "Kontakt",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "title": "Luxusimmobilien auf Mallorca",
+    "subtitle": "Wir kuratieren Villen, Apartments und Gewerbeflächen, die durch Design, Lage und langfristigen Wert definiert sind. Diskretion, Geschwindigkeit und erstklassiger Service—vom Anfang bis zum Schlüssel.",
+    "searchPlaceholder": {
+      "purpose": "Ich möchte…",
+      "type": "Apartment, Haus, Gewerbe",
+      "location": "Gebiet oder Stadt",
+      "price": "Maximales Budget?"
+    },
+    "searchButton": "Immobilien suchen"
+  },
+  "propertyTypes": {
+    "apartment": "Apartment",
+    "house": "Haus",
+    "commercial": "Gewerbe",
+    "villa": "Villa"
+  },
+  "purpose": {
+    "buy": "Kaufen",
+    "rent": "Mieten"
+  },
+  "common": {
+    "beds": "Zimmer",
+    "baths": "Bäder",
+    "sqm": "m²",
+    "viewDetails": "Details ansehen",
+    "requestDetails": "Details anfordern",
+    "scheduleViewing": "Besichtigung vereinbaren",
+    "getValuation": "Bewertung erhalten",
+    "exploreAll": "Alle Immobilien erkunden",
+    "clearAll": "Alle löschen",
+    "noResults": "Noch keine Treffer. Versuchen Sie, Ihren Preisbereich zu erweitern oder Filter zu entfernen.",
+    "loading": "Wird geladen...",
+    "submit": "Absenden",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "message": "Nachricht",
+    "consent": "Ich stimme zu, bezüglich dieser Anfrage kontaktiert zu werden",
+    "success": "Vielen Dank! Wir melden uns in Kürze bei Ihnen."
+  },
+  "home": {
+    "featuredProperties": "Ausgewählte Immobilien",
+    "aboutSnippet": {
+      "title": "Unser Team kennenlernen",
+      "text": "Ein Boutique-Immobilienunternehmen, das auf Vertrauen, Diskretion und Exzellenz aufbaut."
+    },
+    "hiring": {
+      "title": "Wir stellen Immobilienmakler ein",
+      "text": "Werden Sie Teil einer wachsenden Marke, die sich auf Qualität, Marketing-Exzellenz und Vertrauen konzentriert.",
+      "cta": "Jetzt bewerben"
+    },
+    "sellRent": {
+      "title": "Denken Sie über Verkauf oder Vermietung nach?",
+      "text": "Erhalten Sie innerhalb von 24 Stunden eine kostenlose Bewertung. Diskret, datenbasiert und schnell.",
+      "cta": "Bewertung erhalten"
+    },
+    "newsletter": {
+      "title": "Seien Sie der Erste, der es erfährt",
+      "text": "Exklusive Angebote und Einblicke—direkt in Ihren Posteingang.",
+      "cta": "Abonnieren"
+    },
+    "areas": {
+      "title": "Gebiete erkunden",
+      "cta": "Alle Gebiete anzeigen"
+    }
+  },
+  "properties": {
+    "title": "Immobilien zum Verkauf & zur Miete",
+    "subtitle": "Kuratierte Auswahl, täglich aktualisiert. Filtern Sie nach Typ, Gebiet und Budget.",
+    "filters": {
+      "sort": "Sortieren nach",
+      "newest": "Neueste",
+      "priceAsc": "Preis: Niedrig zu Hoch",
+      "priceDesc": "Preis: Hoch zu Niedrig"
+    }
+  },
+  "about": {
+    "title": "Ein Boutique-Immobilienunternehmen, das auf Vertrauen aufbaut",
+    "subtitle": "Unser Ethos, unsere Märkte und was uns unterscheidet.",
+    "founder": {
+      "title": "Daniel kennenlernen",
+      "text": "Mit jahrelanger Expertise in Luxusimmobilien bringt Daniel unvergleichliches Wissen über den Mallorca-Markt mit."
+    },
+    "values": {
+      "discretion": "Diskretion",
+      "design": "Design-geführte Kuration",
+      "speed": "Geschwindigkeit",
+      "service": "Service"
+    },
+    "cta": "Arbeiten Sie mit uns"
+  },
+  "contact": {
+    "title": "Lassen Sie uns Ihr nächstes Zuhause finden",
+    "form": {
+      "reason": "Ich interessiere mich für",
+      "buying": "Kaufen",
+      "selling": "Verkaufen",
+      "renting": "Mieten"
+    },
+    "info": {
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "address": "Adresse",
+      "hours": "Bürozeiten"
+    }
+  },
+  "sell": {
+    "title": "Verkaufen oder vermieten Sie mit Vertrauen",
+    "subtitle": "Bewertung in 24h, Premium-Marketing, qualifizierte Käufer.",
+    "pillars": {
+      "valuation": "Kostenlose Bewertung",
+      "marketing": "Premium-Marketing",
+      "discretion": "Vollständige Diskretion"
+    },
+    "form": {
+      "location": "Immobilienstandort",
+      "type": "Immobilientyp",
+      "estimatedPrice": "Geschätzter Preis (Optional)",
+      "contactMethod": "Bevorzugte Kontaktmethode"
+    }
+  },
+  "footer": {
+    "company": "Lion Capital Immobilien",
+    "address": "Mallorca, Spanien",
+    "quickLinks": "Schnelllinks",
+    "social": "Folgen Sie uns",
+    "newsletter": {
+      "title": "Newsletter",
+      "placeholder": "E-Mail eingeben"
+    },
+    "legal": {
+      "privacy": "Datenschutz",
+      "terms": "Nutzungsbedingungen",
+      "impressum": "Impressum"
+    },
+    "copyright": "© 2024 Lion Capital Immobilien. Alle Rechte vorbehalten."
+  }
+}

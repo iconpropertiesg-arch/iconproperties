@@ -1,0 +1,26 @@
+/* Debug styles to test Tailwind functionality */
+
+/* Test if Tailwind utilities are working */
+.debug-test {
+  @apply bg-red-500 text-white p-4 rounded-lg shadow-lg;
+}
+
+/* Test custom utilities */
+.debug-glass {
+  @apply backdrop-blur-lg bg-white/10 border border-white/20;
+}
+
+/* Test responsive classes */
+.debug-responsive {
+  @apply text-sm md:text-base lg:text-lg xl:text-xl;
+}
+
+/* Test color palette */
+.debug-colors {
+  @apply bg-primary text-primary-foreground;
+}
+
+/* Test animations */
+.debug-animation {
+  @apply animate-pulse hover:animate-bounce;
+}

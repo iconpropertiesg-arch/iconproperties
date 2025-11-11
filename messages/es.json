@@ -1,0 +1,147 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "portfolio": "Portafolio",
+    "contact": "Contacto",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "title": "Inmobiliaria de Lujo en Mallorca",
+    "subtitle": "Curamos villas, apartamentos y espacios comerciales definidos por el diseño, la ubicación y el valor a largo plazo. Discreción, velocidad y servicio de guante blanco—desde el inicio hasta las llaves.",
+    "searchPlaceholder": {
+      "purpose": "Quiero…",
+      "type": "Apartamento, Casa, Comercial",
+      "location": "Área o ciudad",
+      "price": "¿Presupuesto máximo?"
+    },
+    "searchButton": "Buscar Propiedades"
+  },
+  "propertyTypes": {
+    "apartment": "Apartamento",
+    "house": "Casa",
+    "commercial": "Comercial",
+    "villa": "Villa"
+  },
+  "purpose": {
+    "buy": "Comprar",
+    "rent": "Alquilar"
+  },
+  "common": {
+    "beds": "Habitaciones",
+    "baths": "Baños",
+    "sqm": "m²",
+    "viewDetails": "Ver Detalles",
+    "requestDetails": "Solicitar Detalles",
+    "scheduleViewing": "Programar Visita",
+    "getValuation": "Obtener Valoración",
+    "exploreAll": "Explorar Todas las Propiedades",
+    "clearAll": "Limpiar Todo",
+    "noResults": "Aún no hay coincidencias. Intente ampliar su rango de precios o eliminar filtros.",
+    "loading": "Cargando...",
+    "submit": "Enviar",
+    "name": "Nombre",
+    "email": "Email",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "consent": "Acepto ser contactado con respecto a esta consulta",
+    "success": "¡Gracias! Nos pondremos en contacto en breve."
+  },
+  "home": {
+    "featuredProperties": "Propiedades Destacadas",
+    "aboutSnippet": {
+      "title": "Conoce al Equipo",
+      "text": "Una empresa inmobiliaria boutique construida sobre confianza, discreción y excelencia."
+    },
+    "hiring": {
+      "title": "Estamos contratando agentes inmobiliarios",
+      "text": "Únete a una marca en crecimiento enfocada en calidad, excelencia en marketing y confianza.",
+      "cta": "Aplicar Ahora"
+    },
+    "sellRent": {
+      "title": "¿Pensando en vender o alquilar?",
+      "text": "Obtén una valoración gratuita en 24 horas. Discreto, basado en datos y rápido.",
+      "cta": "Obtener Valoración"
+    },
+    "newsletter": {
+      "title": "Sé el primero en saber",
+      "text": "Listados exclusivos e insights—directo a tu bandeja de entrada.",
+      "cta": "Suscribirse"
+    },
+    "areas": {
+      "title": "Explorar Áreas",
+      "cta": "Ver Todas las Áreas"
+    }
+  },
+  "properties": {
+    "title": "Propiedades en Venta y Alquiler",
+    "subtitle": "Selección curada actualizada diariamente. Filtra por tipo, área y presupuesto.",
+    "filters": {
+      "sort": "Ordenar por",
+      "newest": "Más Recientes",
+      "priceAsc": "Precio: Menor a Mayor",
+      "priceDesc": "Precio: Mayor a Menor"
+    }
+  },
+  "about": {
+    "title": "Una empresa inmobiliaria boutique construida sobre confianza",
+    "subtitle": "Nuestro ethos, mercados servidos y lo que nos hace diferentes.",
+    "founder": {
+      "title": "Conoce a Daniel",
+      "text": "Con años de experiencia en bienes raíces de lujo, Daniel aporta un conocimiento incomparable del mercado de Mallorca."
+    },
+    "values": {
+      "discretion": "Discreción",
+      "design": "Curación dirigida por diseño",
+      "speed": "Velocidad",
+      "service": "Servicio"
+    },
+    "cta": "Trabaja con nosotros"
+  },
+  "contact": {
+    "title": "Encontremos tu próximo hogar",
+    "form": {
+      "reason": "Estoy interesado en",
+      "buying": "Comprar",
+      "selling": "Vender",
+      "renting": "Alquilar"
+    },
+    "info": {
+      "phone": "Teléfono",
+      "email": "Email",
+      "address": "Dirección",
+      "hours": "Horario de Oficina"
+    }
+  },
+  "sell": {
+    "title": "Vende o alquila con confianza",
+    "subtitle": "Valoración en 24h, marketing premium, compradores calificados.",
+    "pillars": {
+      "valuation": "Valoración Gratuita",
+      "marketing": "Marketing Premium",
+      "discretion": "Discreción Completa"
+    },
+    "form": {
+      "location": "Ubicación de la Propiedad",
+      "type": "Tipo de Propiedad",
+      "estimatedPrice": "Precio Estimado (Opcional)",
+      "contactMethod": "Método de Contacto Preferido"
+    }
+  },
+  "footer": {
+    "company": "Lion Capital Inmobiliaria",
+    "address": "Mallorca, España",
+    "quickLinks": "Enlaces Rápidos",
+    "social": "Síguenos",
+    "newsletter": {
+      "title": "Newsletter",
+      "placeholder": "Ingresa tu email"
+    },
+    "legal": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "impressum": "Impressum"
+    },
+    "copyright": "© 2024 Lion Capital Inmobiliaria. Todos los derechos reservados."
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "title": "Luxury Real Estate in Mallorca",
+    "subtitle": "We curate villas, apartments, and commercial spaces defined by design, location, and long-term value. Discretion, speed, and white-glove service—start to keys.",
+    "searchPlaceholder": {
+      "purpose": "I want to…",
+      "type": "Apartment, House, Commercial",
+      "location": "Area or city",
+      "price": "Max budget?"
+    },
+    "searchButton": "Search Properties"
+  },
+  "propertyTypes": {
+    "apartment": "Apartment",
+    "house": "House",
+    "commercial": "Commercial",
+    "villa": "Villa"
+  },
+  "purpose": {
+    "buy": "Buy",
+    "rent": "Rent"
+  },
+  "common": {
+    "beds": "Beds",
+    "baths": "Baths",
+    "sqm": "m²",
+    "viewDetails": "View Details",
+    "requestDetails": "Request Details",
+    "scheduleViewing": "Schedule a Viewing",
+    "getValuation": "Get a Valuation",
+    "exploreAll": "Explore All Properties",
+    "clearAll": "Clear All",
+    "noResults": "No matches yet. Try widening your price range or removing filters.",
+    "loading": "Loading...",
+    "submit": "Submit",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "consent": "I agree to be contacted regarding this inquiry",
+    "success": "Thank you! We'll be in touch shortly."
+  },
+  "home": {
+    "featuredProperties": "Featured Properties",
+    "aboutSnippet": {
+      "title": "Meet the Team",
+      "text": "A boutique real estate company built on trust, discretion, and excellence."
+    },
+    "hiring": {
+      "title": "We're hiring real estate agents",
+      "text": "Join a growing brand focused on quality, marketing excellence, and trust.",
+      "cta": "Apply Now"
+    },
+    "sellRent": {
+      "title": "Thinking of selling or renting?",
+      "text": "Get a free valuation within 24 hours. Discreet, data-driven, and fast.",
+      "cta": "Get a Valuation"
+    },
+    "newsletter": {
+      "title": "Be first to know",
+      "text": "Exclusive listings and insights—straight to your inbox.",
+      "cta": "Subscribe"
+    },
+    "areas": {
+      "title": "Explore Areas",
+      "cta": "View All Areas"
+    }
+  },
+  "properties": {
+    "title": "Properties for Sale & Rent",
+    "subtitle": "Curated selection updated daily. Filter by type, area, and budget.",
+    "filters": {
+      "sort": "Sort by",
+      "newest": "Newest",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low"
+    }
+  },
+  "about": {
+    "title": "A boutique real estate company built on trust",
+    "subtitle": "Our ethos, markets served, and what makes us different.",
+    "founder": {
+      "title": "Meet Daniel",
+      "text": "With years of expertise in luxury real estate, Daniel brings unparalleled knowledge of the Mallorca market."
+    },
+    "values": {
+      "discretion": "Discretion",
+      "design": "Design-led curation", 
+      "speed": "Speed",
+      "service": "Service"
+    },
+    "cta": "Work with us"
+  },
+  "contact": {
+    "title": "Let's find your next home",
+    "form": {
+      "reason": "I'm interested in",
+      "buying": "Buying",
+      "selling": "Selling", 
+      "renting": "Renting"
+    },
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "hours": "Office Hours"
+    }
+  },
+  "sell": {
+    "title": "Sell or rent with confidence",
+    "subtitle": "Valuation in 24h, premium marketing, qualified buyers.",
+    "pillars": {
+      "valuation": "Free Valuation",
+      "marketing": "Premium Marketing",
+      "discretion": "Complete Discretion"
+    },
+    "form": {
+      "location": "Property Location",
+      "type": "Property Type",
+      "estimatedPrice": "Estimated Price (Optional)",
+      "contactMethod": "Preferred Contact Method"
+    }
+  },
+  "footer": {
+    "company": "Lion Capital Real Estate",
+    "address": "Mallorca, Spain",
+    "quickLinks": "Quick Links",
+    "social": "Follow Us",
+    "newsletter": {
+      "title": "Newsletter",
+      "placeholder": "Enter your email"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service", 
+      "impressum": "Impressum"
+    },
+    "copyright": "© 2024 Lion Capital Real Estate. All rights reserved."
+  }
+}
