@@ -90,15 +90,23 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br from-black via-blue-950 to-blue-900">
+      {/* Hero Section with animated gradient */}
+      <section className="relative py-32 overflow-hidden">
+        {/* Animated blob shapes */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full mix-blend-screen filter blur-xl opacity-20 animate-blob" />
+        <div className="absolute top-1/2 right-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-xl opacity-20 animate-blob animation-delay-2000" />
+        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-pink-500 rounded-full mix-blend-screen filter blur-xl opacity-20 animate-blob animation-delay-4000" />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 animate-fade-in-up">
+              About Us
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up animation-delay-200">
               {t('title')}
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed animate-fade-in-up animation-delay-400">
               {t('subtitle')} We specialize in luxury properties across Mallorca's most desirable locations, 
               offering unparalleled expertise and personalized service to discerning clients worldwide.
             </p>
@@ -107,12 +115,12 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
       </section>
 
       {/* Company Story */}
-      <section className="py-20">
+      <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
+            <div className="bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl p-8 border border-gray-700">
+              <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
+              <div className="space-y-4 text-gray-300 leading-relaxed">
                 <p>
                   Founded with a vision to redefine luxury real estate in Mallorca, Lion Capital Real Estate 
                   has grown from a boutique agency to one of the island's most trusted names in premium property services.
@@ -128,13 +136,13 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
                 </p>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative rounded-2xl overflow-hidden border border-gray-700">
               <Image
                 src="/about/company-story.jpg"
                 alt="Lion Capital Real Estate office"
                 width={600}
                 height={400}
-                className="rounded-2xl shadow-lg"
+                className="rounded-2xl"
               />
             </div>
           </div>
@@ -142,11 +150,11 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 relative border-t border-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Values</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-white mb-4">Our Values</h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               These core principles guide every aspect of our business and define our commitment to excellence.
             </p>
           </div>
@@ -155,12 +163,12 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
-                <div key={index} className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
-                    <Icon className="w-8 h-8 text-primary" />
+                <div key={index} className="bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-xl p-8 border border-gray-700 hover:border-blue-500 transition-all hover:transform hover:scale-105 duration-300">
+                  <div className="w-16 h-16 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6">
+                    <Icon className="w-8 h-8 text-blue-400" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{value.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                  <h3 className="text-xl font-semibold text-white mb-4">{value.title}</h3>
+                  <p className="text-gray-300 leading-relaxed text-sm">{value.description}</p>
                 </div>
               );
             })}
@@ -169,18 +177,18 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
       </section>
 
       {/* Team */}
-      <section className="py-20">
+      <section className="py-20 border-t border-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-white mb-4">Meet Our Team</h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Our experienced professionals bring deep local knowledge and international expertise to every client interaction.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl border border-gray-700 overflow-hidden hover:border-blue-500 transition-all hover:transform hover:scale-105 duration-300">
                 <div className="relative h-80">
                   <Image
                     src={member.image}
@@ -191,27 +199,27 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
                   />
                 </div>
                 <div className="p-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
-                  <p className="text-primary font-medium mb-4">{member.role}</p>
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">{member.description}</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{member.name}</h3>
+                  <p className="text-blue-400 font-medium mb-4">{member.role}</p>
+                  <p className="text-gray-300 text-sm mb-4 leading-relaxed">{member.description}</p>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <div>
-                      <h4 className="text-sm font-semibold text-gray-900 mb-1">Languages:</h4>
-                      <div className="flex flex-wrap gap-1">
+                      <h4 className="text-sm font-semibold text-gray-400 mb-2">Languages:</h4>
+                      <div className="flex flex-wrap gap-2">
                         {member.languages.map((lang) => (
-                          <span key={lang} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                          <span key={lang} className="bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-xs border border-blue-500/30">
                             {lang}
                           </span>
                         ))}
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-gray-900 mb-1">Certifications:</h4>
-                      <ul className="space-y-1">
+                      <h4 className="text-sm font-semibold text-gray-400 mb-2">Certifications:</h4>
+                      <ul className="space-y-2">
                         {member.certifications.map((cert, certIndex) => (
-                          <li key={certIndex} className="flex items-center text-xs text-gray-600">
-                            <CheckCircle className="w-3 h-3 text-green-500 mr-1 flex-shrink-0" />
+                          <li key={certIndex} className="flex items-start text-xs text-gray-300">
+                            <CheckCircle className="w-4 h-4 text-green-400 mr-2 flex-shrink-0 mt-0.5" />
                             {cert}
                           </li>
                         ))}
@@ -226,22 +234,22 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
       </section>
 
       {/* Achievements */}
-      <section className="py-20 bg-primary">
+      <section className="py-20 border-t border-gray-800 bg-gradient-to-br from-blue-600/10 to-purple-600/10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-4">Our Achievements</h2>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Numbers that reflect our commitment to excellence and client satisfaction.
             </p>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2">
+              <div key={index} className="text-center p-6 bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl border border-gray-700">
+                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">
                   {achievement.number}
                 </div>
-                <div className="text-white/90 font-medium">
+                <div className="text-gray-300 font-medium">
                   {achievement.label}
                 </div>
               </div>
@@ -253,17 +261,17 @@ export default async function AboutPage({ params: { locale } }: AboutPageProps) 
       {/* CTA */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="bg-gray-50 rounded-3xl p-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+          <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-3xl p-12 text-center">
+            <h2 className="text-3xl font-bold text-white mb-6">
               Ready to Work with Us?
             </h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
               Whether you're buying, selling, or simply exploring the Mallorca luxury market, 
               our team is here to provide expert guidance and exceptional service.
             </p>
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex items-center bg-primary text-white px-8 py-4 rounded-full font-semibold hover:bg-primary/90 transition-colors smooth-elevation"
+              className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-600/50 transform hover:scale-105"
             >
               {t('cta')}
               <ArrowRight className="w-5 h-5 ml-2" />
