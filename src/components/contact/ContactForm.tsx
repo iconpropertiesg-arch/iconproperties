@@ -111,16 +111,16 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
 
   if (isSubmitted) {
     return (
-      <div className="bg-white rounded-2xl shadow-lg p-8">
+      <div className="rounded-2xl p-8">
         <div className="text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-8 h-8 text-green-500" />
+          <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="w-8 h-8 text-green-400" />
           </div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h3>
-          <p className="text-gray-600 mb-6">
+          <h3 className="text-2xl font-bold text-white mb-4">Thank You!</h3>
+          <p className="text-gray-300 mb-6">
             Your message has been sent successfully. We'll get back to you within one business day.
           </p>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-400">
             <p>Expect a response from our team soon.</p>
             <p>In the meantime, feel free to explore our property listings.</p>
           </div>
@@ -130,10 +130,10 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8">
+    <div className="rounded-2xl">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Send us a Message</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-bold text-white mb-4">Send us a Message</h2>
+        <p className="text-gray-300">
           Fill out the form below and we'll get back to you as soon as possible.
         </p>
       </div>
@@ -141,7 +141,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
             {t('common.name')} *
           </label>
           <input
@@ -149,17 +149,17 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             id="name"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary transition-colors ${
-              errors.name ? 'border-red-300' : 'border-gray-300'
+            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-white placeholder-gray-500 ${
+              errors.name ? 'border-red-500' : 'border-gray-600'
             }`}
             placeholder="Your full name"
           />
-          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+          {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
         </div>
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
             {t('common.email')} *
           </label>
           <input
@@ -167,17 +167,17 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             id="email"
             value={formData.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary transition-colors ${
-              errors.email ? 'border-red-300' : 'border-gray-300'
+            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-white placeholder-gray-500 ${
+              errors.email ? 'border-red-500' : 'border-gray-600'
             }`}
             placeholder="your.email@example.com"
           />
-          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+          {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
         </div>
 
         {/* Phone */}
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
             {t('common.phone')}
           </label>
           <input
@@ -185,24 +185,24 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             id="phone"
             value={formData.phone}
             onChange={(e) => handleInputChange('phone', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary transition-colors ${
-              errors.phone ? 'border-red-300' : 'border-gray-300'
+            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-white placeholder-gray-500 ${
+              errors.phone ? 'border-red-500' : 'border-gray-600'
             }`}
             placeholder="+34 123 456 789"
           />
-          {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
+          {errors.phone && <p className="mt-1 text-sm text-red-400">{errors.phone}</p>}
         </div>
 
         {/* Reason */}
         <div>
-          <label htmlFor="reason" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="reason" className="block text-sm font-medium text-gray-300 mb-2">
             {t('contact.form.reason')}
           </label>
           <select
             id="reason"
             value={formData.reason}
             onChange={(e) => handleInputChange('reason', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-white"
           >
             <option value="buying">{t('contact.form.buying')}</option>
             <option value="selling">{t('contact.form.selling')}</option>
@@ -212,7 +212,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
 
         {/* Message */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
             {t('common.message')} *
           </label>
           <textarea
@@ -220,12 +220,12 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             rows={6}
             value={formData.message}
             onChange={(e) => handleInputChange('message', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary transition-colors ${
-              errors.message ? 'border-red-300' : 'border-gray-300'
+            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-white placeholder-gray-500 ${
+              errors.message ? 'border-red-500' : 'border-gray-600'
             }`}
             placeholder="Tell us about your requirements, budget, preferred areas, or any questions you have..."
           />
-          {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+          {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
         </div>
 
         {/* Consent */}
@@ -235,24 +235,24 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
               type="checkbox"
               checked={formData.consent}
               onChange={(e) => handleInputChange('consent', e.target.checked)}
-              className={`mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary ${
-                errors.consent ? 'border-red-300' : ''
+              className={`mt-1 w-4 h-4 text-blue-600 bg-gray-900/50 border-gray-600 rounded focus:ring-blue-500 ${
+                errors.consent ? 'border-red-500' : ''
               }`}
             />
-            <span className="text-sm text-gray-600 leading-relaxed">
+            <span className="text-sm text-gray-300 leading-relaxed">
               {t('common.consent')}. View our{' '}
-              <a href={`/${locale}/legal/privacy`} className="text-primary hover:text-primary/80 underline">
+              <a href={`/${locale}/legal/privacy`} className="text-blue-400 hover:text-blue-300 underline">
                 Privacy Policy
               </a>.
             </span>
           </label>
-          {errors.consent && <p className="mt-1 text-sm text-red-600">{errors.consent}</p>}
+          {errors.consent && <p className="mt-1 text-sm text-red-400">{errors.consent}</p>}
         </div>
 
         {/* Submit Error */}
         {errors.submit && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-sm text-red-600">{errors.submit}</p>
+          <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
+            <p className="text-sm text-red-300">{errors.submit}</p>
           </div>
         )}
 
@@ -260,7 +260,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary text-white py-4 px-6 rounded-lg font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
+          className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2 shadow-lg hover:shadow-blue-600/50"
         >
           {isSubmitting ? (
             <>
