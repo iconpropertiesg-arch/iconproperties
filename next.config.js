@@ -12,6 +12,7 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   transpilePackages: ['lucide-react'],
+  output: 'standalone',
 };
 
 module.exports = withNextIntl(nextConfig);
