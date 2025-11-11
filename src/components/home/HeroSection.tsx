@@ -12,6 +12,7 @@ interface HeroSectionProps {
 export default function HeroSection({ locale }: HeroSectionProps) {
   const router = useRouter();
   const t = useTranslations('hero');
+  const tCommon = useTranslations('common');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMouseInSection, setIsMouseInSection] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
@@ -120,18 +121,16 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         {/* Year Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-8 border border-white/20">
           <span className="text-sm font-semibold">2025</span>
-          <span className="text-sm opacity-80">Explore Our Portfolio</span>
+          <span className="text-sm opacity-80">{t('badge')}</span>
         </div>
 
         {/* Hero Text */}
         <div className="mb-12 fade-in-up">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Exclusive Properties in<br />
-            Prime Locations
+            {t('title')}
           </h1>
           <p className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed opacity-90 text-gray-200">
-            Explore a curated selection of luxury properties in Mallorca with<br />
-            off-market options available privately.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -142,7 +141,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50"
           >
             <span className="flex items-center gap-2">
-              Request your Strategy
+              {t('cta')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
           </button>

@@ -7,8 +7,10 @@
     "faq": "FAQ"
   },
   "hero": {
-    "title": "Inmobiliaria de Lujo en Mallorca",
-    "subtitle": "Curamos villas, apartamentos y espacios comerciales definidos por el diseño, la ubicación y el valor a largo plazo. Discreción, velocidad y servicio de guante blanco—desde el inicio hasta las llaves.",
+    "badge": "Explore Nuestro Portafolio",
+    "title": "Propiedades Exclusivas en Ubicaciones Prime",
+    "subtitle": "Explore una selección curada de propiedades de lujo en Mallorca con opciones fuera del mercado disponibles de forma privada.",
+    "cta": "Solicite su Estrategia",
     "searchPlaceholder": {
       "purpose": "Quiero…",
       "type": "Apartamento, Casa, Comercial",

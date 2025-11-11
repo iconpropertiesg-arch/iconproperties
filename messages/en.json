@@ -15,8 +15,10 @@
     "subtitle": "Get answers to common questions"
   },
   "hero": {
-    "title": "Luxury Real Estate in Mallorca",
-    "subtitle": "We curate villas, apartments, and commercial spaces defined by design, location, and long-term value. Discretion, speed, and white-glove service—start to keys.",
+    "badge": "Explore Our Portfolio",
+    "title": "Exclusive Properties in Prime Locations",
+    "subtitle": "Explore a curated selection of luxury properties in Mallorca with off-market options available privately.",
+    "cta": "Request your Strategy",
     "searchPlaceholder": {
       "purpose": "I want to…",
       "type": "Apartment, House, Commercial",

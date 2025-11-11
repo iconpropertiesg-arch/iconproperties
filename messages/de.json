@@ -7,8 +7,10 @@
     "faq": "FAQ"
   },
   "hero": {
-    "title": "Luxusimmobilien auf Mallorca",
-    "subtitle": "Wir kuratieren Villen, Apartments und Gewerbeflächen, die durch Design, Lage und langfristigen Wert definiert sind. Diskretion, Geschwindigkeit und erstklassiger Service—vom Anfang bis zum Schlüssel.",
+    "badge": "Erkunden Sie unser Portfolio",
+    "title": "Exklusive Immobilien in erstklassigen Lagen",
+    "subtitle": "Entdecken Sie eine kuratierte Auswahl von Luxusimmobilien auf Mallorca mit privat verfügbaren Off-Market-Optionen.",
+    "cta": "Fordern Sie Ihre Strategie an",
     "searchPlaceholder": {
       "purpose": "Ich möchte…",
       "type": "Apartment, Haus, Gewerbe",
