@@ -60,7 +60,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-end justify-center overflow-hidden pb-20 md:pb-24"
+      className="relative min-h-screen flex items-end justify-center overflow-hidden pb-16 md:pb-20"
     >
       {/* Background - Gradient fallback with optional video */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-blue-950 to-blue-900">
@@ -152,7 +152,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
           <div className="bg-gradient-to-br from-blue-900/20 to-black/20 backdrop-blur-lg rounded-3xl p-2 border border-white/10 shadow-2xl">
             <div className="aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-blue-950 to-black">
               <img 
-                src="/api/placeholder/800/450"
+                src="/images/home_section_property.jpg"
                 alt="Luxury Property"
                 className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500"
               />

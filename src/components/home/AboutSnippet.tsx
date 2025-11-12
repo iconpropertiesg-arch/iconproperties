@@ -36,32 +36,42 @@ export default function AboutSnippet({ locale }: AboutSnippetProps) {
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-24 bg-gradient-to-br from-gray-900 via-blue-950 to-black relative overflow-hidden border-t border-gray-800">
+      {/* Background effects */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[150px]"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-[150px]"></div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <span className="inline-block bg-blue-600/20 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full mb-4 border border-blue-500/30">
+              About Us
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               {t('about.title')}
             </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               {t('about.subtitle')} We specialize in luxury properties across Mallorca's most desirable locations, 
               offering unparalleled expertise in the island's real estate market.
             </p>
 
             {/* Values Grid */}
-            <div className="grid grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-2 gap-4 mb-8">
               {values.map((value) => {
                 const Icon = value.icon;
                 return (
-                  <div key={value.title} className="flex items-start space-x-3">
-                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-primary" />
+                  <div 
+                    key={value.title} 
+                    className="bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-xl p-4 border border-gray-700 hover:border-blue-500 transition-all hover:transform hover:scale-105 duration-300"
+                  >
+                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center mb-3">
+                      <Icon className="w-5 h-5 text-blue-400" />
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">{value.title}</h4>
-                      <p className="text-sm text-gray-600">{value.description}</p>
-                    </div>
+                    <h4 className="font-semibold text-white mb-1 text-sm">{value.title}</h4>
+                    <p className="text-xs text-gray-400">{value.description}</p>
                   </div>
                 );
               })}
@@ -69,16 +79,16 @@ export default function AboutSnippet({ locale }: AboutSnippetProps) {
 
             <Link
               href={`/${locale}/about`}
-              className="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors group"
+              className="inline-flex items-center bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-600/50 transform hover:scale-105 group"
             >
               {t('about.cta')}
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
           {/* Image */}
           <div className="relative">
-            <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden">
+            <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden border border-gray-700">
               <Image
                 src="/daniel-founder.jpg"
                 alt="Daniel - Founder of Lion Capital Real Estate"
@@ -86,31 +96,31 @@ export default function AboutSnippet({ locale }: AboutSnippetProps) {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               
               {/* Founder Info Overlay */}
               <div className="absolute bottom-6 left-6 right-6 text-white">
                 <h3 className="text-2xl font-bold mb-2">Daniel Rodriguez</h3>
-                <p className="text-white/90">Founder & Managing Director</p>
-                <p className="text-sm text-white/80 mt-2">
+                <p className="text-white/90 text-sm">Founder & Managing Director</p>
+                <p className="text-xs text-white/80 mt-2">
                   15+ years experience in luxury real estate
                 </p>
               </div>
             </div>
 
             {/* Stats Cards */}
-            <div className="absolute -bottom-8 -left-8 right-8 grid grid-cols-3 gap-4">
-              <div className="bg-white rounded-lg shadow-lg p-4 text-center">
-                <div className="text-2xl font-bold text-primary mb-1">500+</div>
-                <div className="text-xs text-gray-600">Properties Sold</div>
+            <div className="absolute -bottom-8 -left-8 right-8 grid grid-cols-3 gap-4 hidden lg:grid">
+              <div className="bg-gradient-to-br from-blue-600/90 to-blue-700/90 backdrop-blur-md rounded-xl shadow-2xl p-4 text-center border border-blue-500/50">
+                <div className="text-2xl font-bold text-white mb-1">500+</div>
+                <div className="text-xs text-blue-100">Properties Sold</div>
               </div>
-              <div className="bg-white rounded-lg shadow-lg p-4 text-center">
-                <div className="text-2xl font-bold text-primary mb-1">€2.5B</div>
-                <div className="text-xs text-gray-600">Sales Volume</div>
+              <div className="bg-gradient-to-br from-blue-600/90 to-blue-700/90 backdrop-blur-md rounded-xl shadow-2xl p-4 text-center border border-blue-500/50">
+                <div className="text-2xl font-bold text-white mb-1">€2.5B</div>
+                <div className="text-xs text-blue-100">Sales Volume</div>
               </div>
-              <div className="bg-white rounded-lg shadow-lg p-4 text-center">
-                <div className="text-2xl font-bold text-primary mb-1">98%</div>
-                <div className="text-xs text-gray-600">Client Satisfaction</div>
+              <div className="bg-gradient-to-br from-blue-600/90 to-blue-700/90 backdrop-blur-md rounded-xl shadow-2xl p-4 text-center border border-blue-500/50">
+                <div className="text-2xl font-bold text-white mb-1">98%</div>
+                <div className="text-xs text-blue-100">Client Satisfaction</div>
               </div>
             </div>
           </div>
