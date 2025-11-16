@@ -10,13 +10,16 @@ export async function GET(
   try {
     const { searchParams } = new URL(request.url);
     const locale = searchParams.get('locale') || 'en';
+    const allTranslations = searchParams.get('allTranslations') === 'true';
 
     const property = await prisma.property.findUnique({
       where: { id: params.id },
       include: {
-        translations: {
-          where: { locale },
-        },
+        translations: allTranslations
+          ? true
+          : {
+              where: { locale },
+            },
       },
     });
 

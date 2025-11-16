@@ -51,7 +51,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
   const fetchProperty = async () => {
     try {
-      const response = await fetch(`/api/properties/${propertyId}`);
+      const response = await fetch(`/api/properties/${propertyId}?allTranslations=true`);
       if (response.ok) {
         const data = await response.json();
         const property = data.property;
