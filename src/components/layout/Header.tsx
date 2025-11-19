@@ -88,7 +88,7 @@ export default function Header({ locale }: HeaderProps) {
               </Link>
 
               <Link
-                href={`/${locale}/portfolio`}
+                href={`/${locale}/properties`}
                 className={cn(
                   "text-sm font-medium transition-colors",
                   isScrolled 
@@ -191,7 +191,7 @@ export default function Header({ locale }: HeaderProps) {
                   {t('about')}
                 </Link>
                 <Link
-                  href={`/${locale}/portfolio`}
+                  href={`/${locale}/properties`}
                   className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface LanguageSwitcherProps {
@@ -40,7 +40,6 @@ export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
         className="flex items-center space-x-2 px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-colors text-white"
         aria-label="Select language"
       >
-        <Globe className="w-4 h-4" />
         <span className="text-sm font-medium">
           {currentLanguage.flag}
         </span>

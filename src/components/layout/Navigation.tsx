@@ -18,7 +18,7 @@ export default function Navigation({ locale, className, onLinkClick }: Navigatio
   const navItems = [
     { key: 'home', href: `/${locale}` },
     { key: 'about', href: `/${locale}/about` },
-    { key: 'portfolio', href: `/${locale}/portfolio` },
+    { key: 'portfolio', href: `/${locale}/properties` },
     { key: 'contact', href: `/${locale}/contact` },
     { key: 'faq', href: `/${locale}/faq` },
   ];

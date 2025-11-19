@@ -10,6 +10,31 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
     formats: ['image/webp', 'image/avif'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.onrender.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.vercel.app',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*',
+      },
+      {
+        protocol: 'http',
+        hostname: '*',
+      },
+    ],
   },
   transpilePackages: ['lucide-react'],
   output: 'standalone',
