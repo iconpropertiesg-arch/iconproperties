@@ -49,34 +49,11 @@ export default function Header({ locale }: HeaderProps) {
         )}
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between lg:justify-center relative">
-            {/* Centered Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link
-                href={`/${locale}`}
-                className={cn(
-                  "text-sm font-medium transition-colors",
-                  isScrolled 
-                    ? "text-gray-300 hover:text-blue-400"
-                    : "text-white/90 hover:text-white"
-                )}
-              >
-                {t('home')}
-              </Link>
-              <Link
-                href={`/${locale}/about`}
-                className={cn(
-                  "text-sm font-medium transition-colors",
-                  isScrolled 
-                    ? "text-gray-300 hover:text-blue-400"
-                    : "text-white/90 hover:text-white"
-                )}
-              >
-                {t('about')}
-              </Link>
-
-              {/* Logo in the center of nav */}
-              <Link href={`/${locale}`} className="flex items-center gap-2 group mx-8">
+          <div className="flex items-center justify-between">
+            {/* Left side - Logo and Navigation */}
+            <div className="hidden lg:flex items-center space-x-8 ml-16">
+              {/* Logo at the front */}
+              <Link href={`/${locale}`} className="flex items-center gap-2 group">
                 <Image
                   src="/images/logo3.png"
                   alt="Property Icon Logo"
@@ -87,40 +64,54 @@ export default function Header({ locale }: HeaderProps) {
                 />
               </Link>
 
-              <Link
-                href={`/${locale}/properties`}
-                className={cn(
-                  "text-sm font-medium transition-colors",
-                  isScrolled 
-                    ? "text-gray-300 hover:text-blue-400"
-                    : "text-white/90 hover:text-white"
-                )}
-              >
-                {t('portfolio')}
-              </Link>
-              <Link
-                href={`/${locale}/contact`}
-                className={cn(
-                  "text-sm font-medium transition-colors",
-                  isScrolled 
-                    ? "text-gray-300 hover:text-blue-400"
-                    : "text-white/90 hover:text-white"
-                )}
-              >
-                {t('contact')}
-              </Link>
-              <Link
-                href={`/${locale}/faq`}
-                className={cn(
-                  "text-sm font-medium transition-colors",
-                  isScrolled 
-                    ? "text-gray-300 hover:text-blue-400"
-                    : "text-white/90 hover:text-white"
-                )}
-              >
-                {t('faq')}
-              </Link>
-            </nav>
+              {/* Navigation Links */}
+              <nav className="flex items-center space-x-8">
+                <Link
+                  href={`/${locale}/about`}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    isScrolled 
+                      ? "text-gray-300 hover:text-blue-400"
+                      : "text-white/90 hover:text-white"
+                  )}
+                >
+                  {t('about')}
+                </Link>
+                <Link
+                  href={`/${locale}/properties`}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    isScrolled 
+                      ? "text-gray-300 hover:text-blue-400"
+                      : "text-white/90 hover:text-white"
+                  )}
+                >
+                  {t('portfolio')}
+                </Link>
+                <Link
+                  href={`/${locale}/contact`}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    isScrolled 
+                      ? "text-gray-300 hover:text-blue-400"
+                      : "text-white/90 hover:text-white"
+                  )}
+                >
+                  {t('contact')}
+                </Link>
+                <Link
+                  href={`/${locale}/faq`}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    isScrolled 
+                      ? "text-gray-300 hover:text-blue-400"
+                      : "text-white/90 hover:text-white"
+                  )}
+                >
+                  {t('faq')}
+                </Link>
+              </nav>
+            </div>
 
             {/* Logo for mobile */}
             <Link href={`/${locale}`} className="flex lg:hidden items-center gap-2 group">
@@ -134,34 +125,36 @@ export default function Header({ locale }: HeaderProps) {
               />
             </Link>
 
-            {/* Right side actions - positioned absolutely on desktop */}
-            <div className="hidden lg:flex items-center space-x-4 absolute right-0">
-              <LanguageSwitcher locale={locale} />
-              <Link 
-                href={`/${locale}/contact`}
-                className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/40"
+            {/* Right side actions */}
+            <div className="flex items-center space-x-4 mr-16">
+              <div className="hidden lg:flex items-center space-x-4">
+                <LanguageSwitcher locale={locale} />
+                <Link 
+                  href={`/${locale}/contact`}
+                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/40"
+                >
+                  Request Private portfolio
+                </Link>
+              </div>
+              
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={cn(
+                  "lg:hidden p-2 rounded-md transition-colors",
+                  isScrolled 
+                    ? "hover:bg-gray-800 text-white"
+                    : "hover:bg-white/10 text-white"
+                )}
+                aria-label="Toggle mobile menu"
               >
-                Get In Touch
-              </Link>
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={cn(
-                "lg:hidden p-2 rounded-md transition-colors",
-                isScrolled 
-                  ? "hover:bg-gray-800 text-white"
-                  : "hover:bg-white/10 text-white"
-              )}
-              aria-label="Toggle mobile menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
           </div>
         </div>
       </header>
@@ -176,13 +169,6 @@ export default function Header({ locale }: HeaderProps) {
           <div className="absolute top-0 right-0 h-full w-80 max-w-full bg-gray-900 shadow-xl">
             <div className="p-6 pt-20">
               <nav className="space-y-6">
-                <Link
-                  href={`/${locale}`}
-                  className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {t('home')}
-                </Link>
                 <Link
                   href={`/${locale}/about`}
                   className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"

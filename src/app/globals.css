@@ -280,3 +280,185 @@ body {
 .cursor-dot-global:hover {
   transform: translate(-50%, -50%) scale(1.5);
 }
+
+/* Animated gradient float animations for hero section */
+@keyframes gradient-float-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(50px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-30px, 40px) scale(0.95);
+  }
+}
+
+@keyframes gradient-float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-60px, 50px) scale(1.15);
+  }
+}
+
+@keyframes gradient-float-3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(40px, -40px) scale(1.05);
+  }
+  75% {
+    transform: translate(-50px, 30px) scale(0.9);
+  }
+}
+
+.animate-gradient-float-1 {
+  animation: gradient-float-1 20s ease-in-out infinite;
+}
+
+.animate-gradient-float-2 {
+  animation: gradient-float-2 25s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.animate-gradient-float-3 {
+  animation: gradient-float-3 30s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+/* Blue flow animation 1 - from top-right corner */
+@keyframes blue-flow-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-50px, 100px) scale(1.15);
+    opacity: 0.5;
+  }
+}
+
+/* Blue flow animation 2 - from center-left */
+@keyframes blue-flow-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(60px, 80px) scale(1.2);
+    opacity: 0.45;
+  }
+}
+
+.animate-blue-flow-1 {
+  animation: blue-flow-1 12s ease-in-out infinite;
+}
+
+.animate-blue-flow-2 {
+  animation: blue-flow-2 14s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* Smooth gradient flow animation */
+@keyframes gradient-flow {
+  0%, 100% {
+    opacity: 1;
+    background-position: 0% 50%;
+  }
+  50% {
+    opacity: 0.95;
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 15s ease-in-out infinite;
+}
+
+/* Animated border line for search bar */
+.search-bar-animated-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.search-bar-animated-border::before {
+  content: '';
+  position: absolute;
+  width: 230px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), transparent);
+  animation: border-line-move-around 12s linear infinite;
+  z-index: 10;
+  border-radius: 1px;
+}
+
+@keyframes border-line-move-around {
+  /* Top edge: left to right */
+  0% {
+    top: 0;
+    left: 0;
+    transform: rotate(0deg);
+    transform-origin: left center;
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 230px);
+    transform: rotate(0deg);
+    transform-origin: left center;
+  }
+  /* Right edge: top to bottom */
+  25.01% {
+    top: 0;
+    left: calc(100% - 2px);
+    transform: rotate(90deg);
+    transform-origin: center center;
+  }
+  50% {
+    top: calc(100% - 230px);
+    left: calc(100% - 2px);
+    transform: rotate(90deg);
+    transform-origin: center center;
+  }
+  /* Bottom edge: right to left - ensure it reaches the corner */
+  50.01% {
+    top: calc(100% - 2px);
+    left: calc(100% - 2px);
+    transform: rotate(180deg);
+    transform-origin: center center;
+  }
+  73% {
+    top: calc(100% - 2px);
+    left: 230px;
+    transform: rotate(180deg);
+    transform-origin: center center;
+  }
+  74.5% {
+    top: calc(100% - 2px);
+    left: 0;
+    transform: rotate(180deg);
+    transform-origin: center center;
+  }
+  /* Left edge: bottom to top - start from exact corner */
+  74.51% {
+    top: calc(100% - 2px);
+    left: 0;
+    transform: rotate(270deg);
+    transform-origin: center center;
+  }
+  75% {
+    top: calc(100% - 2px);
+    left: 0;
+    transform: rotate(270deg);
+    transform-origin: center center;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    transform: rotate(270deg);
+    transform-origin: center center;
+  }
+}

@@ -49,15 +49,24 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
         <div className="grid grid-cols-4 gap-2 h-96 md:h-[500px]">
           {/* Main Image */}
           <div className="col-span-4 md:col-span-2 relative">
-            <Image
-              src={images[selectedImageIndex]?.url || images[0].url}
-              alt={images[selectedImageIndex]?.alt || images[0].alt}
-              fill
-              className="object-cover cursor-pointer hover:opacity-90 transition-opacity"
-              onClick={() => openLightbox(selectedImageIndex)}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
+            {(images[selectedImageIndex]?.url || images[0].url).startsWith('http://') || (images[selectedImageIndex]?.url || images[0].url).startsWith('https://') ? (
+              <img
+                src={images[selectedImageIndex]?.url || images[0].url}
+                alt={images[selectedImageIndex]?.alt || images[0].alt}
+                className="absolute inset-0 w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                onClick={() => openLightbox(selectedImageIndex)}
+              />
+            ) : (
+              <Image
+                src={images[selectedImageIndex]?.url || images[0].url}
+                alt={images[selectedImageIndex]?.alt || images[0].alt}
+                fill
+                className="object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                onClick={() => openLightbox(selectedImageIndex)}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            )}
           </div>
 
           {/* Thumbnail Grid */}
@@ -68,13 +77,21 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
                 className="relative cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={() => setSelectedImageIndex(index + 1)}
               >
-                <Image
-                  src={image.url}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
+                {image.url.startsWith('http://') || image.url.startsWith('https://') ? (
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                )}
                 {index === 3 && images.length > 5 && (
                   <div 
                     className="absolute inset-0 bg-black/60 flex items-center justify-center text-white font-semibold cursor-pointer hover:bg-black/70 transition-colors"
@@ -143,13 +160,21 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
           </button>
 
           <div className="relative w-full h-full max-w-4xl max-h-4xl">
-            <Image
-              src={images[lightboxIndex].url}
-              alt={images[lightboxIndex].alt}
-              fill
-              className="object-contain"
-              sizes="100vw"
-            />
+            {images[lightboxIndex].url.startsWith('http://') || images[lightboxIndex].url.startsWith('https://') ? (
+              <img
+                src={images[lightboxIndex].url}
+                alt={images[lightboxIndex].alt}
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <Image
+                src={images[lightboxIndex].url}
+                alt={images[lightboxIndex].alt}
+                fill
+                className="object-contain"
+                sizes="100vw"
+              />
+            )}
           </div>
 
           {/* Image Counter */}
@@ -167,13 +192,21 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
                   index === lightboxIndex ? 'ring-2 ring-white' : ''
                 }`}
               >
-                <Image
-                  src={image.url}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="64px"
-                />
+                {image.url.startsWith('http://') || image.url.startsWith('https://') ? (
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="64px"
+                  />
+                )}
               </button>
             ))}
           </div>

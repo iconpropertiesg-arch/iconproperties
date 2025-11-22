@@ -9,88 +9,145 @@ import PropertyLocation from '@/components/property/PropertyLocation';
 import PropertyAgent from '@/components/property/PropertyAgent';
 import RelatedProperties from '@/components/property/RelatedProperties';
 import { generateSEOTitle, generateSEODescription } from '@/lib/utils';
-import { Property } from '@/types';
+import { Property, PropertyImage } from '@/types';
+import { prisma } from '@/lib/db';
 
 interface PropertyPageProps {
   params: { locale: string; slug: string };
 }
 
-// Mock function to get property by slug - in a real app, this would fetch from API/database
-async function getPropertyBySlug(slug: string): Promise<Property | null> {
-  // Mock data - in a real app, this would fetch from your database
-  const mockProperty: Property = {
-    id: '1',
-    title: 'Luxury Villa with Sea Views',
-    slug: 'luxury-villa-sea-views-portals-nous',
-    status: 'buy',
-    type: 'villa',
-    area: 'Portals Nous',
-    price: 2800000,
-    beds: 5,
-    baths: 4,
-    interiorSize: 450,
-    plotSize: 800,
-    yearBuilt: 2019,
-    description: `This stunning contemporary villa offers the perfect blend of luxury and comfort, positioned in one of Mallorca's most prestigious locations. With panoramic sea views stretching to the horizon, this exceptional property represents the epitome of Mediterranean living.
-
-The villa features a sophisticated open-plan design that seamlessly connects indoor and outdoor spaces. Floor-to-ceiling windows flood the interiors with natural light while framing the spectacular vistas beyond. The gourmet kitchen, equipped with premium appliances, serves as the heart of the home.
-
-Five generously proportioned bedrooms, including a master suite with private terrace, provide comfortable accommodation. The property is completed by beautifully landscaped gardens, an infinity pool, and multiple terraces perfect for entertaining or quiet contemplation.`,
-    features: [
-      'Swimming Pool',
-      'Sea Views',
-      'Garage',
-      'Garden',
-      'Terrace',
-      'Air Conditioning',
-      'Underfloor Heating',
-      'Wine Cellar',
-      'Guest House',
-      'Gym',
-      'Home Cinema',
-      'Smart Home System'
-    ],
-    images: [
-      { id: '1', url: '/properties/villa-1.jpg', alt: 'Villa exterior with sea views', caption: 'Stunning exterior with infinity pool', order: 1 },
-      { id: '2', url: '/properties/villa-1-2.jpg', alt: 'Villa living room', caption: 'Open-plan living area', order: 2 },
-      { id: '3', url: '/properties/villa-1-3.jpg', alt: 'Villa kitchen', caption: 'Modern gourmet kitchen', order: 3 },
-      { id: '4', url: '/properties/villa-1-4.jpg', alt: 'Villa master bedroom', caption: 'Master bedroom with sea views', order: 4 },
-      { id: '5', url: '/properties/villa-1-5.jpg', alt: 'Villa pool area', caption: 'Infinity pool and outdoor dining', order: 5 },
-    ],
-    videoUrl: 'https://example.com/property-video.mp4',
-    matterportUrl: 'https://example.com/matterport-tour',
-    location: { 
-      lat: 39.5267, 
-      lng: 2.5584, 
-      address: 'Calle Example, Portals Nous, 07181 Calvià, Mallorca' 
-    },
-    agent: {
-      id: '1',
-      name: 'Daniel Rodriguez',
-      email: 'daniel@lioncapitala.com',
-      phone: '+34 123 456 789',
-      whatsapp: '+34 123 456 789',
-      avatar: '/agents/daniel.jpg',
-      languages: ['en', 'es', 'de']
-    },
-    referenceId: 'LCR-001',
-    availability: 'available',
-    seo: {
-      title: 'Luxury Villa with Sea Views in Portals Nous - €2,800,000',
-      description: 'Stunning 5-bedroom villa with panoramic sea views, infinity pool, and premium finishes in prestigious Portals Nous. Contact Lion Capital Real Estate for exclusive viewing.'
-    }
+// Helper function to map database type to Property type
+function mapType(dbType: string): 'apartment' | 'house' | 'commercial' | 'villa' {
+  const typeMap: Record<string, 'apartment' | 'house' | 'commercial' | 'villa'> = {
+    'residential': 'house',
+    'commercial': 'commercial',
+    'apartment': 'apartment',
+    'villa': 'villa',
+    'house': 'house',
   };
+  return typeMap[dbType.toLowerCase()] || 'house';
+}
 
-  // Simple slug matching - in a real app, you'd query your database
-  if (slug === mockProperty.slug) {
-    return mockProperty;
+// Helper function to map database status to Property status
+function mapStatus(dbStatus: string): 'buy' | 'rent' {
+  const rentStatuses = ['rent', 'rented', 'lease', 'leased'];
+  return rentStatuses.includes(dbStatus.toLowerCase()) ? 'rent' : 'buy';
+}
+
+// Helper function to map database status to availability
+function mapAvailability(dbStatus: string): 'available' | 'sold' | 'rented' | 'pending' {
+  const status = dbStatus.toLowerCase();
+  if (status === 'sold') return 'sold';
+  if (status === 'rented' || status === 'leased') return 'rented';
+  if (status === 'pending') return 'pending';
+  return 'available';
+}
+
+// Fetch property from database by slug
+async function getPropertyBySlug(slug: string, locale: string): Promise<Property | null> {
+  try {
+    const property = await prisma.property.findUnique({
+      where: { slug },
+      include: {
+        translations: {
+          where: { locale },
+        },
+      },
+    });
+
+    if (!property) {
+      return null;
+    }
+
+    const translation = property.translations[0];
+    if (!translation) {
+      return null;
+    }
+
+    // Parse coordinates if they exist
+    let location = {
+      lat: 39.5696, // Default to Palma de Mallorca
+      lng: 2.6502,
+      address: property.location || 'Mallorca, Spain',
+    };
+
+    if (property.coordinates) {
+      try {
+        const coords = JSON.parse(property.coordinates);
+        if (coords.lat && coords.lng) {
+          location.lat = coords.lat;
+          location.lng = coords.lng;
+        }
+      } catch (e) {
+        // If parsing fails, use default coordinates
+      }
+    }
+
+    // Map images
+    const images: PropertyImage[] = property.images.map((url, index) => ({
+      id: `${property.id}-${index}`,
+      url: url,
+      alt: translation.title || 'Property image',
+      caption: translation.subtitle || undefined,
+      order: index + 1,
+    }));
+
+    // Default agent (you can customize this or fetch from database)
+    const agent = {
+      id: 'default',
+      name: 'Property Icon Team',
+      email: 'info@propertyicon.com',
+      phone: '+34 971 123 456',
+      whatsapp: '+34 971 123 456',
+      avatar: '/agents/default.jpg',
+      languages: ['en', 'es', 'de'],
+    };
+
+    // Map database property to Property interface
+    const mappedProperty: Property = {
+      id: property.id,
+      title: translation.title,
+      slug: property.slug,
+      status: mapStatus(property.status),
+      type: mapType(property.type),
+      area: property.location || 'Mallorca',
+      price: property.price,
+      beds: property.bedrooms || undefined,
+      baths: property.bathrooms || undefined,
+      interiorSize: property.area || undefined,
+      plotSize: undefined, // Not in database schema
+      yearBuilt: property.year || undefined,
+      description: translation.description,
+      features: translation.features || [],
+      images: images.length > 0 ? images : [
+        {
+          id: 'default',
+          url: '/portfolio/villa-son-vida.jpg',
+          alt: translation.title,
+          order: 1,
+        },
+      ],
+      videoUrl: undefined,
+      matterportUrl: undefined,
+      location,
+      agent,
+      referenceId: property.id.substring(0, 8).toUpperCase(),
+      availability: mapAvailability(property.status),
+      seo: {
+        title: `${translation.title} - €${property.price.toLocaleString()}`,
+        description: translation.subtitle || translation.description.substring(0, 160),
+      },
+    };
+
+    return mappedProperty;
+  } catch (error) {
+    console.error('Error fetching property:', error);
+    return null;
   }
-
-  return null;
 }
 
 export async function generateMetadata({ params: { locale, slug } }: PropertyPageProps): Promise<Metadata> {
-  const property = await getPropertyBySlug(slug);
+  const property = await getPropertyBySlug(slug, locale);
   
   if (!property) {
     return {
@@ -136,7 +193,7 @@ export default async function PropertyPage({ params: { locale, slug } }: Propert
   // Enable static rendering
   setRequestLocale(locale);
   
-  const property = await getPropertyBySlug(slug);
+  const property = await getPropertyBySlug(slug, locale);
   
   if (!property) {
     notFound();
