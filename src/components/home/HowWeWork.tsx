@@ -50,7 +50,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              setVisibleSteps((prev) => new Set([...prev, index]));
+              setVisibleSteps((prev) => new Set([...Array.from(prev), index]));
             }
           });
         },
