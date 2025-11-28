@@ -125,10 +125,10 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Our Properties
+              Explore Properties in Mallorca
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              A showcase of our successful transactions and managed properties across Mallorca's most prestigious locations.
+              Discover hand-selected villas, penthouses and fincas across Mallorca's most desirable locations including private and off-market homes.
             </p>
           </div>
         </div>
