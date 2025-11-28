@@ -168,6 +168,47 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
     updateTranslation(locale, 'features', currentFeatures);
   };
 
+  // Generate slug from title
+  const generateSlug = (text: string): string => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
+      .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+  };
+
+  // Auto-generate slug from English title if slug is empty
+  useEffect(() => {
+    if (!propertyId && !slug && translations.en.title) {
+      const autoSlug = generateSlug(translations.en.title);
+      if (autoSlug) {
+        setSlug(autoSlug);
+      }
+    }
+  }, [translations.en.title, propertyId, slug]);
+
+  // Validate and sanitize slug
+  const handleSlugChange = (value: string) => {
+    // Remove any URLs or full paths
+    let sanitized = value.trim();
+    
+    // If it looks like a URL, extract just the last part
+    if (sanitized.includes('://') || sanitized.includes('localhost') || sanitized.startsWith('http')) {
+      // Extract the last segment after the last slash
+      const parts = sanitized.split('/').filter(p => p);
+      sanitized = parts[parts.length - 1] || '';
+    }
+    
+    // Remove any remaining URL-like patterns
+    sanitized = sanitized.replace(/^https?:\/\//, '').replace(/^www\./, '');
+    
+    // Generate a clean slug
+    sanitized = generateSlug(sanitized);
+    
+    setSlug(sanitized);
+  };
+
   const addImage = () => {
     setImages([...images, '']);
   };
@@ -251,15 +292,23 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Slug (URL) <span className="text-red-400">*</span>
+                <span className="text-xs text-gray-500 ml-2">(Auto-generated from title if empty)</span>
               </label>
               <input
                 type="text"
                 value={slug}
-                onChange={(e) => setSlug(e.target.value)}
+                onChange={(e) => handleSlugChange(e.target.value)}
                 required
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
                 placeholder="luxury-villa-son-vida"
+                pattern="[a-z0-9-]+"
+                title="Slug must contain only lowercase letters, numbers, and hyphens"
               />
+              {slug && (
+                <p className="mt-1 text-xs text-gray-400">
+                  Preview: <span className="text-blue-400">/en/properties/{slug}</span>
+                </p>
+              )}
             </div>
 
             <div>

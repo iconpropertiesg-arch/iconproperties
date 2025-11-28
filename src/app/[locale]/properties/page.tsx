@@ -169,10 +169,37 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {portfolioItems.map((item) => (
+              {portfolioItems.map((item) => {
+                // Sanitize slug to ensure it's valid
+                let cleanSlug = item.slug || '';
+                
+                // Remove any URLs or full paths
+                if (cleanSlug.includes('://') || cleanSlug.includes('localhost') || cleanSlug.startsWith('http')) {
+                  const parts = cleanSlug.split('/').filter(p => p);
+                  cleanSlug = parts[parts.length - 1] || '';
+                }
+                
+                // Remove any remaining URL-like patterns
+                cleanSlug = cleanSlug.replace(/^https?:\/\//, '').replace(/^www\./, '');
+                
+                // Generate a clean slug
+                cleanSlug = cleanSlug
+                  .toLowerCase()
+                  .trim()
+                  .replace(/[^\w\s-]/g, '')
+                  .replace(/[\s_-]+/g, '-')
+                  .replace(/^-+|-+$/g, '');
+
+                // Skip if slug is invalid
+                if (!cleanSlug || !/^[a-z0-9-]+$/.test(cleanSlug)) {
+                  console.warn(`Invalid slug for property ${item.id}: ${item.slug}`);
+                  return null;
+                }
+
+                return (
               <Link
                 key={item.id}
-                href={`/${locale}/properties/${item.slug}`}
+                href={`/${locale}/properties/${cleanSlug}`}
                 className="group bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer block"
               >
                 <div className="relative h-64 overflow-hidden">
@@ -223,7 +250,8 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
                   </div>
                 </div>
               </Link>
-              ))}
+              );
+              })}
             </div>
           )}
         </div>

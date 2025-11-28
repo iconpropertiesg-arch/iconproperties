@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     const data = await request.json();
     const {
-      slug,
+      slug: rawSlug,
       status,
       type,
       year,
@@ -66,6 +66,57 @@ export async function POST(request: NextRequest) {
       images,
       translations, // { en: {...}, de: {...}, es: {...} }
     } = data;
+
+    // Sanitize and validate slug
+    let slug = rawSlug?.trim() || '';
+    
+    // Remove any URLs or full paths
+    if (slug.includes('://') || slug.includes('localhost') || slug.startsWith('http')) {
+      // Extract the last segment after the last slash
+      const parts = slug.split('/').filter(p => p);
+      slug = parts[parts.length - 1] || '';
+    }
+    
+    // Remove any remaining URL-like patterns
+    slug = slug.replace(/^https?:\/\//, '').replace(/^www\./, '');
+    
+    // Generate a clean slug: lowercase, replace spaces/special chars with hyphens
+    slug = slug
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
+      .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+
+    // If slug is still empty, generate from English title
+    if (!slug && translations?.en?.title) {
+      slug = translations.en.title
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    // Final validation
+    if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
+      return NextResponse.json(
+        { error: 'Invalid slug. Slug must contain only lowercase letters, numbers, and hyphens.' },
+        { status: 400 }
+      );
+    }
+
+    // Check if slug already exists
+    const existingProperty = await prisma.property.findUnique({
+      where: { slug },
+    });
+
+    if (existingProperty) {
+      return NextResponse.json(
+        { error: 'A property with this slug already exists. Please use a different slug.' },
+        { status: 400 }
+      );
+    }
 
     // Create property with translations
     const property = await prisma.property.create({
