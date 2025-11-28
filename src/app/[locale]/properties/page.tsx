@@ -170,9 +170,10 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {portfolioItems.map((item) => (
-              <div 
-                key={item.id} 
-                className="group bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300"
+              <Link
+                key={item.id}
+                href={`/${locale}/properties/${item.slug}`}
+                className="group bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer block"
               >
                 <div className="relative h-64 overflow-hidden">
                   {item.image.startsWith('http://') || item.image.startsWith('https://') ? (
@@ -210,21 +211,18 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
                 </div>
 
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-gray-400 mb-4">
+                  <p className="text-gray-400 mb-4 line-clamp-2">
                     {item.description}
                   </p>
-                  <Link
-                    href={`/${locale}/properties/${item.slug}`}
-                    className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors"
-                  >
+                  <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
                     View Details
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-              </div>
+              </Link>
               ))}
             </div>
           )}
