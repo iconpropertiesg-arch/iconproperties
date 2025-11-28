@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 
 interface HeroSearchBarProps {
   locale: string;
+  hideTitle?: boolean;
 }
 
 const propertyTypes = [
@@ -22,7 +23,7 @@ const mockLocations = [
   'Son Vida', 'Bendinat', 'Costa de los Pinos', 'Cala Ratjada', 'Puerto Pollensa',
 ];
 
-export default function HeroSearchBar({ locale }: HeroSearchBarProps) {
+export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchBarProps) {
   const router = useRouter();
   const t = useTranslations('hero');
   const tCommon = useTranslations('propertyTypes');
@@ -139,12 +140,14 @@ export default function HeroSearchBar({ locale }: HeroSearchBarProps) {
   };
 
   return (
-    <div className="relative z-10 container mx-auto px-4 -mt-16 mb-16">
-      <div className="text-center mb-8 mt-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-          Find Your Ideal Property in Mallorca
-        </h2>
-      </div>
+    <div className={`relative z-10 container mx-auto px-4 ${hideTitle ? 'my-0' : '-mt-16 mb-16'}`}>
+      {!hideTitle && (
+        <div className="text-center mb-8 mt-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            Find Your Ideal Property in Mallorca
+          </h2>
+        </div>
+      )}
       
       {/* Glassmorphic Search Bar */}
       <div className="relative">

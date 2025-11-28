@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, TrendingUp, Award, Building2 } from 'lucide-react';
 import { prisma } from '@/lib/db';
+import HeroSearchBar from '@/components/home/HeroSearchBar';
 
 interface PropertiesPageProps {
   params: { locale: string };
@@ -132,6 +133,11 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
             </p>
           </div>
         </div>
+      </section>
+
+      {/* Search Bar Section */}
+      <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-12">
+        <HeroSearchBar locale={locale} hideTitle={true} />
       </section>
 
       {/* Stats Section */}
