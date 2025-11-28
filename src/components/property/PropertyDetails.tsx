@@ -109,33 +109,6 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
           ))}
         </div>
       </div>
-
-      {/* Property Highlights */}
-      <div className="bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl p-8 border border-gray-700">
-        <h3 className="text-xl font-bold text-white mb-6">Property Highlights</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 className="font-semibold text-white mb-3">Interior Features</h4>
-            <ul className="space-y-2 text-gray-300">
-              <li>• Open-plan living and dining areas</li>
-              <li>• Gourmet kitchen with premium appliances</li>
-              <li>• Master suite with private terrace</li>
-              <li>• Floor-to-ceiling windows throughout</li>
-              <li>• Air conditioning and underfloor heating</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-white mb-3">Exterior Features</h4>
-            <ul className="space-y-2 text-gray-300">
-              <li>• Infinity swimming pool</li>
-              <li>• Landscaped Mediterranean gardens</li>
-              <li>• Multiple outdoor terraces</li>
-              <li>• Outdoor kitchen and dining area</li>
-              <li>• Private garage for 2 cars</li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
