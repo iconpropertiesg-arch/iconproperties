@@ -49,33 +49,33 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="border-b border-gray-300 pb-8">
+      <div className="border-b border-gray-700 pb-8">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <div className="flex-1">
             <div className="flex items-center space-x-3 mb-4">
-              <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+              <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                 {t(`propertyTypes.${property.type}`)}
               </span>
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+              <span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                 Available
               </span>
             </div>
             
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
               {property.title}
             </h1>
             
-            <div className="flex items-center text-gray-700 mb-6">
-              <MapPin className="w-5 h-5 mr-2 text-blue-600" />
+            <div className="flex items-center text-gray-300 mb-6">
+              <MapPin className="w-5 h-5 mr-2 text-blue-400" />
               <span className="text-lg font-medium">{property.location.address}</span>
             </div>
           </div>
 
           <div className="text-right">
-            <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
+            <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
               {formatPrice(property.price, locale)}
             </div>
-            <div className="text-gray-600 font-medium">
+            <div className="text-gray-300 font-medium">
               Ref: {property.referenceId}
             </div>
           </div>
@@ -88,11 +88,11 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
           const Icon = detail.icon;
           return (
             <div key={index} className="text-center">
-              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Icon className="w-6 h-6 text-gray-600" />
+              <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-700">
+                <Icon className="w-6 h-6 text-blue-400" />
               </div>
-              <div className="text-sm text-gray-600 mb-1">{detail.label}</div>
-              <div className="font-semibold text-gray-900">{detail.value}</div>
+              <div className="text-sm text-gray-400 mb-1">{detail.label}</div>
+              <div className="font-semibold text-white">{detail.value}</div>
             </div>
           );
         })}
@@ -100,8 +100,8 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
 
       {/* Description */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Description</h2>
-        <div className="prose prose-lg max-w-none text-gray-600">
+        <h2 className="text-2xl font-bold text-white mb-6">Description</h2>
+        <div className="prose prose-lg max-w-none text-gray-300">
           {property.description.split('\n\n').map((paragraph, index) => (
             <p key={index} className="mb-4 leading-relaxed">
               {paragraph}
@@ -111,12 +111,12 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
       </div>
 
       {/* Property Highlights */}
-      <div className="bg-gradient-to-br from-blue-50 to-gray-50 rounded-2xl p-8 border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">Property Highlights</h3>
+      <div className="bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl p-8 border border-gray-700">
+        <h3 className="text-xl font-bold text-white mb-6">Property Highlights</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Interior Features</h4>
-            <ul className="space-y-2 text-gray-600">
+            <h4 className="font-semibold text-white mb-3">Interior Features</h4>
+            <ul className="space-y-2 text-gray-300">
               <li>• Open-plan living and dining areas</li>
               <li>• Gourmet kitchen with premium appliances</li>
               <li>• Master suite with private terrace</li>
@@ -125,8 +125,8 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Exterior Features</h4>
-            <ul className="space-y-2 text-gray-600">
+            <h4 className="font-semibold text-white mb-3">Exterior Features</h4>
+            <ul className="space-y-2 text-gray-300">
               <li>• Infinity swimming pool</li>
               <li>• Landscaped Mediterranean gardens</li>
               <li>• Multiple outdoor terraces</li>
