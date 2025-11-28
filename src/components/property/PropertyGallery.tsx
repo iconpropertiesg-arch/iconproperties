@@ -46,7 +46,7 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
     <>
       <div className="relative">
         {/* Main Gallery Grid */}
-        <div className="grid grid-cols-4 gap-2 h-96 md:h-[500px]">
+        <div className="grid grid-cols-4 gap-2 h-64 md:h-80 lg:h-96">
           {/* Main Image */}
           <div className="col-span-4 md:col-span-2 relative">
             {(images[selectedImageIndex]?.url || images[0].url).startsWith('http://') || (images[selectedImageIndex]?.url || images[0].url).startsWith('https://') ? (

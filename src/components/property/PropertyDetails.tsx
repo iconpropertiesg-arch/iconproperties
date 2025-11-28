@@ -49,7 +49,7 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="border-b border-gray-200 pb-8">
+      <div className="border-b border-gray-300 pb-8">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <div className="flex-1">
             <div className="flex items-center space-x-3 mb-4">
@@ -65,17 +65,17 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
               {property.title}
             </h1>
             
-            <div className="flex items-center text-gray-600 mb-6">
-              <MapPin className="w-5 h-5 mr-2" />
-              <span className="text-lg">{property.location.address}</span>
+            <div className="flex items-center text-gray-700 mb-6">
+              <MapPin className="w-5 h-5 mr-2 text-blue-600" />
+              <span className="text-lg font-medium">{property.location.address}</span>
             </div>
           </div>
 
           <div className="text-right">
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+            <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
               {formatPrice(property.price, locale)}
             </div>
-            <div className="text-gray-600">
+            <div className="text-gray-600 font-medium">
               Ref: {property.referenceId}
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
       </div>
 
       {/* Property Highlights */}
-      <div className="bg-gray-50 rounded-2xl p-8">
+      <div className="bg-gradient-to-br from-blue-50 to-gray-50 rounded-2xl p-8 border border-gray-200">
         <h3 className="text-xl font-bold text-gray-900 mb-6">Property Highlights</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>

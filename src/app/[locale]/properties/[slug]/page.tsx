@@ -200,12 +200,14 @@ export default async function PropertyPage({ params: { locale, slug } }: Propert
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       {/* Gallery */}
-      <PropertyGallery property={property} locale={locale} />
+      <div className="pt-12 px-4 md:px-8 lg:px-12 xl:px-16">
+        <PropertyGallery property={property} locale={locale} />
+      </div>
 
       {/* Property Details */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
@@ -224,7 +226,9 @@ export default async function PropertyPage({ params: { locale, slug } }: Propert
       </div>
 
       {/* Related Properties */}
-      <RelatedProperties property={property} locale={locale} />
+      <div className="px-4 md:px-8 lg:px-12 xl:px-16">
+        <RelatedProperties property={property} locale={locale} />
+      </div>
     </div>
   );
 }
