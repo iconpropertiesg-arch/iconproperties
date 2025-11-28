@@ -77,13 +77,13 @@ export default function RelatedProperties({ property, locale }: RelatedPropertie
   }
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-950 to-black">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Similar Properties
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Discover other exceptional properties that might interest you in similar locations and price ranges.
           </p>
         </div>
@@ -92,23 +92,31 @@ export default function RelatedProperties({ property, locale }: RelatedPropertie
           {relatedProperties.map((relatedProperty) => (
             <div
               key={relatedProperty.id}
-              className="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="property-card bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
             >
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={relatedProperty.images[0]}
-                  alt={relatedProperty.title}
-                  fill
-                  className="object-cover transition-transform duration-300"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                />
+              <div className="relative h-48 overflow-hidden bg-gray-900">
+                {relatedProperty.images[0]?.startsWith('http://') || relatedProperty.images[0]?.startsWith('https://') ? (
+                  <img
+                    src={relatedProperty.images[0]}
+                    alt={relatedProperty.title}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <Image
+                    src={relatedProperty.images[0]}
+                    alt={relatedProperty.title}
+                    fill
+                    className="object-contain transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  />
+                )}
                 <div className="absolute top-3 left-3">
-                  <span className="bg-primary text-white px-2 py-1 rounded-full text-xs font-medium">
-                    {t(`propertyTypes.${relatedProperty.type}`)}
+                  <span className="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                    {t(`propertyTypes.${relatedProperty.type}`) || relatedProperty.type}
                   </span>
                 </div>
                 <div className="absolute top-3 right-3">
-                  <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-2 py-1 rounded-full text-xs font-bold">
+                  <span className="bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-bold">
                     {formatPrice(relatedProperty.price, locale)}
                   </span>
                 </div>
@@ -116,28 +124,28 @@ export default function RelatedProperties({ property, locale }: RelatedPropertie
 
               <div className="p-4">
                 <div className="mb-3">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-2">
+                  <h3 className="text-lg font-semibold text-white mb-1 line-clamp-2">
                     {relatedProperty.title}
                   </h3>
-                  <p className="text-gray-600 text-sm">{relatedProperty.area}</p>
+                  <p className="text-gray-400 text-sm">{relatedProperty.area}</p>
                 </div>
 
-                <div className="flex items-center space-x-4 mb-4 text-xs text-gray-600">
+                <div className="flex items-center space-x-4 mb-4 text-xs text-gray-400">
                   {relatedProperty.beds && (
                     <div className="flex items-center space-x-1">
-                      <Bed className="w-3 h-3" />
+                      <Bed className="w-3 h-3 text-blue-400" />
                       <span>{relatedProperty.beds}</span>
                     </div>
                   )}
                   {relatedProperty.baths && (
                     <div className="flex items-center space-x-1">
-                      <Bath className="w-3 h-3" />
+                      <Bath className="w-3 h-3 text-blue-400" />
                       <span>{relatedProperty.baths}</span>
                     </div>
                   )}
                   {relatedProperty.size && (
                     <div className="flex items-center space-x-1">
-                      <Maximize className="w-3 h-3" />
+                      <Maximize className="w-3 h-3 text-blue-400" />
                       <span>{relatedProperty.size}m²</span>
                     </div>
                   )}
@@ -145,7 +153,7 @@ export default function RelatedProperties({ property, locale }: RelatedPropertie
 
                 <Link
                   href={`/${locale}/properties/${relatedProperty.slug}`}
-                  className="inline-flex items-center justify-center w-full bg-gray-900 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors group"
+                  className="inline-flex items-center justify-center w-full bg-blue-600 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors group"
                 >
                   {t('common.viewDetails')}
                   <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -158,7 +166,7 @@ export default function RelatedProperties({ property, locale }: RelatedPropertie
         <div className="text-center mt-12">
           <Link
             href={`/${locale}/properties`}
-            className="inline-flex items-center bg-primary text-white px-8 py-4 rounded-full font-semibold hover:bg-primary/90 transition-colors smooth-elevation"
+            className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-blue-500/30"
           >
             View All Properties
             <ArrowRight className="w-5 h-5 ml-2" />
