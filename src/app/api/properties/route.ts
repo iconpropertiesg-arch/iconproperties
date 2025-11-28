@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
     // Remove any URLs or full paths
     if (slug.includes('://') || slug.includes('localhost') || slug.startsWith('http')) {
       // Extract the last segment after the last slash
-      const parts = slug.split('/').filter(p => p);
+      const parts = slug.split('/').filter((p: string) => p);
       slug = parts[parts.length - 1] || '';
     }
     

@@ -175,7 +175,7 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
                 
                 // Remove any URLs or full paths
                 if (cleanSlug.includes('://') || cleanSlug.includes('localhost') || cleanSlug.startsWith('http')) {
-                  const parts = cleanSlug.split('/').filter(p => p);
+                  const parts = cleanSlug.split('/').filter((p: string) => p);
                   cleanSlug = parts[parts.length - 1] || '';
                 }
                 

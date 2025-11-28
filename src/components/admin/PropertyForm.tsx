@@ -196,7 +196,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
     // If it looks like a URL, extract just the last part
     if (sanitized.includes('://') || sanitized.includes('localhost') || sanitized.startsWith('http')) {
       // Extract the last segment after the last slash
-      const parts = sanitized.split('/').filter(p => p);
+      const parts = sanitized.split('/').filter((p: string) => p);
       sanitized = parts[parts.length - 1] || '';
     }
     
