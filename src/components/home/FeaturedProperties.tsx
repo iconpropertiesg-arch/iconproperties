@@ -11,101 +11,99 @@ interface FeaturedPropertiesProps {
   locale: string;
 }
 
-// Mock data - in a real app, this would come from an API
-const mockProperties = [
-  {
-    id: '1',
-    title: 'Luxury Villa with Sea Views',
-    slug: 'luxury-villa-sea-views-portals-nous',
-    area: 'Portals Nous',
-    price: 2800000,
-    beds: 5,
-    baths: 4,
-    size: 450,
-    images: ['/properties/villa-1.jpg'],
-    type: 'villa'
-  },
-  {
-    id: '2',
-    title: 'Modern Apartment in Puerto Portals',
-    slug: 'modern-apartment-puerto-portals',
-    area: 'Puerto Portals',
-    price: 1200000,
-    beds: 3,
-    baths: 2,
-    size: 180,
-    images: ['/properties/apartment-1.jpg'],
-    type: 'apartment'
-  },
-  {
-    id: '3',
-    title: 'Contemporary House in Santa Ponsa',
-    slug: 'contemporary-house-santa-ponsa',
-    area: 'Santa Ponsa',
-    price: 1650000,
-    beds: 4,
-    baths: 3,
-    size: 320,
-    images: ['/properties/house-1.jpg'],
-    type: 'house'
-  },
-  {
-    id: '4',
-    title: 'Penthouse with Marina Views',
-    slug: 'penthouse-marina-views-port-adriano',
-    area: 'Port Adriano',
-    price: 3200000,
-    beds: 4,
-    baths: 4,
-    size: 280,
-    images: ['/properties/penthouse-1.jpg'],
-    type: 'apartment'
-  },
-  {
-    id: '5',
-    title: 'Traditional Mallorcan Finca',
-    slug: 'traditional-finca-andratx',
-    area: 'Andratx',
-    price: 4500000,
-    beds: 6,
-    baths: 5,
-    size: 600,
-    images: ['/properties/finca-1.jpg'],
-    type: 'villa'
-  },
-  {
-    id: '6',
-    title: 'Beachfront Apartment',
-    slug: 'beachfront-apartment-camp-de-mar',
-    area: 'Camp de Mar',
-    price: 980000,
-    beds: 2,
-    baths: 2,
-    size: 140,
-    images: ['/properties/beachfront-1.jpg'],
-    type: 'apartment'
-  }
-];
+interface Property {
+  id: string;
+  slug: string;
+  title: string;
+  area: string;
+  price: number;
+  beds: number | null;
+  baths: number | null;
+  size: number | null;
+  images: string[];
+  type: string;
+}
 
 export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) {
   const t = useTranslations();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  // Fetch properties from database
+  useEffect(() => {
+    async function fetchProperties() {
+      try {
+        const response = await fetch(`/api/properties?locale=${locale}&includeTranslations=true`);
+        if (response.ok) {
+          const data = await response.json();
+          
+          // Map database properties to component format
+          const mappedProperties: Property[] = data.properties
+            .filter((p: any) => p.slug && p.translations && p.translations.length > 0) // Only include properties with valid slugs and translations
+            .map((property: any) => {
+              const translation = property.translations[0];
+              const firstImage = property.images && property.images.length > 0 
+                ? property.images[0] 
+                : '/portfolio/villa-son-vida.jpg'; // Fallback image
+              
+              // Sanitize slug
+              let cleanSlug = property.slug || '';
+              if (cleanSlug.includes('://') || cleanSlug.includes('localhost') || cleanSlug.startsWith('http')) {
+                const parts = cleanSlug.split('/').filter((p: string) => p);
+                cleanSlug = parts[parts.length - 1] || '';
+              }
+              cleanSlug = cleanSlug.replace(/^https?:\/\//, '').replace(/^www\./, '');
+              cleanSlug = cleanSlug
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w\s-]/g, '')
+                .replace(/[\s_-]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+
+              return {
+                id: property.id,
+                slug: cleanSlug,
+                title: translation?.title || 'Property',
+                area: property.location || 'Mallorca',
+                price: property.price,
+                beds: property.bedrooms,
+                baths: property.bathrooms,
+                size: property.area,
+                images: property.images && property.images.length > 0 ? property.images : [firstImage],
+                type: property.type === 'residential' ? 'house' : (property.type || 'house'),
+              };
+            })
+            .filter((p: Property) => p.slug && /^[a-z0-9-]+$/.test(p.slug)); // Only include properties with valid slugs
+
+          // Take up to 6 featured properties (or all if less than 6)
+          setProperties(mappedProperties.slice(0, 6));
+        }
+      } catch (error) {
+        console.error('Error fetching featured properties:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProperties();
+  }, [locale]);
   
   // Show 3 cards at a time
   const cardsPerSlide = 3;
-  const totalSlides = Math.ceil(mockProperties.length / cardsPerSlide);
+  const totalSlides = Math.ceil(properties.length / cardsPerSlide);
   
   // Auto-play functionality - slides every 4 seconds
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || properties.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isPaused, totalSlides]);
+  }, [isPaused, totalSlides, properties.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -170,7 +168,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
               {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                 <div key={slideIndex} className="w-full flex-shrink-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {mockProperties
+                    {properties
                       .slice(slideIndex * cardsPerSlide, (slideIndex + 1) * cardsPerSlide)
                       .map((property) => (
                         <div
@@ -178,16 +176,24 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                           className="property-card bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-blue-500/50 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
                         >
                           <div className="relative h-64 overflow-hidden">
-                            <Image
-                              src={property.images[0]}
-                              alt={property.title}
-                              fill
-                              className="object-cover transition-transform duration-300"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
+                            {property.images[0] && (property.images[0].startsWith('http://') || property.images[0].startsWith('https://')) ? (
+                              <img
+                                src={property.images[0]}
+                                alt={property.title}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
+                              />
+                            ) : (
+                              <Image
+                                src={property.images[0] || '/portfolio/villa-son-vida.jpg'}
+                                alt={property.title}
+                                fill
+                                className="object-cover transition-transform duration-300"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              />
+                            )}
                             <div className="absolute top-4 left-4">
                               <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                                {t(`propertyTypes.${property.type}`)}
+                                {t(`propertyTypes.${property.type}`) || property.type}
                               </span>
                             </div>
                             <div className="absolute top-4 right-4">
@@ -243,31 +249,44 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
           </div>
 
           {/* Slider Indicators */}
-          <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: totalSlides }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === currentSlide 
-                    ? 'w-8 bg-blue-500' 
-                    : 'w-2 bg-gray-600 hover:bg-gray-500'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
+          {totalSlides > 1 && (
+            <div className="flex justify-center gap-2 mt-8">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentSlide 
+                      ? 'w-8 bg-blue-500' 
+                      : 'w-2 bg-gray-600 hover:bg-gray-500'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="text-center mt-12">
-          <Link
-            href={`/${locale}/properties`}
-            className="inline-flex items-center bg-blue-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30"
-          >
-            {t('common.exploreAll')}
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Link>
-        </div>
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+            <p className="text-gray-400 mt-4">Loading properties...</p>
+          </div>
+        ) : properties.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-400">No properties available at the moment.</p>
+          </div>
+        ) : (
+          <div className="text-center mt-12">
+            <Link
+              href={`/${locale}/properties`}
+              className="inline-flex items-center bg-blue-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30"
+            >
+              {t('common.exploreAll')}
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
