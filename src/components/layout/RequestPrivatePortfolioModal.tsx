@@ -70,11 +70,51 @@ export default function RequestPrivatePortfolioModal({
 
     setIsSubmitting(true);
     try {
-      // TODO: Implement form submission API
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch('/api/portfolio-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          locale,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit portfolio request');
+      }
+
+      // Check for warnings (like database errors)
+      if (data.warnings && data.warnings.length > 0) {
+        console.warn('⚠️ Submission completed with warnings:', data.warnings);
+        
+        // Show database errors prominently
+        const dbWarning = data.warnings.find((w: string) => w.includes('Database'));
+        if (dbWarning) {
+          console.error('❌ DATABASE ERROR:', dbWarning);
+          console.error('💡 Solution: Update SUPABASE_SERVICE_ROLE_KEY in .env.local and restart server');
+          // Still show success to user since emails were sent, but log the issue
+        }
+      }
+
+      // Log success
+      if (data.id) {
+        console.log('✅ Portfolio request saved successfully to database with ID:', data.id);
+      } else {
+        console.error('❌ WARNING: Portfolio request submitted but NOT saved to database!');
+        console.error('💡 Check your server terminal for database connection errors.');
+        console.error('💡 Make sure SUPABASE_SERVICE_ROLE_KEY is set in .env.local');
+      }
+
       setIsSubmitted(true);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Form submission error:', error);
+      setErrors({ 
+        submit: error.message || 'Failed to submit request. Please try again.' 
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -307,6 +347,13 @@ export default function RequestPrivatePortfolioModal({
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                   </div>
                 </div>
+
+                {/* Error Message */}
+                {errors.submit && (
+                  <div className="bg-red-500/10 border border-red-500/50 rounded-xl p-4">
+                    <p className="text-red-400 text-sm">{errors.submit}</p>
+                  </div>
+                )}
 
                 {/* Submit Button */}
                 <button

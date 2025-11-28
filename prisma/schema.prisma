@@ -59,3 +59,20 @@ model PropertyTranslation {
   @@map("property_translations")
 }
 
+model PortfolioRequest {
+  id             String   @id @default(uuid()) @db.Uuid
+  name           String
+  email          String
+  phone          String?
+  buyerOrSeller  String   @map("buyer_or_seller")
+  budget         String?
+  preferredAreas String?  @map("preferred_areas")
+  typeOfHome     String?  @map("type_of_home")
+  timeline       String?
+  locale         String   @default("en")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("portfolio_requests")
+}
+
