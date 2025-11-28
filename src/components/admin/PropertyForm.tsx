@@ -485,18 +485,6 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                         disabled={uploading[index]}
                       />
                     </label>
-                    
-                    {/* URL Input (Alternative) */}
-                    <div className="mt-2">
-                      <p className="text-xs text-gray-400 mb-1">Or enter image URL:</p>
-                      <input
-                        type="url"
-                        value={image}
-                        onChange={(e) => updateImage(index, e.target.value)}
-                        placeholder="https://example.com/image.jpg"
-                        className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
-                      />
-                    </div>
                   </div>
 
                   {/* Remove Button */}
