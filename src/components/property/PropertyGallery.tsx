@@ -44,16 +44,16 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
 
   return (
     <>
-      <div className="relative">
+      <div className="relative w-full overflow-hidden rounded-2xl">
         {/* Main Gallery Grid */}
-        <div className="grid grid-cols-4 gap-2 h-64 md:h-80 lg:h-96">
+        <div className="grid grid-cols-4 gap-2 h-[500px] md:h-[600px] lg:h-[700px]">
           {/* Main Image */}
-          <div className="col-span-4 md:col-span-2 relative">
+          <div className="col-span-4 md:col-span-2 relative bg-gray-900 rounded-lg overflow-hidden">
             {(images[selectedImageIndex]?.url || images[0].url).startsWith('http://') || (images[selectedImageIndex]?.url || images[0].url).startsWith('https://') ? (
               <img
                 src={images[selectedImageIndex]?.url || images[0].url}
                 alt={images[selectedImageIndex]?.alt || images[0].alt}
-                className="absolute inset-0 w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                className="w-full h-full object-contain cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => openLightbox(selectedImageIndex)}
               />
             ) : (
@@ -61,7 +61,7 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
                 src={images[selectedImageIndex]?.url || images[0].url}
                 alt={images[selectedImageIndex]?.alt || images[0].alt}
                 fill
-                className="object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                className="object-contain cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => openLightbox(selectedImageIndex)}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
@@ -70,25 +70,25 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
           </div>
 
           {/* Thumbnail Grid */}
-          <div className="col-span-4 md:col-span-2 grid grid-cols-2 gap-2">
+          <div className="col-span-4 md:col-span-2 grid grid-cols-2 gap-2 h-full">
             {images.slice(1, 5).map((image, index) => (
               <div
                 key={image.id}
-                className="relative cursor-pointer hover:opacity-80 transition-opacity"
+                className="relative bg-gray-900 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={() => setSelectedImageIndex(index + 1)}
               >
                 {image.url.startsWith('http://') || image.url.startsWith('https://') ? (
                   <img
                     src={image.url}
                     alt={image.alt}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 ) : (
                   <Image
                     src={image.url}
                     alt={image.alt}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
                 )}
@@ -110,22 +110,22 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
         </div>
 
         {/* Gallery Controls */}
-        <div className="absolute bottom-4 right-4 flex space-x-2">
+        <div className="absolute bottom-4 right-4 flex space-x-2 z-10">
           {property.videoUrl && (
-            <button className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-white transition-colors flex items-center space-x-2">
+            <button className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-white transition-colors flex items-center space-x-2 shadow-lg">
               <Play className="w-4 h-4" />
               <span>Video Tour</span>
             </button>
           )}
           {property.matterportUrl && (
-            <button className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-white transition-colors flex items-center space-x-2">
+            <button className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-white transition-colors flex items-center space-x-2 shadow-lg">
               <Eye className="w-4 h-4" />
               <span>Virtual Tour</span>
             </button>
           )}
           <button
             onClick={() => openLightbox(0)}
-            className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-white transition-colors flex items-center space-x-2"
+            className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-white transition-colors flex items-center space-x-2 shadow-lg"
           >
             <Grid3X3 className="w-4 h-4" />
             <span>View All ({images.length})</span>
