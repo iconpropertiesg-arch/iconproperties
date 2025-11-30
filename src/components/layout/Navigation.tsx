@@ -19,6 +19,7 @@ export default function Navigation({ locale, className, onLinkClick }: Navigatio
     { key: 'home', href: `/${locale}` },
     { key: 'about', href: `/${locale}/about` },
     { key: 'portfolio', href: `/${locale}/properties` },
+    { key: 'sell', href: `/${locale}/sell` },
     { key: 'contact', href: `/${locale}/contact` },
     { key: 'faq', href: `/${locale}/faq` },
   ];

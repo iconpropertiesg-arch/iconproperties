@@ -89,6 +89,17 @@ export default function Header({ locale }: HeaderProps) {
                   {t('portfolio')}
                 </Link>
                 <Link
+                  href={`/${locale}/sell`}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    isScrolled 
+                      ? "text-gray-300 hover:text-blue-400"
+                      : "text-white/90 hover:text-white"
+                  )}
+                >
+                  {t('sell')}
+                </Link>
+                <Link
                   href={`/${locale}/contact`}
                   className={cn(
                     "text-sm font-medium transition-colors",
@@ -182,6 +193,13 @@ export default function Header({ locale }: HeaderProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('portfolio')}
+                </Link>
+                <Link
+                  href={`/${locale}/sell`}
+                  className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {t('sell')}
                 </Link>
                 <Link
                   href={`/${locale}/contact`}

@@ -84,3 +84,5 @@ If you see errors (❌), they will indicate what's wrong.
 - **Supabase URL**: `https://zgxjuueedtcfwlkyzrvw.supabase.co`
 - **Supabase Service Role Key**: ⚠️ **NEEDS TO BE SET**
 
+
+

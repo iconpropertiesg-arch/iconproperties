@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About",
     "portfolio": "Properties",
+    "sell": "Sell",
     "contact": "Contact",
     "faq": "FAQ"
   },
@@ -124,18 +125,119 @@
     }
   },
   "sell": {
-    "title": "Sell or rent with confidence",
-    "subtitle": "Valuation in 24h, premium marketing, qualified buyers.",
-    "pillars": {
-      "valuation": "Free Valuation",
-      "marketing": "Premium Marketing",
-      "discretion": "Complete Discretion"
+    "title": "Sell Your Property with ICON PROPERTIES",
+    "subtitle": "A boutique, advisory-led approach designed for owners who value privacy, precision and real results.",
+    "hero": {
+      "primaryCta": "Request Valuation",
+      "secondaryCta": "Speak with an Advisor"
     },
-    "form": {
-      "location": "Property Location",
-      "type": "Property Type",
-      "estimatedPrice": "Estimated Price (Optional)",
-      "contactMethod": "Preferred Contact Method"
+    "whySell": {
+      "title": "Why Sell With Us",
+      "subtitle": "A boutique, advisory-led approach designed for owners who value privacy, precision and real results.",
+      "point1": {
+        "title": "Access to Qualified International Buyers",
+        "description": "We connect your property with a curated pool of serious clients from Germany, Switzerland, Scandinavia and the UK."
+      },
+      "point2": {
+        "title": "Discreet Off-Market Sales",
+        "description": "Many of our sales happen without public exposure — ideal for owners who prefer confidentiality."
+      },
+      "point3": {
+        "title": "Premium Marketing & Presentation",
+        "description": "Professional photography, video, drone and bespoke marketing material to showcase your home at its best."
+      },
+      "point4": {
+        "title": "Personal, Advisor-Level Service",
+        "description": "You get direct contact with our team throughout the entire process, no hand-offs, no large agency overload."
+      },
+      "cta": "Request a Free Consultation"
+    },
+    "offMarket": {
+      "title": "Sell On-Market or Off-Market — We'll Guide You",
+      "subtitle": "We offer both strategies depending on your goals, privacy level and timeline.",
+      "offMarketTitle": "Off-Market Sale",
+      "offMarketPoint1": "No public advertising",
+      "offMarketPoint2": "Property shared only with verified buyers",
+      "offMarketPoint3": "High privacy, zero noise",
+      "offMarketPoint4": "Ideal for high-end villas & owners who value discretion",
+      "offMarketPoint5": "Often faster thanks to curated buyers",
+      "onMarketTitle": "On-Market Sale",
+      "onMarketPoint1": "Full online exposure using Google and Meta ads",
+      "onMarketPoint2": "Perfect for properties needing visibility",
+      "onMarketPoint3": "Combined strategy available",
+      "cta": "Request a Private Sales Strategy"
+    },
+    "process": {
+      "title": "Our 4-Step Sales Process",
+      "step1": {
+        "title": "Property Review & Pricing Strategy",
+        "description": "We analyse your property and provide a clear, data-driven recommendation based on market demand and buyer trends."
+      },
+      "step2": {
+        "title": "Premium Preparation",
+        "description": "Photography, video, drone footage and a professional brochure to highlight your home's strengths."
+      },
+      "step3": {
+        "title": "Private Promotion or Public Launch",
+        "description": "Depending on your chosen strategy, we either promote your villa privately to verified clients or launch it across selected channels."
+      },
+      "step4": {
+        "title": "Viewings, Negotiation & Closing",
+        "description": "We handle viewings discreetly, negotiate on your behalf and coordinate the legal process through completion."
+      }
+    },
+    "testimonials": {
+      "title": "What Our Clients Say",
+      "testimonial1": {
+        "quote": "ICON sold our Son Vida villa privately in under 30 days. Zero public exposure, exactly what we wanted.",
+        "author": "Anna & Erik S., Sweden"
+      },
+      "testimonial2": {
+        "quote": "Professional, efficient and discreet. Daniel brought us qualified buyers quickly and handled everything smoothly.",
+        "author": "Michael R., Germany"
+      }
+    },
+    "valuation": {
+      "title": "Request Your Property Valuation",
+      "subtitle": "Receive a personalised valuation and sales strategy tailored to your property and goals.",
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Property address or area",
+        "type": "Property type",
+        "value": "Estimated value (optional)",
+        "message": "Message (optional)",
+        "submit": "Request Valuation"
+      }
+    },
+    "marketing": {
+      "title": "Premium Marketing, Tailored for Luxury Homes",
+      "photography": {
+        "title": "Photography & Video",
+        "description": "Drone, daytime, sunset and interior lifestyle shots."
+      },
+      "online": {
+        "title": "Online Marketing",
+        "description": "We use the latest online marketing technology to reach new buyers through google, facebook and Instagram. Costs covered by us"
+      },
+      "brochures": {
+        "title": "Private Brochures",
+        "description": "Elegant PDF brochures used for off-market clients."
+      },
+      "international": {
+        "title": "International Reach",
+        "description": "Promotion across Germany, Switzerland and the UK — where most buyers originate."
+      }
+    },
+    "finalCta": {
+      "title": "Thinking of Selling?",
+      "description": "Whether you prefer a discreet off-market approach or a full marketing strategy, we help you position your property for the right buyers.",
+      "cta": "Request a Private Sales Consultation"
+    },
+    "seo": {
+      "title": "Luxury Property Sales in Mallorca",
+      "description": "ICON PROPERTIES specialises in selling high-end villas, fincas and luxury homes across Mallorca's premium areas, including Port Andratx, Son Vida, Bendinat, Santa Ponsa and Palma. We provide a private advisory service tailored to owners who value discretion, professionalism and international reach."
     }
   },
   "footer": {
