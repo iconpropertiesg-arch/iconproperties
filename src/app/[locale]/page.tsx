@@ -51,7 +51,12 @@ export default function HomePage({ params: { locale } }: HomePageProps) {
       <HeroSection locale={locale} />
 
       {/* Search Bar Section */}
-      <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-8">
+      <section className="relative bg-gradient-to-br from-blue-950 via-slate-950 via-black to-black py-8">
+        {/* Subtle glowing effects overlay */}
+        <div className="absolute inset-0 opacity-25">
+          <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
+        </div>
         <HeroSearchBar locale={locale} />
       </section>
 

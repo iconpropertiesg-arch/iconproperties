@@ -62,8 +62,14 @@ export default function HeroSection({ locale }: HeroSectionProps) {
       ref={sectionRef}
       className="relative min-h-screen flex items-center overflow-hidden bg-black"
     >
-      {/* Base background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-blue-950 to-blue-900" />
+      {/* Base background gradient - Dark blue to black gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-slate-950 via-black to-black" />
+      
+      {/* Subtle purple/blue glowing effects */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] animate-pulse-slow" />
+        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-purple-500/15 rounded-full blur-[100px] animate-pulse-slow animation-delay-2000" />
+      </div>
 
       {/* Custom cursor dot */}
       {isMouseInSection && (
