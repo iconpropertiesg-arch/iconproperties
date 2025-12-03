@@ -283,48 +283,23 @@ body {
 
 /* Animated gradient float animations for hero section */
 @keyframes gradient-float-1 {
-  0% {
-    transform: translate(0, -100px) scale(1);
-    opacity: 0.5;
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
   }
-  25% {
-    transform: translate(-120px, -60px) scale(1.25);
-    opacity: 0.6;
+  33% {
+    transform: translate(50px, -30px) scale(1.1);
   }
-  50% {
-    transform: translate(-60px, 100px) scale(1.15);
-    opacity: 0.55;
-  }
-  75% {
-    transform: translate(80px, -80px) scale(1.3);
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate(0, -100px) scale(1);
-    opacity: 0.5;
+  66% {
+    transform: translate(-30px, 40px) scale(0.95);
   }
 }
 
 @keyframes gradient-float-2 {
-  0% {
+  0%, 100% {
     transform: translate(0, 0) scale(1);
-    opacity: 0.4;
-  }
-  25% {
-    transform: translate(-80px, 100px) scale(1.2);
-    opacity: 0.5;
   }
   50% {
-    transform: translate(-150px, -50px) scale(1.35);
-    opacity: 0.55;
-  }
-  75% {
-    transform: translate(60px, -120px) scale(1.15);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.4;
+    transform: translate(-60px, 50px) scale(1.15);
   }
 }
 
@@ -503,4 +478,100 @@ body {
     transform: rotate(360deg);
     transform-origin: 0px 1px;
   }
+}
+
+/* Cobalt blue animated element - curved path from top-right to bottom-left corner */
+@keyframes cobalt-curved-path {
+  0% {
+    top: 5%;
+    right: 5%;
+  }
+  20% {
+    top: 20%;
+    right: 25%;
+  }
+  40% {
+    top: 40%;
+    right: 50%;
+  }
+  60% {
+    top: 60%;
+    right: 70%;
+  }
+  80% {
+    top: 80%;
+    right: 85%;
+  }
+  100% {
+    top: 95%;
+    right: 95%;
+  }
+}
+
+/* Cobalt blue blink animation - forward and back every 4-5 seconds */
+@keyframes cobalt-blink {
+  0%, 88%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  90% {
+    transform: translate(-30px, -30px) scale(1.3);
+    opacity: 0.9;
+  }
+  92% {
+    transform: translate(-20px, -20px) scale(1.2);
+    opacity: 0.8;
+  }
+  94% {
+    transform: translate(-10px, -10px) scale(1.1);
+    opacity: 0.7;
+  }
+  96% {
+    transform: translate(-5px, -5px) scale(1.05);
+    opacity: 0.65;
+  }
+  98% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+}
+
+/* Slow glow pulse animation */
+@keyframes cobalt-glow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    filter: blur(100px) brightness(1);
+  }
+  50% {
+    opacity: 0.9;
+    filter: blur(120px) brightness(1.3);
+  }
+}
+
+.animate-cobalt-path {
+  animation: cobalt-curved-path 10s ease-in-out infinite, cobalt-blink 4.5s ease-in-out infinite, cobalt-glow-pulse 6s ease-in-out infinite;
+}
+
+.animate-cobalt-glow-pulse {
+  animation: cobalt-glow-pulse 6s ease-in-out infinite;
+}
+
+/* Logo carousel animation - scroll from right to left continuously */
+@keyframes logo-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-scroll {
+  animation: logo-scroll 15s linear infinite;
+  will-change: transform;
+  display: flex;
+}
+
+.animate-logo-scroll:hover {
+  animation-play-state: paused;
 }

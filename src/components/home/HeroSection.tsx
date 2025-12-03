@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { ArrowRight, Play, Pause } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -71,6 +72,25 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-purple-500/15 rounded-full blur-[100px] animate-pulse-slow animation-delay-2000" />
       </div>
 
+      {/* Cobalt Blue Gradient Element - Top Left Corner */}
+      <div 
+        className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none z-5 animate-cobalt-glow-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(19, 56, 190, 0.8) 0%, rgba(19, 56, 190, 0.6) 30%, rgba(19, 56, 190, 0.4) 50%, rgba(19, 56, 190, 0.2) 70%, transparent 100%)',
+          boxShadow: '0 0 100px rgba(19, 56, 190, 0.5), 0 0 150px rgba(19, 56, 190, 0.3)',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+
+      {/* Animated Cobalt Blue Gradient Element - Curved path from top-right to bottom-left corner */}
+      <div 
+        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none z-5 animate-cobalt-path"
+        style={{
+          background: 'radial-gradient(circle, rgba(19, 56, 190, 0.8) 0%, rgba(19, 56, 190, 0.6) 30%, rgba(19, 56, 190, 0.4) 50%, rgba(19, 56, 190, 0.2) 70%, transparent 100%)',
+          boxShadow: '0 0 100px rgba(19, 56, 190, 0.5), 0 0 150px rgba(19, 56, 190, 0.3)',
+        }}
+      />
+
       {/* Custom cursor dot */}
       {isMouseInSection && (
         <div 
@@ -122,6 +142,84 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
+            </div>
+
+            {/* Logo Carousel Section */}
+            <div className="pt-8 w-[375px] overflow-hidden relative">
+              <div className="flex animate-logo-scroll items-center" style={{ width: 'fit-content' }}>
+                {/* First set of logos */}
+                <div className="flex items-center gap-12 flex-shrink-0 px-4">
+                  <div className="relative h-8 w-32 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <Image
+                      src="https://logos-world.net/wp-content/uploads/2021/02/Engel-Voelkers-Logo.png"
+                      alt="Engel & Völkers"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="relative h-10 w-24 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <Image
+                      src="https://logo.clearbit.com/rgluxury.com"
+                      alt="R G Luxury"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://via.placeholder.com/120x40/FFFFFF/000000?text=R+G+LUXURY';
+                      }}
+                    />
+                  </div>
+                  <div className="relative h-8 w-28 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <Image
+                      src="https://logo.clearbit.com/vestar.com"
+                      alt="Vesta R"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://via.placeholder.com/140x40/FFFFFF/000000?text=Vesta+R';
+                      }}
+                    />
+                  </div>
+                </div>
+                {/* Duplicate set for seamless loop - exactly the same */}
+                <div className="flex items-center gap-12 flex-shrink-0 px-4">
+                  <div className="relative h-8 w-32 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <Image
+                      src="https://logos-world.net/wp-content/uploads/2021/02/Engel-Voelkers-Logo.png"
+                      alt="Engel & Völkers"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="relative h-10 w-24 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <Image
+                      src="https://logo.clearbit.com/rgluxury.com"
+                      alt="R G Luxury"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://via.placeholder.com/120x40/FFFFFF/000000?text=R+G+LUXURY';
+                      }}
+                    />
+                  </div>
+                  <div className="relative h-8 w-28 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <Image
+                      src="https://logo.clearbit.com/vestar.com"
+                      alt="Vesta R"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://via.placeholder.com/140x40/FFFFFF/000000?text=Vesta+R';
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
