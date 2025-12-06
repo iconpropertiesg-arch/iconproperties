@@ -390,11 +390,11 @@ body {
   position: absolute;
   width: 230px;
   height: 3px;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), transparent);
+  /* Magenta-to-orange glow similar to reference */
+  background: linear-gradient(90deg, transparent, #d946ef, #f97316, transparent);
   animation: border-line-move-around 12s linear infinite;
   z-index: 10;
   border-radius: 1.5px;
-  overflow: clip;
 }
 
 @keyframes border-line-move-around {
@@ -403,80 +403,101 @@ body {
     top: -1px;
     left: -1px;
     transform: rotate(0deg);
-    transform-origin: left center;
   }
   24.99% {
     top: -1px;
     left: calc(100% - 230px);
     transform: rotate(0deg);
-    transform-origin: left center;
   }
-  /* Top-right corner: line reaches the corner, pivot at right end */
+  
+  /* Transition to right edge */
   25% {
     top: -1px;
-    left: calc(100% - 230px);
-    transform: rotate(0deg);
-    transform-origin: 230px 1px;
+    right: -1px;
+    left: auto;
+    transform: rotate(90deg);
+    transform-origin: left center;
   }
-  /* Right edge: top to bottom - rotate around the corner point (right end of horizontal line) */
+  
+  /* Right edge: top to bottom */
   25.01% {
     top: -1px;
-    left: calc(100% - 1px);
+    right: -1px;
+    left: auto;
     transform: rotate(90deg);
-    transform-origin: 230px 1px;
+    transform-origin: left center;
   }
   49.99% {
     top: calc(100% - 230px);
-    left: calc(100% - 1px);
+    right: -1px;
+    left: auto;
     transform: rotate(90deg);
-    transform-origin: 230px 1px;
+    transform-origin: left center;
   }
-  /* Bottom-right corner: line reaches the corner, pivot at bottom end */
+  
+  /* Transition to bottom edge */
   50% {
-    top: calc(100% - 230px);
-    left: calc(100% - 1px);
-    transform: rotate(90deg);
-    transform-origin: 230px 1px;
-  }
-  /* Bottom edge: right to left - rotate around the corner point (bottom end of vertical line) */
-  50.01% {
-    top: calc(100% - 1px);
-    left: calc(100% - 1px);
+    bottom: -1px;
+    right: -1px;
+    top: auto;
+    left: auto;
     transform: rotate(180deg);
-    transform-origin: 230px 1px;
+    transform-origin: left center;
+  }
+  
+  /* Bottom edge: right to left */
+  50.01% {
+    bottom: -1px;
+    right: -1px;
+    top: auto;
+    left: auto;
+    transform: rotate(180deg);
+    transform-origin: left center;
   }
   74.99% {
-    top: calc(100% - 1px);
-    left: -1px;
+    bottom: -1px;
+    right: calc(100% - 230px);
+    top: auto;
+    left: auto;
     transform: rotate(180deg);
-    transform-origin: 230px 1px;
+    transform-origin: left center;
   }
-  /* Bottom-left corner: line reaches the corner, pivot at left end */
+  
+  /* Transition to left edge */
   75% {
-    top: calc(100% - 1px);
+    bottom: -1px;
     left: -1px;
-    transform: rotate(180deg);
-    transform-origin: 0px 1px;
-  }
-  /* Left edge: bottom to top - rotate around the corner point (left end of horizontal line) */
-  75.01% {
-    top: calc(100% - 1px);
-    left: -1px;
+    top: auto;
+    right: auto;
     transform: rotate(270deg);
-    transform-origin: 0px 1px;
+    transform-origin: left center;
+  }
+  
+  /* Left edge: bottom to top */
+  75.01% {
+    bottom: -1px;
+    left: -1px;
+    top: auto;
+    right: auto;
+    transform: rotate(270deg);
+    transform-origin: left center;
   }
   99.99% {
-    top: -1px;
+    bottom: calc(100% - 230px);
     left: -1px;
+    top: auto;
+    right: auto;
     transform: rotate(270deg);
-    transform-origin: 0px 1px;
+    transform-origin: left center;
   }
-  /* Complete the loop - return to start */
+  
+  /* Complete the loop */
   100% {
     top: -1px;
     left: -1px;
-    transform: rotate(360deg);
-    transform-origin: 0px 1px;
+    bottom: auto;
+    right: auto;
+    transform: rotate(0deg);
   }
 }
 
@@ -554,6 +575,19 @@ body {
 
 .animate-cobalt-glow-pulse {
   animation: cobalt-glow-pulse 6s ease-in-out infinite;
+}
+
+.blue-glow {
+  box-shadow:
+    0 0 22px rgba(37, 99, 235, 0.45),
+    0 0 40px rgba(59, 130, 246, 0.35);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.blue-glow:hover {
+  box-shadow:
+    0 0 28px rgba(37, 99, 235, 0.6),
+    0 0 55px rgba(59, 130, 246, 0.45);
 }
 
 /* Logo carousel animation - scroll from right to left continuously */

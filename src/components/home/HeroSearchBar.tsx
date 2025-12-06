@@ -140,7 +140,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   };
 
   return (
-    <div className={`relative z-10 container mx-auto px-4 ${hideTitle ? 'my-0' : '-mt-16 mb-16'}`}>
+    <div className={`relative z-10 mx-auto max-w-6xl px-4 ${hideTitle ? 'my-0' : '-mt-16 mb-16'}`}>
       {!hideTitle && (
         <div className="text-center mb-8 mt-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
@@ -150,7 +150,17 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
       )}
       
       {/* Glassmorphic Search Bar */}
-      <div className="relative">
+     
+
+
+
+      <div className="glow-wrapper">
+    <div 
+        className="relative bg-white/10 backdrop-blur-xl rounded-full border border-white/20 p-2 shadow-2xl search-bar-content overflow-visible"
+    >
+        {/* your whole search bar content */}
+
+        <div className="relative">
         <div 
           className="relative bg-white/10 backdrop-blur-xl rounded-full border border-white/20 p-2 shadow-2xl search-bar-animated-border overflow-visible"
           style={{
@@ -361,6 +371,8 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
           </div>
         </div>
       </div>
+    </div>
+</div>
     </div>
   );
 }
