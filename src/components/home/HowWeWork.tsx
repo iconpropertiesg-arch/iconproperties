@@ -219,17 +219,21 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       {/* Tags */}
                       {step.tags && (
                         <div className="flex gap-2 mb-6 flex-wrap">
-                          {step.tags.map((tag, tagIndex) => (
-                            <span key={tagIndex} className="px-3 py-1.5 bg-slate-800/60 text-white text-xs rounded-lg border border-white/10">
-                              {tag.bold ? (
-                                <>
-                                  <span className="font-semibold">{tag.bold}</span> {tag.text.replace(tag.bold, '').trim()}
-                                </>
-                              ) : (
-                                tag.text
-                              )}
-                            </span>
-                          ))}
+                          {step.tags.map((tag, tagIndex) => {
+                            const hasBold = 'bold' in tag && tag.bold;
+                            return (
+                              <span key={tagIndex} className="px-3 py-1.5 bg-slate-800/60 text-white text-xs rounded-lg border border-white/10">
+                                {hasBold ? (
+                                  <>
+                                    <span className="font-semibold">{tag.bold}</span>{' '}
+                                    {tag.text.replace(tag.bold as string, '').trim()}
+                                  </>
+                                ) : (
+                                  tag.text
+                                )}
+                              </span>
+                            );
+                          })}
                         </div>
                       )}
 
