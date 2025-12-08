@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -14,17 +14,37 @@ interface HeaderProps {
 
 export default function Header({ locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const lastScrollY = useRef(0);
   const t = useTranslations('navigation');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScroll = window.scrollY;
+      setIsScrolled(currentScroll > 20);
+
+      // Hide header while scrolling down and show it again on scroll up
+      if (isMobileMenuOpen) {
+        setIsHidden(false);
+        lastScrollY.current = currentScroll;
+        return;
+      }
+
+      const isScrollingDown = currentScroll > lastScrollY.current;
+      if (isScrollingDown && currentScroll > 120) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+
+      lastScrollY.current = currentScroll;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -42,7 +62,8 @@ export default function Header({ locale }: HeaderProps) {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform',
+          isHidden ? '-translate-y-full' : 'translate-y-0',
           isScrolled
             ? 'bg-blue-950/20 backdrop-blur-xl py-2 shadow-lg border-b border-white/10'
             : 'bg-transparent py-3'
