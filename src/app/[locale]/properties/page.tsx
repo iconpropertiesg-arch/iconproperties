@@ -200,53 +200,73 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
               <Link
                 key={item.id}
                 href={`/${locale}/properties/${cleanSlug}`}
-                className="group bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer block"
+                className="group relative h-[420px] rounded-2xl overflow-hidden border border-white/10 hover:border-blue-500 transition-all duration-300 cursor-pointer block hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-900/30"
               >
-                <div className="relative h-64 overflow-hidden">
-                  {item.image.startsWith('http://') || item.image.startsWith('https://') ? (
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  ) : (
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                {/* Full-cover background image */}
+                {item.image.startsWith('http://') || item.image.startsWith('https://') ? (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                ) : (
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                )}
+
+                {/* Dark overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 group-hover:from-black/85 group-hover:via-black/50 transition-all duration-300" />
+
+                {/* Content overlay - all on top of image */}
+                <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
+                  {/* Top badges */}
+                  <div className="flex items-start justify-between">
+                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
                       {item.category}
                     </span>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <span className={`${item.status.toLowerCase() === 'sold' ? 'bg-red-500' : 'bg-emerald-500'} text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg`}>
                       {item.status}
                     </span>
                   </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="text-white">
-                      <p className="text-sm opacity-90">{item.year}</p>
-                      <p className="text-2xl font-bold">{item.value}</p>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400 mb-4 line-clamp-2">
-                    {item.description}
-                  </p>
-                  <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
-                    View Details
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  {/* Spacer for middle area */}
+                  <div className="flex-1" />
+
+                  {/* Bottom info */}
+                  <div className="space-y-3">
+                    {/* Title and location */}
+                    <div className="flex items-end justify-between gap-3">
+                      <div>
+                        <h3 className="text-xl font-bold mb-1 group-hover:text-blue-300 transition-colors line-clamp-1">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-gray-300 line-clamp-1">
+                          {item.description}
+                        </p>
+                      </div>
+                      <span className="px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-xs font-semibold border border-white/20 shrink-0">
+                        {item.year}
+                      </span>
+                    </div>
+
+                    {/* Price and CTA */}
+                    <div className="flex items-center justify-between pt-2 border-t border-white/20">
+                      <div className="text-2xl font-bold">{item.value}</div>
+                      <div className="flex items-center gap-3">
+                        <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors font-medium">
+                          View Details
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                        <span className="inline-flex items-center px-4 py-2 rounded-full bg-white text-gray-900 font-semibold shadow-lg transition-transform duration-300 group-hover:scale-105 text-sm">
+                          View Now
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Link>

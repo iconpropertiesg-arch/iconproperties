@@ -171,76 +171,93 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                     {properties
                       .slice(slideIndex * cardsPerSlide, (slideIndex + 1) * cardsPerSlide)
                       .map((property) => (
-                        <div
+                        <Link
                           key={property.id}
-                          className="property-card bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-blue-500/50 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+                          href={`/${locale}/properties/${property.slug}`}
+                          className="group relative h-[420px] rounded-2xl overflow-hidden border border-white/10 hover:border-blue-500 transition-all duration-300 cursor-pointer block hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-900/30"
                         >
-                          <div className="relative h-64 overflow-hidden">
-                            {property.images[0] && (property.images[0].startsWith('http://') || property.images[0].startsWith('https://')) ? (
-                              <img
-                                src={property.images[0]}
-                                alt={property.title}
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
-                              />
-                            ) : (
-                              <Image
-                                src={property.images[0] || '/portfolio/villa-son-vida.jpg'}
-                                alt={property.title}
-                                fill
-                                className="object-cover transition-transform duration-300"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              />
-                            )}
-                            <div className="absolute top-4 left-4">
-                              <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {/* Full-cover background image */}
+                          {property.images[0] && (property.images[0].startsWith('http://') || property.images[0].startsWith('https://')) ? (
+                            <img
+                              src={property.images[0]}
+                              alt={property.title}
+                              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                          ) : (
+                            <Image
+                              src={property.images[0] || '/portfolio/villa-son-vida.jpg'}
+                              alt={property.title}
+                              fill
+                              className="object-cover transition-transform duration-500 group-hover:scale-110"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            />
+                          )}
+
+                          {/* Dark overlay for text readability */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 group-hover:from-black/85 group-hover:via-black/50 transition-all duration-300" />
+
+                          {/* Content overlay - all on top of image */}
+                          <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
+                            {/* Top badges */}
+                            <div className="flex items-start justify-between">
+                              <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
                                 {t(`propertyTypes.${property.type}`) || property.type}
                               </span>
-                            </div>
-                            <div className="absolute top-4 right-4">
-                              <span className="bg-black/70 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold">
+                              <span className="bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                                 {formatPrice(property.price, locale)}
                               </span>
                             </div>
-                          </div>
 
-                          <div className="p-6">
-                            <div className="mb-3">
-                              <h3 className="text-xl font-semibold text-white mb-1">
-                                {property.title}
-                              </h3>
-                              <p className="text-gray-400">{property.area}</p>
+                            {/* Spacer for middle area */}
+                            <div className="flex-1" />
+
+                            {/* Bottom info */}
+                            <div className="space-y-3">
+                              {/* Title and location */}
+                              <div>
+                                <h3 className="text-xl font-bold mb-1 group-hover:text-blue-300 transition-colors line-clamp-1">
+                                  {property.title}
+                                </h3>
+                                <p className="text-sm text-gray-300 line-clamp-1">
+                                  {property.area}
+                                </p>
+                              </div>
+
+                              {/* Features */}
+                              <div className="flex items-center space-x-4 text-sm text-gray-300">
+                                {property.beds && (
+                                  <div className="flex items-center space-x-1">
+                                    <Bed className="w-4 h-4" />
+                                    <span>{property.beds} {t('common.beds')}</span>
+                                  </div>
+                                )}
+                                {property.baths && (
+                                  <div className="flex items-center space-x-1">
+                                    <Bath className="w-4 h-4" />
+                                    <span>{property.baths} {t('common.baths')}</span>
+                                  </div>
+                                )}
+                                {property.size && (
+                                  <div className="flex items-center space-x-1">
+                                    <Maximize className="w-4 h-4" />
+                                    <span>{property.size}{t('common.sqm')}</span>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* CTA */}
+                              <div className="flex items-center justify-between pt-2 border-t border-white/20">
+                                <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors font-medium">
+                                  {t('common.viewDetails')}
+                                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                </div>
+                                <span className="inline-flex items-center px-4 py-2 rounded-full bg-white text-gray-900 font-semibold shadow-lg transition-transform duration-300 group-hover:scale-105 text-sm">
+                                  View Now
+                                </span>
+                              </div>
                             </div>
-
-                            <div className="flex items-center space-x-4 mb-6 text-sm text-gray-400">
-                              {property.beds && (
-                                <div className="flex items-center space-x-1">
-                                  <Bed className="w-4 h-4" />
-                                  <span>{property.beds} {t('common.beds')}</span>
-                                </div>
-                              )}
-                              {property.baths && (
-                                <div className="flex items-center space-x-1">
-                                  <Bath className="w-4 h-4" />
-                                  <span>{property.baths} {t('common.baths')}</span>
-                                </div>
-                              )}
-                              {property.size && (
-                                <div className="flex items-center space-x-1">
-                                  <Maximize className="w-4 h-4" />
-                                  <span>{property.size}{t('common.sqm')}</span>
-                                </div>
-                              )}
-                            </div>
-
-                            <Link
-                              href={`/${locale}/properties/${property.slug}`}
-                              className="inline-flex items-center justify-center w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-600 transition-all duration-300 group hover:shadow-lg hover:shadow-blue-500/30"
-                            >
-                              {t('common.viewDetails')}
-                              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                            </Link>
                           </div>
-                        </div>
+                        </Link>
                       ))}
                   </div>
                 </div>

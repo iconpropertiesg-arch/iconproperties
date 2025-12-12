@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
 import { verifyToken } from '@/lib/auth';
+import { createServerClient } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
@@ -51,28 +50,38 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate unique filename
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(2, 15);
     const extension = file.name.split('.').pop();
     const filename = `property-${timestamp}-${randomString}.${extension}`;
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads', 'properties');
-    try {
-      await mkdir(uploadsDir, { recursive: true });
-    } catch (error) {
-      // Directory might already exist
+    // Convert file to buffer
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    // Upload to Supabase Storage
+    const supabase = createServerClient();
+    const { data, error } = await supabase.storage
+      .from('property_images')
+      .upload(`properties/${filename}`, buffer, {
+        contentType: file.type,
+        upsert: false
+      });
+
+    if (error) {
+      console.error('Supabase upload error:', error);
+      return NextResponse.json(
+        { error: error.message || 'Failed to upload image to storage' },
+        { status: 500 }
+      );
     }
 
-    // Save file
-    const filepath = join(uploadsDir, filename);
-    await writeFile(filepath, buffer);
+    // Get public URL
+    const { data: urlData } = supabase.storage
+      .from('property_images')
+      .getPublicUrl(`properties/${filename}`);
 
-    // Return the public URL
-    const url = `/uploads/properties/${filename}`;
+    const url = urlData.publicUrl;
 
     return NextResponse.json({ 
       success: true,

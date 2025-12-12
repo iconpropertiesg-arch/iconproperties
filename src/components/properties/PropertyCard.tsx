@@ -113,75 +113,102 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
   }
 
   return (
-    <div className="property-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-      {/* Image */}
-      <div className="relative h-64 overflow-hidden">
-        <Image
-          src={property.images[0]?.url || '/placeholder-property.jpg'}
-          alt={property.title}
-          fill
-          className="object-cover transition-transform duration-300"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        <div className="absolute top-4 left-4">
-          <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
-            {t(`propertyTypes.${property.type}`)}
-          </span>
-        </div>
-        <div className="absolute top-4 right-4">
-          <button className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors">
-            <Heart className="w-4 h-4 text-gray-600" />
-          </button>
-        </div>
-        <div className="absolute bottom-4 right-4">
-          <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-sm font-bold">
-            {formatPrice(property.price, locale)}
-          </span>
-        </div>
-      </div>
+    <div className="group relative h-96 overflow-hidden rounded-2xl border border-white/10 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-blue-900/30 bg-transparent">
+      {/* Background image fills card */}
+      <Image
+        src={property.images[0]?.url || '/placeholder-property.jpg'}
+        alt={property.title}
+        fill
+        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        priority
+      />
 
-      {/* Content */}
-      <div className="p-6">
-        <div className="mb-3">
-          <h3 className="text-xl font-semibold text-gray-900 mb-1 hover:text-primary transition-colors">
-            <Link href={`/${locale}/properties/${property.slug}`}>
-              {property.title}
-            </Link>
-          </h3>
-          <div className="flex items-center text-gray-600 text-sm">
-            <MapPin className="w-4 h-4 mr-1" />
-            <span>{property.area}</span>
+      {/* Single overlay layer with gradients for readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/35 to-black/85 opacity-90 group-hover:opacity-95 transition-opacity duration-300" />
+
+      {/* Content overlay */}
+      <div className="absolute inset-0 flex flex-col justify-between p-4">
+        {/* Top badges */}
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-2">
+            <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+              {t(`propertyTypes.${property.type}`)}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            {property.availability && (
+              <span className="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                {property.availability === 'sold' ? t('common.sold') : t('common.available')}
+              </span>
+            )}
           </div>
         </div>
 
-        <div className="flex items-center flex-wrap gap-4 mb-6 text-sm text-gray-600">
-          {property.beds && (
-            <div className="flex items-center space-x-1">
-              <Bed className="w-4 h-4" />
-              <span>{property.beds} {t('common.beds')}</span>
-            </div>
-          )}
-          {property.baths && (
-            <div className="flex items-center space-x-1">
-              <Bath className="w-4 h-4" />
-              <span>{property.baths} {t('common.baths')}</span>
-            </div>
-          )}
-          {property.interiorSize && (
-            <div className="flex items-center space-x-1">
-              <Maximize className="w-4 h-4" />
-              <span>{property.interiorSize}{t('common.sqm')}</span>
-            </div>
-          )}
+        {/* Center CTA */}
+        <div className="flex justify-center">
+          <span className="inline-flex items-center px-4 py-2 rounded-full bg-white text-gray-900 font-semibold shadow-lg transition-transform duration-300 group-hover:scale-105">
+            View Now
+          </span>
         </div>
 
-        <Link
-          href={`/${locale}/properties/${property.slug}`}
-          className="inline-flex items-center justify-center w-full bg-gray-900 text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-800 transition-colors group"
-        >
-          {t('common.viewDetails')}
-          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        {/* Bottom info directly over image */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h3 className="text-lg font-semibold leading-tight mb-1 transition-colors duration-200 group-hover:text-blue-200">
+                <Link href={`/${locale}/properties/${property.slug}`}>
+                  {property.title}
+                </Link>
+              </h3>
+              <div className="flex items-center text-sm text-slate-200/90">
+                <MapPin className="w-4 h-4 mr-1" />
+                <span>{property.area}</span>
+              </div>
+            </div>
+            {property.yearBuilt && (
+              <span className="px-3 py-1 rounded-full bg-white/10 text-xs font-semibold border border-white/20">
+                {property.yearBuilt}
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center flex-wrap gap-4 text-sm text-slate-200/90">
+            {property.beds && (
+              <div className="flex items-center space-x-1">
+                <Bed className="w-4 h-4" />
+                <span>{property.beds} {t('common.beds')}</span>
+              </div>
+            )}
+            {property.baths && (
+              <div className="flex items-center space-x-1">
+                <Bath className="w-4 h-4" />
+                <span>{property.baths} {t('common.baths')}</span>
+              </div>
+            )}
+            {property.interiorSize && (
+              <div className="flex items-center space-x-1">
+                <Maximize className="w-4 h-4" />
+                <span>{property.interiorSize}{t('common.sqm')}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div>
+              <span className="text-xs uppercase tracking-wide text-slate-200/80">{property.yearBuilt}</span>
+              <div className="text-2xl font-bold text-white leading-tight">{formatPrice(property.price, locale)}</div>
+            </div>
+            <Link
+              href={`/${locale}/properties/${property.slug}`}
+              className="inline-flex items-center justify-center bg-white text-gray-900 py-2 px-4 rounded-xl font-semibold hover:bg-slate-100 transition-colors group"
+            >
+              {t('common.viewDetails')}
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
+        </div>
       </div>
     </div>
   );

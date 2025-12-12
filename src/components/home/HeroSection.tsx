@@ -20,6 +20,18 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Logo images array
+  const logos = [
+    '/images/logos/Black Beige Bold Framed Typography Planet Brand Business Logo.png',
+    '/images/logos/Black White Minimal Design Studio Logo (3).png',
+    '/images/logos/Black White Minimal Design Studio Logo (4).png',
+    '/images/logos/Black White Minimal Design Studio Logo (5).png',
+    '/images/logos/Green and White Simple Technology Logo (1).png',
+    '/images/logos/Green and White Simple Technology Logo (2).png',
+    '/images/logos/Green and White Simple Technology Logo (3).png',
+    '/images/logos/Green and White Simple Technology Logo.png',
+  ];
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (sectionRef.current) {
@@ -145,80 +157,54 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             </div>
 
             {/* Logo Carousel Section */}
-            <div className="pt-8 w-[375px] overflow-hidden relative">
+            <div className="pt-8 w-full max-w-[600px] overflow-hidden relative">
               <div className="flex animate-logo-scroll items-center" style={{ width: 'fit-content' }}>
                 {/* First set of logos */}
-                <div className="flex items-center gap-12 flex-shrink-0 px-4">
-                  <div className="relative h-8 w-32 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                {logos.map((logoPath, index) => (
+                  <div key={`logo-${index}`} className="relative h-12 w-32 mx-6 flex-shrink-0 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
                     <Image
-                      src="https://logos-world.net/wp-content/uploads/2021/02/Engel-Voelkers-Logo.png"
-                      alt="Engel & Völkers"
-                      fill
-                      className="object-contain"
-                      unoptimized
-                    />
-                  </div>
-                  <div className="relative h-10 w-24 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
-                    <Image
-                      src="https://logo.clearbit.com/rgluxury.com"
-                      alt="R G Luxury"
+                      src={logoPath}
+                      alt={`Logo ${index + 1}`}
                       fill
                       className="object-contain"
                       unoptimized
                       onError={(e) => {
-                        e.currentTarget.src = 'https://via.placeholder.com/120x40/FFFFFF/000000?text=R+G+LUXURY';
+                        // Fallback: try encoded path if original fails
+                        const pathParts = logoPath.split('/');
+                        const filename = pathParts.pop();
+                        const encodedPath = [...pathParts, encodeURIComponent(filename || '')].join('/');
+                        if (e.currentTarget.src !== encodedPath) {
+                          e.currentTarget.src = encodedPath;
+                        } else {
+                          console.error(`Failed to load logo ${index + 1}:`, logoPath);
+                        }
                       }}
                     />
                   </div>
-                  <div className="relative h-8 w-28 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                ))}
+                {/* Duplicate set for seamless loop */}
+                {logos.map((logoPath, index) => (
+                  <div key={`logo-duplicate-${index}`} className="relative h-12 w-32 mx-6 flex-shrink-0 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
                     <Image
-                      src="https://logo.clearbit.com/vestar.com"
-                      alt="Vesta R"
+                      src={logoPath}
+                      alt={`Logo ${index + 1}`}
                       fill
                       className="object-contain"
                       unoptimized
                       onError={(e) => {
-                        e.currentTarget.src = 'https://via.placeholder.com/140x40/FFFFFF/000000?text=Vesta+R';
+                        // Fallback: try encoded path if original fails
+                        const pathParts = logoPath.split('/');
+                        const filename = pathParts.pop();
+                        const encodedPath = [...pathParts, encodeURIComponent(filename || '')].join('/');
+                        if (e.currentTarget.src !== encodedPath) {
+                          e.currentTarget.src = encodedPath;
+                        } else {
+                          console.error(`Failed to load logo ${index + 1}:`, logoPath);
+                        }
                       }}
                     />
                   </div>
-                </div>
-                {/* Duplicate set for seamless loop - exactly the same */}
-                <div className="flex items-center gap-12 flex-shrink-0 px-4">
-                  <div className="relative h-8 w-32 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
-                    <Image
-                      src="https://logos-world.net/wp-content/uploads/2021/02/Engel-Voelkers-Logo.png"
-                      alt="Engel & Völkers"
-                      fill
-                      className="object-contain"
-                      unoptimized
-                    />
-                  </div>
-                  <div className="relative h-10 w-24 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
-                    <Image
-                      src="https://logo.clearbit.com/rgluxury.com"
-                      alt="R G Luxury"
-                      fill
-                      className="object-contain"
-                      unoptimized
-                      onError={(e) => {
-                        e.currentTarget.src = 'https://via.placeholder.com/120x40/FFFFFF/000000?text=R+G+LUXURY';
-                      }}
-                    />
-                  </div>
-                  <div className="relative h-8 w-28 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
-                    <Image
-                      src="https://logo.clearbit.com/vestar.com"
-                      alt="Vesta R"
-                      fill
-                      className="object-contain"
-                      unoptimized
-                      onError={(e) => {
-                        e.currentTarget.src = 'https://via.placeholder.com/140x40/FFFFFF/000000?text=Vesta+R';
-                      }}
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
