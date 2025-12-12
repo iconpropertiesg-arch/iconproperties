@@ -22,12 +22,22 @@ EMAIL_FROM=Icon Properties <noreply@uaebazarr.com>
 ADMIN_EMAIL=jam752575@gmail.com
 ```
 
-### 3. Supabase (if needed)
+### 3. Supabase (REQUIRED for Image Uploads)
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://zgxjuueedtcfwlkyzrvw.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
 ```
+
+**⚠️ IMPORTANT: How to Get Your Supabase Keys:**
+
+1. Go to Supabase Dashboard: https://supabase.com/dashboard
+2. Select your project: `zgxjuueedtcfwlkyzrvw`
+3. Go to **Settings** → **API**
+4. Find these keys:
+   - **Project URL**: Copy this as `NEXT_PUBLIC_SUPABASE_URL`
+   - **anon public key**: Copy this as `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - **service_role secret key**: Copy this as `SUPABASE_SERVICE_ROLE_KEY` ⚠️ **Keep this secret!**
 
 ### 4. JWT Secret
 ```
@@ -95,6 +105,24 @@ For **each variable**, click **Add New** and enter:
 - **Environments**: ✅ Production, ✅ Preview, ✅ Development
 - Click **Save**
 
+**Variable 8:**
+- **Key**: `NEXT_PUBLIC_SUPABASE_URL`
+- **Value**: `https://zgxjuueedtcfwlkyzrvw.supabase.co`
+- **Environments**: ✅ Production, ✅ Preview, ✅ Development
+- Click **Save**
+
+**Variable 9:**
+- **Key**: `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- **Value**: (Get from Supabase Dashboard → Settings → API → anon public key)
+- **Environments**: ✅ Production, ✅ Preview, ✅ Development
+- Click **Save**
+
+**Variable 10:**
+- **Key**: `SUPABASE_SERVICE_ROLE_KEY`
+- **Value**: (Get from Supabase Dashboard → Settings → API → service_role secret key)
+- **Environments**: ✅ Production, ✅ Preview, ✅ Development
+- Click **Save**
+
 ### Step 4: Redeploy
 
 After adding all variables:
@@ -134,6 +162,9 @@ The most critical variables for email are:
 - [ ] `ADMIN_EMAIL` added
 - [ ] `JWT_SECRET` added
 - [ ] `ADMIN_PASSWORD` added
+- [ ] `NEXT_PUBLIC_SUPABASE_URL` added
+- [ ] `NEXT_PUBLIC_SUPABASE_ANON_KEY` added
+- [ ] `SUPABASE_SERVICE_ROLE_KEY` added ⚠️ **CRITICAL for image uploads**
 - [ ] All variables set for Production, Preview, Development
 - [ ] Redeployed after adding variables
 

@@ -18,7 +18,7 @@ export const createServerClient = () => {
   }
   
   if (!supabaseServiceKey || supabaseServiceKey === 'your-service-role-key-here') {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set or is still a placeholder. Please set it in your .env.local file');
+    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set. Please add it to Vercel Environment Variables (Settings → Environment Variables) or your .env.local file for localhost.');
   }
   
   return createClient(supabaseUrl, supabaseServiceKey, {
