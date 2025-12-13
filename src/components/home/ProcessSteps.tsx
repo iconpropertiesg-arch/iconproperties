@@ -8,7 +8,7 @@ export default function ProcessSteps() {
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
-          #7 The Private Buying Experience
+           The Private Buying Experience
         </h2>
 
         {/* Two Column Layout */}

@@ -5,10 +5,6 @@ import LifestyleGallery from '@/components/home/LifestyleGallery';
 import HowItWorks from '@/components/home/HowItWorks';
 import RequestPrivatePortfolioSection from '@/components/home/RequestPrivatePortfolioSection';
 import Testimonials from '@/components/home/Testimonials';
-import FeaturedProperties from '@/components/home/FeaturedProperties';
-import WhyWorkWithUs from '@/components/home/WhyWorkWithUs';
-import AreasWeCover from '@/components/home/AreasWeCover';
-import RequestPrivatePortfolio from '@/components/home/RequestPrivatePortfolio';
 import FinalCTA from '@/components/home/FinalCTA';
 import MinimalFooter from '@/components/layout/MinimalFooter';
 
@@ -44,18 +40,6 @@ export default function BuyingPage() {
 
       {/* Testimonials */}
       <Testimonials locale={locale} />
-
-      {/* Featured Properties */}
-      <FeaturedProperties locale={locale} />
-
-      {/* Why Work With Us */}
-      <WhyWorkWithUs locale={locale} />
-
-      {/* Areas We Cover */}
-      <AreasWeCover locale={locale} />
-
-      {/* Request Private Portfolio */}
-      <RequestPrivatePortfolio locale={locale} />
 
       {/* Final CTA Section */}
       <FinalCTA locale={locale} />

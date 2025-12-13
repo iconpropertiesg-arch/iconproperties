@@ -9,8 +9,10 @@ const intlMiddleware = createMiddleware({
 });
 
 export default function middleware(request: NextRequest) {
-  // Skip middleware for /buying route
-  if (request.nextUrl.pathname.startsWith('/buying')) {
+  // Skip middleware for /buying, /selling, and /guide routes
+  if (request.nextUrl.pathname.startsWith('/buying') || 
+      request.nextUrl.pathname.startsWith('/selling') ||
+      request.nextUrl.pathname.startsWith('/guide')) {
     return NextResponse.next();
   }
   
