@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -14,37 +14,19 @@ interface HeaderProps {
 
 export default function Header({ locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const lastScrollY = useRef(0);
   const t = useTranslations('navigation');
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
       setIsScrolled(currentScroll > 20);
-
-      // Hide header while scrolling down and show it again on scroll up
-      if (isMobileMenuOpen) {
-        setIsHidden(false);
-        lastScrollY.current = currentScroll;
-        return;
-      }
-
-      const isScrollingDown = currentScroll > lastScrollY.current;
-      if (isScrollingDown && currentScroll > 120) {
-        setIsHidden(true);
-      } else {
-        setIsHidden(false);
-      }
-
-      lastScrollY.current = currentScroll;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobileMenuOpen]);
+  }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -62,8 +44,7 @@ export default function Header({ locale }: HeaderProps) {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform',
-          isHidden ? '-translate-y-full' : 'translate-y-0',
+          'relative z-50 transition-all duration-300',
           isScrolled
             ? 'bg-blue-950/20 backdrop-blur-xl py-2 shadow-lg border-b border-white/10'
             : 'bg-transparent py-3'
@@ -132,7 +113,7 @@ export default function Header({ locale }: HeaderProps) {
                   {t('contact')}
                 </Link>
                 <Link
-                  href={`/${locale}/faq`}
+                  href={`/${locale}/team`}
                   className={cn(
                     "text-sm font-medium transition-colors",
                     isScrolled 
@@ -140,7 +121,7 @@ export default function Header({ locale }: HeaderProps) {
                       : "text-white/90 hover:text-white"
                   )}
                 >
-                  {t('faq')}
+                  Team
                 </Link>
               </nav>
             </div>
@@ -230,11 +211,11 @@ export default function Header({ locale }: HeaderProps) {
                   {t('contact')}
                 </Link>
                 <Link
-                  href={`/${locale}/faq`}
+                  href={`/${locale}/team`}
                   className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {t('faq')}
+                  Team
                 </Link>
                 <div className="pt-6 space-y-4">
                   <Link 

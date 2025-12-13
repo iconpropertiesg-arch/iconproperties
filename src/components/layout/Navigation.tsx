@@ -21,7 +21,7 @@ export default function Navigation({ locale, className, onLinkClick }: Navigatio
     { key: 'portfolio', href: `/${locale}/properties` },
     { key: 'sell', href: `/${locale}/sell` },
     { key: 'contact', href: `/${locale}/contact` },
-    { key: 'faq', href: `/${locale}/faq` },
+    { key: 'team', href: `/${locale}/team` },
   ];
 
   const isActive = (href: string) => {
@@ -46,7 +46,7 @@ export default function Navigation({ locale, className, onLinkClick }: Navigatio
               )}
               onClick={onLinkClick}
             >
-              {t(item.key)}
+              {item.key === 'team' ? 'Team' : t(item.key)}
             </Link>
           </li>
         ))}
