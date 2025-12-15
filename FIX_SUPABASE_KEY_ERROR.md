@@ -83,3 +83,6 @@ The `SUPABASE_SERVICE_ROLE_KEY` has full admin access to your Supabase project. 
 It's safe to use in Vercel environment variables (they're encrypted).
 
 
+
+
+

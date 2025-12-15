@@ -77,3 +77,6 @@ export default function LifestyleGallery({ locale }: LifestyleGalleryProps) {
 
 
 
+
+
+

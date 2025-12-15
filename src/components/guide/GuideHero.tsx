@@ -52,3 +52,6 @@ export default function GuideHero({ locale }: GuideHeroProps) {
   );
 }
 
+
+
+

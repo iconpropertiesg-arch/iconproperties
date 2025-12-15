@@ -26,10 +26,10 @@ export default function HeroSection({ locale }: HeroSectionProps) {
     '/images/logos/Black White Minimal Design Studio Logo (3).png',
     '/images/logos/Black White Minimal Design Studio Logo (4).png',
     '/images/logos/Black White Minimal Design Studio Logo (5).png',
-    '/images/logos/Green and White Simple Technology Logo (1).png',
-    '/images/logos/Green and White Simple Technology Logo (2).png',
-    '/images/logos/Green and White Simple Technology Logo (3).png',
-    '/images/logos/Green and White Simple Technology Logo.png',
+    // '/images/logos/Green and White Simple Technology Logo (1).png',
+    // '/images/logos/Green and White Simple Technology Logo (2).png',
+    // '/images/logos/Green and White Simple Technology Logo (3).png',
+    // '/images/logos/Green and White Simple Technology Logo.png',
   ];
 
   useEffect(() => {
@@ -161,7 +161,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
               <div className="flex animate-logo-scroll items-center" style={{ width: 'fit-content' }}>
                 {/* First set of logos */}
                 {logos.map((logoPath, index) => (
-                  <div key={`logo-${index}`} className="relative h-12 w-32 mx-6 flex-shrink-0 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                  <div key={`logo-${index}`} className="relative h-12 w-32 mx-6 flex-shrink-0 opacity-100">
                     <Image
                       src={logoPath}
                       alt={`Logo ${index + 1}`}
@@ -184,7 +184,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 ))}
                 {/* Duplicate set for seamless loop */}
                 {logos.map((logoPath, index) => (
-                  <div key={`logo-duplicate-${index}`} className="relative h-12 w-32 mx-6 flex-shrink-0 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                  <div key={`logo-duplicate-${index}`} className="relative h-12 w-32 mx-6 flex-shrink-0 opacity-100">
                     <Image
                       src={logoPath}
                       alt={`Logo ${index + 1}`}

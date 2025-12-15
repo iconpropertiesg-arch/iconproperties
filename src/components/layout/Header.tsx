@@ -44,10 +44,10 @@ export default function Header({ locale }: HeaderProps) {
     <>
       <header
         className={cn(
-          'relative z-50 transition-all duration-300',
+          'relative z-50 transition-all duration-300 navbar-gradient',
           isScrolled
-            ? 'bg-blue-950/20 backdrop-blur-xl py-2 shadow-lg border-b border-white/10'
-            : 'bg-transparent py-3'
+            ? 'py-2 shadow-lg border-b border-white/10'
+            : 'py-3'
         )}
       >
         <div className="container mx-auto px-4">
