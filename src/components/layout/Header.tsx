@@ -15,18 +15,42 @@ interface HeaderProps {
 export default function Header({ locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const t = useTranslations('navigation');
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      setIsScrolled(currentScroll > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+          setIsScrolled(currentScroll > 20);
+          
+          // Hide navbar when scrolling down, show when scrolling up
+          if (currentScroll < 10) {
+            // At the top, always show
+            setIsVisible(true);
+          } else if (currentScroll > lastScrollY && currentScroll > 30) {
+            // Scrolling down and past 30px - hide navbar (slide up)
+            setIsVisible(false);
+          } else if (currentScroll < lastScrollY) {
+            // Scrolling up - show navbar (slide down from top)
+            setIsVisible(true);
+          }
+          
+          setLastScrollY(currentScroll);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -44,11 +68,30 @@ export default function Header({ locale }: HeaderProps) {
     <>
       <header
         className={cn(
-          'relative z-50 transition-all duration-300 navbar-gradient',
-          isScrolled
-            ? 'py-2 shadow-lg border-b border-white/10'
-            : 'py-3'
+          'fixed top-0 left-0 right-0 z-50',
+          'transition-transform duration-500 ease-out',
+          'transition-opacity duration-500 ease-out',
+          isVisible
+            ? 'translate-y-0 opacity-100 visible'
+            : '-translate-y-full opacity-0 invisible pointer-events-none',
+          // Glass effect when scrolled and visible
+          isScrolled && isVisible
+            ? 'py-2 border-b border-white/20 shadow-2xl'
+            : isScrolled
+            ? 'navbar-gradient py-2 shadow-lg border-b border-white/10'
+            : 'navbar-gradient py-3'
         )}
+        style={
+          isScrolled && isVisible
+            ? {
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                backdropFilter: 'blur(20px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+              }
+            : undefined
+        }
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
