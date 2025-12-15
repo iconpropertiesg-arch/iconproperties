@@ -38,6 +38,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const [filteredLocations, setFilteredLocations] = useState<string[]>(mockLocations.slice(0, 8));
   const areaInputRef = useRef<HTMLInputElement>(null);
   const typeButtonRef = useRef<HTMLButtonElement>(null);
+  const borderContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (area.length > 0) {
@@ -162,11 +163,84 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
 
         <div className="relative">
         <div 
-          className="relative bg-white/10 backdrop-blur-xl rounded-full border border-white/20 p-2 shadow-2xl search-bar-animated-border overflow-visible"
+          ref={borderContainerRef}
+          className="relative bg-white/10 backdrop-blur-xl rounded-full border border-white/20 p-2 shadow-2xl overflow-visible"
           style={{
             boxShadow: '0 8px 32px rgba(37, 99, 235, 0.3), 0 0 60px rgba(59, 130, 246, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.2)'
           }}
         >
+          {/* SVG Path Animation Border */}
+          <svg 
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{ overflow: 'visible' }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1000 100"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="animatedBorderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="transparent" stopOpacity="0" />
+                <stop offset="20%" stopColor="#d946ef" stopOpacity="1" />
+                <stop offset="50%" stopColor="#ec5f82" stopOpacity="1" />
+                <stop offset="80%" stopColor="#f97316" stopOpacity="1" />
+                <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+              </linearGradient>
+              <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            {/* Subtle glow layer */}
+            <rect
+              x="2"
+              y="2"
+              width="996"
+              height="96"
+              rx="48"
+              ry="48"
+              fill="none"
+              stroke="url(#animatedBorderGradient)"
+              strokeWidth="6"
+              strokeLinecap="round"
+              strokeDasharray="200 1900"
+              pathLength="2100"
+              opacity="0.3"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                values="0;-2100"
+                dur="30s"
+                repeatCount="indefinite"
+              />
+            </rect>
+            {/* Main thin line with subtle glow */}
+            <rect
+              x="2"
+              y="2"
+              width="996"
+              height="96"
+              rx="48"
+              ry="48"
+              fill="none"
+              stroke="url(#animatedBorderGradient)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeDasharray="200 1900"
+              pathLength="2100"
+              filter="url(#glowFilter)"
+              opacity="1"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                values="0;-2100"
+                dur="30s"
+                repeatCount="indefinite"
+              />
+            </rect>
+          </svg>
           <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 p-2 overflow-visible">
             {/* Buy / Rent Dropdown */}
             <div className="relative flex-shrink-0">

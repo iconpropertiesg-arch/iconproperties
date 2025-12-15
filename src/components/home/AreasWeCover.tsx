@@ -176,7 +176,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
             {/* Real Map Image */}
             <div className="relative w-full h-full">
               <Image
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Map_of_Mallorca_%28Majorca%29.svg/800px-Map_of_Mallorca_%28Majorca%29.svg.png"
+                src="/images/maps.jpg"
                 alt="Mallorca Map"
                 fill
                 className="object-contain"
@@ -206,21 +206,40 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                 >
                   {/* Marker Pin */}
                   <div className="relative">
-                    <MapPin
-                      className={cn(
-                        "w-8 h-8 transition-all duration-300",
-                        isHovered || isSelected
-                          ? "text-blue-400 scale-150 drop-shadow-lg"
-                          : "text-blue-300/70 scale-100"
-                      )}
-                      fill={isHovered || isSelected ? "currentColor" : "none"}
-                    />
+                    {/* Outer white glow/shadow for visibility */}
+                    <div className="absolute inset-0 flex items-center justify-center -z-10">
+                      <div className="w-14 h-14 rounded-full bg-white/80 blur-md" />
+                    </div>
+                    
+                    {/* Blue glow ring */}
+                    <div className="absolute inset-0 flex items-center justify-center -z-10">
+                      <div className="w-12 h-12 rounded-full bg-blue-500/50 blur-sm" />
+                    </div>
+                    
+                    {/* Main pin */}
+                    <div className="relative filter drop-shadow-[0_0_4px_rgba(255,255,255,0.9)] drop-shadow-[0_0_8px_rgba(37,99,235,0.8)]">
+                      <MapPin
+                        className={cn(
+                          "transition-all duration-300",
+                          isHovered || isSelected
+                            ? "w-10 h-10 text-blue-500 scale-150"
+                            : "w-9 h-9 text-blue-600 scale-100"
+                        )}
+                        fill={isHovered || isSelected ? "#3b82f6" : "#2563eb"}
+                      />
+                    </div>
+                    
+                    {/* White center dot for extra visibility */}
+                    <div className={cn(
+                      "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-lg",
+                      isHovered || isSelected ? "w-3 h-3" : "w-2.5 h-2.5"
+                    )} />
                     
                     {/* Pulse Animation */}
                     {(isHovered || isSelected) && (
-                      <div className="absolute inset-0 -z-10">
-                        <div className="absolute inset-0 rounded-full bg-blue-400/30 animate-ping" />
-                        <div className="absolute inset-0 rounded-full bg-blue-400/20" />
+                      <div className="absolute inset-0 -z-20">
+                        <div className="absolute inset-0 rounded-full bg-blue-500/40 animate-ping" />
+                        <div className="absolute inset-0 rounded-full bg-blue-500/30" />
                       </div>
                     )}
 
