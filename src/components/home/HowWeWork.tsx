@@ -113,9 +113,9 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-block mb-4">
+          {/* <div className="inline-block mb-4">
             <span className="text-blue-400 text-sm font-semibold tracking-wider uppercase">#7</span>
-          </div>
+          </div> */}
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             The Private Buying Experience
           </h2>
