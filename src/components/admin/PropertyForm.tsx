@@ -249,6 +249,27 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
         return;
       }
 
+      const vercelLimit = 4.5 * 1024 * 1024; // 4.5MB
+      const isLargeFile = file.size > vercelLimit;
+
+      // For files > 4.5MB, use direct client-side upload to Supabase (bypasses Vercel limit)
+      // For smaller files, use server-side upload (more secure, uses service role key)
+      if (isLargeFile) {
+        // Direct client-side upload for large files
+        await uploadDirectToSupabase(index, file);
+      } else {
+        // Server-side upload for smaller files
+        await uploadViaServer(index, file);
+      }
+    } catch (error: any) {
+      console.error('Upload error:', error);
+      alert(error.message || 'An error occurred while uploading the image');
+      setUploading((prev) => ({ ...prev, [index]: false }));
+    }
+  };
+
+  const uploadDirectToSupabase = async (index: number, file: File) => {
+    try {
       // Step 1: Get authenticated upload path from API
       const initResponse = await fetch('/api/upload/init', {
         method: 'POST',
@@ -264,9 +285,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
       const initData = await initResponse.json();
 
       if (!initResponse.ok || !initData.path) {
-        alert(initData.error || 'Failed to initialize upload');
-        setUploading((prev) => ({ ...prev, [index]: false }));
-        return;
+        throw new Error(initData.error || 'Failed to initialize upload');
       }
 
       // Step 2: Upload directly to Supabase Storage (bypasses Vercel 4.5MB limit)
@@ -279,9 +298,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
       if (uploadError) {
         console.error('Supabase upload error:', uploadError);
-        alert(uploadError.message || 'Failed to upload image to storage');
-        setUploading((prev) => ({ ...prev, [index]: false }));
-        return;
+        throw new Error(uploadError.message || 'Failed to upload image to storage. Make sure RLS policies are configured.');
       }
 
       // Step 3: Get public URL
@@ -292,11 +309,36 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
       if (urlData?.publicUrl) {
         updateImage(index, urlData.publicUrl);
       } else {
-        alert('Failed to get image URL');
+        throw new Error('Failed to get image URL');
       }
     } catch (error: any) {
-      console.error('Upload error:', error);
-      alert(error.message || 'An error occurred while uploading the image');
+      console.error('Direct upload error:', error);
+      throw error;
+    } finally {
+      setUploading((prev) => ({ ...prev, [index]: false }));
+    }
+  };
+
+  const uploadViaServer = async (index: number, file: File) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/upload/init', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.url) {
+        updateImage(index, data.url);
+      } else {
+        throw new Error(data.error || 'Failed to upload image');
+      }
+    } catch (error: any) {
+      console.error('Server upload error:', error);
+      throw error;
     } finally {
       setUploading((prev) => ({ ...prev, [index]: false }));
     }
