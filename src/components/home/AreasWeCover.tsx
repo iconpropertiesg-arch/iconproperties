@@ -176,7 +176,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
             {/* Real Map Image */}
             <div className="relative w-full h-full">
               <Image
-                src="/images/maps.jpg"
+                src="/images/maps2.jpg"
                 alt="Mallorca Map"
                 fill
                 className="object-contain"
