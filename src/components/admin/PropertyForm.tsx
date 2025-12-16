@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Save, Loader2, Plus, X, Upload, Image as ImageIcon } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 interface PropertyFormProps {
   propertyId?: string;
@@ -232,24 +233,70 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
     setUploading((prev) => ({ ...prev, [index]: true }));
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      // Validate file size (max 50MB)
+      const maxSize = 50 * 1024 * 1024; // 50MB
+      if (file.size > maxSize) {
+        alert('File size too large. Maximum size is 50MB.');
+        setUploading((prev) => ({ ...prev, [index]: false }));
+        return;
+      }
 
-      const response = await fetch('/api/upload', {
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Invalid file type. Only images are allowed.');
+        setUploading((prev) => ({ ...prev, [index]: false }));
+        return;
+      }
+
+      // Step 1: Get authenticated upload path from API
+      const initResponse = await fetch('/api/upload/init', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          filename: file.name,
+          contentType: file.type,
+        }),
       });
 
-      const data = await response.json();
+      const initData = await initResponse.json();
 
-      if (response.ok && data.url) {
-        updateImage(index, data.url);
-      } else {
-        alert(data.error || 'Failed to upload image');
+      if (!initResponse.ok || !initData.path) {
+        alert(initData.error || 'Failed to initialize upload');
+        setUploading((prev) => ({ ...prev, [index]: false }));
+        return;
       }
-    } catch (error) {
+
+      // Step 2: Upload directly to Supabase Storage (bypasses Vercel 4.5MB limit)
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('property_images')
+        .upload(initData.path, file, {
+          contentType: file.type,
+          upsert: false,
+        });
+
+      if (uploadError) {
+        console.error('Supabase upload error:', uploadError);
+        alert(uploadError.message || 'Failed to upload image to storage');
+        setUploading((prev) => ({ ...prev, [index]: false }));
+        return;
+      }
+
+      // Step 3: Get public URL
+      const { data: urlData } = supabase.storage
+        .from('property_images')
+        .getPublicUrl(initData.path);
+
+      if (urlData?.publicUrl) {
+        updateImage(index, urlData.publicUrl);
+      } else {
+        alert('Failed to get image URL');
+      }
+    } catch (error: any) {
       console.error('Upload error:', error);
-      alert('An error occurred while uploading the image');
+      alert(error.message || 'An error occurred while uploading the image');
     } finally {
       setUploading((prev) => ({ ...prev, [index]: false }));
     }

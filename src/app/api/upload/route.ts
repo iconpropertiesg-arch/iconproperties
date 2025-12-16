@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '@/lib/auth';
 import { createServerClient } from '@/lib/supabase';
 
+// Configure route to accept larger body sizes
+// Note: Vercel has a 4.5MB limit for serverless function request bodies
+// For files larger than 4.5MB, consider using direct client-side upload to Supabase
+export const runtime = 'nodejs';
+export const maxDuration = 60; // 60 seconds timeout for large uploads
+
 export async function POST(request: NextRequest) {
   try {
     // Check authentication
@@ -21,7 +27,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const formData = await request.formData();
+    // Parse form data with error handling
+    let formData: FormData;
+    try {
+      formData = await request.formData();
+    } catch (error: any) {
+      console.error('FormData parsing error:', error);
+      return NextResponse.json(
+        { error: 'Failed to parse form data. File may be too large or request body exceeded limit.' },
+        { status: 413 }
+      );
+    }
     const file = formData.get('file') as File;
 
     if (!file) {
