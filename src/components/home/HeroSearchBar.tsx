@@ -179,11 +179,11 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
           >
             <defs>
               <linearGradient id="animatedBorderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="transparent" stopOpacity="0" />
-                <stop offset="20%" stopColor="#d946ef" stopOpacity="1" />
-                <stop offset="50%" stopColor="#ec5f82" stopOpacity="1" />
-                <stop offset="80%" stopColor="#f97316" stopOpacity="1" />
-                <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+                <stop offset="0%" stopColor="#a855f7" stopOpacity="1" />
+                <stop offset="25%" stopColor="#ec4899" stopOpacity="1" />
+                <stop offset="50%" stopColor="#f97316" stopOpacity="1" />
+                <stop offset="75%" stopColor="#fb923c" stopOpacity="1" />
+                <stop offset="100%" stopColor="#ef4444" stopOpacity="1" />
               </linearGradient>
               <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
