@@ -38,32 +38,32 @@ export default function Footer({ locale }: FooterProps) {
   return (
     <>
       <footer className="bg-gradient-to-br from-black via-blue-950 to-blue-900 text-white">
-        <div className="container mx-auto px-16 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 sm:py-12 md:py-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
             {/* Company Info */}
             <div className="lg:col-span-1">
-              <Link href={`/${locale}`} className="inline-block mb-6">
+              <Link href={`/${locale}`} className="inline-block mb-4 sm:mb-6">
                 <Image
                   src="/images/logo3.png"
                   alt="ICON PROPERTIES"
                   width={200}
                   height={67}
-                  className="h-12 w-auto"
+                  className="h-10 sm:h-12 w-auto"
                 />
               </Link>
-              <p className="text-gray-300 text-sm leading-relaxed mb-6">
+              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                 Private real estate advisory for discerning buyers and property owners in Mallorca.
               </p>
             </div>
 
             {/* Explore Links */}
             <div>
-              <h4 className="text-lg font-semibold mb-6 text-white">Explore</h4>
-              <ul className="space-y-3">
+              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Explore</h4>
+              <ul className="space-y-2 sm:space-y-3">
                 <li>
                   <Link 
                     href={`/${locale}/properties`}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
                     Properties
                   </Link>
@@ -71,7 +71,7 @@ export default function Footer({ locale }: FooterProps) {
                 <li>
                   <Link 
                     href={`/${locale}/sell`}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
                     Sell With Us
                   </Link>
@@ -79,7 +79,7 @@ export default function Footer({ locale }: FooterProps) {
                 <li>
                   <Link 
                     href={`/${locale}/about`}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
                     About
                   </Link>
@@ -87,7 +87,7 @@ export default function Footer({ locale }: FooterProps) {
                 <li>
                   <Link 
                     href={`/${locale}/properties`}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
                     Areas We Serve
                   </Link>
@@ -95,7 +95,7 @@ export default function Footer({ locale }: FooterProps) {
                 <li>
                   <Link 
                     href={`/${locale}/about`}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
                     Team
                   </Link>
@@ -103,7 +103,7 @@ export default function Footer({ locale }: FooterProps) {
                 <li>
                   <Link 
                     href={`/${locale}/contact`}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
                     Contact
                   </Link>
@@ -113,28 +113,28 @@ export default function Footer({ locale }: FooterProps) {
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-lg font-semibold mb-6 text-white">Contact</h4>
-              <ul className="space-y-4">
+              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Contact</h4>
+              <ul className="space-y-3 sm:space-y-4">
                 <li>
                   <a 
                     href="mailto:info@iconproperties.es"
-                    className="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm flex items-center gap-2 break-all"
                   >
-                    <Mail className="w-4 h-4" />
-                    info@iconproperties.es
+                    <Mail className="w-4 h-4 flex-shrink-0" />
+                    <span>info@iconproperties.es</span>
                   </a>
                 </li>
                 <li>
                   <a 
                     href="tel:+34XXXXXXXXX"
-                    className="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm flex items-center gap-2"
                   >
-                    <Phone className="w-4 h-4" />
-                    +34 XXX XXX XXX
+                    <Phone className="w-4 h-4 flex-shrink-0" />
+                    <span>+34 XXX XXX XXX</span>
                   </a>
                 </li>
                 <li>
-                  <div className="text-gray-300 text-sm flex items-start gap-2">
+                  <div className="text-gray-300 text-xs sm:text-sm flex items-start gap-2">
                     <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                     <span>Mallorca, Spain — Private Office. By Appointment Only.</span>
                   </div>
@@ -143,53 +143,53 @@ export default function Footer({ locale }: FooterProps) {
             </div>
 
             {/* CTA Section */}
-            <div>
-              <h4 className="text-lg font-semibold mb-6 text-white">Get Started</h4>
+            <div className="sm:col-span-2 lg:col-span-1">
+              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Get Started</h4>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full px-6 py-3 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 mb-6"
+                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 mb-4 sm:mb-6"
               >
-                <span>Request Private Portfolio</span>
-                <ArrowRight className="w-5 h-5" />
+                <span className="text-xs sm:text-sm md:text-base">Request Private Portfolio</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
-              <p className="text-gray-400 text-xs">
+              <p className="text-gray-400 text-xs leading-relaxed">
                 Access exclusive off-market listings and private sales opportunities.
               </p>
             </div>
           </div>
 
           {/* Email Collection Bar */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 mb-8">
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              <div className="flex-1">
-                <h5 className="text-white font-semibold mb-1">Stay Private. Receive Off-Market Listings First.</h5>
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/10 p-4 sm:p-6 mb-6 sm:mb-8">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+              <div className="flex-1 w-full md:w-auto">
+                <h5 className="text-white font-semibold mb-1 text-sm sm:text-base">Stay Private. Receive Off-Market Listings First.</h5>
                 <p className="text-gray-400 text-xs">Only sent occasionally. No public listings.</p>
               </div>
               {isSubmitted ? (
-                <div className="text-green-400 text-sm font-medium">
+                <div className="text-green-400 text-xs sm:text-sm font-medium w-full md:w-auto text-center md:text-left">
                   Thank you! Check your email.
                 </div>
               ) : (
-                <form onSubmit={handleEmailSubmit} className="flex gap-2 w-full md:w-auto">
+                <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter Email Address"
-                    className="flex-1 md:w-64 px-4 py-3 bg-white/10 border border-white/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                    className="flex-1 md:w-64 px-4 py-2.5 sm:py-3 bg-white/10 border border-white/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm sm:text-base"
                     required
                   />
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all duration-300 disabled:opacity-50 flex items-center gap-2"
+                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 text-sm sm:text-base whitespace-nowrap"
                   >
                     {isSubmitting ? (
                       'Submitting...'
                     ) : (
                       <>
                         <span className="hidden md:inline">Subscribe</span>
-                        <ArrowRight className="w-5 h-5" />
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                       </>
                     )}
                   </button>
@@ -199,22 +199,22 @@ export default function Footer({ locale }: FooterProps) {
           </div>
 
           {/* Legal & Copyright */}
-          <div className="border-t border-white/10 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-gray-400">
+          <div className="border-t border-white/10 pt-6 sm:pt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+              <p className="text-xs sm:text-sm text-gray-400">
                 © {currentYear} ICON PROPERTIES. All rights reserved.
               </p>
-              <div className="flex flex-wrap items-center gap-6">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
                 <Link 
                   href={`/${locale}/legal/privacy`}
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm"
                 >
                   Privacy Policy
                 </Link>
-                <span className="text-gray-600">|</span>
+                <span className="text-gray-600 hidden sm:inline">|</span>
                 <Link 
                   href={`/${locale}/legal/notice`}
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm"
                 >
                   Legal Notice
                 </Link>
@@ -225,7 +225,7 @@ export default function Footer({ locale }: FooterProps) {
                   className="text-gray-400 hover:text-white transition-colors"
                   aria-label="Instagram"
                 >
-                  <Instagram className="w-5 h-5" />
+                  <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
               </div>
             </div>
