@@ -141,10 +141,10 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   };
 
   return (
-    <div className={`relative z-10 mx-auto max-w-6xl px-4 ${hideTitle ? 'my-0' : '-mt-16 mb-16'}`}>
+    <div className={`relative z-10 mx-auto max-w-6xl px-4 sm:px-6 md:px-8 ${hideTitle ? 'my-0' : '-mt-8 sm:-mt-12 md:-mt-16 mb-8 sm:mb-12 md:mb-16'}`}>
       {!hideTitle && (
-        <div className="text-center mb-8 mt-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+        <div className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
             Find Your Ideal Property in Mallorca
           </h2>
         </div>
@@ -239,7 +239,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               />
             </rect>
           </svg>
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 p-2 overflow-visible">
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 sm:gap-3 p-2 overflow-visible">
             {/* Buy / Rent Dropdown */}
             <div className="relative flex-shrink-0">
               <button
@@ -249,12 +249,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                   setIsTypeOpen(false);
                   setIsAreaOpen(false);
                 }}
-                className="w-full lg:w-auto min-w-[140px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-6 py-4 text-white transition-all duration-200"
+                className="w-full lg:w-auto min-w-[120px] sm:min-w-[140px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 sm:px-6 py-3 sm:py-4 text-white transition-all duration-200"
               >
-                <span className="text-sm font-medium">
+                <span className="text-xs sm:text-sm font-medium">
                   {purpose === 'buy' ? 'Buy / Rent' : 'Rent / Buy'}
                 </span>
-                <ChevronDown className={cn("w-4 h-4 ml-2 transition-transform", isPurposeOpen && "rotate-180")} />
+                <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 sm:h-4 ml-2 transition-transform", isPurposeOpen && "rotate-180")} />
               </button>
               {/* Purpose dropdown */}
               {isPurposeOpen && (
@@ -299,15 +299,15 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                   setIsPurposeOpen(false);
                   setIsAreaOpen(false);
                 }}
-                className="w-full lg:w-auto min-w-[60px] max-w-[180px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 py-4 text-white transition-all duration-200"
+                className="w-full lg:w-auto min-w-[60px] max-w-[180px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-3 sm:px-4 py-3 sm:py-4 text-white transition-all duration-200"
               >
                 <div className="flex items-center gap-2 min-w-0">
-                  {propertyType.length === 0 && <Home className="w-4 h-4 flex-shrink-0" />}
+                  {propertyType.length === 0 && <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />}
                   {propertyType.length > 0 && (
-                    <span className="text-sm truncate">{getTypeDisplayText()}</span>
+                    <span className="text-xs sm:text-sm truncate">{getTypeDisplayText()}</span>
                   )}
                 </div>
-                <ChevronDown className={cn("w-4 h-4 transition-transform flex-shrink-0", isTypeOpen && "rotate-180")} />
+                <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform flex-shrink-0", isTypeOpen && "rotate-180")} />
               </button>
               {isTypeOpen && (
                 <>
@@ -359,9 +359,9 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 onBlur={() => setTimeout(() => setIsAreaOpen(false), 200)}
                   onKeyDown={handleKeyDown}
                   placeholder={t('searchPlaceholder.location')}
-                  className="w-full bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-6 py-4 pl-10 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-200"
+                  className="w-full bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 sm:px-6 py-3 sm:py-4 pl-8 sm:pl-10 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-200"
                 />
-                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/60" />
+                <MapPin className="absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/60" />
               </div>
               {isAreaOpen && filteredLocations.length > 0 && (
                 <>
@@ -391,20 +391,20 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
 
             {/* Price Range Slider - Inline */}
             <div className="relative flex-1 min-w-0 price-slider-container">
-              <div className="bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-6 py-4">
-                <div className="space-y-3">
+              <div className="bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 sm:px-6 py-3 sm:py-4">
+                <div className="space-y-2 sm:space-y-3">
                   {/* Price Display */}
                   <div className="flex items-center gap-2 text-white">
-                    <Euro className="w-4 h-4" />
-                    <span className="text-sm font-medium">{getPriceDisplayText()}</span>
+                    <Euro className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    <span className="text-xs sm:text-sm font-medium">{getPriceDisplayText()}</span>
                   </div>
                   
                   {/* Slider Track */}
                   <div className="relative">
-                    <div className="price-slider-track relative h-2 bg-white/20 rounded-full">
+                    <div className="price-slider-track relative h-1.5 sm:h-2 bg-white/20 rounded-full">
                       {/* Active Range */}
                       <div 
-                        className="absolute h-2 bg-blue-500 rounded-full"
+                        className="absolute h-1.5 sm:h-2 bg-blue-500 rounded-full"
                         style={{
                           left: `${getPercentage(priceRange.min)}%`,
                           width: `${getPercentage(priceRange.max) - getPercentage(priceRange.min)}%`,
@@ -413,15 +413,15 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       
                       {/* Min Handle */}
                       <div
-                        className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-10"
-                        style={{ left: `calc(${getPercentage(priceRange.min)}% - 8px)` }}
+                        className="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-10"
+                        style={{ left: `calc(${getPercentage(priceRange.min)}% - 7px)` }}
                         onMouseDown={(e) => handleSliderMouseDown('min', e)}
                       />
                       
                       {/* Max Handle */}
                       <div
-                        className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-10"
-                        style={{ left: `calc(${getPercentage(priceRange.max)}% - 8px)` }}
+                        className="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-10"
+                        style={{ left: `calc(${getPercentage(priceRange.max)}% - 7px)` }}
                         onMouseDown={(e) => handleSliderMouseDown('max', e)}
                       />
                     </div>
@@ -437,9 +437,9 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
             <button
               type="button"
               onClick={handleSearch}
-              className="flex-shrink-0 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-full px-8 py-4 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 whitespace-nowrap"
+              className="flex-shrink-0 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm sm:text-base font-semibold rounded-full px-6 sm:px-8 py-3 sm:py-4 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 whitespace-nowrap"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Search</span>
             </button>
           </div>
