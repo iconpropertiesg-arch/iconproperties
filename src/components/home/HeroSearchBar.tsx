@@ -183,15 +183,46 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 <stop offset="50%" stopColor="#fb6d3a" stopOpacity="1" />
                 <stop offset="100%" stopColor="#ef4444" stopOpacity="1" />
               </linearGradient>
-              <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <filter id="glowFilter" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <filter id="strongGlowFilter" x="-150%" y="-150%" width="400%" height="400%">
+                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
                 </feMerge>
               </filter>
             </defs>
-            {/* Subtle glow layer */}
+            {/* Strong outer glow layer */}
+            <rect
+              x="2"
+              y="2"
+              width="996"
+              height="96"
+              rx="48"
+              ry="48"
+              fill="none"
+              stroke="url(#animatedBorderGradient)"
+              strokeWidth="8"
+              strokeLinecap="round"
+              strokeDasharray="200 1900"
+              pathLength="2100"
+              filter="url(#strongGlowFilter)"
+              opacity="0.4"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                values="0;-2100"
+                dur="30s"
+                repeatCount="indefinite"
+              />
+            </rect>
+            {/* Medium glow layer */}
             <rect
               x="2"
               y="2"
@@ -205,7 +236,8 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               strokeLinecap="round"
               strokeDasharray="200 1900"
               pathLength="2100"
-              opacity="0.3"
+              filter="url(#glowFilter)"
+              opacity="0.5"
             >
               <animate
                 attributeName="stroke-dashoffset"
@@ -214,7 +246,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 repeatCount="indefinite"
               />
             </rect>
-            {/* Main thin line with subtle glow */}
+            {/* Main thin line with glow */}
             <rect
               x="2"
               y="2"

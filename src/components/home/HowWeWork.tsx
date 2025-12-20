@@ -72,6 +72,7 @@ const steps = [
 
 export default function HowWeWork({ locale }: HowWeWorkProps) {
   const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set());
+  const [scrollProgress, setScrollProgress] = useState<{ [key: number]: number }>({});
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -85,12 +86,30 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               setVisibleSteps((prev) => new Set([...Array.from(prev), index]));
+              
+              // Calculate scroll progress (0 to 1)
+              const rect = entry.boundingClientRect;
+              const windowHeight = window.innerHeight;
+              const elementTop = rect.top;
+              const elementHeight = rect.height;
+              
+              // Progress: 1 when fully visible, 0 when just entering from bottom
+              let progress = 1;
+              if (elementTop > windowHeight * 0.5) {
+                // Card is entering from bottom
+                progress = Math.max(0, Math.min(1, (windowHeight - elementTop) / (elementHeight + windowHeight * 0.3)));
+              }
+              
+              setScrollProgress((prev) => ({
+                ...prev,
+                [index]: progress
+              }));
             }
           });
         },
         {
-          threshold: 0.3,
-          rootMargin: '0px 0px -100px 0px'
+          threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+          rootMargin: '0px'
         }
       );
 
@@ -98,8 +117,48 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
       observers.push(observer);
     });
 
+    // Also track scroll for smooth blur updates
+    const handleScroll = () => {
+      stepRefs.current.forEach((ref, index) => {
+        if (!ref) return;
+        const rect = ref.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Calculate progress: 0 = blurred (below viewport), 1 = clear (visible on screen)
+        let progress = 1; // Default to clear (no blur)
+        
+        // Only blur cards that are below the viewport (not yet scrolled into view)
+        if (rect.top >= windowHeight) {
+          // Card is completely below viewport - should be blurred
+          progress = 0;
+        } else if (rect.top < windowHeight && rect.top >= 0) {
+          // Card is entering from bottom - start clearing blur as soon as any part is visible
+          // Calculate how much of the card is visible
+          const visibleHeight = windowHeight - rect.top;
+          const cardHeight = rect.height;
+          
+          // Clear blur immediately as card enters viewport
+          // Use a small transition zone for smoothness
+          const transitionZone = cardHeight * 0.3; // Quick transition over 30% of card
+          progress = Math.max(0, Math.min(1, visibleHeight / transitionZone));
+        } else if (rect.top < 0) {
+          // Card is fully above viewport or fully visible - no blur
+          progress = 1;
+        }
+        
+        setScrollProgress((prev) => ({
+          ...prev,
+          [index]: progress
+        }));
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial calculation
+
     return () => {
       observers.forEach((observer) => observer.disconnect());
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -146,6 +205,13 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
           <div className="space-y-6">
             {steps.map((step, index) => {
               const isVisible = visibleSteps.has(index);
+              const progress = scrollProgress[index] ?? 0;
+              
+              // Calculate blur based on scroll progress
+              // When progress is 0 (below viewport, not visible), blur is high (20px)
+              // When progress is 1 (visible on screen), blur is 0 (perfectly clear)
+              const blurAmount = progress < 1 ? Math.max(0, 20 * (1 - progress)) : 0; // Blur from 20px to 0px, 0 when visible
+              const opacity = progress < 1 ? Math.max(0.5, 0.5 + (progress * 0.5)) : 1; // Opacity from 0.5 to 1.0, 1 when visible
               
               return (
                 <div
@@ -154,40 +220,24 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                     stepRefs.current[index] = el;
                   }}
                   className={cn(
-                    "relative rounded-2xl border border-white/12 p-6 transition-all duration-300 overflow-hidden",
-                    "backdrop-blur-2xl",
+                    "relative rounded-2xl border border-white/20 p-6 transition-all duration-700 ease-out overflow-hidden",
                     isVisible
                       ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-4"
+                      : "opacity-0 translate-y-8"
                   )}
                   style={{
-                    background:
-                      "radial-gradient(circle at top left, rgba(50, 80, 200, 0.4), transparent 60%), radial-gradient(circle at bottom right, rgba(0, 150, 255, 0.3), transparent 70%), linear-gradient(135deg, #0b0f29, #0a0f25)",
-                    backgroundBlendMode: "screen, color-dodge, normal",
-                    boxShadow:
-                      "inset 0 0 35px rgba(255,255,255,0.04), 0 0 60px rgba(0, 90, 255, 0.2)",
-                    backdropFilter: "blur(20px)",
-                    WebkitBackdropFilter: "blur(20px)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                    backdropFilter: `blur(20px) saturate(180%)`,
+                    WebkitBackdropFilter: `blur(20px) saturate(180%)`,
+                    filter: `blur(${blurAmount}px)`,
+                    WebkitFilter: `blur(${blurAmount}px)`,
+                    opacity: opacity,
+                    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
                     color: "white",
+                    transition: "filter 0.15s ease-out, opacity 0.15s ease-out, transform 0.7s ease-out",
                   }}
                 >
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-50"
-                    aria-hidden="true"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, transparent 40%, rgba(255,255,255,0.07) 65%, transparent 100%)",
-                    }}
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-35"
-                    aria-hidden="true"
-                    style={{
-                      background:
-                        "radial-gradient(circle at 25% 30%, rgba(64,140,255,0.14) 0%, transparent 40%), radial-gradient(circle at 75% 70%, rgba(30,64,175,0.12) 0%, transparent 45%)",
-                    }}
-                  />
                   {index === 0 ? (
                     // First card: "Sell your Home Privately" design
                     <div>
@@ -205,13 +255,19 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-2xl font-bold text-white mb-3">
+                      <h3 className={cn(
+                        "font-bold text-white mb-3 transition-all duration-700 ease-out",
+                        isVisible ? "text-2xl sm:text-3xl scale-100" : "text-xl sm:text-2xl scale-95"
+                      )}>
                         {step.title}
                       </h3>
 
                       {/* Subtitle */}
                       {step.subtitle && (
-                        <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                        <p className={cn(
+                          "text-gray-300 mb-4 leading-relaxed transition-all duration-700 ease-out delay-100",
+                          isVisible ? "text-sm sm:text-base opacity-100" : "text-xs sm:text-sm opacity-70"
+                        )}>
                           {step.subtitle}
                         </p>
                       )}
@@ -280,13 +336,19 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-2xl font-bold text-white mb-3">
+                      <h3 className={cn(
+                        "font-bold text-white mb-3 transition-all duration-700 ease-out",
+                        isVisible ? "text-2xl sm:text-3xl scale-100" : "text-xl sm:text-2xl scale-95"
+                      )}>
                         {step.title}
                       </h3>
 
                       {/* Subtitle */}
                       {step.subtitle && (
-                        <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                        <p className={cn(
+                          "text-gray-300 mb-4 leading-relaxed transition-all duration-700 ease-out delay-100",
+                          isVisible ? "text-sm sm:text-base opacity-100" : "text-xs sm:text-sm opacity-70"
+                        )}>
                           {step.subtitle}
                         </p>
                       )}

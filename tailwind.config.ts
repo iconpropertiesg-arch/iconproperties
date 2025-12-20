@@ -72,7 +72,7 @@ const config: Config = {
         sm: "0.25rem",
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['DM Sans', 'system-ui', 'sans-serif'],
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
