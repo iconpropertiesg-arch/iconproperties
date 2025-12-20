@@ -21,60 +21,11 @@ interface Area {
 const areas: Area[] = [
   // Western/Southwestern areas
   {
-    name: 'Port Andratx',
-    x: 18,
-    y: 60,
-    description: 'Exclusive marina and coastal properties',
-    properties: 'Luxury villas & waterfront properties'
-  },
-  {
-    name: 'Santa Ponsa',
-    x: 22,
-    y: 55,
-    description: 'Family-friendly coastal area',
-    properties: 'Villas & family homes'
-  },
-  {
-    name: 'Portals',
-    x: 26,
-    y: 48,
-    description: 'Luxury marina and coastal properties',
-    properties: 'Sea-view villas & apartments'
-  },
-  {
     name: 'Palma',
     x: 32,
     y: 52,
     description: 'Historic city center and modern districts',
     properties: 'Historic penthouses & modern apartments'
-  },
-  {
-    name: 'Palma Beach',
-    x: 34,
-    y: 54,
-    description: 'Beachfront properties and resorts',
-    properties: 'Beachfront apartments & hotels'
-  },
-  {
-    name: 'Son Vida',
-    x: 30,
-    y: 45,
-    description: 'Prestigious golf and country club area',
-    properties: 'Luxury estates & villas'
-  },
-  {
-    name: 'Deià',
-    x: 28,
-    y: 35,
-    description: 'Artistic mountain village',
-    properties: 'Mountain villas & fincas'
-  },
-  {
-    name: 'Sóller',
-    x: 30,
-    y: 32,
-    description: 'Historic mountain town',
-    properties: 'Traditional fincas & villas'
   },
   // Northern areas
   {
@@ -93,19 +44,12 @@ const areas: Area[] = [
   },
   {
     name: 'Puerto Alcúdia',
-    x: 45,
+    x: 55,
     y: 28,
     description: 'Popular resort area',
     properties: 'Resort properties & apartments'
   },
   // Central areas (in red highlighted zone)
-  {
-    name: 'Alaró',
-    x: 35,
-    y: 42,
-    description: 'Mountain town with historic castle',
-    properties: 'Mountain properties & fincas'
-  },
   {
     name: 'Inca',
     x: 38,
@@ -113,24 +57,10 @@ const areas: Area[] = [
     description: 'Central market town',
     properties: 'Traditional properties & townhouses'
   },
-  {
-    name: 'Santa Maria',
-    x: 36,
-    y: 44,
-    description: 'Central Mallorca location',
-    properties: 'Country properties & estates'
-  },
   // Southern areas
   {
-    name: 'Llucmajor',
-    x: 35,
-    y: 60,
-    description: 'Southern coastal area',
-    properties: 'Coastal properties & villas'
-  },
-  {
     name: 'Santanyí',
-    x: 48,
+    x: 65,
     y: 65,
     description: 'Historic southern town',
     properties: 'Traditional properties & villas'
@@ -138,10 +68,24 @@ const areas: Area[] = [
   // Eastern areas
   {
     name: 'Artà',
-    x: 52,
+    x: 62,
     y: 30,
     description: 'Eastern mountain town',
     properties: 'Mountain properties & fincas'
+  },
+  {
+    name: 'Manacor',
+    x: 58,
+    y: 48,
+    description: 'Eastern market town',
+    properties: 'Traditional properties & apartments'
+  },
+  {
+    name: 'Felanitx',
+    x: 60,
+    y: 58,
+    description: 'Historic eastern town',
+    properties: 'Traditional villas & fincas'
   }
 ];
 
@@ -243,8 +187,15 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                       </div>
                     )}
 
-                    {/* Tooltip */}
-                    {(isHovered || isSelected) && (
+                    {/* Location name label - Always visible below the point */}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2">
+                      <span className="text-white text-xs font-semibold bg-blue-600/80 backdrop-blur-sm px-2 py-1 rounded-full border border-blue-400/50 whitespace-nowrap">
+                        {area.name}
+                      </span>
+                    </div>
+
+                    {/* Tooltip with details - Only show on hover */}
+                    {isHovered && (
                       <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-64 z-50">
                         <div className="bg-white/95 backdrop-blur-xl rounded-xl p-4 shadow-2xl border border-white/20">
                           <h3 className="font-bold text-gray-900 mb-1">{area.name}</h3>
@@ -263,29 +214,6 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
               );
             })}
 
-            {/* Area Labels (visible on hover/click) */}
-            {areas.map((area) => {
-              const isHovered = hoveredArea === area.name;
-              const isSelected = selectedArea === area.name;
-              
-              if (!isHovered && !isSelected) return null;
-              
-              return (
-                <div
-                  key={`label-${area.name}`}
-                  className="absolute pointer-events-none"
-                  style={{
-                    left: `${area.x}%`,
-                    top: `${area.y + 3}%`,
-                    transform: 'translateX(-50%)'
-                  }}
-                >
-                  <span className="text-white text-sm font-semibold bg-blue-600/80 backdrop-blur-sm px-3 py-1 rounded-full border border-blue-400/50">
-                    {area.name}
-                  </span>
-                </div>
-              );
-            })}
           </div>
 
           {/* Legend/Instructions */}

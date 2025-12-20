@@ -43,3 +43,5 @@ export default function TeamHero({ locale }: TeamHeroProps) {
 
 
 
+
+

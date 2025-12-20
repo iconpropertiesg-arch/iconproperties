@@ -43,3 +43,5 @@ export default function MinimalFooter({ locale }: MinimalFooterProps) {
 
 
 
+
+

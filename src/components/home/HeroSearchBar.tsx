@@ -179,10 +179,8 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
           >
             <defs>
               <linearGradient id="animatedBorderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#a855f7" stopOpacity="1" />
-                <stop offset="25%" stopColor="#ec4899" stopOpacity="1" />
-                <stop offset="50%" stopColor="#f97316" stopOpacity="1" />
-                <stop offset="75%" stopColor="#fb923c" stopOpacity="1" />
+                <stop offset="0%" stopColor="#f97316" stopOpacity="1" />
+                <stop offset="50%" stopColor="#fb6d3a" stopOpacity="1" />
                 <stop offset="100%" stopColor="#ef4444" stopOpacity="1" />
               </linearGradient>
               <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
@@ -301,11 +299,13 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                   setIsPurposeOpen(false);
                   setIsAreaOpen(false);
                 }}
-                className="w-full lg:w-auto min-w-[120px] max-w-[180px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-6 py-4 text-white transition-all duration-200"
+                className="w-full lg:w-auto min-w-[60px] max-w-[180px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 py-4 text-white transition-all duration-200"
               >
                 <div className="flex items-center gap-2 min-w-0">
                   {propertyType.length === 0 && <Home className="w-4 h-4 flex-shrink-0" />}
-                  <span className="text-sm truncate">{getTypeDisplayText()}</span>
+                  {propertyType.length > 0 && (
+                    <span className="text-sm truncate">{getTypeDisplayText()}</span>
+                  )}
                 </div>
                 <ChevronDown className={cn("w-4 h-4 transition-transform flex-shrink-0", isTypeOpen && "rotate-180")} />
               </button>

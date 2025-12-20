@@ -55,22 +55,21 @@ export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 top-full mt-2 w-48 bg-gray-900/95 backdrop-blur-md rounded-lg shadow-2xl border border-gray-700 z-20">
+          <div className="absolute right-0 top-full mt-2 w-[50px] bg-gray-900/95 backdrop-blur-md rounded-lg shadow-2xl border border-gray-700 z-20">
             <div className="py-2">
               {languages.map((language) => (
                 <Link
                   key={language.code}
                   href={getLocalizedPath(language.code)}
                   className={cn(
-                    "flex items-center space-x-3 px-4 py-3 text-sm hover:bg-gray-800 transition-colors text-white",
+                    "flex items-center justify-center relative px-2 py-3 text-sm hover:bg-gray-800 transition-colors text-white",
                     language.code === locale && "bg-blue-600/20 text-blue-400"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
                   <span className="text-lg">{language.flag}</span>
-                  <span className="font-medium">{language.name}</span>
                   {language.code === locale && (
-                    <div className="ml-auto w-2 h-2 bg-blue-400 rounded-full" />
+                    <div className="absolute top-1 right-1 w-2 h-2 bg-blue-400 rounded-full" />
                   )}
                 </Link>
               ))}
