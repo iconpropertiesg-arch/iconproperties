@@ -76,10 +76,10 @@ export default function Header({ locale }: HeaderProps) {
             : '-translate-y-full opacity-0 invisible pointer-events-none',
           // Glass effect when scrolled and visible
           isScrolled && isVisible
-            ? 'py-2 border-b border-white/20 shadow-2xl'
+            ? 'py-2 sm:py-2 border-b border-white/20 shadow-2xl'
             : isScrolled
-            ? 'navbar-gradient py-2 shadow-lg border-b border-white/10'
-            : 'navbar-gradient py-3'
+            ? 'navbar-gradient py-2 sm:py-2 shadow-lg border-b border-white/10'
+            : 'navbar-gradient py-2 sm:py-3'
         )}
         style={
           isScrolled && isVisible
@@ -93,10 +93,10 @@ export default function Header({ locale }: HeaderProps) {
             : undefined
         }
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
           <div className="flex items-center justify-between">
             {/* Left side - Logo and Navigation */}
-            <div className="hidden lg:flex items-center space-x-8 ml-16">
+            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 lg:ml-0 xl:ml-16">
               {/* Logo at the front */}
               <Link href={`/${locale}`} className="flex items-center gap-2 group">
                 <Image
@@ -104,17 +104,17 @@ export default function Header({ locale }: HeaderProps) {
                   alt="Property Icon Logo"
                   width={320}
                   height={107}
-                  className="h-20 w-auto transition-transform duration-300 group-hover:scale-105"
+                  className="h-16 xl:h-20 w-auto transition-transform duration-300 group-hover:scale-105"
                   priority
                 />
               </Link>
 
               {/* Navigation Links */}
-              <nav className="flex items-center space-x-8">
+              <nav className="flex items-center space-x-4 xl:space-x-8">
                 <Link
                   href={`/${locale}/about`}
                   className={cn(
-                    "text-sm font-medium transition-colors",
+                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-blue-400"
                       : "text-white/90 hover:text-white"
@@ -125,7 +125,7 @@ export default function Header({ locale }: HeaderProps) {
                 <Link
                   href={`/${locale}/properties`}
                   className={cn(
-                    "text-sm font-medium transition-colors",
+                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-blue-400"
                       : "text-white/90 hover:text-white"
@@ -136,7 +136,7 @@ export default function Header({ locale }: HeaderProps) {
                 <Link
                   href={`/${locale}/sell`}
                   className={cn(
-                    "text-sm font-medium transition-colors",
+                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-blue-400"
                       : "text-white/90 hover:text-white"
@@ -147,7 +147,7 @@ export default function Header({ locale }: HeaderProps) {
                 <Link
                   href={`/${locale}/contact`}
                   className={cn(
-                    "text-sm font-medium transition-colors",
+                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-blue-400"
                       : "text-white/90 hover:text-white"
@@ -158,7 +158,7 @@ export default function Header({ locale }: HeaderProps) {
                 <Link
                   href={`/${locale}/team`}
                   className={cn(
-                    "text-sm font-medium transition-colors",
+                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-blue-400"
                       : "text-white/90 hover:text-white"
@@ -176,18 +176,18 @@ export default function Header({ locale }: HeaderProps) {
                 alt="Property Icon Logo"
                 width={240}
                 height={80}
-                className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="h-10 sm:h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
                 priority
               />
             </Link>
 
             {/* Right side actions */}
-            <div className="flex items-center space-x-4 mr-16">
-              <div className="hidden lg:flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 lg:mr-0 xl:mr-16">
+              <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
                 <LanguageSwitcher locale={locale} />
                 <Link 
                   href={`/${locale}/contact`}
-                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/40"
+                  className="px-4 xl:px-6 py-2 xl:py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs xl:text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/40 whitespace-nowrap"
                 >
                   Request Private portfolio
                 </Link>
@@ -205,9 +205,9 @@ export default function Header({ locale }: HeaderProps) {
                 aria-label="Toggle mobile menu"
               >
                 {isMobileMenuOpen ? (
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
                 )}
               </button>
             </div>
@@ -222,51 +222,51 @@ export default function Header({ locale }: HeaderProps) {
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <div className="absolute top-0 right-0 h-full w-80 max-w-full bg-gray-900 shadow-xl">
-            <div className="p-6 pt-20">
-              <nav className="space-y-6">
+          <div className="absolute top-0 right-0 h-full w-[85%] sm:w-80 max-w-sm bg-gray-900 shadow-xl overflow-y-auto">
+            <div className="p-4 sm:p-6 pt-16 sm:pt-20">
+              <nav className="space-y-4 sm:space-y-6">
                 <Link
                   href={`/${locale}/about`}
-                  className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('about')}
                 </Link>
                 <Link
                   href={`/${locale}/properties`}
-                  className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('portfolio')}
                 </Link>
                 <Link
                   href={`/${locale}/sell`}
-                  className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('sell')}
                 </Link>
                 <Link
                   href={`/${locale}/contact`}
-                  className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('contact')}
                 </Link>
                 <Link
                   href={`/${locale}/team`}
-                  className="block text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Team
                 </Link>
-                <div className="pt-6 space-y-4">
+                <div className="pt-4 sm:pt-6 space-y-3 sm:space-y-4">
                   <Link 
                     href={`/${locale}/contact`}
-                    className="block w-full text-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-full transition-all duration-300"
+                    className="block w-full text-center px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm sm:text-base font-medium rounded-full transition-all duration-300"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Get In Touch
+                    Request Private Portfolio
                   </Link>
                   <div className="flex justify-center">
                     <LanguageSwitcher locale={locale} />
