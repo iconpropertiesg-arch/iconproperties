@@ -11,9 +11,9 @@ interface LanguageSwitcherProps {
 }
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'en', display: 'US' },
+  { code: 'de', display: 'DE' },
+  { code: 'es', display: 'ES' },
 ];
 
 export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
@@ -41,7 +41,7 @@ export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
         aria-label="Select language"
       >
         <span className="text-sm font-medium">
-          {currentLanguage.flag}
+          {currentLanguage.display}
         </span>
         <ChevronDown className={cn(
           "w-4 h-4 transition-transform",
@@ -55,19 +55,19 @@ export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 top-full mt-2 w-[50px] bg-gray-900/95 backdrop-blur-md rounded-lg shadow-2xl border border-gray-700 z-20">
+          <div className="absolute right-0 top-full mt-2 min-w-[60px] bg-gray-900/95 backdrop-blur-md rounded-lg shadow-2xl border border-gray-700 z-20">
             <div className="py-2">
               {languages.map((language) => (
                 <Link
                   key={language.code}
                   href={getLocalizedPath(language.code)}
                   className={cn(
-                    "flex items-center justify-center relative px-2 py-3 text-sm hover:bg-gray-800 transition-colors text-white",
+                    "flex items-center justify-center relative px-4 py-3 text-sm font-medium hover:bg-gray-800 transition-colors text-white",
                     language.code === locale && "bg-blue-600/20 text-blue-400"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
-                  <span className="text-lg">{language.flag}</span>
+                  <span>{language.display}</span>
                   {language.code === locale && (
                     <div className="absolute top-1 right-1 w-2 h-2 bg-blue-400 rounded-full" />
                   )}
