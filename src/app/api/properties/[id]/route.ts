@@ -68,6 +68,7 @@ export async function PUT(
       slug: rawSlug,
       status,
       type,
+      purpose,
       year,
       price,
       bedrooms,
@@ -138,6 +139,7 @@ export async function PUT(
         slug,
         status,
         type,
+        purpose: purpose || 'buy',
         year: year ? parseInt(year) : null,
         price: parseFloat(price),
         bedrooms: bedrooms ? parseInt(bedrooms) : null,
@@ -190,8 +192,25 @@ export async function PUT(
     return NextResponse.json({ property: updatedProperty });
   } catch (error: any) {
     console.error('Error updating property:', error);
+    
+    // Handle Prisma errors more gracefully
+    let errorMessage = 'Failed to update property';
+    
+    if (error?.code === 'P2002') {
+      errorMessage = 'A property with this slug already exists. Please use a different slug.';
+    } else if (error?.code === 'P2003') {
+      errorMessage = 'Invalid reference. Please check your data.';
+    } else if (error?.message) {
+      // Extract meaningful error message
+      if (error.message.includes('Unknown argument')) {
+        errorMessage = `Database schema mismatch: ${error.message}. Please regenerate Prisma client with 'npx prisma generate'`;
+      } else {
+        errorMessage = error.message;
+      }
+    }
+    
     return NextResponse.json(
-      { error: error.message || 'Failed to update property' },
+      { error: errorMessage },
       { status: 500 }
     );
   }

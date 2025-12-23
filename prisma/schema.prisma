@@ -27,6 +27,7 @@ model Property {
   slug        String   @unique
   status      String   // "sold", "available", "leased", etc.
   type        String   // "residential", "commercial", etc.
+  purpose     String   @default("buy") // "buy" or "rent"
   year        Int?
   price       Float
   bedrooms    Int?

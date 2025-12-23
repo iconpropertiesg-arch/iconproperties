@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Save, Loader2, Plus, X, Upload, Image as ImageIcon } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
@@ -26,6 +26,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
   const [slug, setSlug] = useState('');
   const [status, setStatus] = useState('available');
   const [type, setType] = useState('residential');
+  const [purpose, setPurpose] = useState('buy');
   const [year, setYear] = useState('');
   const [price, setPrice] = useState('');
   const [bedrooms, setBedrooms] = useState('');
@@ -36,6 +37,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
   const [featured, setFeatured] = useState(false);
   const [images, setImages] = useState<string[]>(['']);
   const [uploading, setUploading] = useState<Record<number, boolean>>({});
+  const multipleFileInputRef = useRef<HTMLInputElement>(null);
 
   // Translations
   const [translations, setTranslations] = useState<Record<string, TranslationData>>({
@@ -61,6 +63,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
         setSlug(property.slug || '');
         setStatus(property.status || 'available');
         setType(property.type || 'residential');
+        setPurpose(property.purpose || 'buy');
         setYear(property.year?.toString() || '');
         setPrice(property.price?.toString() || '');
         setBedrooms(property.bedrooms?.toString() || '');
@@ -105,6 +108,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
         slug,
         status,
         type,
+        purpose,
         year: year || null,
         price: parseFloat(price),
         bedrooms: bedrooms ? parseInt(bedrooms) : null,
@@ -133,11 +137,17 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
         router.refresh();
       } else {
         const data = await response.json();
-        alert(data.error || 'Failed to save property');
+        const errorMessage = data.error || data.message || 'Failed to save property';
+        // If error is an object, stringify it for display
+        const displayError = typeof errorMessage === 'object' 
+          ? JSON.stringify(errorMessage, null, 2) 
+          : errorMessage;
+        alert(`Error: ${displayError}`);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving property:', error);
-      alert('An error occurred while saving');
+      const errorMessage = error?.message || 'An error occurred while saving';
+      alert(`Error: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
@@ -224,9 +234,15 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
   };
 
   const updateImage = (index: number, value: string) => {
-    const newImages = [...images];
-    newImages[index] = value;
-    setImages(newImages);
+    setImages((prevImages) => {
+      const newImages = [...prevImages];
+      // Ensure the array is long enough
+      while (newImages.length <= index) {
+        newImages.push('');
+      }
+      newImages[index] = value;
+      return newImages;
+    });
   };
 
   const handleFileUpload = async (index: number, file: File) => {
@@ -351,6 +367,80 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
     }
   };
 
+  const handleMultipleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+
+    // Validate all files first
+    const maxSize = 50 * 1024 * 1024; // 50MB
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+    
+    const invalidFiles: string[] = [];
+    files.forEach((file) => {
+      if (file.size > maxSize) {
+        invalidFiles.push(`${file.name} (too large)`);
+      }
+      if (!allowedTypes.includes(file.type)) {
+        invalidFiles.push(`${file.name} (invalid type)`);
+      }
+    });
+
+    if (invalidFiles.length > 0) {
+      alert(`Some files are invalid:\n${invalidFiles.join('\n')}`);
+      e.target.value = '';
+      return;
+    }
+
+    // Capture current length before state updates
+    const currentLength = images.length;
+    
+    // Add empty slots for new images
+    const newImages = [...images];
+    files.forEach(() => {
+      newImages.push('');
+    });
+    setImages(newImages);
+
+    // Set uploading state for all new images
+    const newUploading: Record<number, boolean> = { ...uploading };
+    files.forEach((_, fileIndex) => {
+      newUploading[currentLength + fileIndex] = true;
+    });
+    setUploading(newUploading);
+
+    // Upload all files in parallel
+    const uploadPromises = files.map(async (file, fileIndex) => {
+      const imageIndex = currentLength + fileIndex;
+      
+      try {
+        const vercelLimit = 4.5 * 1024 * 1024; // 4.5MB
+        const isLargeFile = file.size > vercelLimit;
+
+        if (isLargeFile) {
+          await uploadDirectToSupabase(imageIndex, file);
+        } else {
+          await uploadViaServer(imageIndex, file);
+        }
+      } catch (error: any) {
+        console.error(`Error uploading ${file.name}:`, error);
+        alert(`Failed to upload ${file.name}: ${error.message || 'Unknown error'}`);
+      } finally {
+        setUploading((prev) => {
+          const updated = { ...prev };
+          delete updated[imageIndex];
+          return updated;
+        });
+      }
+    });
+
+    await Promise.allSettled(uploadPromises);
+
+    // Reset the input to allow selecting the same files again if needed
+    if (multipleFileInputRef.current) {
+      multipleFileInputRef.current.value = '';
+    }
+  };
+
   const localeNames: Record<string, string> = {
     en: 'English',
     de: 'German (Deutsch)',
@@ -383,16 +473,16 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 Slug (URL) <span className="text-red-400">*</span>
                 <span className="text-xs text-gray-500 ml-2">(Auto-generated from title if empty)</span>
               </label>
-              <input
-                type="text"
-                value={slug}
-                onChange={(e) => handleSlugChange(e.target.value)}
-                required
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                placeholder="luxury-villa-son-vida"
-                pattern="[a-z0-9-]+"
-                title="Slug must contain only lowercase letters, numbers, and hyphens"
-              />
+                <input
+                  type="text"
+                  value={slug}
+                  onChange={(e) => handleSlugChange(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  placeholder="luxury-villa-son-vida"
+                  pattern="[a-z0-9\-]+"
+                  title="Slug must contain only lowercase letters, numbers, and hyphens"
+                />
               {slug && (
                 <p className="mt-1 text-xs text-gray-400">
                   Preview: <span className="text-blue-400">/en/properties/{slug}</span>
@@ -432,6 +522,21 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 <option value="commercial">Commercial</option>
                 <option value="hospitality">Hospitality</option>
                 <option value="land">Land</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Rent or Buy <span className="text-red-400">*</span>
+              </label>
+              <select
+                value={purpose}
+                onChange={(e) => setPurpose(e.target.value)}
+                required
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+              >
+                <option value="buy">Buy</option>
+                <option value="rent">Rent</option>
               </select>
             </div>
 
@@ -541,14 +646,35 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
         <div className="bg-black/50 backdrop-blur-md rounded-xl p-6 border border-gray-800">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-white">Images</h2>
-            <button
-              type="button"
-              onClick={addImage}
-              className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm"
-            >
-              <Plus size={16} />
-              Add Image
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => multipleFileInputRef.current?.click()}
+                disabled={Object.values(uploading).some((isUploading) => isUploading)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg cursor-pointer transition-colors text-sm font-medium"
+              >
+                <Upload size={16} />
+                <span>Select Multiple Images</span>
+              </button>
+              <input
+                ref={multipleFileInputRef}
+                type="file"
+                accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                multiple
+                onChange={handleMultipleFileSelect}
+                className="hidden"
+                disabled={Object.values(uploading).some((isUploading) => isUploading)}
+                title="Select multiple images"
+              />
+              <button
+                type="button"
+                onClick={addImage}
+                className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm"
+              >
+                <Plus size={16} />
+                Add Single Image
+              </button>
+            </div>
           </div>
           <div className="space-y-4">
             {images.map((image, index) => (
@@ -590,9 +716,9 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 </div>
 
                 {/* Image Preview */}
-                {image && !uploading[index] && (
+                {image && image.trim() !== '' && !uploading[index] && (
                   <div className="relative w-full h-48 bg-gray-900 rounded-lg overflow-hidden border border-gray-700">
-                    {image.startsWith('http') || image.startsWith('/') ? (
+                    {image.startsWith('http') || image.startsWith('/') || image.startsWith('data:') ? (
                       <img
                         src={image}
                         alt={`Preview ${index + 1}`}
@@ -609,6 +735,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                     ) : (
                       <div className="flex items-center justify-center h-full text-gray-400">
                         <ImageIcon size={48} />
+                        <span className="ml-2 text-sm">Invalid image URL</span>
                       </div>
                     )}
                   </div>

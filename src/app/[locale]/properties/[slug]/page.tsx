@@ -108,7 +108,7 @@ async function getPropertyBySlug(slug: string, locale: string): Promise<Property
       id: property.id,
       title: translation.title,
       slug: property.slug,
-      status: mapStatus(property.status),
+      status: (property.purpose as 'buy' | 'rent') || mapStatus(property.status),
       type: mapType(property.type),
       area: property.location || 'Mallorca',
       price: property.price,

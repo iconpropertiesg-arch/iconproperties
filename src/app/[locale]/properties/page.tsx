@@ -9,6 +9,7 @@ import HeroSearchBar from '@/components/home/HeroSearchBar';
 
 interface PropertiesPageProps {
   params: { locale: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata({ params: { locale } }: PropertiesPageProps): Promise<Metadata> {
@@ -43,9 +44,28 @@ function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export default async function PropertiesPage({ params: { locale } }: PropertiesPageProps) {
+export default async function PropertiesPage({ 
+  params: { locale },
+  searchParams 
+}: PropertiesPageProps) {
   // Enable static rendering
   setRequestLocale(locale);
+
+  // Extract search filters from query parameters
+  const purposeParam = searchParams.purpose;
+  const purpose = typeof purposeParam === 'string' ? (purposeParam as 'buy' | 'rent') : undefined;
+  
+  const typeParam = searchParams.type;
+  const propertyTypes = typeof typeParam === 'string' ? typeParam.split(',') : [];
+  
+  const locationParam = searchParams.location;
+  const location = typeof locationParam === 'string' ? locationParam : undefined;
+  
+  const minPriceParam = searchParams.minPrice;
+  const minPrice = typeof minPriceParam === 'string' ? parseInt(minPriceParam) : undefined;
+  
+  const maxPriceParam = searchParams.maxPrice;
+  const maxPrice = typeof maxPriceParam === 'string' ? parseInt(maxPriceParam) : undefined;
 
   // Fetch properties from database
   let portfolioItems: Array<{
@@ -58,11 +78,38 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
     year: string;
     status: string;
     slug: string;
+    purpose: string;
   }> = [];
   let totalValue = 0;
 
   try {
+    // Build where clause for filtering
+    const where: any = {};
+    
+    if (purpose) {
+      where.purpose = purpose;
+    }
+    
+    if (propertyTypes.length > 0) {
+      where.type = { in: propertyTypes };
+    }
+    
+    if (location) {
+      where.location = { contains: location, mode: 'insensitive' };
+    }
+    
+    if (minPrice !== undefined || maxPrice !== undefined) {
+      where.price = {};
+      if (minPrice !== undefined) {
+        where.price.gte = minPrice;
+      }
+      if (maxPrice !== undefined) {
+        where.price.lte = maxPrice;
+      }
+    }
+
     const properties = await prisma.property.findMany({
+      where,
       include: {
         translations: {
           where: { locale },
@@ -92,6 +139,7 @@ export default async function PropertiesPage({ params: { locale } }: PropertiesP
         year: property.year ? property.year.toString() : new Date(property.createdAt).getFullYear().toString(),
         status: capitalize(property.status || 'Available'),
         slug: property.slug,
+        purpose: property.purpose || 'buy',
       };
     });
   } catch (error) {

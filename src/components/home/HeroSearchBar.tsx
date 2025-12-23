@@ -129,12 +129,27 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   }, [isDragging, handleSliderMove]);
 
   const handleSearch = () => {
+    // Track search event for Meta Ads
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Search', {
+        content_name: 'Property Search',
+        content_category: 'Search',
+        search_string: area || 'Mallorca',
+        purpose: purpose,
+        property_types: propertyType.join(','),
+        price_range: `${priceRange.min}-${priceRange.max}`,
+      });
+    }
+
+    // Build query parameters
     const params = new URLSearchParams();
     if (purpose) params.set('purpose', purpose);
     if (propertyType.length > 0) params.set('type', propertyType.join(','));
     if (area) params.set('location', area);
     if (priceRange.min !== minPrice) params.set('minPrice', priceRange.min.toString());
     if (priceRange.max !== maxPrice) params.set('maxPrice', priceRange.max.toString());
+    
+    // Redirect to properties page with filters
     router.push(`/${locale}/properties?${params.toString()}`);
   };
 

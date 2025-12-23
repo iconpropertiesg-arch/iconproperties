@@ -56,8 +56,13 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
               <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                 {t(`propertyTypes.${property.type}`)}
               </span>
-              <span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                Available
+              <span className={`${property.status === 'rent' ? 'bg-purple-600' : 'bg-green-600'} text-white px-3 py-1 rounded-full text-sm font-medium`}>
+                {property.status === 'rent' ? 'For Rent' : 'For Sale'}
+              </span>
+              <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium">
+                {property.availability === 'available' ? 'Available' : 
+                 property.availability === 'sold' ? 'Sold' :
+                 property.availability === 'rented' ? 'Rented' : 'Pending'}
               </span>
             </div>
             

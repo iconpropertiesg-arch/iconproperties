@@ -55,6 +55,7 @@ export async function POST(request: NextRequest) {
       slug: rawSlug,
       status,
       type,
+      purpose,
       year,
       price,
       bedrooms,
@@ -124,6 +125,7 @@ export async function POST(request: NextRequest) {
         slug,
         status,
         type,
+        purpose: purpose || 'buy',
         year: year ? parseInt(year) : null,
         price: parseFloat(price),
         bedrooms: bedrooms ? parseInt(bedrooms) : null,
@@ -151,8 +153,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ property }, { status: 201 });
   } catch (error: any) {
     console.error('Error creating property:', error);
+    
+    // Handle Prisma errors more gracefully
+    let errorMessage = 'Failed to create property';
+    
+    if (error?.code === 'P2002') {
+      errorMessage = 'A property with this slug already exists. Please use a different slug.';
+    } else if (error?.code === 'P2003') {
+      errorMessage = 'Invalid reference. Please check your data.';
+    } else if (error?.message) {
+      // Extract meaningful error message
+      if (error.message.includes('Unknown argument')) {
+        errorMessage = `Database schema mismatch: ${error.message}. Please regenerate Prisma client with 'npx prisma generate'`;
+      } else {
+        errorMessage = error.message;
+      }
+    }
+    
     return NextResponse.json(
-      { error: error.message || 'Failed to create property' },
+      { error: errorMessage },
       { status: 500 }
     );
   }
