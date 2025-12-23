@@ -186,26 +186,88 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
             preserveAspectRatio="none"
           >
             <defs>
-              <linearGradient id="animatedBorderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#f97316" stopOpacity="1" />
-                <stop offset="50%" stopColor="#fb6d3a" stopOpacity="1" />
-                <stop offset="100%" stopColor="#ef4444" stopOpacity="1" />
+              <linearGradient id="animatedBorderGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#F02FC2" stopOpacity="1" />
+                <stop offset="50%" stopColor="#FFC080" stopOpacity="1" />
+                <stop offset="100%" stopColor="#FF4500" stopOpacity="1" />
               </linearGradient>
-              <filter id="glowFilter" x="-100%" y="-100%" width="300%" height="300%">
-                <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+              <filter id="glowFilter" x="-200%" y="-200%" width="500%" height="500%">
+                <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
                 </feMerge>
               </filter>
-              <filter id="strongGlowFilter" x="-150%" y="-150%" width="400%" height="400%">
-                <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+              <filter id="strongGlowFilter" x="-250%" y="-250%" width="600%" height="600%">
+                <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <filter id="intenseGlowFilter" x="-300%" y="-300%" width="700%" height="700%">
+                <feGaussianBlur stdDeviation="20" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <filter id="luminousGlowFilter" x="-350%" y="-350%" width="800%" height="800%">
+                <feGaussianBlur stdDeviation="25" result="coloredBlur"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
                 </feMerge>
               </filter>
             </defs>
+            {/* Luminous outer glow layer - brightest */}
+            <rect
+              x="2"
+              y="2"
+              width="996"
+              height="96"
+              rx="48"
+              ry="48"
+              fill="none"
+              stroke="url(#animatedBorderGradient)"
+              strokeWidth="12"
+              strokeLinecap="round"
+              strokeDasharray="200 1900"
+              pathLength="2100"
+              filter="url(#luminousGlowFilter)"
+              opacity="0.8"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                values="0;-2100"
+                dur="30s"
+                repeatCount="indefinite"
+              />
+            </rect>
+            {/* Intense outer glow layer */}
+            <rect
+              x="2"
+              y="2"
+              width="996"
+              height="96"
+              rx="48"
+              ry="48"
+              fill="none"
+              stroke="url(#animatedBorderGradient)"
+              strokeWidth="10"
+              strokeLinecap="round"
+              strokeDasharray="200 1900"
+              pathLength="2100"
+              filter="url(#intenseGlowFilter)"
+              opacity="0.7"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                values="0;-2100"
+                dur="30s"
+                repeatCount="indefinite"
+              />
+            </rect>
             {/* Strong outer glow layer */}
             <rect
               x="2"
@@ -221,7 +283,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               strokeDasharray="200 1900"
               pathLength="2100"
               filter="url(#strongGlowFilter)"
-              opacity="0.4"
+              opacity="0.8"
             >
               <animate
                 attributeName="stroke-dashoffset"
@@ -245,7 +307,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               strokeDasharray="200 1900"
               pathLength="2100"
               filter="url(#glowFilter)"
-              opacity="0.5"
+              opacity="0.9"
             >
               <animate
                 attributeName="stroke-dashoffset"
