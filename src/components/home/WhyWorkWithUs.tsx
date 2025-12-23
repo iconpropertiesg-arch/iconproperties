@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 import { Lock, Users, MapPin, ArrowRight } from 'lucide-react';
 
 interface WhyWorkWithUsProps {
@@ -10,7 +9,6 @@ interface WhyWorkWithUsProps {
 
 export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
   const router = useRouter();
-  const t = useTranslations('whyWorkWithUs');
 
   const features = [
     {

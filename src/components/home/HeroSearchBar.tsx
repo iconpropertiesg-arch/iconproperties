@@ -30,7 +30,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const [purpose, setPurpose] = useState<'buy' | 'rent'>('buy');
   const [propertyType, setPropertyType] = useState<string[]>([]);
   const [area, setArea] = useState('');
-  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 20000, max: 70000000 });
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 20000, max: 35000000 });
   const [isPurposeOpen, setIsPurposeOpen] = useState(false);
   const [isTypeOpen, setIsTypeOpen] = useState(false);
   const [isAreaOpen, setIsAreaOpen] = useState(false);
@@ -67,7 +67,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   };
 
   const minPrice = 20000;
-  const maxPrice = 70000000;
+  const maxPrice = 35000000;
 
   const formatPrice = (value: number): string => {
     if (value >= 1000000) {
@@ -141,7 +141,10 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   };
 
   return (
-    <div className={`relative z-10 mx-auto max-w-6xl px-4 sm:px-6 md:px-8 ${hideTitle ? 'my-0' : '-mt-8 sm:-mt-12 md:-mt-16 mb-8 sm:mb-12 md:mb-16'}`}>
+    <div 
+      className={`relative z-10 mx-auto px-4 sm:px-6 md:px-8 ${hideTitle ? 'my-0' : '-mt-8 sm:-mt-12 md:-mt-16 mb-8 sm:mb-12 md:mb-16'}`}
+      style={{ maxWidth: 'calc(56rem + 50px)' }}
+    >
       {!hideTitle && (
         <div className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
