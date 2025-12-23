@@ -9,6 +9,7 @@
 
 * {
   border-color: theme('colors.border');
+  font-family: 'DM Sans', system-ui, sans-serif;
 }
 
 html {
@@ -21,6 +22,11 @@ body {
   font-family: 'DM Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure DM Sans is applied to all text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label, li, td, th {
+  font-family: 'DM Sans', system-ui, sans-serif;
 }
 
 /* Liquid Glass Effects */

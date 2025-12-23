@@ -135,7 +135,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
             {/* Hero Text */}
             <div className="space-y-4 sm:space-y-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight sm:leading-tight whitespace-pre-line">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight sm:leading-tight whitespace-pre-line">
                 {t('title')}
               </h1>
               <p className="text-base sm:text-lg md:text-xl leading-relaxed opacity-90 text-gray-200 max-w-xl">

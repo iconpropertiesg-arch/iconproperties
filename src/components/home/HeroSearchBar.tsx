@@ -89,12 +89,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     return ((value - minPrice) / (maxPrice - minPrice)) * 100;
   };
 
-  const handleSliderMouseDown = (type: 'min' | 'max', e: React.MouseEvent) => {
+  const handleSliderMouseDown = (type: 'min' | 'max', e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     setIsDragging(type);
   };
 
-  const handleSliderMove = useCallback((e: MouseEvent) => {
+  const handleSliderMove = useCallback((e: MouseEvent | TouchEvent) => {
     if (!isDragging) return;
     
     const sliderContainer = document.querySelector('.price-slider-container');
@@ -102,7 +102,8 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     if (!slider) return;
     
     const rect = slider.getBoundingClientRect();
-    const percent = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const percent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
     const value = minPrice + (percent / 100) * (maxPrice - minPrice);
     
     if (isDragging === 'min') {
@@ -116,12 +117,16 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     if (isDragging) {
       document.addEventListener('mousemove', handleSliderMove);
       document.addEventListener('mouseup', () => setIsDragging(null));
+      document.addEventListener('touchmove', handleSliderMove);
+      document.addEventListener('touchend', () => setIsDragging(null));
       return () => {
         document.removeEventListener('mousemove', handleSliderMove);
         document.removeEventListener('mouseup', () => setIsDragging(null));
+        document.removeEventListener('touchmove', handleSliderMove);
+        document.removeEventListener('touchend', () => setIsDragging(null));
       };
     }
-  }, [isDragging, priceRange]);
+  }, [isDragging, handleSliderMove]);
 
   const handleSearch = () => {
     const params = new URLSearchParams();
@@ -142,7 +147,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
 
   return (
     <div 
-      className={`relative z-10 mx-auto px-4 sm:px-6 md:px-8 ${hideTitle ? 'my-0' : '-mt-8 sm:-mt-12 md:-mt-16 mb-8 sm:mb-12 md:mb-16'}`}
+      className={`relative z-10 mx-auto px-3 sm:px-4 md:px-6 lg:px-8 ${hideTitle ? 'my-0' : '-mt-8 sm:-mt-12 md:-mt-16 mb-8 sm:mb-12 md:mb-16'}`}
       style={{ maxWidth: 'calc(56rem + 50px)' }}
     >
       {!hideTitle && (
@@ -158,23 +163,23 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
 
 
 
-      <div className="glow-wrapper">
+      <div className="glow-wrapper overflow-hidden lg:overflow-visible">
     <div 
-        className="relative bg-white/10 backdrop-blur-xl rounded-full border border-white/20 p-2 shadow-2xl search-bar-content overflow-visible"
+        className="relative bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-full border border-white/20 p-2 sm:p-2 shadow-2xl search-bar-content overflow-hidden lg:overflow-visible"
     >
         {/* your whole search bar content */}
 
-        <div className="relative">
+        <div className="relative overflow-hidden lg:overflow-visible">
         <div 
           ref={borderContainerRef}
-          className="relative bg-white/10 backdrop-blur-xl rounded-full border border-white/20 p-2 shadow-2xl overflow-visible"
+          className="relative bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-full border border-white/20 p-2 sm:p-3 lg:p-2 shadow-2xl overflow-hidden lg:overflow-visible"
           style={{
             boxShadow: '0 8px 32px rgba(37, 99, 235, 0.3), 0 0 60px rgba(59, 130, 246, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.2)'
           }}
         >
-          {/* SVG Path Animation Border */}
+          {/* SVG Path Animation Border - Hidden on mobile for cleaner look */}
           <svg 
-            className="absolute inset-0 w-full h-full pointer-events-none"
+            className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
             style={{ overflow: 'visible' }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1000 100"
@@ -274,7 +279,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               />
             </rect>
           </svg>
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 sm:gap-3 p-2 overflow-visible">
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 sm:gap-3 p-1 sm:p-2 overflow-visible">
             {/* Buy / Rent Dropdown */}
             <div className="relative flex-shrink-0">
               <button
@@ -284,12 +289,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                   setIsTypeOpen(false);
                   setIsAreaOpen(false);
                 }}
-                className="w-full lg:w-auto min-w-[120px] sm:min-w-[140px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 sm:px-6 py-3 sm:py-4 text-white transition-all duration-200"
+                className="w-full lg:w-auto lg:min-w-[140px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-4 py-2.5 sm:py-3 lg:py-3 text-white transition-all duration-200"
               >
-                <span className="text-xs sm:text-sm font-medium">
+                <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
                   {purpose === 'buy' ? 'Buy / Rent' : 'Rent / Buy'}
                 </span>
-                <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 sm:h-4 ml-2 transition-transform", isPurposeOpen && "rotate-180")} />
+                <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 ml-1.5 sm:ml-2 transition-transform flex-shrink-0", isPurposeOpen && "rotate-180")} />
               </button>
               {/* Purpose dropdown */}
               {isPurposeOpen && (
@@ -334,7 +339,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                   setIsPurposeOpen(false);
                   setIsAreaOpen(false);
                 }}
-                className="w-full lg:w-auto min-w-[60px] max-w-[180px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-3 sm:px-4 py-3 sm:py-4 text-white transition-all duration-200"
+                className="w-full lg:w-auto lg:min-w-[60px] lg:max-w-[180px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 lg:py-3 text-white transition-all duration-200"
               >
                 <div className="flex items-center gap-2 min-w-0">
                   {propertyType.length === 0 && <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />}
@@ -394,9 +399,9 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 onBlur={() => setTimeout(() => setIsAreaOpen(false), 200)}
                   onKeyDown={handleKeyDown}
                   placeholder={t('searchPlaceholder.location')}
-                  className="w-full bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 sm:px-6 py-3 sm:py-4 pl-8 sm:pl-10 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-200"
+                  className="w-full bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-4 py-2.5 sm:py-3 lg:py-3 pl-7 sm:pl-9 lg:pl-10 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-200"
                 />
-                <MapPin className="absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/60" />
+                <MapPin className="absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 w-3.5 h-3.5 sm:w-4 text-white/60 flex-shrink-0" />
               </div>
               {isAreaOpen && filteredLocations.length > 0 && (
                 <>
@@ -426,12 +431,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
 
             {/* Price Range Slider - Inline */}
             <div className="relative flex-1 min-w-0 price-slider-container">
-              <div className="bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 sm:px-6 py-3 sm:py-4">
-                <div className="space-y-2 sm:space-y-3">
+              <div className="bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-4 py-2.5 sm:py-3 lg:py-3">
+                  <div className="space-y-1.5 sm:space-y-2">
                   {/* Price Display */}
-                  <div className="flex items-center gap-2 text-white">
-                    <Euro className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    <span className="text-xs sm:text-sm font-medium">{getPriceDisplayText()}</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-white">
+                    <Euro className="w-3.5 h-3.5 sm:w-4 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm font-medium truncate">{getPriceDisplayText()}</span>
                   </div>
                   
                   {/* Slider Track */}
@@ -448,16 +453,18 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       
                       {/* Min Handle */}
                       <div
-                        className="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-10"
-                        style={{ left: `calc(${getPercentage(priceRange.min)}% - 7px)` }}
+                        className="absolute top-1/2 -translate-y-1/2 w-4 h-4 sm:w-4 sm:h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-10 touch-none"
+                        style={{ left: `calc(${getPercentage(priceRange.min)}% - 8px)` }}
                         onMouseDown={(e) => handleSliderMouseDown('min', e)}
+                        onTouchStart={(e) => handleSliderMouseDown('min', e)}
                       />
                       
                       {/* Max Handle */}
                       <div
-                        className="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-10"
-                        style={{ left: `calc(${getPercentage(priceRange.max)}% - 7px)` }}
+                        className="absolute top-1/2 -translate-y-1/2 w-4 h-4 sm:w-4 sm:h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-10 touch-none"
+                        style={{ left: `calc(${getPercentage(priceRange.max)}% - 8px)` }}
                         onMouseDown={(e) => handleSliderMouseDown('max', e)}
+                        onTouchStart={(e) => handleSliderMouseDown('max', e)}
                       />
                     </div>
                   </div>
@@ -472,9 +479,9 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
             <button
               type="button"
               onClick={handleSearch}
-              className="flex-shrink-0 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm sm:text-base font-semibold rounded-full px-6 sm:px-8 py-3 sm:py-4 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 whitespace-nowrap"
+              className="w-full lg:w-auto flex-shrink-0 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm sm:text-base font-semibold rounded-xl lg:rounded-full px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 whitespace-nowrap"
             >
-              <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+              <Search className="w-4 h-4 sm:w-5 flex-shrink-0" />
               <span>Search</span>
             </button>
           </div>
