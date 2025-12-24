@@ -480,7 +480,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                   required
                   className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="luxury-villa-son-vida"
-                  pattern="[a-z0-9\-]+"
+                  pattern="[-a-z0-9]+"
                   title="Slug must contain only lowercase letters, numbers, and hyphens"
                 />
               {slug && (

@@ -24,7 +24,10 @@
     "apartment": "Apartment",
     "house": "Haus",
     "commercial": "Gewerbe",
-    "villa": "Villa"
+    "villa": "Villa",
+    "residential": "Wohnimmobilie",
+    "hospitality": "Hotellerie",
+    "land": "Grundstück"
   },
   "purpose": {
     "buy": "Kaufen",

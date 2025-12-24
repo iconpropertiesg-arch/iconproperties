@@ -32,7 +32,10 @@
     "apartment": "Apartment",
     "house": "House",
     "commercial": "Commercial",
-    "villa": "Villa"
+    "villa": "Villa",
+    "residential": "Residential",
+    "hospitality": "Hospitality",
+    "land": "Land"
   },
   "purpose": {
     "buy": "Buy",
