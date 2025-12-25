@@ -23,6 +23,80 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
             Request Private Portfolio
           </h2>
 
+          {/* Animated Glow Line */}
+          <div className="relative w-full max-w-md mx-auto mb-8 h-1">
+            <svg 
+              className="absolute inset-0 w-full h-full"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 400 4"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="portfolioLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#F02FC2" stopOpacity="1" />
+                  <stop offset="50%" stopColor="#FFC080" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#FF4500" stopOpacity="1" />
+                </linearGradient>
+                <filter id="portfolioGlowFilter" x="-200%" y="-200%" width="500%" height="500%">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                <filter id="portfolioStrongGlowFilter" x="-250%" y="-250%" width="600%" height="600%">
+                  <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              {/* Strong glow layer */}
+              <line
+                x1="0"
+                y1="2"
+                x2="400"
+                y2="2"
+                stroke="url(#portfolioLineGradient)"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeDasharray="50 350"
+                pathLength="400"
+                filter="url(#portfolioStrongGlowFilter)"
+                opacity="0.7"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="0;-400"
+                  dur="20s"
+                  repeatCount="indefinite"
+                />
+              </line>
+              {/* Main line with glow */}
+              <line
+                x1="0"
+                y1="2"
+                x2="400"
+                y2="2"
+                stroke="url(#portfolioLineGradient)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeDasharray="50 350"
+                pathLength="400"
+                filter="url(#portfolioGlowFilter)"
+                opacity="1"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="0;-400"
+                  dur="20s"
+                  repeatCount="indefinite"
+                />
+              </line>
+            </svg>
+          </div>
+
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             Most of Mallorca's finest properties are sold privately, without ever appearing on public portals.

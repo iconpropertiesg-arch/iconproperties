@@ -197,7 +197,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
             className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
             style={{ overflow: 'visible' }}
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1000 100"
+            viewBox="0 0 1000 70"
             preserveAspectRatio="none"
           >
             <defs>
@@ -240,12 +240,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               x="2"
               y="2"
               width="996"
-              height="96"
-              rx="48"
-              ry="48"
+              height="66"
+              rx="33"
+              ry="33"
               fill="none"
               stroke="url(#animatedBorderGradient)"
-              strokeWidth="12"
+              strokeWidth="1.5"
               strokeLinecap="round"
               strokeDasharray="200 1900"
               pathLength="2100"
@@ -255,7 +255,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               <animate
                 attributeName="stroke-dashoffset"
                 values="0;-2100"
-                dur="30s"
+                dur="20s"
                 repeatCount="indefinite"
               />
             </rect>
@@ -264,12 +264,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               x="2"
               y="2"
               width="996"
-              height="96"
-              rx="48"
-              ry="48"
+              height="66"
+              rx="33"
+              ry="33"
               fill="none"
               stroke="url(#animatedBorderGradient)"
-              strokeWidth="10"
+              strokeWidth="1.2"
               strokeLinecap="round"
               strokeDasharray="200 1900"
               pathLength="2100"
@@ -279,7 +279,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               <animate
                 attributeName="stroke-dashoffset"
                 values="0;-2100"
-                dur="30s"
+                dur="20s"
                 repeatCount="indefinite"
               />
             </rect>
@@ -288,12 +288,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               x="2"
               y="2"
               width="996"
-              height="96"
-              rx="48"
-              ry="48"
+              height="66"
+              rx="33"
+              ry="33"
               fill="none"
               stroke="url(#animatedBorderGradient)"
-              strokeWidth="8"
+              strokeWidth="1"
               strokeLinecap="round"
               strokeDasharray="200 1900"
               pathLength="2100"
@@ -303,7 +303,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               <animate
                 attributeName="stroke-dashoffset"
                 values="0;-2100"
-                dur="30s"
+                dur="20s"
                 repeatCount="indefinite"
               />
             </rect>
@@ -312,12 +312,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               x="2"
               y="2"
               width="996"
-              height="96"
-              rx="48"
-              ry="48"
+              height="66"
+              rx="33"
+              ry="33"
               fill="none"
               stroke="url(#animatedBorderGradient)"
-              strokeWidth="6"
+              strokeWidth="0.8"
               strokeLinecap="round"
               strokeDasharray="200 1900"
               pathLength="2100"
@@ -327,7 +327,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               <animate
                 attributeName="stroke-dashoffset"
                 values="0;-2100"
-                dur="30s"
+                dur="20s"
                 repeatCount="indefinite"
               />
             </rect>
@@ -336,12 +336,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               x="2"
               y="2"
               width="996"
-              height="96"
-              rx="48"
-              ry="48"
+              height="66"
+              rx="33"
+              ry="33"
               fill="none"
               stroke="url(#animatedBorderGradient)"
-              strokeWidth="2"
+              strokeWidth="3"
               strokeLinecap="round"
               strokeDasharray="200 1900"
               pathLength="2100"
@@ -351,7 +351,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               <animate
                 attributeName="stroke-dashoffset"
                 values="0;-2100"
-                dur="30s"
+                dur="20s"
                 repeatCount="indefinite"
               />
             </rect>
