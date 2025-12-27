@@ -4,6 +4,7 @@ import { createServerClient } from '@/lib/supabase';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
@@ -122,6 +123,14 @@ export async function POST(request: NextRequest) {
       // Convert file to buffer and upload using service role key (bypasses RLS)
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
+
+      // Check if Supabase env vars are set
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+        return NextResponse.json(
+          { error: 'Supabase configuration is missing. Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in environment variables.' },
+          { status: 500 }
+        );
+      }
 
       const supabase = createServerClient();
       const { data, error } = await supabase.storage
