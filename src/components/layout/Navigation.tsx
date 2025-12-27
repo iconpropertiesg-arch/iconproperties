@@ -46,7 +46,7 @@ export default function Navigation({ locale, className, onLinkClick }: Navigatio
               )}
               onClick={onLinkClick}
             >
-              {item.key === 'team' ? 'Team' : t(item.key)}
+              {t(item.key)}
             </Link>
           </li>
         ))}

@@ -95,3 +95,4 @@ Then add `NEXT_PUBLIC_HERO_VIDEO_URL` to Vercel environment variables.
 ⏳ Need to: Link store to project & get token from dashboard  
 ⏳ Then: Upload video using one of the methods above
 
+

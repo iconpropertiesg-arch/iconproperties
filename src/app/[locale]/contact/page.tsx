@@ -46,15 +46,13 @@ export default async function ContactPage({ params, searchParams }: ContactPageP
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block bg-gray-700 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 animate-fade-in-up">
-              Get In Touch
+              {t('hero.badge')}
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up animation-delay-200">
-              Let's Find Your Dream Property
+              {t('hero.title')}
             </h1>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed animate-fade-in-up animation-delay-400">
-              Ready to find your dream property in Mallorca? Our expert team is here to help you 
-              every step of the way. Get in touch today for personalized service and exclusive access 
-              to the finest properties on the island.
+              {t('hero.description')}
             </p>
           </div>
         </div>

@@ -1,12 +1,15 @@
 'use client';
 
 import { ArrowRight, MessageCircle } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface SellHeroProps {
   locale: string;
 }
 
 export default function SellHero({ locale }: SellHeroProps) {
+  const t = useTranslations('sell');
+  
   const scrollToForm = () => {
     const form = document.getElementById('valuation-form');
     if (form) {
@@ -36,10 +39,10 @@ export default function SellHero({ locale }: SellHeroProps) {
       <div className="container mx-auto px-4 relative z-10 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            Sell Your Property in Mallorca, Privately & Professionally
+            {t('title')}
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-12 leading-relaxed max-w-3xl mx-auto">
-            A boutique service for property owners seeking a discreet, premium and efficient sales process with qualified international buyers.
+            {t('subtitle')}
           </p>
 
           {/* CTAs */}
@@ -48,14 +51,14 @@ export default function SellHero({ locale }: SellHeroProps) {
               onClick={scrollToForm}
               className="group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl "
             >
-              Request Valuation
+              {t('hero.primaryCta')}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={scrollToContact}
               className="inline-flex items-center bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all duration-300"
             >
-              Speak With an Advisor
+              {t('hero.secondaryCta')}
               <MessageCircle className="w-5 h-5 ml-2" />
             </button>
           </div>

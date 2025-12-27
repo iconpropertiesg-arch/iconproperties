@@ -164,7 +164,7 @@ export default function Header({ locale }: HeaderProps) {
                       : "text-white/90 hover:text-white"
                   )}
                 >
-                  Team
+                  {t('team')}
                 </Link>
               </nav>
             </div>
@@ -258,7 +258,7 @@ export default function Header({ locale }: HeaderProps) {
                   className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Team
+                  {t('team')}
                 </Link>
                 <div className="pt-4 sm:pt-6 space-y-3 sm:space-y-4">
                   <Link 

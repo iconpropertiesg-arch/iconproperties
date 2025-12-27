@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Phone, MapPin, Instagram, ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import RequestPrivatePortfolioModal from './RequestPrivatePortfolioModal';
 
 interface FooterProps {
@@ -11,6 +12,7 @@ interface FooterProps {
 }
 
 export default function Footer({ locale }: FooterProps) {
+  const t = useTranslations('navigation');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -94,10 +96,10 @@ export default function Footer({ locale }: FooterProps) {
                 </li>
                 <li>
                   <Link 
-                    href={`/${locale}/about`}
+                    href={`/${locale}/team`}
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
-                    Team
+                    {t('team')}
                   </Link>
                 </li>
                 <li>

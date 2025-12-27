@@ -5,6 +5,7 @@
     "portfolio": "Properties",
     "sell": "Sell",
     "contact": "Contact",
+    "team": "Team",
     "faq": "FAQ"
   },
   "portfolio": {
@@ -114,6 +115,11 @@
   },
   "contact": {
     "title": "Let's find your next home",
+    "hero": {
+      "badge": "Get In Touch",
+      "title": "Let's Find Your Dream Property",
+      "description": "Ready to find your dream property in Mallorca? Our expert team is here to help you every step of the way. Get in touch today for personalized service and exclusive access to the finest properties on the island."
+    },
     "form": {
       "reason": "I'm interested in",
       "buying": "Buying",
@@ -156,18 +162,19 @@
       "cta": "Request a Free Consultation"
     },
     "offMarket": {
-      "title": "Sell On-Market or Off-Market — We'll Guide You",
-      "subtitle": "We offer both strategies depending on your goals, privacy level and timeline.",
-      "offMarketTitle": "Off-Market Sale",
+      "title": "Choose the Right Strategy for Your Property",
+      "subtitle": "We'll recommend the best strategy based on your goals, privacy level and timeline.",
+      "offMarketBadge": "Recommended for luxury villas",
+      "offMarketTitle": "OFF-MARKET SALE",
       "offMarketPoint1": "No public advertising",
       "offMarketPoint2": "Property shared only with verified buyers",
-      "offMarketPoint3": "High privacy, zero noise",
+      "offMarketPoint3": "Maintains privacy and reduces unnecessary viewings",
       "offMarketPoint4": "Ideal for high-end villas & owners who value discretion",
-      "offMarketPoint5": "Often faster thanks to curated buyers",
-      "onMarketTitle": "On-Market Sale",
-      "onMarketPoint1": "Full online exposure using Google and Meta ads",
-      "onMarketPoint2": "Perfect for properties needing visibility",
-      "onMarketPoint3": "Combined strategy available",
+      "offMarketPoint5": "Often faster due to curated clientele",
+      "onMarketTitle": "ON-MARKET SALE",
+      "onMarketPoint1": "Full exposure across select portals",
+      "onMarketPoint2": "Ideal for properties needing visibility",
+      "onMarketPoint3": "Professional photography, video & marketing package",
       "cta": "Request a Private Sales Strategy"
     },
     "process": {
@@ -241,6 +248,13 @@
     "seo": {
       "title": "Luxury Property Sales in Mallorca",
       "description": "ICON PROPERTIES specialises in selling high-end villas, fincas and luxury homes across Mallorca's premium areas, including Port Andratx, Son Vida, Bendinat, Santa Ponsa and Palma. We provide a private advisory service tailored to owners who value discretion, professionalism and international reach."
+    }
+  },
+  "team": {
+    "hero": {
+      "title": "Meet the ICON PROPERTIES Team",
+      "subtitle": "A boutique real estate advisory built on trust, discretion and deep local expertise.",
+      "description": "We work with a limited number of clients to deliver exceptional results — personally, privately and professionally."
     }
   },
   "footer": {

@@ -5,6 +5,7 @@
     "portfolio": "Immobilien",
     "sell": "Verkaufen",
     "contact": "Kontakt",
+    "team": "Team",
     "faq": "FAQ"
   },
   "hero": {
@@ -106,6 +107,11 @@
   },
   "contact": {
     "title": "Lassen Sie uns Ihr nächstes Zuhause finden",
+    "hero": {
+      "badge": "Kontakt aufnehmen",
+      "title": "Lassen Sie uns Ihre Traumimmobilie finden",
+      "description": "Bereit, Ihre Traumimmobilie auf Mallorca zu finden? Unser Expertenteam steht Ihnen bei jedem Schritt zur Seite. Kontaktieren Sie uns noch heute für einen personalisierten Service und exklusiven Zugang zu den besten Immobilien der Insel."
+    },
     "form": {
       "reason": "Ich interessiere mich für",
       "buying": "Kaufen",
@@ -120,18 +126,127 @@
     }
   },
   "sell": {
-    "title": "Verkaufen oder vermieten Sie mit Vertrauen",
-    "subtitle": "Bewertung in 24h, Premium-Marketing, qualifizierte Käufer.",
-    "pillars": {
-      "valuation": "Kostenlose Bewertung",
-      "marketing": "Premium-Marketing",
-      "discretion": "Vollständige Diskretion"
+    "title": "Verkaufen Sie Ihre Immobilie mit ICON PROPERTIES",
+    "subtitle": "Ein boutique, beratungsorientierter Ansatz für Eigentümer, die Privatsphäre, Präzision und echte Ergebnisse schätzen.",
+    "hero": {
+      "primaryCta": "Bewertung anfordern",
+      "secondaryCta": "Mit einem Berater sprechen"
     },
-    "form": {
-      "location": "Immobilienstandort",
-      "type": "Immobilientyp",
-      "estimatedPrice": "Geschätzter Preis (Optional)",
-      "contactMethod": "Bevorzugte Kontaktmethode"
+    "whySell": {
+      "title": "Warum Mit Uns Verkaufen",
+      "subtitle": "Ein boutique, beratungsorientierter Ansatz für Eigentümer, die Privatsphäre, Präzision und echte Ergebnisse schätzen.",
+      "point1": {
+        "title": "Zugang zu Qualifizierten Internationalen Käufern",
+        "description": "Wir verbinden Ihre Immobilie mit einem kuratierten Pool seriöser Kunden aus Deutschland, der Schweiz, Skandinavien und dem Vereinigten Königreich."
+      },
+      "point2": {
+        "title": "Diskrete Off-Market-Verkäufe",
+        "description": "Viele unserer Verkäufe erfolgen ohne öffentliche Bekanntmachung — ideal für Eigentümer, die Vertraulichkeit bevorzugen."
+      },
+      "point3": {
+        "title": "Premium-Marketing & Präsentation",
+        "description": "Professionelle Fotografie, Video, Drohnenaufnahmen und maßgeschneidertes Marketingmaterial, um Ihr Zuhause von seiner besten Seite zu zeigen."
+      },
+      "point4": {
+        "title": "Persönlicher, Beraterebene Service",
+        "description": "Sie haben direkten Kontakt mit unserem Team während des gesamten Prozesses, keine Übergaben, keine Überlastung großer Agenturen."
+      },
+      "cta": "Kostenlose Beratung Anfordern"
+    },
+    "offMarket": {
+      "title": "Wählen Sie die Richtige Strategie für Ihre Immobilie",
+      "subtitle": "Wir empfehlen die beste Strategie basierend auf Ihren Zielen, Privatsphäreniveau und Zeitplan.",
+      "offMarketBadge": "Empfohlen für Luxusvillen",
+      "offMarketTitle": "OFF-MARKET-VERKAUF",
+      "offMarketPoint1": "Keine öffentliche Werbung",
+      "offMarketPoint2": "Immobilie nur mit verifizierten Käufern geteilt",
+      "offMarketPoint3": "Wahrt die Privatsphäre und reduziert unnötige Besichtigungen",
+      "offMarketPoint4": "Ideal für High-End-Villen & Eigentümer, die Diskretion schätzen",
+      "offMarketPoint5": "Oft schneller dank kuratierter Klientel",
+      "onMarketTitle": "ON-MARKET-VERKAUF",
+      "onMarketPoint1": "Vollständige Präsenz auf ausgewählten Portalen",
+      "onMarketPoint2": "Ideal für Immobilien, die Sichtbarkeit benötigen",
+      "onMarketPoint3": "Professionelle Fotografie, Video & Marketingpaket",
+      "cta": "Private Verkaufsstrategie Anfordern"
+    },
+    "process": {
+      "title": "Unser 4-Schritte-Verkaufsprozess",
+      "step1": {
+        "title": "Immobilienprüfung & Preisstrategie",
+        "description": "Wir analysieren Ihre Immobilie und geben eine klare, datengestützte Empfehlung basierend auf Marktnachfrage und Käufertrends."
+      },
+      "step2": {
+        "title": "Premium-Vorbereitung",
+        "description": "Fotografie, Video, Drohnenaufnahmen und eine professionelle Broschüre, um die Stärken Ihres Zuhauses hervorzuheben."
+      },
+      "step3": {
+        "title": "Private Förderung oder Öffentlicher Start",
+        "description": "Je nach gewählter Strategie fördern wir Ihre Villa entweder privat bei verifizierten Kunden oder starten sie über ausgewählte Kanäle."
+      },
+      "step4": {
+        "title": "Besichtigungen, Verhandlung & Abschluss",
+        "description": "Wir handhaben Besichtigungen diskret, verhandeln in Ihrem Namen und koordinieren den rechtlichen Prozess bis zur Fertigstellung."
+      }
+    },
+    "testimonials": {
+      "title": "Was Unsere Kunden Sagen",
+      "testimonial1": {
+        "quote": "ICON hat unsere Son Vida Villa privat in weniger als 30 Tagen verkauft. Keine öffentliche Bekanntmachung, genau das, was wir wollten.",
+        "author": "Anna & Erik S., Schweden"
+      },
+      "testimonial2": {
+        "quote": "Professionell, effizient und diskret. Daniel brachte uns schnell qualifizierte Käufer und handhabte alles reibungslos.",
+        "author": "Michael R., Deutschland"
+      }
+    },
+    "valuation": {
+      "title": "Fordern Sie Ihre Immobilienbewertung An",
+      "subtitle": "Erhalten Sie eine personalisierte Bewertung und Verkaufsstrategie, die auf Ihre Immobilie und Ziele zugeschnitten ist.",
+      "form": {
+        "name": "Name",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "address": "Immobilienadresse oder Gebiet",
+        "type": "Immobilientyp",
+        "value": "Geschätzter Wert (optional)",
+        "message": "Nachricht (optional)",
+        "submit": "Bewertung Anfordern"
+      }
+    },
+    "marketing": {
+      "title": "Premium-Marketing, Zugeschnitten auf Luxusimmobilien",
+      "photography": {
+        "title": "Fotografie & Video",
+        "description": "Drohnen, Tageslicht-, Sonnenuntergangs- und Innenraum-Lifestyle-Aufnahmen."
+      },
+      "online": {
+        "title": "Online-Marketing",
+        "description": "Wir nutzen die neueste Online-Marketing-Technologie, um neue Käufer über Google, Facebook und Instagram zu erreichen. Kosten von uns übernommen"
+      },
+      "brochures": {
+        "title": "Private Broschüren",
+        "description": "Elegante PDF-Broschüren für Off-Market-Kunden."
+      },
+      "international": {
+        "title": "Internationale Reichweite",
+        "description": "Förderung in Deutschland, der Schweiz und dem Vereinigten Königreich — woher die meisten Käufer stammen."
+      }
+    },
+    "finalCta": {
+      "title": "Denken Sie Über Verkauf Nach?",
+      "description": "Ob Sie einen diskreten Off-Market-Ansatz oder eine vollständige Marketingstrategie bevorzugen, wir helfen Ihnen, Ihre Immobilie für die richtigen Käufer zu positionieren.",
+      "cta": "Private Verkaufsberatung Anfordern"
+    },
+    "seo": {
+      "title": "Luxusimmobilienverkäufe auf Mallorca",
+      "description": "ICON PROPERTIES spezialisiert sich auf den Verkauf von High-End-Villen, Fincas und Luxusimmobilien in Mallorcas Premium-Gebieten, einschließlich Port Andratx, Son Vida, Bendinat, Santa Ponsa und Palma. Wir bieten einen privaten Beratungsservice für Eigentümer, die Diskretion, Professionalität und internationale Reichweite schätzen."
+    }
+  },
+  "team": {
+    "hero": {
+      "title": "Lernen Sie das ICON PROPERTIES Team kennen",
+      "subtitle": "Eine Boutique-Immobilienberatung, die auf Vertrauen, Diskretion und tiefgreifender lokaler Expertise aufbaut.",
+      "description": "Wir arbeiten mit einer begrenzten Anzahl von Kunden zusammen, um außergewöhnliche Ergebnisse zu erzielen — persönlich, privat und professionell."
     }
   },
   "footer": {

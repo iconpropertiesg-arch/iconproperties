@@ -1,12 +1,15 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 interface TeamHeroProps {
   locale: string;
 }
 
 export default function TeamHero({ locale }: TeamHeroProps) {
+  const t = useTranslations('team');
+  
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-black">
       {/* Background Image with Dark Overlay */}
@@ -25,13 +28,13 @@ export default function TeamHero({ locale }: TeamHeroProps) {
       <div className="container mx-auto px-4 relative z-10 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            Meet the ICON PROPERTIES Team
+            {t('hero.title')}
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-4 leading-relaxed max-w-3xl mx-auto">
-            A boutique real estate advisory built on trust, discretion and deep local expertise.
+            {t('hero.subtitle')}
           </p>
           <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl mx-auto">
-            We work with a limited number of clients to deliver exceptional results — personally, privately and professionally.
+            {t('hero.description')}
           </p>
         </div>
       </div>

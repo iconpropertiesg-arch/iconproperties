@@ -100,3 +100,4 @@ vercel blob put public/videos/video_hero_banner.mp4 --access public
 - Verify CORS settings (should be public)
 - Check browser console for errors
 
+
