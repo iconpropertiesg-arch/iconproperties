@@ -210,25 +210,45 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
           {/* Right Column - Video */}
           <div className="relative mt-8 lg:mt-0">
-            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-gray-900/20 to-black/20 backdrop-blur-sm h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] min-h-[300px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
-              {/* Video */}
-              <video
-                ref={videoRef}
-                className="absolute inset-0 w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-              >
-                <source 
-                  src={process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "https://7bagyx1my6xy2qz4.public.blob.vercel-storage.com/video_hero_banner.mp4"}
-                  type="video/mp4" 
-                />
-              </video>
+            <div className="relative rounded-xl sm:rounded-2xl overflow-visible shadow-2xl bg-gradient-to-br from-gray-900/20 to-black/20 backdrop-blur-sm h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] min-h-[300px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
+              {/* Top Left Corner - Three Lines Forming Corner Bracket */}
+              <div className="absolute -top-0.5 -left-0.5 z-20">
+                {/* First line - horizontal extending left (outer, longest) */}
+                <div className="absolute w-32 h-[2px] bg-white/30 -left-8 top-0"></div>
+                {/* Second line - vertical extending up (outer, longest) */}
+                <div className="absolute h-32 w-[2px] bg-white/30 -top-8 left-0"></div>
+                {/* Third line - diagonal from corner (shorter) */}
+                <div className="absolute w-20 h-[2px] bg-white/25 -left-5 -top-5 rotate-45 origin-left"></div>
+              </div>
+
+              {/* Video Container with overflow hidden */}
+              <div className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden">
+                <video
+                  ref={videoRef}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                >
+                  <source 
+                    src={process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "https://7bagyx1my6xy2qz4.public.blob.vercel-storage.com/video_hero_banner.mp4"}
+                    type="video/mp4" 
+                  />
+                </video>
+                
+                {/* Lines Over Video - Full Length */}
+                {/* Center horizontal line - spans full width */}
+                <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[1px] bg-white/30 z-10"></div>
+                {/* Top border line - spans full width */}
+                <div className="absolute left-0 right-0 top-0 h-[1px] bg-white/30 z-10"></div>
+                {/* Left border line - spans full height */}
+                <div className="absolute top-0 bottom-0 left-0 w-[1px] bg-white/30 z-10"></div>
+              </div>
               
               {/* Video Controls Overlay */}
-              <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
+              <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 z-30">
                 <button
                   onClick={toggleVideo}
                   className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group"
@@ -243,7 +263,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
               </div>
 
               {/* Gradient overlay for better video appearance */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none rounded-xl sm:rounded-2xl" />
             </div>
           </div>
         </div>

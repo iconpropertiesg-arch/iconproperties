@@ -22,6 +22,7 @@ interface Property {
   size: number | null;
   images: string[];
   type: string;
+  status?: 'buy' | 'rent';
 }
 
 export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) {
@@ -73,6 +74,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                 size: property.area,
                 images: property.images && property.images.length > 0 ? property.images : [firstImage],
                 type: property.type === 'residential' ? 'house' : (property.type || 'house'),
+                status: property.status || 'buy',
               };
             })
             .filter((p: Property) => p.slug && /^[a-z0-9-]+$/.test(p.slug)); // Only include properties with valid slugs
@@ -203,6 +205,11 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                               </span>
                               <span className="bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                                 {formatPrice(property.price, locale)}
+                                {property.status === 'rent' && (
+                                  <span className="text-xs font-normal ml-1">
+                                    {t('common.perMonth')}
+                                  </span>
+                                )}
                               </span>
                             </div>
 
@@ -249,9 +256,6 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                                   {t('common.viewDetails')}
                                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </div>
-                                <span className="inline-flex items-center px-4 py-2 rounded-full bg-white text-gray-900 font-semibold shadow-lg transition-transform duration-300 group-hover:scale-105 text-sm">
-                                  View Now
-                                </span>
                               </div>
                             </div>
                           </div>

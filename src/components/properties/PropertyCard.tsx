@@ -52,6 +52,11 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
                   </h3>
                   <div className="text-2xl font-bold text-primary">
                     {formatPrice(property.price, locale)}
+                    {property.status === 'rent' && (
+                      <span className="text-base font-normal text-gray-600 ml-1">
+                        {t('common.perMonth')}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="flex items-center text-gray-600 text-sm">
@@ -147,9 +152,6 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
 
         {/* Center CTA */}
         <div className="flex justify-center">
-          <span className="inline-flex items-center px-4 py-2 rounded-full bg-white text-gray-900 font-semibold shadow-lg transition-transform duration-300 group-hover:scale-105">
-            View Now
-          </span>
         </div>
 
         {/* Bottom info directly over image */}
@@ -197,7 +199,14 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
           <div className="flex items-center justify-between">
             <div>
               <span className="text-xs uppercase tracking-wide text-slate-200/80">{property.yearBuilt}</span>
-              <div className="text-2xl font-bold text-white leading-tight">{formatPrice(property.price, locale)}</div>
+              <div className="text-2xl font-bold text-white leading-tight">
+                {formatPrice(property.price, locale)}
+                {property.status === 'rent' && (
+                  <span className="text-base font-normal text-slate-200/80 ml-1">
+                    {t('common.perMonth')}
+                  </span>
+                )}
+              </div>
             </div>
             <Link
               href={`/${locale}/properties/${property.slug}`}

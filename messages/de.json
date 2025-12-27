@@ -52,7 +52,8 @@
     "phone": "Telefon",
     "message": "Nachricht",
     "consent": "Ich stimme zu, bezüglich dieser Anfrage kontaktiert zu werden",
-    "success": "Vielen Dank! Wir melden uns in Kürze bei Ihnen."
+    "success": "Vielen Dank! Wir melden uns in Kürze bei Ihnen.",
+    "perMonth": "pro Monat"
   },
   "home": {
     "featuredProperties": "Ausgewählte Immobilien",

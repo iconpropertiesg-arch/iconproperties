@@ -118,6 +118,11 @@ export default function RelatedProperties({ property, locale }: RelatedPropertie
                 <div className="absolute top-3 right-3">
                   <span className="bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-bold">
                     {formatPrice(relatedProperty.price, locale)}
+                    {relatedProperty.status === 'rent' && (
+                      <span className="text-[10px] font-normal ml-1">
+                        {t('common.perMonth')}
+                      </span>
+                    )}
                   </span>
                 </div>
               </div>

@@ -52,7 +52,8 @@
     "phone": "Teléfono",
     "message": "Mensaje",
     "consent": "Acepto ser contactado con respecto a esta consulta",
-    "success": "¡Gracias! Nos pondremos en contacto en breve."
+    "success": "¡Gracias! Nos pondremos en contacto en breve.",
+    "perMonth": "por mes"
   },
   "home": {
     "featuredProperties": "Propiedades Destacadas",

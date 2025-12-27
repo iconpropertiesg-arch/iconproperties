@@ -79,6 +79,11 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
           <div className="text-right">
             <div className="text-3xl md:text-4xl font-bold text-gray-400 mb-2">
               {formatPrice(property.price, locale)}
+              {property.status === 'rent' && (
+                <span className="text-xl font-normal text-gray-500 ml-2">
+                  {t('common.perMonth')}
+                </span>
+              )}
             </div>
             <div className="text-gray-300 font-medium">
               Ref: {property.referenceId}

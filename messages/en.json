@@ -60,7 +60,8 @@
     "phone": "Phone",
     "message": "Message",
     "consent": "I agree to be contacted regarding this inquiry",
-    "success": "Thank you! We'll be in touch shortly."
+    "success": "Thank you! We'll be in touch shortly.",
+    "perMonth": "per month"
   },
   "home": {
     "featuredProperties": "Featured Properties",
