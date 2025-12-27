@@ -1,10 +1,8 @@
 # Dependencies
 node_modules/
 
-# Video files (exclude large original, include compressed)
-public/videos/video_hero_banner.mp4
-# Keep compressed video for deployment
-!public/videos/video-hero-banner_tpzrhea8.mp4
+# Video files (large video is now included for Vercel Pro)
+# public/videos/video_hero_banner.mp4
 
 # Local env files
 .env*.local

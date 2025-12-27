@@ -222,11 +222,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 preload="auto"
               >
                 <source 
-                  src={
-                    process.env.NODE_ENV === 'production' 
-                      ? "/videos/video-hero-banner_tpzrhea8.mp4"  // Compressed for Vercel (5.49MB)
-                      : "/videos/video_hero_banner.mp4"            // Original for localhost (195MB)
-                  }
+                  src="/videos/video_hero_banner.mp4"
                   type="video/mp4" 
                 />
               </video>
