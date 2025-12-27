@@ -418,5 +418,3 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     </div>
   );
 }
-
-image.png
