@@ -24,7 +24,8 @@ const mockRelatedProperties = [
     baths: 2,
     size: 180,
     images: ['/properties/apartment-1.jpg'],
-    type: 'apartment'
+    type: 'apartment',
+    status: 'buy'
   },
   {
     id: '3',
@@ -36,7 +37,8 @@ const mockRelatedProperties = [
     baths: 3,
     size: 320,
     images: ['/properties/house-1.jpg'],
-    type: 'house'
+    type: 'house',
+    status: 'rent'
   },
   {
     id: '4',
@@ -48,7 +50,8 @@ const mockRelatedProperties = [
     baths: 4,
     size: 280,
     images: ['/properties/penthouse-1.jpg'],
-    type: 'apartment'
+    type: 'apartment',
+    status: 'buy'
   },
   {
     id: '5',
@@ -60,7 +63,8 @@ const mockRelatedProperties = [
     baths: 5,
     size: 600,
     images: ['/properties/finca-1.jpg'],
-    type: 'villa'
+    type: 'villa',
+    status: 'rent'
   }
 ];
 
