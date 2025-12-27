@@ -37,7 +37,9 @@ yarn-error.log*
 next-env.d.ts
 
 # videos (large video is now included for Vercel Pro)
-# public/videos/video_hero_banner.mp4
+public/videos/video_hero_banner.mp4
 
 # uploaded images (uncomment if you don't want to track uploads in git)
 # public/uploads/
+
+.vercel

@@ -222,7 +222,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 preload="auto"
               >
                 <source 
-                  src="/videos/video_hero_banner.mp4"
+                  src={process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "https://7bagyx1my6xy2qz4.public.blob.vercel-storage.com/video_hero_banner.mp4"}
                   type="video/mp4" 
                 />
               </video>
