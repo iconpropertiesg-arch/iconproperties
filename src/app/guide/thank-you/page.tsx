@@ -12,7 +12,7 @@ export default function ThankYouPage() {
   const downloadLink = '/downloads/mallorca-luxury-property-buyer-guide.pdf'; // Placeholder
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-blue-950 to-blue-900 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-black flex items-center justify-center px-4">
       <div className="max-w-2xl w-full">
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-12 text-center">
           {/* Success Icon */}
@@ -32,7 +32,7 @@ export default function ThankYouPage() {
           <a
             href={downloadLink}
             download
-            className="group inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50 mb-6"
+            className="group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl  mb-6"
           >
             <Download className="w-5 h-5 mr-2" />
             Download Your Guide (PDF)
@@ -52,7 +52,7 @@ export default function ThankYouPage() {
           <div className="mt-8 pt-8 border-t border-white/10">
             <Link
               href="/"
-              className="text-blue-400 hover:text-blue-300 transition-colors"
+              className="text-gray-400 hover:text-gray-300 transition-colors"
             >
               ← Back to Home
             </Link>
@@ -62,6 +62,7 @@ export default function ThankYouPage() {
     </div>
   );
 }
+
 
 
 

@@ -34,7 +34,7 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
                 {t(`propertyTypes.${property.type}`)}
               </span>
             </div>
-            <button className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors">
+            <button className="absolute top-3 right-3 w-8 h-8 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors">
               <Heart className="w-4 h-4 text-gray-600" />
             </button>
           </div>
@@ -113,7 +113,7 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
   }
 
   return (
-    <div className="group relative h-96 overflow-hidden rounded-2xl border border-white/10 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-blue-900/30 bg-transparent">
+    <div className="group relative h-96 overflow-hidden rounded-2xl border border-white/10 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 bg-transparent">
       {/* Background image fills card */}
       <Image
         src={property.images[0]?.url || '/placeholder-property.jpg'}
@@ -132,7 +132,7 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
         {/* Top badges */}
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-2">
-            <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+            <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
               {t(`propertyTypes.${property.type}`)}
             </span>
           </div>
@@ -156,7 +156,7 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
         <div className="flex flex-col gap-3">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h3 className="text-lg font-semibold leading-tight mb-1 transition-colors duration-200 group-hover:text-blue-200">
+              <h3 className="text-lg font-semibold leading-tight mb-1 transition-colors duration-200 group-hover:text-gray-200">
                 <Link href={`/${locale}/properties/${property.slug}`}>
                   {property.title}
                 </Link>

@@ -15,7 +15,7 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       <div className="container mx-auto max-w-4xl">
         <div className="text-center">
           {/* Title */}
@@ -110,7 +110,7 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
           {/* CTA Button */}
           <button
             onClick={handleRequest}
-            className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50 inline-flex items-center gap-2"
+            className="group px-8 py-4 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl  inline-flex items-center gap-2"
           >
             <span>Request Private Portfolio</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

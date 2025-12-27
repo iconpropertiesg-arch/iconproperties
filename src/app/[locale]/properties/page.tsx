@@ -8,11 +8,12 @@ import { prisma } from '@/lib/db';
 import HeroSearchBar from '@/components/home/HeroSearchBar';
 
 interface PropertiesPageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export async function generateMetadata({ params: { locale } }: PropertiesPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PropertiesPageProps): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'portfolio' });
 
   return {
@@ -45,9 +46,10 @@ function capitalize(str: string): string {
 }
 
 export default async function PropertiesPage({ 
-  params: { locale },
+  params,
   searchParams 
 }: PropertiesPageProps) {
+  const { locale } = await params;
   // Enable static rendering
   setRequestLocale(locale);
 
@@ -168,7 +170,7 @@ export default async function PropertiesPage({
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-black">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative py-20">
         <div className="container mx-auto px-4">
@@ -184,7 +186,7 @@ export default async function PropertiesPage({
       </section>
 
       {/* Search Bar Section */}
-      <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-12">
+      <section className="relative bg-black py-12">
         <HeroSearchBar locale={locale} hideTitle={true} />
       </section>
 
@@ -196,8 +198,8 @@ export default async function PropertiesPage({
               const Icon = stat.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-blue-600/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-8 h-8 text-blue-400" />
+                  <div className="w-16 h-16 bg-gray-700/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-8 h-8 text-gray-400" />
                   </div>
                   <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
                   <div className="text-gray-400">{stat.label}</div>
@@ -248,7 +250,7 @@ export default async function PropertiesPage({
               <Link
                 key={item.id}
                 href={`/${locale}/properties/${cleanSlug}`}
-                className="group relative h-[420px] rounded-2xl overflow-hidden border border-white/10 hover:border-blue-500 transition-all duration-300 cursor-pointer block hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-900/30"
+                className="group relative h-[420px] rounded-2xl overflow-hidden border border-white/10 hover:border-gray-500 transition-all duration-300 cursor-pointer block hover:-translate-y-1 hover:shadow-xl"
               >
                 {/* Full-cover background image */}
                 {item.image.startsWith('http://') || item.image.startsWith('https://') ? (
@@ -274,7 +276,7 @@ export default async function PropertiesPage({
                 <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
                   {/* Top badges */}
                   <div className="flex items-start justify-between">
-                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+                    <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
                       {item.category}
                     </span>
                     <span className={`${item.status.toLowerCase() === 'sold' ? 'bg-red-500' : 'bg-emerald-500'} text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg`}>
@@ -290,7 +292,7 @@ export default async function PropertiesPage({
                     {/* Title and location */}
                     <div className="flex items-end justify-between gap-3">
                       <div>
-                        <h3 className="text-xl font-bold mb-1 group-hover:text-blue-300 transition-colors line-clamp-1">
+                        <h3 className="text-xl font-bold mb-1 group-hover:text-gray-300 transition-colors line-clamp-1">
                           {item.title}
                         </h3>
                         <p className="text-sm text-gray-300 line-clamp-1">
@@ -306,7 +308,7 @@ export default async function PropertiesPage({
                     <div className="flex items-center justify-between pt-2 border-t border-white/20">
                       <div className="text-2xl font-bold">{item.value}</div>
                       <div className="flex items-center gap-3">
-                        <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors font-medium">
+                        <div className="inline-flex items-center text-gray-400 group-hover:text-gray-300 transition-colors font-medium">
                           View Details
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </div>
@@ -337,7 +339,7 @@ export default async function PropertiesPage({
             </p>
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-blue-600/50"
+              className="inline-flex items-center bg-gray-700 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-600 transition-colors shadow-lg"
             >
               Get Started
               <ArrowRight className="w-5 h-5 ml-2" />

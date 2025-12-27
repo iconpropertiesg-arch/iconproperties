@@ -124,15 +124,15 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                 <h4 className="font-semibold text-gray-900 mb-4">What happens next:</h4>
                 <div className="space-y-3 text-left">
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
+                    <div className="w-6 h-6 bg-gray-700 text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
                     <span className="text-gray-600">Our team reviews your property details</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
+                    <div className="w-6 h-6 bg-gray-700 text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
                     <span className="text-gray-600">We conduct a comparative market analysis</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">3</div>
+                    <div className="w-6 h-6 bg-gray-700 text-white rounded-full flex items-center justify-center text-xs font-bold">3</div>
                     <span className="text-gray-600">You receive a detailed valuation report</span>
                   </div>
                 </div>
@@ -149,8 +149,8 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
       <div className="container mx-auto max-w-7xl">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <div className="w-16 h-16 bg-blue-600/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Calculator className="w-8 h-8 text-blue-600" />
+            <div className="w-16 h-16 bg-gray-700/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Calculator className="w-8 h-8 text-gray-600" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               {tSell('title')}
@@ -177,7 +177,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                           type="text"
                           value={formData.name}
                           onChange={(e) => handleInputChange('name', e.target.value)}
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-gray-500 focus:border-gray-500 ${
                             errors.name ? 'border-red-300' : 'border-gray-300'
                           }`}
                           placeholder="Your full name"
@@ -193,7 +193,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                           type="email"
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-gray-500 focus:border-gray-500 ${
                             errors.email ? 'border-red-300' : 'border-gray-300'
                           }`}
                           placeholder="your.email@example.com"
@@ -215,7 +215,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                           type="text"
                           value={formData.propertyLocation}
                           onChange={(e) => handleInputChange('propertyLocation', e.target.value)}
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-gray-500 focus:border-gray-500 ${
                             errors.propertyLocation ? 'border-red-300' : 'border-gray-300'
                           }`}
                           placeholder="e.g., Portals Nous, Santa Ponsa..."
@@ -231,7 +231,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                           <select
                             value={formData.propertyType}
                             onChange={(e) => handleInputChange('propertyType', e.target.value)}
-                            className={`w-full px-4 py-3 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${
+                            className={`w-full px-4 py-3 border rounded-lg focus:ring-gray-500 focus:border-gray-500 ${
                               errors.propertyType ? 'border-red-300' : 'border-gray-300'
                             }`}
                           >
@@ -251,7 +251,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                           <select
                             value={formData.estimatedPrice}
                             onChange={(e) => handleInputChange('estimatedPrice', parseInt(e.target.value))}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-gray-500 focus:border-gray-500"
                           >
                             <option value={0}>I'm not sure</option>
                             <option value={500000}>€300k - €500k</option>
@@ -292,7 +292,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                         <select
                           value={formData.contactMethod}
                           onChange={(e) => handleInputChange('contactMethod', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-gray-500 focus:border-gray-500"
                         >
                           <option value="email">Email</option>
                           <option value="phone">Phone</option>
@@ -322,13 +322,13 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                         type="checkbox"
                         checked={formData.consent}
                         onChange={(e) => handleInputChange('consent', e.target.checked)}
-                        className={`mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ${
+                        className={`mt-1 w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 rounded focus:ring-gray-500 ${
                           errors.consent ? 'border-red-300' : ''
                         }`}
                       />
                       <span className="text-sm text-gray-600 leading-relaxed">
                         {t('common.consent')}. View our{' '}
-                        <a href={`/${locale}/legal/privacy`} className="text-blue-600 hover:text-blue-700 underline">
+                        <a href={`/${locale}/legal/privacy`} className="text-gray-600 hover:text-gray-800 underline">
                           Privacy Policy
                         </a>.
                       </span>
@@ -347,7 +347,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 px-6 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50"
+                    className="w-full bg-gray-700 hover:bg-gray-600 text-white py-4 px-6 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-lg "
                   >
                     {isSubmitting ? 'Submitting...' : tSell('form.submit')}
                   </button>
@@ -370,7 +370,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                     href="tel:+34123456789"
                     className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <Phone className="w-5 h-5 text-blue-600" />
+                    <Phone className="w-5 h-5 text-gray-600" />
                     <div>
                       <div className="font-medium text-gray-900">Call Direct</div>
                       <div className="text-sm text-gray-600">+34 123 456 789</div>
@@ -381,7 +381,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                     href="mailto:valuations@lioncapitala.com"
                     className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <Mail className="w-5 h-5 text-blue-600" />
+                    <Mail className="w-5 h-5 text-gray-600" />
                     <div>
                       <div className="font-medium text-gray-900">Email Us</div>
                       <div className="text-sm text-gray-600">valuations@lioncapitala.com</div>
@@ -394,7 +394,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                     rel="noopener noreferrer"
                     className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <MessageCircle className="w-5 h-5 text-blue-600" />
+                    <MessageCircle className="w-5 h-5 text-gray-600" />
                     <div>
                       <div className="font-medium text-gray-900">WhatsApp</div>
                       <div className="text-sm text-gray-600">Quick response</div>
@@ -402,7 +402,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                   </a>
                 </div>
 
-                <div className="bg-blue-600/10 rounded-lg p-4">
+                <div className="bg-gray-700/10 rounded-lg p-4">
                   <h4 className="font-semibold text-gray-900 mb-2">Free Service</h4>
                   <p className="text-sm text-gray-600">
                     Our property valuation is completely free with no obligations. 

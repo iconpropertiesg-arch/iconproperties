@@ -163,17 +163,17 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-blue-950 via-slate-950 via-black to-black py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       {/* Subtle blue and purple glow effects */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/30 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gray-600/30 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]" />
       </div>
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           {/* <div className="inline-block mb-4">
-            <span className="text-blue-400 text-sm font-semibold tracking-wider uppercase">#7</span>
+            <span className="text-gray-400 text-sm font-semibold tracking-wider uppercase">#7</span>
           </div> */}
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             The Private Buying Experience
@@ -185,7 +185,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
           {/* Left Side - Image */}
           <div className="relative lg:sticky lg:top-20">
             <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-              <div className="relative aspect-[4/5] w-full bg-gradient-to-br from-blue-900/20 to-black/40">
+              <div className="relative aspect-[4/5] w-full bg-gradient-to-br from-gray-900/20 to-black/40">
                 <Image
                   src="/images/home_section_property.jpg"
                   alt="Private Buying Experience"
@@ -195,7 +195,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                 />
               </div>
               {/* Blue glow effect at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-blue-600/40 via-blue-600/20 to-transparent z-20 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-gray-700/40 via-gray-700/20 to-transparent z-20 pointer-events-none" />
               {/* Subtle overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10 pointer-events-none" />
             </div>
@@ -249,7 +249,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                         </div>
                         
                         {/* Top Right Icon - Colorful House */}
-                        <div className="w-10 h-10 bg-blue-100/20 rounded-lg flex items-center justify-center border border-white/10">
+                        <div className="w-10 h-10 bg-gray-100/20 rounded-lg flex items-center justify-center border border-white/10">
                           <Home className="w-5 h-5 text-orange-400 fill-orange-400" />
                         </div>
                       </div>
@@ -298,7 +298,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                         <ul className="space-y-3">
                           {step.features.map((feature, featIndex) => (
                             <li key={featIndex} className="flex items-center gap-3 text-white text-sm">
-                              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                                 <Check className="w-3 h-3 text-white" />
                               </div>
                               <span>{feature}</span>
@@ -313,20 +313,20 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       {/* Top Icons */}
                       <div className="flex justify-between items-start mb-6">
                         {/* Top Left Icon - Compass for Investment, Phone for Buy Luxury, FileCode for Property Management */}
-                        <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center border border-blue-400/30">
+                        <div className="w-12 h-12 bg-gray-600/20 rounded-lg flex items-center justify-center border border-gray-400/30">
                           {index === 1 ? (
-                            <Compass className="w-6 h-6 text-blue-400" />
+                            <Compass className="w-6 h-6 text-gray-400" />
                           ) : index === 2 ? (
-                            <Phone className="w-6 h-6 text-blue-400" />
+                            <Phone className="w-6 h-6 text-gray-400" />
                           ) : (
-                            <FileCode className="w-6 h-6 text-blue-400" />
+                            <FileCode className="w-6 h-6 text-gray-400" />
                           )}
                         </div>
                         
                         {/* Top Right Icon - Trash Can for Investment, Colorful House for Buy Luxury, Bell for Property Management */}
-                        <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center border border-blue-400/30">
+                        <div className="w-10 h-10 bg-gray-600/20 rounded-lg flex items-center justify-center border border-gray-400/30">
                           {index === 1 ? (
-                            <Trash2 className="w-5 h-5 text-blue-400" />
+                            <Trash2 className="w-5 h-5 text-gray-400" />
                           ) : index === 2 ? (
                             <Home className="w-5 h-5 text-orange-400 fill-orange-400" />
                           ) : (
@@ -379,7 +379,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                         <ul className="space-y-3 mb-6">
                           {step.features.map((feature, featIndex) => (
                             <li key={featIndex} className="flex items-center gap-3 text-white text-sm">
-                              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                                 <Check className="w-3 h-3 text-white" />
                               </div>
                               <span>{feature}</span>
@@ -390,7 +390,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
 
                       {/* CTA Button for third card */}
                       {step.ctaButton && (
-                        <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 blue-glow">
+                        <button className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg  blue-glow">
                           {step.ctaButton}
                         </button>
                       )}

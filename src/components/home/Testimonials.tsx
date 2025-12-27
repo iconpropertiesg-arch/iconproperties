@@ -62,7 +62,7 @@ const testimonials: Testimonial[] = [
 
 export default function Testimonials({ locale }: TestimonialsProps) {
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -83,14 +83,14 @@ export default function Testimonials({ locale }: TestimonialsProps) {
             >
               {/* Quote Icon - Top Right */}
               <div className="absolute top-6 right-6 opacity-20 group-hover:opacity-30 transition-opacity">
-                <Quote className="w-8 h-8 text-blue-400" />
+                <Quote className="w-8 h-8 text-gray-400" />
               </div>
 
               {/* Avatar */}
               <div className="flex items-start gap-4 mb-4">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-blue-400/30 flex-shrink-0">
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center">
-                    <span className="text-blue-400 font-semibold text-lg">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-gray-400/30 flex-shrink-0">
+                  <div className="w-full h-full bg-gradient-to-br from-gray-600/20 to-gray-700/20 flex items-center justify-center">
+                    <span className="text-gray-400 font-semibold text-lg">
                       {testimonial.name.charAt(0)}
                     </span>
                   </div>

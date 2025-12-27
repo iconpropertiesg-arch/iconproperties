@@ -27,7 +27,7 @@ export default function ServiceCards() {
         </div>
         
         {/* Top Right Small Icon - Colorful House */}
-        <div className="absolute top-4 right-4 w-10 h-10 bg-blue-100/20 rounded-lg flex items-center justify-center border border-white/10 z-20">
+        <div className="absolute top-4 right-4 w-10 h-10 bg-gray-100/20 rounded-lg flex items-center justify-center border border-white/10 z-20">
           <Home className="w-5 h-5 text-orange-400 fill-orange-400" />
         </div>
 
@@ -50,19 +50,19 @@ export default function ServiceCards() {
           {/* Features List */}
           <ul className="space-y-3">
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>No ads, no signs</span>
             </li>
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>Strategic Pricing & Presentation</span>
             </li>
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>Direct access to pre-vetted, high intent buyers</span>
@@ -88,13 +88,13 @@ export default function ServiceCards() {
           background: 'linear-gradient(135deg, rgba(255,255,255,0.14) 0%, transparent 40%, rgba(255,255,255,0.07) 65%, transparent 100%)'
         }}></div>
         {/* Top Left Icon - Compass */}
-        <div className="absolute top-4 left-4 w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center border border-blue-400/30 z-20">
-          <Compass className="w-6 h-6 text-blue-400" />
+        <div className="absolute top-4 left-4 w-12 h-12 bg-gray-700/20 rounded-lg flex items-center justify-center border border-gray-400/30 z-20">
+          <Compass className="w-6 h-6 text-gray-400" />
         </div>
         
         {/* Top Right Small Icon - Briefcase/Stack */}
-        <div className="absolute top-4 right-4 w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center border border-blue-400/30 z-20">
-          <Briefcase className="w-5 h-5 text-blue-400" />
+        <div className="absolute top-4 right-4 w-10 h-10 bg-gray-700/20 rounded-lg flex items-center justify-center border border-gray-400/30 z-20">
+          <Briefcase className="w-5 h-5 text-gray-400" />
         </div>
 
         <div className="relative z-10 mt-16">
@@ -116,19 +116,19 @@ export default function ServiceCards() {
           {/* Features List */}
           <ul className="space-y-3">
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>ROI Analysis & Projection</span>
             </li>
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>Introduction to architects, lawyers, builders... our network</span>
             </li>
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>Exit Strategies & resale advice</span>
@@ -154,8 +154,8 @@ export default function ServiceCards() {
           background: 'linear-gradient(135deg, rgba(255,255,255,0.14) 0%, transparent 40%, rgba(255,255,255,0.07) 65%, transparent 100%)'
         }}></div>
         {/* Top Left Icon - Document with Code brackets */}
-        <div className="absolute top-4 left-4 w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center border border-blue-400/30 z-20">
-          <FileCode className="w-6 h-6 text-blue-400" />
+        <div className="absolute top-4 left-4 w-12 h-12 bg-gray-600/20 rounded-lg flex items-center justify-center border border-gray-400/30 z-20">
+          <FileCode className="w-6 h-6 text-gray-400" />
         </div>
         
         {/* Top Right Small Icon - Bell (Golden/Orange) */}
@@ -182,19 +182,19 @@ export default function ServiceCards() {
           {/* Features List */}
           <ul className="space-y-3 mb-6">
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>Maintenance, repairs & security checks</span>
             </li>
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>Rental management & short-term permits</span>
             </li>
             <li className="flex items-center gap-3 text-white text-sm">
-              <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-white" />
               </div>
               <span>Interior styling & staging</span>
@@ -202,7 +202,7 @@ export default function ServiceCards() {
           </ul>
 
           {/* CTA Button */}
-          <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 blue-glow">
+          <button className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
             Book an Appointment
           </button>
         </div>

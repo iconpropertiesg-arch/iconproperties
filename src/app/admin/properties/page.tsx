@@ -76,7 +76,7 @@ export default function PropertiesPage() {
       case 'sold':
         return 'bg-green-600';
       case 'available':
-        return 'bg-blue-600';
+        return 'bg-gray-700';
       case 'leased':
         return 'bg-yellow-600';
       default:
@@ -90,7 +90,7 @@ export default function PropertiesPage() {
         <h1 className="text-3xl font-bold text-white">Properties</h1>
         <Link
           href="/admin/properties/new"
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
         >
           <Plus size={20} />
           <span>Add Property</span>
@@ -105,7 +105,7 @@ export default function PropertiesPage() {
             placeholder="Search properties..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full pl-10 pr-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
         </div>
       </div>
@@ -117,7 +117,7 @@ export default function PropertiesPage() {
           <p className="text-gray-400 text-lg">No properties found</p>
           <Link
             href="/admin/properties/new"
-            className="inline-block mt-4 text-blue-400 hover:text-blue-300"
+            className="inline-block mt-4 text-gray-400 hover:text-gray-300"
           >
             Add your first property
           </Link>
@@ -171,7 +171,7 @@ export default function PropertiesPage() {
                         <Link
                           href={`/properties/${property.slug}`}
                           target="_blank"
-                          className="p-2 text-blue-400 hover:text-blue-300 hover:bg-blue-600/20 rounded transition-colors"
+                          className="p-2 text-gray-400 hover:text-gray-300 hover:bg-gray-700/20 rounded transition-colors"
                           title="View"
                         >
                           <Eye size={18} />

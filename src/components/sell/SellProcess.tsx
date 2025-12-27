@@ -38,7 +38,7 @@ export default function SellProcess({ locale }: SellProcessProps) {
   ];
 
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -62,8 +62,8 @@ export default function SellProcess({ locale }: SellProcessProps) {
                   {/* Content */}
                   <div className={isEven ? 'lg:col-start-2' : ''}>
                     <div className="flex items-center space-x-4 mb-6">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center border border-blue-400/30">
-                        <Icon className="w-8 h-8 text-blue-400 stroke-[1.5]" />
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-600/20 to-gray-700/20 flex items-center justify-center border border-gray-400/30">
+                        <Icon className="w-8 h-8 text-gray-400 stroke-[1.5]" />
                       </div>
                       <div className="text-4xl font-bold text-gray-400">
                         {step.number}
@@ -81,11 +81,11 @@ export default function SellProcess({ locale }: SellProcessProps) {
                   <div className={isEven ? 'lg:col-start-1' : ''}>
                     <div className="relative">
                       <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                        <div className="aspect-square bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl flex items-center justify-center">
-                          <Icon className="w-20 h-20 text-blue-400" />
+                        <div className="aspect-square bg-gradient-to-br from-gray-600/10 to-gray-700/5 rounded-xl flex items-center justify-center">
+                          <Icon className="w-20 h-20 text-gray-400" />
                         </div>
                       </div>
-                      <div className="absolute -top-4 -right-4 w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-lg">
+                      <div className="absolute -top-4 -right-4 w-16 h-16 bg-gray-700 text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-lg">
                         {step.number}
                       </div>
                     </div>

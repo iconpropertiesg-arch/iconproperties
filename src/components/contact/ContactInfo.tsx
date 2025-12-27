@@ -59,14 +59,14 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
               <a
                 key={index}
                 href={method.href}
-                className="flex items-start space-x-4 p-4 rounded-lg bg-gray-900/30 border border-gray-700 hover:border-blue-500 hover:bg-gray-900/50 transition-all group"
+                className="flex items-start space-x-4 p-4 rounded-lg bg-gray-900/30 border border-gray-700 hover:border-gray-500 hover:bg-gray-900/50 transition-all group"
               >
-                <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600/30 transition-colors">
-                  <Icon className="w-6 h-6 text-blue-400" />
+                <div className="w-12 h-12 bg-gray-700/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-gray-700/30 transition-colors">
+                  <Icon className="w-6 h-6 text-gray-400" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-white mb-1">{method.label}</h4>
-                  <p className="text-blue-400 font-medium mb-1">{method.value}</p>
+                  <p className="text-gray-400 font-medium mb-1">{method.value}</p>
                   <p className="text-sm text-gray-400">{method.description}</p>
                 </div>
               </a>
@@ -97,7 +97,7 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-xl p-6 border border-blue-500/30">
+      <div className="bg-gradient-to-br from-gray-700/20 to-purple-600/20 rounded-xl p-6 border border-gray-500/30">
         <h3 className="text-lg font-semibold text-white mb-3">Need Immediate Assistance?</h3>
         <p className="text-gray-300 text-sm mb-4">
           For urgent inquiries or same-day viewings
@@ -105,7 +105,7 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
         <div className="space-y-2">
           <a
             href="tel:+34123456789"
-            className="flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 rounded-lg py-3 px-4 font-medium transition-colors text-white shadow-lg hover:shadow-blue-600/50"
+            className="flex items-center justify-center w-full bg-gray-700 hover:bg-gray-800 rounded-lg py-3 px-4 font-medium transition-colors text-white shadow-lg "
           >
             <Phone className="w-5 h-5 mr-2" />
             Call Now

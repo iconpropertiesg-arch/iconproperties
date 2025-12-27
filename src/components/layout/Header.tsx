@@ -116,7 +116,7 @@ export default function Header({ locale }: HeaderProps) {
                   className={cn(
                     "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
-                      ? "text-gray-300 hover:text-blue-400"
+                      ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
                   )}
                 >
@@ -127,7 +127,7 @@ export default function Header({ locale }: HeaderProps) {
                   className={cn(
                     "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
-                      ? "text-gray-300 hover:text-blue-400"
+                      ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
                   )}
                 >
@@ -138,7 +138,7 @@ export default function Header({ locale }: HeaderProps) {
                   className={cn(
                     "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
-                      ? "text-gray-300 hover:text-blue-400"
+                      ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
                   )}
                 >
@@ -149,7 +149,7 @@ export default function Header({ locale }: HeaderProps) {
                   className={cn(
                     "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
-                      ? "text-gray-300 hover:text-blue-400"
+                      ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
                   )}
                 >
@@ -160,7 +160,7 @@ export default function Header({ locale }: HeaderProps) {
                   className={cn(
                     "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
-                      ? "text-gray-300 hover:text-blue-400"
+                      ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
                   )}
                 >
@@ -187,7 +187,7 @@ export default function Header({ locale }: HeaderProps) {
                 <LanguageSwitcher locale={locale} />
                 <Link 
                   href={`/${locale}/contact`}
-                  className="px-4 xl:px-6 py-2 xl:py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs xl:text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/40 whitespace-nowrap"
+                  className="px-4 xl:px-6 py-2 xl:py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs xl:text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:/40 whitespace-nowrap"
                 >
                   Request Private portfolio
                 </Link>
@@ -227,35 +227,35 @@ export default function Header({ locale }: HeaderProps) {
               <nav className="space-y-4 sm:space-y-6">
                 <Link
                   href={`/${locale}/about`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('about')}
                 </Link>
                 <Link
                   href={`/${locale}/properties`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('portfolio')}
                 </Link>
                 <Link
                   href={`/${locale}/sell`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('sell')}
                 </Link>
                 <Link
                   href={`/${locale}/contact`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('contact')}
                 </Link>
                 <Link
                   href={`/${locale}/team`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Team
@@ -263,7 +263,7 @@ export default function Header({ locale }: HeaderProps) {
                 <div className="pt-4 sm:pt-6 space-y-3 sm:space-y-4">
                   <Link 
                     href={`/${locale}/contact`}
-                    className="block w-full text-center px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm sm:text-base font-medium rounded-full transition-all duration-300"
+                    className="block w-full text-center px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-medium rounded-full transition-all duration-300"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Request Private Portfolio

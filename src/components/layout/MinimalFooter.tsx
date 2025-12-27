@@ -10,7 +10,7 @@ export default function MinimalFooter({ locale }: MinimalFooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-br from-black via-blue-950 to-blue-900 text-white border-t border-white/10">
+    <footer className="bg-black text-white border-t border-white/10">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-400">
@@ -36,6 +36,9 @@ export default function MinimalFooter({ locale }: MinimalFooterProps) {
     </footer>
   );
 }
+
+
+
 
 
 

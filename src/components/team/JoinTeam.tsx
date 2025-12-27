@@ -9,10 +9,10 @@ interface JoinTeamProps {
 
 export default function JoinTeam({ locale }: JoinTeamProps) {
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
       <div className="absolute inset-0 opacity-25">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+        
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
       </div>
 
@@ -29,7 +29,7 @@ export default function JoinTeam({ locale }: JoinTeamProps) {
           </p>
           <Link
             href={`/${locale}/join-us`}
-            className="group inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50"
+            className="group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl "
           >
             Apply Now
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -39,6 +39,9 @@ export default function JoinTeam({ locale }: JoinTeamProps) {
     </section>
   );
 }
+
+
+
 
 
 

@@ -10,10 +10,11 @@ import JoinTeam from '@/components/team/JoinTeam';
 import TeamFinalCTA from '@/components/team/TeamFinalCTA';
 
 interface TeamPageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata({ params: { locale } }: TeamPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: TeamPageProps): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'team' });
 
   return {
@@ -30,7 +31,8 @@ export async function generateMetadata({ params: { locale } }: TeamPageProps): P
   };
 }
 
-export default function TeamPage({ params: { locale } }: TeamPageProps) {
+export default async function TeamPage({ params }: TeamPageProps) {
+  const { locale } = await params;
   setRequestLocale(locale);
 
   return (
@@ -58,6 +60,9 @@ export default function TeamPage({ params: { locale } }: TeamPageProps) {
     </div>
   );
 }
+
+
+
 
 
 

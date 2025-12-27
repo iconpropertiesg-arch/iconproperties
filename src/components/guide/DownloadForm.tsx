@@ -108,7 +108,7 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
 
   if (isSubmitted) {
     return (
-      <section id="download-form" className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+      <section id="download-form" className="relative bg-black py-20 px-4">
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-12 text-center">
             <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -125,10 +125,10 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
   }
 
   return (
-    <section id="download-form" className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section id="download-form" className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
       <div className="absolute inset-0 opacity-25">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+        
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
       </div>
 
@@ -154,7 +154,7 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
                   type="text"
                   value={formData.firstName}
                   onChange={(e) => handleInputChange('firstName', e.target.value)}
-                  className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 ${
                     errors.firstName ? 'border-red-400' : 'border-white/20'
                   }`}
                   placeholder="John"
@@ -170,7 +170,7 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
                   type="text"
                   value={formData.lastName}
                   onChange={(e) => handleInputChange('lastName', e.target.value)}
-                  className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 ${
                     errors.lastName ? 'border-red-400' : 'border-white/20'
                   }`}
                   placeholder="Doe"
@@ -188,7 +188,7 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 ${
                   errors.email ? 'border-red-400' : 'border-white/20'
                 }`}
                 placeholder="your.email@example.com"
@@ -204,7 +204,7 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
               <select
                 value={formData.interestedIn}
                 onChange={(e) => handleInputChange('interestedIn', e.target.value)}
-                className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-500 ${
                   errors.interestedIn ? 'border-red-400' : 'border-white/20'
                 }`}
               >
@@ -224,7 +224,7 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
                 type="text"
                 value={formData.country}
                 onChange={(e) => handleInputChange('country', e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 placeholder="e.g., Germany, UK, Switzerland"
               />
             </div>
@@ -240,7 +240,7 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-4 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-4 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl  disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -267,6 +267,9 @@ export default function DownloadForm({ locale }: DownloadFormProps) {
     </section>
   );
 }
+
+
+
 
 
 

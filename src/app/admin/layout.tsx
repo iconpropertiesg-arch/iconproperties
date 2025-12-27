@@ -68,7 +68,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   if (loading && !isLoginPage) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-black flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );
@@ -82,7 +82,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   // If not authenticated and not on login page, redirect
   if (!admin && !isLoginPage) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-black flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-white text-xl">Redirecting to login...</div>
       </div>
     );
@@ -95,7 +95,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-black">
+    <div className="min-h-screen bg-black">
       {/* Header */}
       <header className="bg-black/50 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
@@ -147,7 +147,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                       className={`
                         flex items-center gap-3 px-4 py-3 rounded-lg transition-colors
                         ${isActive
-                          ? 'bg-blue-600 text-white'
+                          ? 'bg-gray-700 text-white'
                           : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                         }
                       `}

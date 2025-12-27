@@ -53,8 +53,8 @@ export default function PropertyLocation({ property, locale }: PropertyLocationP
       {/* Address & Map Placeholder */}
       <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
         <div className="flex items-start space-x-4 mb-6">
-          <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-blue-500/30">
-            <MapPin className="w-6 h-6 text-blue-400" />
+          <div className="w-12 h-12 bg-gray-700/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-500/30">
+            <MapPin className="w-6 h-6 text-gray-400" />
           </div>
           <div>
             <h3 className="text-lg font-semibold text-white mb-2">Address</h3>
@@ -72,7 +72,7 @@ export default function PropertyLocation({ property, locale }: PropertyLocationP
           <div className="text-center">
             <MapPin className="w-12 h-12 text-gray-500 mx-auto mb-2" />
             <p className="text-gray-400">Interactive map will be shown here</p>
-            <button className="mt-2 text-blue-400 font-medium hover:text-blue-300">
+            <button className="mt-2 text-gray-400 font-medium hover:text-gray-300">
               View on Google Maps
             </button>
           </div>
@@ -87,7 +87,7 @@ export default function PropertyLocation({ property, locale }: PropertyLocationP
             const Icon = transport.icon;
             return (
               <div key={index} className="flex items-center space-x-3 p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
-                <Icon className="w-6 h-6 text-blue-400" />
+                <Icon className="w-6 h-6 text-gray-400" />
                 <div>
                   <div className="font-medium text-white">{transport.label}</div>
                   <div className="text-sm text-gray-300">{transport.time}</div>
@@ -107,8 +107,8 @@ export default function PropertyLocation({ property, locale }: PropertyLocationP
             return (
               <div key={categoryIndex} className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center border border-blue-500/30">
-                    <CategoryIcon className="w-5 h-5 text-blue-400" />
+                  <div className="w-10 h-10 bg-gray-700/20 rounded-lg flex items-center justify-center border border-gray-500/30">
+                    <CategoryIcon className="w-5 h-5 text-gray-400" />
                   </div>
                   <h4 className="font-semibold text-white">{category.category}</h4>
                 </div>

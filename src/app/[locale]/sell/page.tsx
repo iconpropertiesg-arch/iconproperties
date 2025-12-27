@@ -12,10 +12,11 @@ import FinalCTA from '@/components/sell/FinalCTA';
 import SEOBlock from '@/components/sell/SEOBlock';
 
 interface SellPageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata({ params: { locale } }: SellPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: SellPageProps): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'sell' });
 
   return {
@@ -32,7 +33,8 @@ export async function generateMetadata({ params: { locale } }: SellPageProps): P
   };
 }
 
-export default async function SellPage({ params: { locale } }: SellPageProps) {
+export default async function SellPage({ params }: SellPageProps) {
+  const { locale } = await params;
   // Enable static rendering
   setRequestLocale(locale);
   

@@ -478,14 +478,14 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                   value={slug}
                   onChange={(e) => handleSlugChange(e.target.value)}
                   required
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                   placeholder="luxury-villa-son-vida"
                   pattern="[-a-z0-9]+"
                   title="Slug must contain only lowercase letters, numbers, and hyphens"
                 />
               {slug && (
                 <p className="mt-1 text-xs text-gray-400">
-                  Preview: <span className="text-blue-400">/en/properties/{slug}</span>
+                  Preview: <span className="text-gray-400">/en/properties/{slug}</span>
                 </p>
               )}
             </div>
@@ -498,7 +498,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
                 <option value="available">Available</option>
                 <option value="sold">Sold</option>
@@ -516,7 +516,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 value={type}
                 onChange={(e) => setType(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
                 <option value="residential">Residential</option>
                 <option value="commercial">Commercial</option>
@@ -533,7 +533,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 value={purpose}
                 onChange={(e) => setPurpose(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
                 <option value="buy">Buy</option>
                 <option value="rent">Rent</option>
@@ -546,7 +546,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 type="number"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 placeholder="2024"
               />
             </div>
@@ -561,7 +561,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 placeholder="8500000"
               />
             </div>
@@ -572,7 +572,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 type="number"
                 value={bedrooms}
                 onChange={(e) => setBedrooms(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 placeholder="6"
               />
             </div>
@@ -583,7 +583,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 type="number"
                 value={bathrooms}
                 onChange={(e) => setBathrooms(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 placeholder="4"
               />
             </div>
@@ -595,7 +595,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 step="0.01"
                 value={area}
                 onChange={(e) => setArea(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 placeholder="500"
               />
             </div>
@@ -609,7 +609,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 placeholder="Son Vida, Mallorca"
               />
             </div>
@@ -622,7 +622,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 type="text"
                 value={coordinates}
                 onChange={(e) => setCoordinates(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 placeholder='{"lat": 39.5696, "lng": 2.6502}'
               />
             </div>
@@ -633,7 +633,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 id="featured"
                 checked={featured}
                 onChange={(e) => setFeatured(e.target.checked)}
-                className="w-5 h-5 text-blue-600 bg-gray-900 border-gray-700 rounded focus:ring-blue-600"
+                className="w-5 h-5 text-gray-600 bg-gray-900 border-gray-700 rounded focus:ring-gray-600"
               />
               <label htmlFor="featured" className="text-sm font-medium text-gray-300">
                 Featured Property
@@ -651,7 +651,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 type="button"
                 onClick={() => multipleFileInputRef.current?.click()}
                 disabled={Object.values(uploading).some((isUploading) => isUploading)}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg cursor-pointer transition-colors text-sm font-medium"
+                className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg cursor-pointer transition-colors text-sm font-medium"
               >
                 <Upload size={16} />
                 <span>Select Multiple Images</span>
@@ -669,7 +669,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
               <button
                 type="button"
                 onClick={addImage}
-                className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm"
+                className="flex items-center gap-2 text-gray-400 hover:text-gray-300 text-sm"
               >
                 <Plus size={16} />
                 Add Single Image
@@ -689,7 +689,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                           {uploading[index] ? 'Uploading...' : image ? 'Change Image' : 'Upload Image'}
                         </span>
                         {uploading[index] && (
-                          <Loader2 className="ml-auto animate-spin text-blue-400" size={18} />
+                          <Loader2 className="ml-auto animate-spin text-gray-400" size={18} />
                         )}
                       </div>
                       <input
@@ -761,7 +761,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                   value={translations[locale].title}
                   onChange={(e) => updateTranslation(locale, 'title', e.target.value)}
                   required
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                   placeholder="Luxury Villa in Son Vida"
                 />
               </div>
@@ -774,7 +774,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                   type="text"
                   value={translations[locale].subtitle || ''}
                   onChange={(e) => updateTranslation(locale, 'subtitle', e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                   placeholder="Exclusive 6-bedroom villa with panoramic views"
                 />
               </div>
@@ -788,7 +788,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                   onChange={(e) => updateTranslation(locale, 'description', e.target.value)}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                   placeholder="Detailed property description..."
                 />
               </div>
@@ -799,7 +799,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                   <button
                     type="button"
                     onClick={() => addFeature(locale)}
-                    className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm"
+                    className="flex items-center gap-2 text-gray-400 hover:text-gray-300 text-sm"
                   >
                     <Plus size={16} />
                     Add Feature
@@ -813,7 +813,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                         value={feature}
                         onChange={(e) => updateFeature(locale, index, e.target.value)}
                         placeholder="Feature description"
-                        className="flex-1 px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        className="flex-1 px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                       />
                       {translations[locale].features.length > 1 && (
                         <button
@@ -844,7 +844,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>

@@ -34,10 +34,10 @@ export default function TestimonialsSection({ locale }: TestimonialsSectionProps
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-gray-900 via-blue-950 to-blue-900 rounded-2xl p-8 shadow-lg relative border border-white/10"
+              className="bg-black rounded-2xl p-8 shadow-lg relative border border-white/10"
             >
               <div className="absolute top-6 right-6">
-                <Quote className="w-12 h-12 text-blue-400/20" />
+                <Quote className="w-12 h-12 text-gray-400/20" />
               </div>
               <p className="text-gray-200 text-lg leading-relaxed mb-6 italic">
                 "{testimonial.quote}"

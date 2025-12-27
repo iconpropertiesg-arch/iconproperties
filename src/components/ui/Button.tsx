@@ -16,14 +16,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           {
             "bg-primary text-primary-foreground hover:bg-primary/90":
               variant === "default",
-            "bg-destructive text-destructive-foreground hover:bg-destructive/90":
+            "bg-primary text-white hover:bg-primary/90":
               variant === "destructive",
-            "border border-input bg-background hover:bg-accent hover:text-accent-foreground":
+            "border border-primary bg-primary text-white hover:bg-primary/90":
               variant === "outline",
-            "bg-secondary text-secondary-foreground hover:bg-secondary/80":
+            "bg-primary text-white hover:bg-primary/80":
               variant === "secondary",
-            "hover:bg-accent hover:text-accent-foreground": variant === "ghost",
-            "text-primary underline-offset-4 hover:underline": variant === "link",
+            "bg-primary text-white hover:bg-primary/90": variant === "ghost",
+            "bg-primary text-white underline-offset-4 hover:bg-primary/90": variant === "link",
           },
           {
             "h-10 px-4 py-2": size === "default",

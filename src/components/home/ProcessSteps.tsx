@@ -27,12 +27,12 @@ export default function ProcessSteps() {
           {/* Right Side - Process Steps Cards */}
           <div className="space-y-6">
             {/* Step 1: Briefing & Discovery */}
-            <div className="relative bg-blue-900/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+            <div className="relative bg-gray-900/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
               <div className="flex items-start gap-4">
                 {/* Speech Bubble Icon with Number */}
                 <div className="relative flex-shrink-0">
                   <svg
-                    className="w-16 h-16 text-blue-400"
+                    className="w-16 h-16 text-gray-400"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@ export default function ProcessSteps() {
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
                   </svg>
                   <div className="absolute top-2 left-0 right-0 flex items-center justify-center">
-                    <span className="text-blue-600 text-lg font-bold">1</span>
+                    <span className="text-gray-600 text-lg font-bold">1</span>
                   </div>
                 </div>
 
@@ -54,12 +54,12 @@ export default function ProcessSteps() {
             </div>
 
             {/* Step 2: Curated Portfolio Delivery */}
-            <div className="relative bg-blue-900/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+            <div className="relative bg-gray-900/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
               <div className="flex items-start gap-4">
                 {/* Speech Bubble Icon with Number */}
                 <div className="relative flex-shrink-0">
                   <svg
-                    className="w-16 h-16 text-blue-400"
+                    className="w-16 h-16 text-gray-400"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ export default function ProcessSteps() {
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
                   </svg>
                   <div className="absolute top-2 left-0 right-0 flex items-center justify-center">
-                    <span className="text-blue-600 text-lg font-bold">2</span>
+                    <span className="text-gray-600 text-lg font-bold">2</span>
                   </div>
                 </div>
 

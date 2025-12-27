@@ -28,10 +28,10 @@ const keyValues = [
 
 export default function TeamProfiles({ locale }: TeamProfilesProps) {
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
       <div className="absolute inset-0 opacity-25">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+        
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
       </div>
 
@@ -44,7 +44,7 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
               <div className="md:col-span-1">
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-gray-800">
                   {/* Placeholder for Daniel's portrait - replace with actual image */}
-                  <div className="w-full h-full bg-gradient-to-br from-blue-900/30 to-gray-800/30 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-gray-900/30 to-gray-800/30 flex items-center justify-center">
                     <span className="text-gray-500 text-sm">Daniel's Portrait</span>
                   </div>
                 </div>
@@ -53,7 +53,7 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
               {/* Content */}
               <div className="md:col-span-2">
                 <div className="mb-4">
-                  <span className="inline-block px-3 py-1 bg-blue-600/20 text-blue-400 text-sm font-semibold rounded-full border border-blue-400/30">
+                  <span className="inline-block px-3 py-1 bg-gray-700/20 text-gray-400 text-sm font-semibold rounded-full border border-gray-400/30">
                     Founder & Lead Advisor
                   </span>
                 </div>
@@ -68,23 +68,23 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
                 </p>
                 <ul className="space-y-2 mb-8 text-gray-300">
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="text-gray-400 mr-2">•</span>
                     <span>Luxury villa acquisitions</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="text-gray-400 mr-2">•</span>
                     <span>Off-market sales</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="text-gray-400 mr-2">•</span>
                     <span>Investment guidance</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="text-gray-400 mr-2">•</span>
                     <span>Area advisory</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="text-gray-400 mr-2">•</span>
                     <span>End-to-end buying support</span>
                   </li>
                 </ul>
@@ -100,7 +100,7 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
                           key={index}
                           className="flex flex-col items-center text-center p-4 bg-white/5 rounded-lg border border-white/10"
                         >
-                          <Icon className="w-6 h-6 text-blue-400 mb-2" />
+                          <Icon className="w-6 h-6 text-gray-400 mb-2" />
                           <span className="text-sm text-gray-300">{value.label}</span>
                         </div>
                       );
@@ -123,23 +123,23 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-start">
-                <span className="text-blue-400 mr-2">•</span>
+                <span className="text-gray-400 mr-2">•</span>
                 <span className="text-gray-300">Legal & tax advisory</span>
               </div>
               <div className="flex items-start">
-                <span className="text-blue-400 mr-2">•</span>
+                <span className="text-gray-400 mr-2">•</span>
                 <span className="text-gray-300">Architecture & construction</span>
               </div>
               <div className="flex items-start">
-                <span className="text-blue-400 mr-2">•</span>
+                <span className="text-gray-400 mr-2">•</span>
                 <span className="text-gray-300">Interior design</span>
               </div>
               <div className="flex items-start">
-                <span className="text-blue-400 mr-2">•</span>
+                <span className="text-gray-400 mr-2">•</span>
                 <span className="text-gray-300">Property management</span>
               </div>
               <div className="flex items-start">
-                <span className="text-blue-400 mr-2">•</span>
+                <span className="text-gray-400 mr-2">•</span>
                 <span className="text-gray-300">Mortgage & financing services</span>
               </div>
             </div>
@@ -152,6 +152,9 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
     </section>
   );
 }
+
+
+
 
 
 

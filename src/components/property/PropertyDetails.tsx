@@ -53,7 +53,7 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <div className="flex-1">
             <div className="flex items-center space-x-3 mb-4">
-              <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+              <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium">
                 {t(`propertyTypes.${property.type}`)}
               </span>
               <span className={`${property.status === 'rent' ? 'bg-purple-600' : 'bg-green-600'} text-white px-3 py-1 rounded-full text-sm font-medium`}>
@@ -71,13 +71,13 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
             </h1>
             
             <div className="flex items-center text-gray-300 mb-6">
-              <MapPin className="w-5 h-5 mr-2 text-blue-400" />
+              <MapPin className="w-5 h-5 mr-2 text-gray-400" />
               <span className="text-lg font-medium">{property.location.address}</span>
             </div>
           </div>
 
           <div className="text-right">
-            <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
+            <div className="text-3xl md:text-4xl font-bold text-gray-400 mb-2">
               {formatPrice(property.price, locale)}
             </div>
             <div className="text-gray-300 font-medium">
@@ -94,7 +94,7 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
           return (
             <div key={index} className="text-center">
               <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-700">
-                <Icon className="w-6 h-6 text-blue-400" />
+                <Icon className="w-6 h-6 text-gray-400" />
               </div>
               <div className="text-sm text-gray-400 mb-1">{detail.label}</div>
               <div className="font-semibold text-white">{detail.value}</div>

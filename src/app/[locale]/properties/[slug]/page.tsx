@@ -13,7 +13,7 @@ import { Property, PropertyImage } from '@/types';
 import { prisma } from '@/lib/db';
 
 interface PropertyPageProps {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 // Helper function to map database type to Property type
@@ -146,7 +146,8 @@ async function getPropertyBySlug(slug: string, locale: string): Promise<Property
   }
 }
 
-export async function generateMetadata({ params: { locale, slug } }: PropertyPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PropertyPageProps): Promise<Metadata> {
+  const { locale, slug } = await params;
   const property = await getPropertyBySlug(slug, locale);
   
   if (!property) {
@@ -189,7 +190,8 @@ export async function generateMetadata({ params: { locale, slug } }: PropertyPag
   };
 }
 
-export default async function PropertyPage({ params: { locale, slug } }: PropertyPageProps) {
+export default async function PropertyPage({ params }: PropertyPageProps) {
+  const { locale, slug } = await params;
   // Enable static rendering
   setRequestLocale(locale);
   
@@ -200,7 +202,7 @@ export default async function PropertyPage({ params: { locale, slug } }: Propert
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-black">
+    <div className="min-h-screen bg-black">
       {/* Property Details - Show First */}
       <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 pt-28 md:pt-32 pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -225,7 +227,7 @@ export default async function PropertyPage({ params: { locale, slug } }: Propert
 
       {/* Property Highlights - Show After Gallery */}
       <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8">
-        <div className="bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl p-8 border border-gray-700">
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/30 rounded-2xl p-8 border border-gray-700">
           <h3 className="text-xl font-bold text-white mb-6">Property Highlights</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>

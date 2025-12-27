@@ -37,7 +37,7 @@ export default function Footer({ locale }: FooterProps) {
 
   return (
     <>
-      <footer className="bg-gradient-to-br from-black via-blue-950 to-blue-900 text-white">
+      <footer className="bg-black text-white">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 sm:py-12 md:py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
             {/* Company Info */}
@@ -147,7 +147,7 @@ export default function Footer({ locale }: FooterProps) {
               <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Get Started</h4>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 mb-4 sm:mb-6"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base transition-all duration-300 transform hover:scale-105 shadow-lg  flex items-center justify-center gap-2 mb-4 sm:mb-6"
               >
                 <span className="text-xs sm:text-sm md:text-base">Request Private Portfolio</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -176,13 +176,13 @@ export default function Footer({ locale }: FooterProps) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter Email Address"
-                    className="flex-1 md:w-64 px-4 py-2.5 sm:py-3 bg-white/10 border border-white/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm sm:text-base"
+                    className="flex-1 md:w-64 px-4 py-2.5 sm:py-3 bg-white/10 border border-white/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500/50 text-sm sm:text-base"
                     required
                   />
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 text-sm sm:text-base whitespace-nowrap"
+                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 text-sm sm:text-base whitespace-nowrap"
                   >
                     {isSubmitting ? (
                       'Submitting...'

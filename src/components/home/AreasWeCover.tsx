@@ -101,7 +101,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -114,7 +114,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
         </div>
 
         {/* Interactive Map */}
-        <div className="relative bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-3xl border border-white/10 p-8 md:p-12 overflow-hidden">
+        <div className="relative bg-gradient-to-br from-gray-900/30 to-gray-800/20 rounded-3xl border border-white/10 p-8 md:p-12 overflow-hidden">
           {/* Map Container */}
           <div className="relative w-full h-[500px] md:h-[600px] rounded-2xl border border-white/10 overflow-hidden bg-white">
             {/* Real Map Image */}
@@ -157,7 +157,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                     
                     {/* Blue glow ring */}
                     <div className="absolute inset-0 flex items-center justify-center -z-10">
-                      <div className="w-12 h-12 rounded-full bg-blue-500/50 blur-sm" />
+                      <div className="w-12 h-12 rounded-full bg-gray-600/50 blur-sm" />
                     </div>
                     
                     {/* Main pin */}
@@ -166,8 +166,8 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                         className={cn(
                           "transition-all duration-300",
                           isHovered || isSelected
-                            ? "w-10 h-10 text-blue-500 scale-150"
-                            : "w-9 h-9 text-blue-600 scale-100"
+                            ? "w-10 h-10 text-gray-500 scale-150"
+                            : "w-9 h-9 text-gray-600 scale-100"
                         )}
                         fill={isHovered || isSelected ? "#3b82f6" : "#2563eb"}
                       />
@@ -182,14 +182,14 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                     {/* Pulse Animation */}
                     {(isHovered || isSelected) && (
                       <div className="absolute inset-0 -z-20">
-                        <div className="absolute inset-0 rounded-full bg-blue-500/40 animate-ping" />
-                        <div className="absolute inset-0 rounded-full bg-blue-500/30" />
+                        <div className="absolute inset-0 rounded-full bg-gray-600/40 animate-ping" />
+                        <div className="absolute inset-0 rounded-full bg-gray-600/30" />
                       </div>
                     )}
 
                     {/* Location name label - Always visible below the point */}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2">
-                      <span className="text-white text-xs font-semibold bg-blue-600/80 backdrop-blur-sm px-2 py-1 rounded-full border border-blue-400/50 whitespace-nowrap">
+                      <span className="text-white text-xs font-semibold bg-gray-700/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-400/50 whitespace-nowrap">
                         {area.name}
                       </span>
                     </div>
@@ -201,7 +201,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                           <h3 className="font-bold text-gray-900 mb-1">{area.name}</h3>
                           <p className="text-sm text-gray-600 mb-2">{area.description}</p>
                           {area.properties && (
-                            <p className="text-xs text-blue-600 font-medium">{area.properties}</p>
+                            <p className="text-xs text-gray-600 font-medium">{area.properties}</p>
                           )}
                           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
                             <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/95" />

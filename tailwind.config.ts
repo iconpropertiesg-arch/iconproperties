@@ -13,7 +13,7 @@ const config: Config = {
         border: "#e2e8f0",
         input: "#e2e8f0", 
         ring: "#3b82f6",
-        background: "#ffffff",
+        background: "#000000",
         foreground: "#0f172a",
         primary: {
           DEFAULT: "#3b82f6",

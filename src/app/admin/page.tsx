@@ -49,7 +49,7 @@ export default function AdminDashboard() {
       title: 'Total Properties',
       value: stats.total,
       icon: Building2,
-      color: 'bg-blue-600',
+      color: 'bg-gray-700',
     },
     {
       title: 'Available',
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
         <h1 className="text-3xl font-bold text-white">Dashboard</h1>
         <Link
           href="/admin/properties/new"
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
         >
           <Plus size={20} />
           <span>Add Property</span>

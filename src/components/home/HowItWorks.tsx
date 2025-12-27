@@ -58,10 +58,10 @@ export default function HowItWorks({ locale }: HowItWorksProps) {
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
       <div className="absolute inset-0 opacity-25">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+        
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
       </div>
 
@@ -95,11 +95,11 @@ export default function HowItWorks({ locale }: HowItWorksProps) {
               >
                 {/* Numbered Circle */}
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-2 border-blue-400/30 flex items-center justify-center group-hover:border-blue-400/50 transition-colors">
-                    <span className="text-3xl font-bold text-blue-400">{step.number}</span>
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gray-600/20 to-gray-700/20 border-2 border-gray-400/30 flex items-center justify-center group-hover:border-gray-400/50 transition-colors">
+                    <span className="text-3xl font-bold text-gray-400">{step.number}</span>
                   </div>
                   {/* Subtle glow effect */}
-                  <div className="absolute inset-0 rounded-full bg-blue-400/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 rounded-full bg-gray-400/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Title */}

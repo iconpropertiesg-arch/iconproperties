@@ -15,10 +15,10 @@ export default function OffMarketVsOnMarket({ locale }: OffMarketVsOnMarketProps
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
       <div className="absolute inset-0 opacity-25">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+        
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
       </div>
 
@@ -36,7 +36,7 @@ export default function OffMarketVsOnMarket({ locale }: OffMarketVsOnMarketProps
           {/* Off-Market Sale (Left) */}
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
             <div className="mb-4">
-              <span className="inline-block px-3 py-1 bg-blue-600/20 text-blue-400 text-sm font-semibold rounded-full border border-blue-400/30">
+              <span className="inline-block px-3 py-1 bg-gray-700/20 text-gray-400 text-sm font-semibold rounded-full border border-gray-400/30">
                 Recommended for luxury villas
               </span>
             </div>
@@ -70,15 +70,15 @@ export default function OffMarketVsOnMarket({ locale }: OffMarketVsOnMarketProps
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
-                <Check className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5" />
+                <Check className="w-6 h-6 text-gray-400 flex-shrink-0 mt-0.5" />
                 <span className="text-gray-200 leading-relaxed">Full exposure across select portals</span>
               </li>
               <li className="flex items-start space-x-3">
-                <Check className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5" />
+                <Check className="w-6 h-6 text-gray-400 flex-shrink-0 mt-0.5" />
                 <span className="text-gray-200 leading-relaxed">Ideal for properties needing visibility</span>
               </li>
               <li className="flex items-start space-x-3">
-                <Check className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5" />
+                <Check className="w-6 h-6 text-gray-400 flex-shrink-0 mt-0.5" />
                 <span className="text-gray-200 leading-relaxed">Professional photography, video & marketing package</span>
               </li>
             </ul>
@@ -88,7 +88,7 @@ export default function OffMarketVsOnMarket({ locale }: OffMarketVsOnMarketProps
         <div className="text-center">
           <button
             onClick={scrollToForm}
-            className="group inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50"
+            className="group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl "
           >
             Request a Private Sales Strategy
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

@@ -149,7 +149,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             id="name"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
-            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-white placeholder-gray-500 ${
+            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-gray-500 focus:border-gray-500 transition-colors text-white placeholder-gray-500 ${
               errors.name ? 'border-red-500' : 'border-gray-600'
             }`}
             placeholder="Your full name"
@@ -167,7 +167,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             id="email"
             value={formData.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
-            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-white placeholder-gray-500 ${
+            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-gray-500 focus:border-gray-500 transition-colors text-white placeholder-gray-500 ${
               errors.email ? 'border-red-500' : 'border-gray-600'
             }`}
             placeholder="your.email@example.com"
@@ -185,7 +185,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             id="phone"
             value={formData.phone}
             onChange={(e) => handleInputChange('phone', e.target.value)}
-            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-white placeholder-gray-500 ${
+            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-gray-500 focus:border-gray-500 transition-colors text-white placeholder-gray-500 ${
               errors.phone ? 'border-red-500' : 'border-gray-600'
             }`}
             placeholder="+34 123 456 789"
@@ -202,7 +202,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             id="reason"
             value={formData.reason}
             onChange={(e) => handleInputChange('reason', e.target.value)}
-            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-white"
+            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg focus:ring-gray-500 focus:border-gray-500 text-white"
           >
             <option value="buying">{t('contact.form.buying')}</option>
             <option value="selling">{t('contact.form.selling')}</option>
@@ -220,7 +220,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
             rows={6}
             value={formData.message}
             onChange={(e) => handleInputChange('message', e.target.value)}
-            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-white placeholder-gray-500 ${
+            className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:ring-gray-500 focus:border-gray-500 transition-colors text-white placeholder-gray-500 ${
               errors.message ? 'border-red-500' : 'border-gray-600'
             }`}
             placeholder="Tell us about your requirements, budget, preferred areas, or any questions you have..."
@@ -235,13 +235,13 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
               type="checkbox"
               checked={formData.consent}
               onChange={(e) => handleInputChange('consent', e.target.checked)}
-              className={`mt-1 w-4 h-4 text-blue-600 bg-gray-900/50 border-gray-600 rounded focus:ring-blue-500 ${
+              className={`mt-1 w-4 h-4 text-gray-600 bg-gray-900/50 border-gray-600 rounded focus:ring-gray-500 ${
                 errors.consent ? 'border-red-500' : ''
               }`}
             />
             <span className="text-sm text-gray-300 leading-relaxed">
               {t('common.consent')}. View our{' '}
-              <a href={`/${locale}/legal/privacy`} className="text-blue-400 hover:text-blue-300 underline">
+              <a href={`/${locale}/legal/privacy`} className="text-gray-400 hover:text-gray-300 underline">
                 Privacy Policy
               </a>.
             </span>
@@ -260,7 +260,7 @@ export default function ContactForm({ locale, searchParams }: ContactFormProps) 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2 shadow-lg hover:shadow-blue-600/50"
+          className="w-full bg-gray-700 text-white py-4 px-6 rounded-lg font-semibold hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2 shadow-lg "
         >
           {isSubmitting ? (
             <>

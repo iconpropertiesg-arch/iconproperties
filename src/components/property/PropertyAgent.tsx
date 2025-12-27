@@ -132,7 +132,7 @@ export default function PropertyAgent({ property, locale }: PropertyAgentProps) 
           </button>
           <button
             onClick={() => handleQuickContact('email')}
-            className="flex items-center justify-center space-x-2 bg-blue-50 text-blue-700 p-3 rounded-lg hover:bg-blue-100 transition-colors"
+            className="flex items-center justify-center space-x-2 bg-gray-50 text-gray-700 p-3 rounded-lg hover:bg-gray-100 transition-colors"
           >
             <Mail className="w-4 h-4" />
             <span className="text-sm font-medium">Email</span>

@@ -76,11 +76,10 @@ export default function HeroSection({ locale }: HeroSectionProps) {
       className="relative min-h-screen sm:min-h-screen flex items-center overflow-hidden bg-black"
     >
       {/* Base background gradient - Dark blue to black gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-slate-950 via-black to-black" />
+      <div className="absolute inset-0 bg-black" />
       
       {/* Subtle purple/blue glowing effects */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-1/4 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] bg-blue-500/20 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] animate-pulse-slow" />
         <div className="absolute bottom-0 left-1/3 w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] bg-purple-500/15 rounded-full blur-[70px] sm:blur-[90px] md:blur-[100px] animate-pulse-slow animation-delay-2000" />
       </div>
 
@@ -125,7 +124,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
               <div className="absolute -top-1 -left-1 w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white rounded-full"></div>
               
               {/* Blue NEW badge */}
-              <div className="px-2 sm:px-3 py-0.5 sm:py-1 bg-blue-600 rounded-md">
+              <div className="px-2 sm:px-3 py-0.5 sm:py-1 bg-gray-700 rounded-md">
                 <span className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-wide">NEW</span>
               </div>
               
@@ -147,7 +146,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             <div className="pt-2 sm:pt-4">
               <button 
                 onClick={() => router.push(`/${locale}/contact`)}
-                className="group px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm sm:text-base font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50"
+                className="group px-6 sm:px-8 py-3 sm:py-4 bg-gray-700 hover:bg-gray-600 text-white text-sm sm:text-base font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl"
               >
                 <span className="flex items-center gap-2">
                   {t('cta')}
@@ -211,7 +210,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
           {/* Right Column - Video */}
           <div className="relative mt-8 lg:mt-0">
-            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-blue-900/20 to-black/20 backdrop-blur-sm h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] min-h-[300px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
+            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-gray-900/20 to-black/20 backdrop-blur-sm h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] min-h-[300px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
               {/* Video */}
               <video
                 ref={videoRef}

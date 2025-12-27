@@ -119,14 +119,12 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
 
   return (
     <section 
-      className="py-24 bg-gradient-to-br from-gray-900 via-blue-950 to-black relative overflow-hidden"
+      className="py-24 bg-black relative overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Background effects */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[150px]"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-[150px]"></div>
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
@@ -143,7 +141,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-20 w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all shadow-2xl hover:shadow-blue-600/50 hover:scale-110"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-20 w-14 h-14 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-all shadow-2xl hover:scale-110"
             aria-label="Previous properties"
           >
             <ChevronLeft className="w-7 h-7 text-white" />
@@ -151,7 +149,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-20 w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all shadow-2xl hover:shadow-blue-600/50 hover:scale-110"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-20 w-14 h-14 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-all shadow-2xl hover:scale-110"
             aria-label="Next properties"
           >
             <ChevronRight className="w-7 h-7 text-white" />
@@ -174,7 +172,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                         <Link
                           key={property.id}
                           href={`/${locale}/properties/${property.slug}`}
-                          className="group relative h-[420px] rounded-2xl overflow-hidden border border-white/10 hover:border-blue-500 transition-all duration-300 cursor-pointer block hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-900/30"
+                          className="group relative h-[420px] rounded-2xl overflow-hidden border border-white/10 hover:border-gray-500 transition-all duration-300 cursor-pointer block hover:-translate-y-1 hover:shadow-xl"
                         >
                           {/* Full-cover background image */}
                           {property.images[0] && (property.images[0].startsWith('http://') || property.images[0].startsWith('https://')) ? (
@@ -200,7 +198,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                           <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
                             {/* Top badges */}
                             <div className="flex items-start justify-between">
-                              <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+                              <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
                                 {t(`propertyTypes.${property.type}`) || property.type}
                               </span>
                               <span className="bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
@@ -215,7 +213,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                             <div className="space-y-3">
                               {/* Title and location */}
                               <div>
-                                <h3 className="text-xl font-bold mb-1 group-hover:text-blue-300 transition-colors line-clamp-1">
+                                <h3 className="text-xl font-bold mb-1 group-hover:text-gray-300 transition-colors line-clamp-1">
                                   {property.title}
                                 </h3>
                                 <p className="text-sm text-gray-300 line-clamp-1">
@@ -247,7 +245,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
 
                               {/* CTA */}
                               <div className="flex items-center justify-between pt-2 border-t border-white/20">
-                                <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors font-medium">
+                                <div className="inline-flex items-center text-gray-400 group-hover:text-gray-300 transition-colors font-medium">
                                   {t('common.viewDetails')}
                                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </div>
@@ -274,7 +272,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                   onClick={() => goToSlide(index)}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === currentSlide 
-                      ? 'w-8 bg-blue-500' 
+                      ? 'w-8 bg-gray-600' 
                       : 'w-2 bg-gray-600 hover:bg-gray-500'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
@@ -286,7 +284,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
 
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500"></div>
             <p className="text-gray-400 mt-4">Loading properties...</p>
           </div>
         ) : properties.length === 0 ? (
@@ -297,7 +295,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
           <div className="text-center mt-12">
             <Link
               href={`/${locale}/properties`}
-              className="inline-flex items-center bg-blue-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30"
+              className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               {t('common.exploreAll')}
               <ArrowRight className="w-5 h-5 ml-2" />

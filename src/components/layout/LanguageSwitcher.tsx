@@ -63,13 +63,13 @@ export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
                   href={getLocalizedPath(language.code)}
                   className={cn(
                     "flex items-center justify-center relative px-4 py-3 text-sm font-medium hover:bg-gray-800 transition-colors text-white",
-                    language.code === locale && "bg-blue-600/20 text-blue-400"
+                    language.code === locale && "bg-gray-700/20 text-gray-400"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
                   <span>{language.display}</span>
                   {language.code === locale && (
-                    <div className="absolute top-1 right-1 w-2 h-2 bg-blue-400 rounded-full" />
+                    <div className="absolute top-1 right-1 w-2 h-2 bg-gray-400 rounded-full" />
                   )}
                 </Link>
               ))}

@@ -197,13 +197,13 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
             {/* Action Buttons */}
             <div className="absolute bottom-4 right-4 z-20 flex flex-col sm:flex-row gap-2">
               {property.videoUrl && (
-                <button className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2.5 rounded-lg font-medium hover:bg-white transition-all duration-300 flex items-center space-x-2 shadow-lg hover:scale-105">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 shadow-lg hover:scale-105">
                   <Play className="w-4 h-4" />
                   <span className="hidden sm:inline">Video Tour</span>
                 </button>
               )}
               {property.matterportUrl && (
-                <button className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2.5 rounded-lg font-medium hover:bg-white transition-all duration-300 flex items-center space-x-2 shadow-lg hover:scale-105">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 shadow-lg hover:scale-105">
                   <Eye className="w-4 h-4" />
                   <span className="hidden sm:inline">Virtual Tour</span>
                 </button>
@@ -222,7 +222,7 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
                   onClick={() => goToSlide(index)}
                   className={`relative flex-shrink-0 w-24 h-24 md:w-28 md:h-28 rounded-lg overflow-hidden transition-all duration-300 ${
                     index === currentIndex
-                      ? 'ring-2 ring-blue-500 scale-105 shadow-lg shadow-blue-500/50'
+                      ? 'ring-2 ring-blue-500 scale-105 shadow-lg /50'
                       : 'opacity-60 hover:opacity-100 hover:scale-105'
                   }`}
                 >
@@ -242,7 +242,7 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
                     />
                   )}
                   {index === currentIndex && (
-                    <div className="absolute inset-0 bg-blue-500/20" />
+                    <div className="absolute inset-0 bg-gray-600/20" />
                   )}
                 </button>
               ))}

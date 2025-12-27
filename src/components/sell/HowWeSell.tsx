@@ -68,10 +68,10 @@ export default function HowWeSell({ locale }: HowWeSellProps) {
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
       <div className="absolute inset-0 opacity-25">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+        
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
       </div>
 
@@ -111,10 +111,10 @@ export default function HowWeSell({ locale }: HowWeSellProps) {
               >
                 {/* Numbered Circle */}
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-2 border-blue-400/30 flex items-center justify-center group-hover:border-blue-400/50 transition-colors">
-                    {Icon && <Icon className="w-8 h-8 text-blue-400" />}
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gray-600/20 to-gray-700/20 border-2 border-gray-400/30 flex items-center justify-center group-hover:border-gray-400/50 transition-colors">
+                    {Icon && <Icon className="w-8 h-8 text-gray-400" />}
                   </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
                     <span className="text-sm font-bold text-white">{step.number}</span>
                   </div>
                 </div>

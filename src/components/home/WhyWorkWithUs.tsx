@@ -29,12 +29,12 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
   ];
 
   return (
-    <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+    <section className="relative bg-black py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
           {/* <div className="inline-block mb-4">
-            <span className="text-blue-400 text-sm font-semibold tracking-wider uppercase">#5</span>
+            <span className="text-gray-400 text-sm font-semibold tracking-wider uppercase">#5</span>
           </div> */}
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Why Work With Us
@@ -55,8 +55,8 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
               >
                 {/* Icon */}
                 <div className="mb-6">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center border border-blue-400/30 group-hover:border-blue-400/50 transition-colors">
-                    <Icon className="w-8 h-8 text-blue-400 stroke-[1.5]" />
+                  <div className="w-16 h-16 rounded-full bg-gray-700/20 flex items-center justify-center border border-gray-400/30 group-hover:border-gray-400/50 transition-colors">
+                    <Icon className="w-8 h-8 text-gray-400 stroke-[1.5]" />
                   </div>
                 </div>
 
@@ -78,7 +78,7 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
         <div className="text-center">
           <button
             onClick={() => router.push(`/${locale}/contact`)}
-            className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50 inline-flex items-center gap-2"
+            className="group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl inline-flex items-center gap-2"
           >
             <span>Request Private Portfolio</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

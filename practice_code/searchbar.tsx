@@ -181,12 +181,12 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
       <div className="glow-wrapper overflow-hidden lg:overflow-visible">
         <div 
           ref={borderContainerRef}
-          className="relative bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-full border border-white/20 p-2 sm:p-3 lg:p-2 shadow-2xl revolving-border-line"
+          className="relative bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-full border border-white/20 p-2 sm:p-3 lg:p-2 shadow-2xl overflow-hidden revolving-border-line"
           style={{
             boxShadow: '0 8px 32px rgba(37, 99, 235, 0.3), 0 0 60px rgba(59, 130, 246, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.2)'
           }}
         >
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-1 sm:gap-1.5 p-1 sm:p-2 overflow-visible">
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-1 sm:gap-1.5 p-1 sm:p-2 overflow-visible relative z-10">
             {/* Buy / Rent Dropdown */}
             <div className="relative flex-shrink-0">
               <button
@@ -214,7 +214,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                         setPurpose('buy');
                         setIsPurposeOpen(false);
                       }}
-                      className="w-full px-6 py-3 text-left text-gray-900 hover:bg-gray-100 transition-colors"
+                      className="w-full px-6 py-3 text-left text-gray-900 hover:bg-blue-50 transition-colors"
                     >
                       Buy
                     </button>
@@ -224,7 +224,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                         setPurpose('rent');
                         setIsPurposeOpen(false);
                       }}
-                      className="w-full px-6 py-3 text-left text-gray-900 hover:bg-gray-100 transition-colors"
+                      className="w-full px-6 py-3 text-left text-gray-900 hover:bg-blue-50 transition-colors"
                     >
                       Rent
                     </button>
@@ -269,13 +269,13 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                           type="button"
                           onClick={() => handleTypeToggle(type.key)}
                           className={cn(
-                            "w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-100 transition-colors",
-                            isSelected && "bg-gray-100 text-gray-900"
+                            "w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-blue-50 transition-colors",
+                            isSelected && "bg-blue-50 text-blue-600"
                           )}
                         >
                           <Icon className="w-5 h-5" />
                           <span className="font-medium text-gray-900">{type.label}</span>
-                          {isSelected && <div className="ml-auto w-2 h-2 bg-gray-900 rounded-full" />}
+                          {isSelected && <div className="ml-auto w-2 h-2 bg-blue-600 rounded-full" />}
                         </button>
                       );
                     })}
@@ -306,7 +306,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 onBlur={() => setTimeout(() => setIsAreaOpen(false), 200)}
                   onKeyDown={handleKeyDown}
                   placeholder="Area"
-                  className="w-full bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-3 py-2.5 sm:py-3 lg:py-3 pl-7 sm:pl-8 lg:pl-8 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all duration-200"
+                  className="w-full bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-3 py-2.5 sm:py-3 lg:py-3 pl-7 sm:pl-8 lg:pl-8 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-200"
                 />
                 <MapPin className="absolute left-2 sm:left-2.5 top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-3.5 text-white/60 flex-shrink-0" />
               </div>
@@ -322,7 +322,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                           setArea(location);
                           setIsAreaOpen(false);
                         }}
-                        className="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-100 transition-colors"
+                        className="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-blue-50 transition-colors"
                       >
                         <MapPin className="w-4 h-4 text-gray-400" />
                         <span className="text-gray-900">{location}</span>
@@ -366,7 +366,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                     >
                       {/* Active Range */}
                       <div 
-                        className="absolute h-1 bg-gray-600 rounded-full"
+                        className="absolute h-1 bg-blue-500 rounded-full"
                         style={{
                           left: `${getPercentage(priceRange.min)}%`,
                           width: `${getPercentage(priceRange.max) - getPercentage(priceRange.min)}%`,
@@ -375,7 +375,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       
                       {/* Min Handle */}
                       <div
-                        className="absolute top-1/2 w-4 h-4 bg-gray-700 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-gray-800 transition-colors z-20 touch-none"
+                        className="absolute top-1/2 w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-20 touch-none"
                         style={{ 
                           left: `${getPercentage(priceRange.min)}%`,
                           transform: 'translate(-50%, -50%)',
@@ -386,7 +386,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       
                       {/* Max Handle */}
                       <div
-                        className="absolute top-1/2 w-4 h-4 bg-gray-700 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-gray-800 transition-colors z-20 touch-none"
+                        className="absolute top-1/2 w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors z-20 touch-none"
                         style={{ 
                           left: `${getPercentage(priceRange.max)}%`,
                           transform: 'translate(-50%, -50%)',
@@ -407,7 +407,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
             <button
               type="button"
               onClick={handleSearch}
-              className="w-full lg:w-auto flex-shrink-0 bg-gray-700 hover:bg-gray-600 text-white text-xs sm:text-sm font-semibold rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-2.5 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap"
+              className="w-full lg:w-auto flex-shrink-0 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-xs sm:text-sm font-semibold rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-2.5 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-1.5 whitespace-nowrap"
             >
               <Search className="w-3.5 h-3.5 sm:w-3.5 flex-shrink-0" />
               <span>Search</span>
@@ -419,3 +419,4 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   );
 }
 
+image.png

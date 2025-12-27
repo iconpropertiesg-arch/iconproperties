@@ -40,10 +40,10 @@ export default function GuidePreview({ locale }: GuidePreviewProps) {
 
   return (
     <>
-      <section className="relative bg-gradient-to-br from-black via-blue-950 to-blue-900 py-20 px-4">
+      <section className="relative bg-black py-20 px-4">
         {/* Subtle glowing effects overlay */}
         <div className="absolute inset-0 opacity-25">
-          <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+          
           <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
         </div>
 
@@ -68,7 +68,7 @@ export default function GuidePreview({ locale }: GuidePreviewProps) {
                   <p className="text-white font-semibold">{page.title}</p>
                 </div>
                 {/* Placeholder - replace with actual preview images */}
-                <div className="w-full h-full bg-gradient-to-br from-blue-900/30 to-gray-800/30 flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-gray-900/30 to-gray-800/30 flex items-center justify-center">
                   <span className="text-gray-500 text-sm">{page.title}</span>
                 </div>
               </div>
@@ -92,7 +92,7 @@ export default function GuidePreview({ locale }: GuidePreviewProps) {
           <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
             <div className="relative aspect-[3/4] bg-gray-900 rounded-lg overflow-hidden">
               {/* Placeholder - replace with actual image */}
-              <div className="w-full h-full bg-gradient-to-br from-blue-900/30 to-gray-800/30 flex items-center justify-center">
+              <div className="w-full h-full bg-gradient-to-br from-gray-900/30 to-gray-800/30 flex items-center justify-center">
                 <span className="text-gray-400">Preview Image</span>
               </div>
             </div>
@@ -102,6 +102,9 @@ export default function GuidePreview({ locale }: GuidePreviewProps) {
     </>
   );
 }
+
+
+
 
 
 

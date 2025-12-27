@@ -4,10 +4,11 @@ import { setRequestLocale } from 'next-intl/server';
 import { ChevronDown } from 'lucide-react';
 
 interface FAQPageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata({ params: { locale } }: FAQPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: FAQPageProps): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'faq' });
 
   return {
@@ -24,7 +25,8 @@ export async function generateMetadata({ params: { locale } }: FAQPageProps): Pr
   };
 }
 
-export default async function FAQPage({ params: { locale } }: FAQPageProps) {
+export default async function FAQPage({ params }: FAQPageProps) {
+  const { locale } = await params;
   // Enable static rendering
   setRequestLocale(locale);
 
@@ -100,7 +102,7 @@ export default async function FAQPage({ params: { locale } }: FAQPageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-black">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative py-20">
         <div className="container mx-auto px-4">
@@ -120,7 +122,7 @@ export default async function FAQPage({ params: { locale } }: FAQPageProps) {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-8">
             {faqs.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="bg-gradient-to-br from-gray-800/50 to-blue-900/30 rounded-2xl p-8 border border-gray-700">
+              <div key={categoryIndex} className="bg-gradient-to-br from-gray-800/50 to-gray-900/30 rounded-2xl p-8 border border-gray-700">
                 <h2 className="text-2xl font-bold text-white mb-6">
                   {category.category}
                 </h2>
@@ -128,13 +130,13 @@ export default async function FAQPage({ params: { locale } }: FAQPageProps) {
                   {category.questions.map((faq, faqIndex) => (
                     <details 
                       key={faqIndex}
-                      className="group bg-gray-900/50 rounded-lg border border-gray-700 hover:border-blue-500 transition-colors"
+                      className="group bg-gray-900/50 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors"
                     >
                       <summary className="flex items-center justify-between cursor-pointer p-6">
                         <h3 className="text-lg font-medium text-white pr-4">
                           {faq.question}
                         </h3>
-                        <ChevronDown className="w-5 h-5 text-blue-400 transition-transform duration-200 group-open:rotate-180" />
+                        <ChevronDown className="w-5 h-5 text-gray-400 transition-transform duration-200 group-open:rotate-180" />
                       </summary>
                       <div className="px-6 pb-6">
                         <p className="text-gray-300 leading-relaxed">
@@ -163,7 +165,7 @@ export default async function FAQPage({ params: { locale } }: FAQPageProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={`/${locale}/contact`}
-                className="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-blue-600/50"
+                className="inline-flex items-center justify-center bg-gray-700 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-600 transition-colors shadow-lg"
               >
                 Contact Us
               </a>

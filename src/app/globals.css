@@ -193,10 +193,10 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
 /* Navbar gradient background - matches Investment Opportunities card */
 .navbar-gradient {
   position: relative;
-  background:
+  /* background:
     radial-gradient(circle at top left, rgba(50, 80, 200, 0.4), transparent 60%),
     radial-gradient(circle at bottom right, rgba(0, 150, 255, 0.3), transparent 70%),
-    linear-gradient(135deg, #0b0f29, #0a0f25);
+    linear-gradient(135deg, #0b0f29, #0a0f25); */
   background-blend-mode: screen, color-dodge, normal;
   box-shadow: inset 0 0 35px rgba(255,255,255,0.04), 0 0 60px rgba(0, 90, 255, 0.2);
   backdrop-filter: blur(20px);
@@ -524,3 +524,184 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
 .animate-logo-scroll:hover {
   animation-play-state: paused;
 }
+/* Revolving Border Line Effect */
+.revolving-border-line {
+  position: relative;
+}
+
+.revolving-border-line::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #F02FC2 20%,
+    #FFC080 50%,
+    #FF4500 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  box-shadow: 
+    0 0 12px rgba(240, 47, 194, 0.9),
+    0 0 24px rgba(255, 192, 128, 0.7),
+    0 0 36px rgba(255, 69, 0, 0.5);
+  z-index: 20;
+  animation: revolve-border-line 10s linear infinite;
+  pointer-events: none;
+  opacity: 0.95;
+  transform-origin: center;
+}
+
+@keyframes revolve-border-line {
+  /* Top edge - left to right */
+  0% {
+    top: -2px;
+    left: 0%;
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(0deg);
+  }
+  24% {
+    top: -2px;
+    left: calc(100% - 150px);
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(0deg);
+  }
+  /* Right edge - top to bottom */
+  25% {
+    top: -2px;
+    left: calc(100% - 2px);
+    width: 4px;
+    height: 150px;
+    transform: translateX(0) rotate(90deg);
+  }
+  49% {
+    top: calc(100% - 150px);
+    left: calc(100% - 2px);
+    width: 4px;
+    height: 150px;
+    transform: translateX(0) rotate(90deg);
+  }
+  /* Bottom edge - right to left */
+  50% {
+    top: calc(100% - 2px);
+    left: calc(100% - 2px);
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(180deg);
+  }
+  74% {
+    top: calc(100% - 2px);
+    left: 0%;
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(180deg);
+  }
+  /* Left edge - bottom to top */
+  75% {
+    top: calc(100% - 2px);
+    left: -2px;
+    width: 4px;
+    height: 150px;
+    transform: translateX(0) rotate(270deg);
+  }
+  99% {
+    top: -2px;
+    left: -2px;
+    width: 4px;
+    height: 150px;
+
+    transform: translateX(0) rotate(270deg);
+  }
+  100% {
+    top: -2px;
+    left: 0%;
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(360deg);
+  }
+}
+/* For rounded-full on large screens */
+@media (min-width: 1024px) {
+  .revolving-border-line::before {
+    animation: revolve-border-rounded 10s linear infinite;
+  }
+}
+
+@keyframes revolve-border-rounded {
+  /* Top edge - left to right */
+  0% {
+    top: -2px;
+    left: 0%;
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(0deg);
+  }
+  24% {
+    top: -2px;
+    left: calc(100% - 150px);
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(0deg);
+  }
+  /* Right edge - top to bottom */
+  25% {
+    top: -2px;
+    left: calc(100% - 2px);
+    width: 4px;
+    height: 150px;
+    transform: translateX(0) rotate(90deg);
+  }
+  49% {
+    top: calc(100% - 150px);
+    left: calc(100% - 2px);
+    width: 4px;
+    height: 150px;
+    transform: translateX(0) rotate(90deg);
+  }
+  /* Bottom edge - right to left */
+  50% {
+    top: calc(100% - 2px);
+    left: calc(100% - 2px);
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(180deg);
+  }
+  74% {
+    top: calc(100% - 2px);
+    left: 0%;
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(180deg);
+  }
+  /* Left edge - bottom to top */
+  75% {
+    top: calc(100% - 2px);
+    left: -2px;
+    width: 4px;
+    height: 150px;
+    transform: translateX(0) rotate(270deg);
+  }
+  99% {
+    top: -2px;
+    left: -2px;
+    width: 4px;
+    height: 150px;
+    transform: translateX(0) rotate(270deg);
+  }
+  100% {
+    top: -2px;
+    left: 0%;
+    width: 150px;
+    height: 4px;
+    transform: translateX(0) rotate(360deg);
+  }
+}
+
+
+
