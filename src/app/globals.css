@@ -550,81 +550,10 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     0 0 24px rgba(255, 192, 128, 0.7),
     0 0 36px rgba(255, 69, 0, 0.5);
   z-index: 20;
-  animation: revolve-border-line 10s linear infinite;
+  /* animation: revolve-border-line 10s linear infinite; */
   pointer-events: none;
   opacity: 0.95;
   transform-origin: center;
-}
-
-@keyframes revolve-border-line {
-  /* Top edge - left to right */
-  0% {
-    top: -2px;
-    left: 0%;
-    width: 150px;
-    height: 4px;
-    transform: translateX(0) rotate(0deg);
-  }
-  24% {
-    top: -2px;
-    left: calc(100% - 150px);
-    width: 150px;
-    height: 4px;
-    transform: translateX(0) rotate(0deg);
-  }
-  /* Right edge - top to bottom */
-  25% {
-    top: -2px;
-    left: calc(100% - 2px);
-    width: 4px;
-    height: 150px;
-    transform: translateX(0) rotate(90deg);
-  }
-  49% {
-    top: calc(100% - 150px);
-    left: calc(100% - 2px);
-    width: 4px;
-    height: 150px;
-    transform: translateX(0) rotate(90deg);
-  }
-  /* Bottom edge - right to left */
-  50% {
-    top: calc(100% - 2px);
-    left: calc(100% - 2px);
-    width: 150px;
-    height: 4px;
-    transform: translateX(0) rotate(180deg);
-  }
-  74% {
-    top: calc(100% - 2px);
-    left: 0%;
-    width: 150px;
-    height: 4px;
-    transform: translateX(0) rotate(180deg);
-  }
-  /* Left edge - bottom to top */
-  75% {
-    top: calc(100% - 2px);
-    left: -2px;
-    width: 4px;
-    height: 150px;
-    transform: translateX(0) rotate(270deg);
-  }
-  99% {
-    top: -2px;
-    left: -2px;
-    width: 4px;
-    height: 150px;
-
-    transform: translateX(0) rotate(270deg);
-  }
-  100% {
-    top: -2px;
-    left: 0%;
-    width: 150px;
-    height: 4px;
-    transform: translateX(0) rotate(360deg);
-  }
 }
 /* For rounded-full on large screens */
 @media (min-width: 1024px) {
@@ -639,68 +568,68 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     top: -2px;
     left: 0%;
     width: 150px;
-    height: 4px;
+    height: 5px;
     transform: translateX(0) rotate(0deg);
   }
   24% {
     top: -2px;
     left: calc(100% - 150px);
-    width: 150px;
+    width: 155px;
     height: 4px;
     transform: translateX(0) rotate(0deg);
   }
   /* Right edge - top to bottom */
   25% {
     top: -2px;
-    left: calc(100% - 2px);
-    width: 4px;
-    height: 150px;
-    transform: translateX(0) rotate(90deg);
+    left: calc(100% - 30px);
+    width: 5px;
+    height: 4px;
+    transform: translateX(0) rotate(0deg);
   }
   49% {
-    top: calc(100% - 150px);
+    bottom: calc(100% - 10px);
     left: calc(100% - 2px);
     width: 4px;
-    height: 150px;
-    transform: translateX(0) rotate(90deg);
+    height:10px;
+    transform: translateX(0) rotate(0deg);
   }
   /* Bottom edge - right to left */
   50% {
-    top: calc(100% - 2px);
+    top: calc(100%);
     left: calc(100% - 2px);
-    width: 150px;
+    width: 5px;
     height: 4px;
-    transform: translateX(0) rotate(180deg);
+    transform: translateX(0) rotate(0deg);
   }
   74% {
     top: calc(100% - 2px);
     left: 0%;
     width: 150px;
     height: 4px;
-    transform: translateX(0) rotate(180deg);
+    transform: translateX(0) rotate(0deg);
   }
   /* Left edge - bottom to top */
   75% {
     top: calc(100% - 2px);
     left: -2px;
-    width: 4px;
-    height: 150px;
-    transform: translateX(0) rotate(270deg);
+    width:2px;
+    height: 5px;
+    transform: translateX(0) rotate(0deg);
   }
-  99% {
+   99% {
     top: -2px;
     left: -2px;
     width: 4px;
-    height: 150px;
-    transform: translateX(0) rotate(270deg);
+    height: 5px;
+    transform: translateX(0) rotate(0deg);
   }
   100% {
     top: -2px;
     left: 0%;
-    width: 150px;
+    width: 5px;
     height: 4px;
-    transform: translateX(0) rotate(360deg);
-  }
+    transform: translateX(0) rotate(0deg);
+  } 
 }
 
 
