@@ -558,78 +558,154 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
 /* For rounded-full on large screens */
 @media (min-width: 1024px) {
   .revolving-border-line::before {
-    animation: revolve-border-rounded 10s linear infinite;
+    animation: revolve-glow-border 10s linear infinite;
   }
 }
 
-@keyframes revolve-border-rounded {
+@keyframes revolve-glow-border {
   /* Top edge - left to right */
   0% {
     top: -2px;
     left: 0%;
-    width: 150px;
-    height: 5px;
-    transform: translateX(0) rotate(0deg);
+    width: 100px;
+    height: 6px;
+    transform: rotate(0deg);
   }
-  24% {
+  22% {
     top: -2px;
-    left: calc(100% - 150px);
-    width: 155px;
-    height: 4px;
-    transform: translateX(0) rotate(0deg);
+    left: calc(100% - 100px);
+    width: 100px;
+    height: 2px;
+    transform: rotate(0deg);
   }
-  /* Right edge - top to bottom */
+  
+  /* Approaching top-right corner */
+  23% {
+    top: -4px;
+    left: calc(100% - 40px);
+    width: 40px;
+    height: 2px;
+    transform: rotate(0deg);
+  }
+  
+  /* Top-right corner transition */
+  24% {
+    top: 10px;
+    left: calc(100% - 6px);
+    width: 6px;
+    height: 0px;
+    transform: rotate(0deg);
+  }
+  
+  /* Right edge - moving down */
   25% {
-    top: 2px;
-    left: calc(100%);
-    width: 5px;
-    height: 10px;
-    transform: translateX(-0px) rotate(-15deg);
+    top: 90px;
+    left: calc(100% - 4px);
+    width: 6px;
+    height: 0px;
+    transform: rotate(0deg);
   }
+  47% {
+    top: calc(100% - 20px);
+    left: calc(100% - 4px);
+    width: 6px;
+    height: 0px;
+    transform: rotate(0deg);
+  }
+  
+  /* Approaching bottom-right corner */
+  48% {
+    top: calc(100% - 50px);
+    left: calc(100% - 4px);
+    width: 6px;
+    height: 0px;
+    transform: rotate(0deg);
+  }
+  
+  /* Bottom-right corner transition */
   49% {
-    bottom: calc(100%);
-    left: calc(100%);
-    width: 4px;
-    height:10px;
-    transform: translateX(0) rotate(0deg);
-  }
-  /* Bottom edge - right to left */
-  50% {
-    top: calc(100%);
-    left: calc(100% - 10px);
-    width: 5px;
-    height: 4px;
-    transform: translateX(0) rotate(0deg);
-  }
-  74% {
-    top: calc(100% - 2px);
-    left: 4%;
-    width: 150px;
-    height: 4px;
-    transform: translateX(0) rotate(0deg);
-  }
-  /* Left edge - bottom to top */
-  75% {
     top: calc(100% - 10px);
-    left: -20px;
-    width:2px;
-    height: 5px;
-    transform: translateX(30px) rotate(25deg);
+    left: calc(100% - 40px);
+    width: 40px;
+    height: 2px;
+    transform: rotate(0deg);
   }
-   99% {
+  
+  /* Bottom edge - moving left */
+  50% {
+    top: calc(100% - 4px);
+    left: calc(100% - 120px);
+    width: 100px;
+    height: 2px;
+    transform: rotate(0deg);
+  }
+  72% {
+    top: calc(100% - 4px);
+    left: 20px;
+    width: 100px;
+    height: 2px;
+    transform: rotate(0deg);
+  }
+  
+  /* Approaching bottom-left corner */
+  73% {
+    top: calc(100% - 4px);
+    left: 0px;
+    width: 40px;
+    height: 2px;
+    transform: rotate(0deg);
+  }
+  
+  /* Bottom-left corner transition */
+  74% {
+    top: calc(100% - 40px);
+    left: -4px;
+    width: 6px;
+    height: 0px;
+    transform: rotate(0deg);
+  }
+  
+  /* Left edge - moving up */
+  75% {
+    top: calc(100% - 120px);
+    left: -4px;
+    width: 6px;
+    height: 0px;
+    transform: rotate(0deg);
+  }
+  97% {
+    top: 40px;
+    left: -4px;
+    width: 6px;
+    height: 0px;
+    transform: rotate(0deg);
+  }
+  
+  /* Approaching top-left corner */
+  98% {
     top: 10px;
-    left: -10px;
-    width: 4px;
-    height: 5px;
-    transform: translateX(0) rotate(0deg);
+    left: -4px;
+    width: 6px;
+    height: 0px;
+    transform: rotate(0deg);
   }
+  
+  /* Top-left corner transition */
+  99% {
+    top: -2px;
+    left: 0px;
+    width: 40px;
+    height: 6px;
+    transform: rotate(0deg);
+  }
+  
   100% {
-    top: 10px;
+    top: -2px;
     left: 0%;
-    width: 5px;
-    height: 4px;
-    transform: translateX(0) rotate(0deg);
-  } 
+    width: 100px;
+    height: 2px;
+    transform: rotate(0deg);
+  }
 }
 
 
