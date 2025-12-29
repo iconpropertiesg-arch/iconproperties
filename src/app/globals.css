@@ -596,35 +596,35 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   /* Bottom edge - right to left */
   50% {
     top: calc(100%);
-    left: calc(100% - 2px);
+    left: calc(100% - 10px);
     width: 5px;
     height: 4px;
     transform: translateX(0) rotate(0deg);
   }
   74% {
     top: calc(100% - 2px);
-    left: 0%;
+    left: 4%;
     width: 150px;
     height: 4px;
     transform: translateX(0) rotate(0deg);
   }
   /* Left edge - bottom to top */
   75% {
-    top: calc(100% - 2px);
-    left: -2px;
+    top: calc(100% - 10px);
+    left: -20px;
     width:2px;
     height: 5px;
-    transform: translateX(0) rotate(0deg);
+    transform: translateX(30px) rotate(25deg);
   }
    99% {
-    top: -2px;
-    left: -2px;
+    top: 10px;
+    left: -10px;
     width: 4px;
     height: 5px;
     transform: translateX(0) rotate(0deg);
   }
   100% {
-    top: -2px;
+    top: 10px;
     left: 0%;
     width: 5px;
     height: 4px;
