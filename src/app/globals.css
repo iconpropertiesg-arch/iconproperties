@@ -580,15 +580,15 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   }
   /* Right edge - top to bottom */
   25% {
-    top: -2px;
-    left: calc(100% - 30px);
+    top: 2px;
+    left: calc(100%);
     width: 5px;
-    height: 4px;
-    transform: translateX(0) rotate(0deg);
+    height: 10px;
+    transform: translateX(-0px) rotate(-15deg);
   }
   49% {
-    bottom: calc(100% - 10px);
-    left: calc(100% - 2px);
+    bottom: calc(100%);
+    left: calc(100%);
     width: 4px;
     height:10px;
     transform: translateX(0) rotate(0deg);

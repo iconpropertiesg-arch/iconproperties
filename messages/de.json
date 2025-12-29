@@ -8,6 +8,10 @@
     "team": "Team",
     "faq": "FAQ"
   },
+  "portfolio": {
+    "title": "Unsere Immobilien",
+    "subtitle": "Erfolgreiche Transaktionen und Investitionen"
+  },
   "hero": {
     "badge": "Erkunden Sie unser Portfolio",
     "title": "Mallorcas beste Immobilien,\nPrivat kuratiert",

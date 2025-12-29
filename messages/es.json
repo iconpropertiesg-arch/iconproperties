@@ -8,6 +8,10 @@
     "team": "Equipo",
     "faq": "FAQ"
   },
+  "portfolio": {
+    "title": "Nuestras Propiedades",
+    "subtitle": "Transacciones e inversiones exitosas"
+  },
   "hero": {
     "badge": "Explore Nuestro Portafolio",
     "title": "Las Mejores Propiedades de Mallorca,\nCuradas en Privado",
