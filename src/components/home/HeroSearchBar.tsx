@@ -27,6 +27,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const router = useRouter();
   const t = useTranslations('hero');
   const tCommon = useTranslations('propertyTypes');
+  const tPurpose = useTranslations('purpose');
   const [purpose, setPurpose] = useState<'buy' | 'rent'>('buy');
   const [propertyType, setPropertyType] = useState<string[]>([]);
   const [area, setArea] = useState('');
@@ -199,7 +200,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 className="w-full lg:w-auto lg:min-w-[100px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-3 py-2.5 sm:py-3 lg:py-3 text-white transition-all duration-200"
               >
                 <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
-                  {purpose === 'buy' ? 'Buy / Rent' : 'Rent / Buy'}
+                  {tPurpose(purpose)}
                 </span>
                 <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 ml-1.5 sm:ml-2 transition-transform flex-shrink-0", isPurposeOpen && "rotate-180")} />
               </button>
@@ -216,7 +217,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       }}
                       className="w-full px-6 py-3 text-left text-gray-900 hover:bg-gray-100 transition-colors"
                     >
-                      Buy
+                      {tPurpose('buy')}
                     </button>
                     <button
                       type="button"
@@ -226,7 +227,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       }}
                       className="w-full px-6 py-3 text-left text-gray-900 hover:bg-gray-100 transition-colors"
                     >
-                      Rent
+                      {tPurpose('rent')}
                     </button>
                   </div>
                 </>

@@ -550,7 +550,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     0 0 24px rgba(255, 192, 128, 0.7),
     0 0 36px rgba(255, 69, 0, 0.5);
   z-index: 20;
-  /* animation: revolve-border-line 10s linear infinite; */
+  animation: revolve-glow-border 10s linear infinite;
   pointer-events: none;
   opacity: 0.95;
   transform-origin: center;
