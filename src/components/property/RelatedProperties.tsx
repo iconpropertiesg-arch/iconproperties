@@ -25,6 +25,7 @@ const mockRelatedProperties = [
     size: 180,
     images: ['/properties/apartment-1.jpg'],
     type: 'apartment',
+    purpose: 'buy',
     status: 'buy'
   },
   {
@@ -38,6 +39,7 @@ const mockRelatedProperties = [
     size: 320,
     images: ['/properties/house-1.jpg'],
     type: 'house',
+    purpose: 'rent',
     status: 'rent'
   },
   {
@@ -51,6 +53,7 @@ const mockRelatedProperties = [
     size: 280,
     images: ['/properties/penthouse-1.jpg'],
     type: 'apartment',
+    purpose: 'buy',
     status: 'buy'
   },
   {
@@ -64,6 +67,7 @@ const mockRelatedProperties = [
     size: 600,
     images: ['/properties/finca-1.jpg'],
     type: 'villa',
+    purpose: 'rent',
     status: 'rent'
   }
 ];
@@ -122,7 +126,7 @@ export default function RelatedProperties({ property, locale }: RelatedPropertie
                 <div className="absolute top-3 right-3">
                   <span className="bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-bold">
                     {formatPrice(relatedProperty.price, locale)}
-                    {relatedProperty.status === 'rent' && (
+                    {(relatedProperty.purpose === 'rent' || relatedProperty.status === 'rent') && (
                       <span className="text-[10px] font-normal ml-1">
                         {t('common.perMonth')}
                       </span>

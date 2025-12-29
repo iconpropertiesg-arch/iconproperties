@@ -56,8 +56,8 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
               <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium">
                 {t(`propertyTypes.${property.type}`)}
               </span>
-              <span className={`${property.status === 'rent' ? 'bg-purple-600' : 'bg-green-600'} text-white px-3 py-1 rounded-full text-sm font-medium`}>
-                {property.status === 'rent' ? 'For Rent' : 'For Sale'}
+              <span className={`${(property.purpose === 'rent' || property.status === 'rent') ? 'bg-purple-600' : 'bg-green-600'} text-white px-3 py-1 rounded-full text-sm font-medium`}>
+                {(property.purpose === 'rent' || property.status === 'rent') ? 'For Rent' : 'For Sale'}
               </span>
               <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium">
                 {property.availability === 'available' ? 'Available' : 
@@ -79,7 +79,7 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
           <div className="text-right">
             <div className="text-3xl md:text-4xl font-bold text-gray-400 mb-2">
               {formatPrice(property.price, locale)}
-              {property.status === 'rent' && (
+              {(property.purpose === 'rent' || property.status === 'rent') && (
                 <span className="text-xl font-normal text-gray-500 ml-2">
                   {t('common.perMonth')}
                 </span>

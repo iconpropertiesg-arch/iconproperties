@@ -22,6 +22,7 @@ interface Property {
   size: number | null;
   images: string[];
   type: string;
+  purpose?: 'buy' | 'rent';
   status?: 'buy' | 'rent';
 }
 
@@ -74,7 +75,8 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                 size: property.area,
                 images: property.images && property.images.length > 0 ? property.images : [firstImage],
                 type: property.type === 'residential' ? 'house' : (property.type || 'house'),
-                status: property.status || 'buy',
+                purpose: property.purpose || property.status || 'buy',
+                status: property.purpose || property.status || 'buy',
               };
             })
             .filter((p: Property) => p.slug && /^[a-z0-9-]+$/.test(p.slug)); // Only include properties with valid slugs
@@ -205,7 +207,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
                               </span>
                               <span className="bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                                 {formatPrice(property.price, locale)}
-                                {property.status === 'rent' && (
+                                {(property.purpose === 'rent' || property.status === 'rent') && (
                                   <span className="text-xs font-normal ml-1">
                                     {t('common.perMonth')}
                                   </span>

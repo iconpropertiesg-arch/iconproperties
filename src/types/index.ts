@@ -3,6 +3,7 @@ export interface Property {
   title: string;
   slug: string;
   status: 'buy' | 'rent';
+  purpose?: 'buy' | 'rent'; // Database field - optional for backward compatibility
   type: 'apartment' | 'house' | 'commercial' | 'villa';
   area: string;
   price: number;

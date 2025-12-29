@@ -52,7 +52,7 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
                   </h3>
                   <div className="text-2xl font-bold text-primary">
                     {formatPrice(property.price, locale)}
-                    {property.status === 'rent' && (
+                    {(property.purpose === 'rent' || property.status === 'rent') && (
                       <span className="text-base font-normal text-gray-600 ml-1">
                         {t('common.perMonth')}
                       </span>
@@ -201,7 +201,7 @@ export default function PropertyCard({ property, locale, viewMode }: PropertyCar
               <span className="text-xs uppercase tracking-wide text-slate-200/80">{property.yearBuilt}</span>
               <div className="text-2xl font-bold text-white leading-tight">
                 {formatPrice(property.price, locale)}
-                {property.status === 'rent' && (
+                {(property.purpose === 'rent' || property.status === 'rent') && (
                   <span className="text-base font-normal text-slate-200/80 ml-1">
                     {t('common.perMonth')}
                   </span>
