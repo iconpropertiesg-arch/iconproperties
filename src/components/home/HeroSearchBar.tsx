@@ -32,7 +32,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const [purpose, setPurpose] = useState<'buy' | 'rent'>('buy');
   const [propertyType, setPropertyType] = useState<string[]>([]);
   const [area, setArea] = useState('');
-  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 20000, max: 35000000 });
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 39500000 });
   const [isPurposeOpen, setIsPurposeOpen] = useState(false);
   const [isTypeOpen, setIsTypeOpen] = useState(false);
   const [isAreaOpen, setIsAreaOpen] = useState(false);
@@ -101,25 +101,17 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     return `${propertyType.length}`;
   };
 
-  const minPrice = 20000;
-  const maxPrice = 35000000;
+  const minPrice = 0;
+  const maxPrice = 39500000;
 
   const formatPrice = (value: number): string => {
-    if (value >= 1000000) {
-      return `${(value / 1000000).toFixed(value % 1000000 === 0 ? 0 : 1)}M`;
-    }
-    if (value >= 1000) {
-      return `${(value / 1000).toFixed(value % 1000 === 0 ? 0 : 1)}K`;
-    }
-    return value.toLocaleString('en-US');
+    // Format with dots (European format: 39.500.000)
+    return value.toLocaleString('de-DE'); // German locale uses dots for thousands separator
   };
 
   const getPriceDisplayText = () => {
-    let minText = formatPrice(priceRange.min).toLowerCase();
-    let maxText = formatPrice(priceRange.max).toLowerCase();
-    // Replace "m" with "million" for better readability
-    minText = minText.replace('m', 'million');
-    maxText = maxText.replace('m', 'million');
+    const minText = formatPrice(priceRange.min);
+    const maxText = formatPrice(priceRange.max);
     return `${minText} to ${maxText}`;
   };
 
@@ -147,9 +139,9 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     const value = minPrice + (percent / 100) * (maxPrice - minPrice);
     
     if (isDragging === 'min') {
-      setPriceRange(prev => ({ ...prev, min: Math.min(Math.round(value), prev.max - 10000) }));
+      setPriceRange(prev => ({ ...prev, min: Math.max(0, Math.min(Math.round(value), prev.max - 100000)) }));
     } else {
-      setPriceRange(prev => ({ ...prev, max: Math.max(Math.round(value), prev.min + 10000) }));
+      setPriceRange(prev => ({ ...prev, max: Math.min(maxPrice, Math.max(Math.round(value), prev.min + 100000)) }));
     }
   }, [isDragging, minPrice, maxPrice]);
 
@@ -423,9 +415,9 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                         const distanceToMax = Math.abs(value - priceRange.max);
                         
                         if (distanceToMin < distanceToMax) {
-                          setPriceRange(prev => ({ ...prev, min: Math.min(Math.round(value), prev.max - 10000) }));
+                          setPriceRange(prev => ({ ...prev, min: Math.max(0, Math.min(Math.round(value), prev.max - 100000)) }));
                         } else {
-                          setPriceRange(prev => ({ ...prev, max: Math.max(Math.round(value), prev.min + 10000) }));
+                          setPriceRange(prev => ({ ...prev, max: Math.min(maxPrice, Math.max(Math.round(value), prev.min + 100000)) }));
                         }
                       }}
                     >
