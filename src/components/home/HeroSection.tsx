@@ -156,12 +156,12 @@ export default function HeroSection({ locale }: HeroSectionProps) {
           {/* Left Column - Text Content */}
           <div className="text-white space-y-6 sm:space-y-8">
             {/* New Badge Banner */}
-            <div className="relative inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 backdrop-blur-sm rounded-lg border border-gray-600/30">
+            <div className="relative inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 mt-8 md:mt-12 py-3 backdrop-blur-sm rounded-lg border border-gray-600/30">
               {/* Small white dot */}
               <div className="absolute -top-1 -left-1 w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white rounded-full"></div>
               
               {/* Blue NEW badge */}
-              <div className="px-2 sm:px-3 py-0.5 sm:py-1 bg-blue-700 rounded-md">
+              <div className="px-2 sm:px-3 py-0.5 sm:py-1  bg-blue-700 rounded-md">
                 <span className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-wide">NEW</span>
               </div>
               
