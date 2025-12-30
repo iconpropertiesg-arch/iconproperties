@@ -77,8 +77,8 @@ export default function Header({ locale }: HeaderProps) {
           isScrolled && isVisible
             ? 'py-2 sm:py-2 border-b border-white/20 shadow-2xl'
             : isScrolled
-            ? 'navbar-gradient py-2 sm:py-2 shadow-lg border-b border-white/10'
-            : 'navbar-gradient py-2 sm:py-3'
+            ? 'py-2 sm:py-2 shadow-lg border-b border-white/10'
+            : 'py-2 sm:py-3'
         )}
         style={
           isScrolled && isVisible

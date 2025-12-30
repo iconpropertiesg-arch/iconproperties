@@ -2,31 +2,34 @@
 
 import Image from 'next/image';
 import { Shield, Eye, Target, Award } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface TeamProfilesProps {
   locale: string;
 }
 
-const keyValues = [
-  {
-    icon: Shield,
-    label: 'Discretion'
-  },
-  {
-    icon: Eye,
-    label: 'Transparency'
-  },
-  {
-    icon: Target,
-    label: 'Precision'
-  },
-  {
-    icon: Award,
-    label: 'Premium client experience'
-  }
-];
-
 export default function TeamProfiles({ locale }: TeamProfilesProps) {
+  const t = useTranslations('team.profiles');
+  
+  const keyValues = [
+    {
+      icon: Shield,
+      label: t('discretion')
+    },
+    {
+      icon: Eye,
+      label: t('transparency')
+    },
+    {
+      icon: Target,
+      label: t('precision')
+    },
+    {
+      icon: Award,
+      label: t('premiumExperience')
+    }
+  ];
+  
   return (
     <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
@@ -54,44 +57,44 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
               <div className="md:col-span-2">
                 <div className="mb-4">
                   <span className="inline-block px-3 py-1 bg-gray-700/20 text-gray-400 text-sm font-semibold rounded-full border border-gray-400/30">
-                    Founder & Lead Advisor
+                    {t('founderBadge')}
                   </span>
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-4">
-                  Daniel — Founder & Private Client Advisor
+                  {t('founderTitle')}
                 </h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  Daniel specialises in helping international buyers and luxury property owners navigate Mallorca's premium real estate market. With a strong background in high-end marketing, negotiations and client relations, he provides a modern, data-driven approach combined with a deeply personal advisory experience.
+                  {t('founderDescription1')}
                 </p>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  He works primarily with clients from Germany, Switzerland, the UK and Scandinavia and focuses on:
+                  {t('founderDescription2')}
                 </p>
                 <ul className="space-y-2 mb-8 text-gray-300">
                   <li className="flex items-start">
                     <span className="text-gray-400 mr-2">•</span>
-                    <span>Luxury villa acquisitions</span>
+                    <span>{t('focus1')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-gray-400 mr-2">•</span>
-                    <span>Off-market sales</span>
+                    <span>{t('focus2')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-gray-400 mr-2">•</span>
-                    <span>Investment guidance</span>
+                    <span>{t('focus3')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-gray-400 mr-2">•</span>
-                    <span>Area advisory</span>
+                    <span>{t('focus4')}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-gray-400 mr-2">•</span>
-                    <span>End-to-end buying support</span>
+                    <span>{t('focus5')}</span>
                   </li>
                 </ul>
 
                 {/* Key Values */}
                 <div>
-                  <h4 className="text-lg font-semibold text-white mb-4">Key Values:</h4>
+                  <h4 className="text-lg font-semibold text-white mb-4">{t('keyValues')}</h4>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {keyValues.map((value, index) => {
                       const Icon = value.icon;
@@ -116,35 +119,35 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
         <div className="max-w-4xl mx-auto">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 md:p-12">
             <h3 className="text-2xl font-bold text-white mb-6">
-              Expanding Our Private Advisory Network
+              {t('expandingTitle')}
             </h3>
             <p className="text-gray-300 leading-relaxed mb-6">
-              As ICON PROPERTIES grows, we partner with trusted professionals in:
+              {t('expandingDescription')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-start">
                 <span className="text-gray-400 mr-2">•</span>
-                <span className="text-gray-300">Legal & tax advisory</span>
+                <span className="text-gray-300">{t('partner1')}</span>
               </div>
               <div className="flex items-start">
                 <span className="text-gray-400 mr-2">•</span>
-                <span className="text-gray-300">Architecture & construction</span>
+                <span className="text-gray-300">{t('partner2')}</span>
               </div>
               <div className="flex items-start">
                 <span className="text-gray-400 mr-2">•</span>
-                <span className="text-gray-300">Interior design</span>
+                <span className="text-gray-300">{t('partner3')}</span>
               </div>
               <div className="flex items-start">
                 <span className="text-gray-400 mr-2">•</span>
-                <span className="text-gray-300">Property management</span>
+                <span className="text-gray-300">{t('partner4')}</span>
               </div>
               <div className="flex items-start">
                 <span className="text-gray-400 mr-2">•</span>
-                <span className="text-gray-300">Mortgage & financing services</span>
+                <span className="text-gray-300">{t('partner5')}</span>
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed mt-6">
-              Every partner is hand-selected to ensure clients receive reliable, high-quality, end-to-end support.
+              {t('expandingFooter')}
             </p>
           </div>
         </div>

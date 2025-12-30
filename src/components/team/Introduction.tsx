@@ -1,10 +1,14 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 interface IntroductionProps {
   locale: string;
 }
 
 export default function Introduction({ locale }: IntroductionProps) {
+  const t = useTranslations('team.introduction');
+  
   return (
     <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
@@ -16,16 +20,16 @@ export default function Introduction({ locale }: IntroductionProps) {
       <div className="container mx-auto max-w-4xl relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            A Boutique Team With a Personal Approach
+            {t('title')}
           </h2>
         </div>
 
         <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
           <p>
-            At ICON PROPERTIES, we believe luxury real estate requires more than listings and online portal, it requires genuine relationships, trusted advisory and a guided experience from start to finish.
+            {t('paragraph1')}
           </p>
           <p>
-            Our team works closely with international buyers and property owners, ensuring every client receives tailored support, expert knowledge and complete discretion throughout the entire journey.
+            {t('paragraph2')}
           </p>
         </div>
       </div>

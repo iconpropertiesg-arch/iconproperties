@@ -1,21 +1,24 @@
 'use client';
 
 import { Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface WhyChooseTeamProps {
   locale: string;
 }
 
-const points = [
-  'Personal, one-to-one service',
-  'Boutique approach — no mass-market noise',
-  'Expert knowledge of Mallorca\'s prime areas',
-  'International clientele focus',
-  'Full advisory from search to closing',
-  'Off-market access through private network'
-];
-
 export default function WhyChooseTeam({ locale }: WhyChooseTeamProps) {
+  const t = useTranslations('team.whyChoose');
+  
+  const points = [
+    t('point1'),
+    t('point2'),
+    t('point3'),
+    t('point4'),
+    t('point5'),
+    t('point6')
+  ];
+  
   return (
     <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
@@ -27,7 +30,7 @@ export default function WhyChooseTeam({ locale }: WhyChooseTeamProps) {
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Why Clients Choose Our Team
+            {t('title')}
           </h2>
         </div>
 

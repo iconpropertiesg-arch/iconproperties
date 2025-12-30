@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
 
       const supabase = createServerClient();
       const { data, error } = await supabase.storage
-        .from('property_images')
+        .from('properties')
         .upload(uploadPath, buffer, {
           contentType: file.type,
           upsert: false
@@ -150,7 +150,7 @@ export async function POST(request: NextRequest) {
 
       // Get public URL
       const { data: urlData } = supabase.storage
-        .from('property_images')
+        .from('properties')
         .getPublicUrl(uploadPath);
 
       return NextResponse.json({

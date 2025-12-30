@@ -1,23 +1,27 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 interface TeamTestimonialsProps {
   locale: string;
 }
 
-const testimonials = [
-  {
-    quote: "Goldie was extremely professional and found us a villa in Son Vida that wasn't listed anywhere. A perfect experience.",
-    author: "Michael R.",
-    location: "Germany"
-  },
-  {
-    quote: "Discreet, honest and fast. Exactly what we needed.",
-    author: "Laura T.",
-    location: "UK"
-  }
-];
-
 export default function TeamTestimonials({ locale }: TeamTestimonialsProps) {
+  const t = useTranslations('team.testimonials');
+  
+  const testimonials = [
+    {
+      quote: t('testimonial1.quote'),
+      author: t('testimonial1.author'),
+      location: t('testimonial1.location')
+    },
+    {
+      quote: t('testimonial2.quote'),
+      author: t('testimonial2.author'),
+      location: t('testimonial2.location')
+    }
+  ];
+  
   return (
     <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
@@ -29,7 +33,7 @@ export default function TeamTestimonials({ locale }: TeamTestimonialsProps) {
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            What Clients Say
+            {t('title')}
           </h2>
         </div>
 

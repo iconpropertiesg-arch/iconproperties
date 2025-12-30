@@ -15,7 +15,7 @@ Use **Supabase Storage** to store uploaded images. This works on both localhost 
 3. Navigate to **Storage** in the left sidebar
 4. Click **"New bucket"**
 5. Configure the bucket:
-   - **Name**: `property_images`
+   - **Name**: `properties`
    - **Public bucket**: ✅ **Enable this** (so images are publicly accessible)
    - **File size limit**: 10MB (or your preferred limit)
    - **Allowed MIME types**: `image/jpeg, image/jpg, image/png, image/webp, image/gif`
@@ -26,14 +26,14 @@ Use **Supabase Storage** to store uploaded images. This works on both localhost 
 After creating the bucket, you need to set up policies to allow uploads:
 
 1. Go to **Storage** → **Policies** tab
-2. Click on the `property_images` bucket
+2. Click on the `properties` bucket
 3. Click **"New Policy"**
 4. Create a policy for **INSERT** (uploads):
    - **Policy name**: `Allow authenticated uploads`
    - **Allowed operation**: `INSERT`
    - **Policy definition**: 
    ```sql
-   (bucket_id = 'property_images'::text)
+   (bucket_id = 'properties'::text)
    ```
    - **Policy command**: `INSERT`
    - **Target roles**: `authenticated` (or `anon` if you want public uploads)
@@ -42,7 +42,7 @@ After creating the bucket, you need to set up policies to allow uploads:
    - **Allowed operation**: `SELECT`
    - **Policy definition**:
    ```sql
-   (bucket_id = 'property_images'::text)
+   (bucket_id = 'properties'::text)
    ```
    - **Policy command**: `SELECT`
    - **Target roles**: `anon, authenticated` (public access since bucket is public)
@@ -78,13 +78,13 @@ Make sure these are set in your Vercel environment variables:
 
 After upload, images will have URLs like:
 ```
-https://zgxjuueedtcfwlkyzrvw.supabase.co/storage/v1/object/public/property_images/properties/property-1234567890-abc123.png
+https://yjvyrrdvalzjtcwfnymc.supabase.co/storage/v1/object/public/properties/properties/property-1234567890-abc123.png
 ```
 
 ## Troubleshooting
 
 ### Error: "Bucket not found"
-- Make sure the bucket name is exactly `property_images`
+- Make sure the bucket name is exactly `properties`
 - Check that the bucket exists in your Supabase dashboard
 
 ### Error: "new row violates row-level security policy"

@@ -317,6 +317,68 @@
       "title": "Meet the ICON PROPERTIES Team",
       "subtitle": "A boutique real estate advisory built on trust, discretion and deep local expertise.",
       "description": "We work with a limited number of clients to deliver exceptional results — personally, privately and professionally."
+    },
+    "introduction": {
+      "title": "A Boutique Team With a Personal Approach",
+      "paragraph1": "At ICON PROPERTIES, we believe luxury real estate requires more than listings and online portal, it requires genuine relationships, trusted advisory and a guided experience from start to finish.",
+      "paragraph2": "Our team works closely with international buyers and property owners, ensuring every client receives tailored support, expert knowledge and complete discretion throughout the entire journey."
+    },
+    "profiles": {
+      "founderBadge": "Founder & Lead Advisor",
+      "founderTitle": "Daniel — Founder & Private Client Advisor",
+      "founderDescription1": "Daniel specialises in helping international buyers and luxury property owners navigate Mallorca's premium real estate market. With a strong background in high-end marketing, negotiations and client relations, he provides a modern, data-driven approach combined with a deeply personal advisory experience.",
+      "founderDescription2": "He works primarily with clients from Germany, Switzerland, the UK and Scandinavia and focuses on:",
+      "focus1": "Luxury villa acquisitions",
+      "focus2": "Off-market sales",
+      "focus3": "Investment guidance",
+      "focus4": "Area advisory",
+      "focus5": "End-to-end buying support",
+      "keyValues": "Key Values:",
+      "discretion": "Discretion",
+      "transparency": "Transparency",
+      "precision": "Precision",
+      "premiumExperience": "Premium client experience",
+      "expandingTitle": "Expanding Our Private Advisory Network",
+      "expandingDescription": "As ICON PROPERTIES grows, we partner with trusted professionals in:",
+      "partner1": "Legal & tax advisory",
+      "partner2": "Architecture & construction",
+      "partner3": "Interior design",
+      "partner4": "Property management",
+      "partner5": "Mortgage & financing services",
+      "expandingFooter": "Every partner is hand-selected to ensure clients receive reliable, high-quality, end-to-end support."
+    },
+    "whyChoose": {
+      "title": "Why Clients Choose Our Team",
+      "point1": "Personal, one-to-one service",
+      "point2": "Boutique approach — no mass-market noise",
+      "point3": "Expert knowledge of Mallorca's prime areas",
+      "point4": "International clientele focus",
+      "point5": "Full advisory from search to closing",
+      "point6": "Off-market access through private network"
+    },
+    "testimonials": {
+      "title": "What Clients Say",
+      "testimonial1": {
+        "quote": "Goldie was extremely professional and found us a villa in Son Vida that wasn't listed anywhere. A perfect experience.",
+        "author": "Michael R.",
+        "location": "Germany"
+      },
+      "testimonial2": {
+        "quote": "Discreet, honest and fast. Exactly what we needed.",
+        "author": "Laura T.",
+        "location": "UK"
+      }
+    },
+    "join": {
+      "title": "Join ICON PROPERTIES",
+      "description1": "We are always interested in collaborating with talented professionals who share our values of service, discretion and excellence.",
+      "description2": "Whether you're an agent, advisor or specialist, feel free to reach out.",
+      "button": "Apply Now"
+    },
+    "cta": {
+      "title": "Speak With Our Team",
+      "description": "Whether you're looking to buy, sell or receive private off-market opportunities, we're here to help.",
+      "button": "Contact Us"
     }
   },
   "footer": {

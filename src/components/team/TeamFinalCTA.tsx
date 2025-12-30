@@ -2,12 +2,15 @@
 
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface TeamFinalCTAProps {
   locale: string;
 }
 
 export default function TeamFinalCTA({ locale }: TeamFinalCTAProps) {
+  const t = useTranslations('team.cta');
+  
   return (
     <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
@@ -19,16 +22,16 @@ export default function TeamFinalCTA({ locale }: TeamFinalCTAProps) {
       <div className="container mx-auto max-w-4xl relative z-10">
         <div className="text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Speak With Our Team
+            {t('title')}
           </h2>
           <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Whether you're looking to buy, sell or receive private off-market opportunities, we're here to help.
+            {t('description')}
           </p>
           <Link
             href={`/${locale}/contact`}
             className="group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl "
           >
-            Contact Us
+            {t('button')}
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

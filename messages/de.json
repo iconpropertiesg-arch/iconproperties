@@ -313,6 +313,68 @@
       "title": "Lernen Sie das ICON PROPERTIES Team kennen",
       "subtitle": "Eine Boutique-Immobilienberatung, die auf Vertrauen, Diskretion und tiefgreifender lokaler Expertise aufbaut.",
       "description": "Wir arbeiten mit einer begrenzten Anzahl von Kunden zusammen, um außergewöhnliche Ergebnisse zu erzielen — persönlich, privat und professionell."
+    },
+    "introduction": {
+      "title": "Ein Boutique-Team mit persönlichem Ansatz",
+      "paragraph1": "Bei ICON PROPERTIES glauben wir, dass Luxusimmobilien mehr erfordern als Listings und Online-Portale. Es erfordert echte Beziehungen, vertrauenswürdige Beratung und eine geführte Erfahrung von Anfang bis Ende.",
+      "paragraph2": "Unser Team arbeitet eng mit internationalen Käufern und Immobilieneigentümern zusammen und stellt sicher, dass jeder Kunde maßgeschneiderte Unterstützung, Expertenwissen und vollständige Diskretion während der gesamten Reise erhält."
+    },
+    "profiles": {
+      "founderBadge": "Gründer & Hauptberater",
+      "founderTitle": "Daniel — Gründer & Privatkundenberater",
+      "founderDescription1": "Daniel ist spezialisiert auf die Unterstützung internationaler Käufer und Luxusimmobilieneigentümer bei der Navigation im Premium-Immobilienmarkt von Mallorca. Mit einem starken Hintergrund in High-End-Marketing, Verhandlungen und Kundenbeziehungen bietet er einen modernen, datengesteuerten Ansatz kombiniert mit einer zutiefst persönlichen Beratungserfahrung.",
+      "founderDescription2": "Er arbeitet hauptsächlich mit Kunden aus Deutschland, der Schweiz, dem Vereinigten Königreich und Skandinavien und konzentriert sich auf:",
+      "focus1": "Luxus-Villen-Erwerb",
+      "focus2": "Off-Market-Verkäufe",
+      "focus3": "Anlageberatung",
+      "focus4": "Gebietsberatung",
+      "focus5": "End-to-End-Kaufunterstützung",
+      "keyValues": "Schlüsselwerte:",
+      "discretion": "Diskretion",
+      "transparency": "Transparenz",
+      "precision": "Präzision",
+      "premiumExperience": "Premium-Kundenerfahrung",
+      "expandingTitle": "Erweiterung unseres privaten Beratungsnetzwerks",
+      "expandingDescription": "Während ICON PROPERTIES wächst, arbeiten wir mit vertrauenswürdigen Fachleuten zusammen in:",
+      "partner1": "Rechts- und Steuerberatung",
+      "partner2": "Architektur & Bau",
+      "partner3": "Innenarchitektur",
+      "partner4": "Immobilienverwaltung",
+      "partner5": "Hypotheken- und Finanzierungsdienstleistungen",
+      "expandingFooter": "Jeder Partner wird sorgfältig ausgewählt, um sicherzustellen, dass Kunden zuverlässige, hochwertige, end-to-end Unterstützung erhalten."
+    },
+    "whyChoose": {
+      "title": "Warum Kunden Unser Team Wählen",
+      "point1": "Persönlicher, eins-zu-eins Service",
+      "point2": "Boutique-Ansatz — kein Massenmarkt-Lärm",
+      "point3": "Expertenwissen über Mallorcas Premium-Gebiete",
+      "point4": "Fokus auf internationale Kundschaft",
+      "point5": "Vollständige Beratung von der Suche bis zum Abschluss",
+      "point6": "Off-Market-Zugang über privates Netzwerk"
+    },
+    "testimonials": {
+      "title": "Was Kunden Sagen",
+      "testimonial1": {
+        "quote": "Goldie war äußerst professionell und fand uns eine Villa in Son Vida, die nirgendwo gelistet war. Eine perfekte Erfahrung.",
+        "author": "Michael R.",
+        "location": "Deutschland"
+      },
+      "testimonial2": {
+        "quote": "Diskret, ehrlich und schnell. Genau das, was wir brauchten.",
+        "author": "Laura T.",
+        "location": "UK"
+      }
+    },
+    "join": {
+      "title": "Werden Sie Teil von ICON PROPERTIES",
+      "description1": "Wir sind immer interessiert an der Zusammenarbeit mit talentierten Fachleuten, die unsere Werte von Service, Diskretion und Exzellenz teilen.",
+      "description2": "Ob Sie Agent, Berater oder Spezialist sind, zögern Sie nicht, uns zu kontaktieren.",
+      "button": "Jetzt Bewerben"
+    },
+    "cta": {
+      "title": "Sprechen Sie mit Unserem Team",
+      "description": "Ob Sie kaufen, verkaufen oder private Off-Market-Möglichkeiten erhalten möchten, wir sind hier, um zu helfen.",
+      "button": "Kontaktieren Sie Uns"
     }
   },
   "footer": {

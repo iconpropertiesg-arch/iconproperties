@@ -527,6 +527,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
 /* Revolving Border Line Effect */
 .revolving-border-line {
   position: relative;
+  overflow: hidden;
 }
 
 .revolving-border-line::before {
@@ -534,7 +535,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   position: absolute;
   top: -2px;
   left: 0;
-  width: 150px;
+  width: 120px;
   height: 4px;
   background: linear-gradient(
     90deg,
@@ -553,157 +554,70 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   animation: revolve-glow-border 10s linear infinite;
   pointer-events: none;
   opacity: 0.95;
-  transform-origin: center;
-}
-/* For rounded-full on large screens */
-@media (min-width: 1024px) {
-  .revolving-border-line::before {
-    animation: revolve-glow-border 10s linear infinite;
-  }
 }
 
 @keyframes revolve-glow-border {
-  /* Top edge - left to right */
+  /* Top edge - moving left to right (horizontal line) */
   0% {
     top: -2px;
     left: 0%;
-    width: 100px;
-    height: 6px;
-    transform: rotate(0deg);
+    width: 120px;
+    height: 4px;
   }
-  22% {
-    top: -2px;
-    left: calc(100% - 100px);
-    width: 100px;
-    height: 2px;
-    transform: rotate(0deg);
-  }
-  
-  /* Approaching top-right corner */
-  23% {
-    top: -4px;
-    left: calc(100% - 40px);
-    width: 40px;
-    height: 2px;
-    transform: rotate(0deg);
-  }
-  
-  /* Top-right corner transition */
   24% {
-    top: 10px;
-    left: calc(100% - 6px);
-    width: 6px;
-    height: 0px;
-    transform: rotate(0deg);
+    top: -2px;
+    left: calc(100% - 120px);
+    width: 120px;
+    height: 4px;
   }
   
-  /* Right edge - moving down */
+  /* Right edge - moving down (vertical line - only shows corner, not full height) */
   25% {
-    top: 90px;
-    left: calc(100% - 4px);
-    width: 6px;
-    height: 0px;
-    transform: rotate(0deg);
+    top: 0%;
+    left: calc(100% - 5px);
+    width: 4px;
+    height: 15px;
   }
-  47% {
-    top: calc(100% - 20px);
-    left: calc(100% - 4px);
-    width: 6px;
-    height: 0px;
-    transform: rotate(0deg);
-  }
-  
-  /* Approaching bottom-right corner */
-  48% {
-    top: calc(100% - 50px);
-    left: calc(100% - 4px);
-    width: 6px;
-    height: 0px;
-    transform: rotate(0deg);
-  }
-  
-  /* Bottom-right corner transition */
   49% {
-    top: calc(100% - 10px);
-    left: calc(100% - 40px);
-    width: 40px;
-    height: 2px;
-    transform: rotate(0deg);
+    top: calc(100% - 15px);
+    left: calc(100% - 5px);
+    width: 4px;
+    height: 15px;
   }
   
-  /* Bottom edge - moving left */
+  /* Bottom edge - moving left (horizontal line) */
   50% {
     top: calc(100% - 4px);
     left: calc(100% - 120px);
-    width: 100px;
-    height: 2px;
-    transform: rotate(0deg);
+    width: 120px;
+    height: 4px;
   }
-  72% {
-    top: calc(100% - 4px);
-    left: 20px;
-    width: 100px;
-    height: 2px;
-    transform: rotate(0deg);
-  }
-  
-  /* Approaching bottom-left corner */
-  73% {
-    top: calc(100% - 4px);
-    left: 0px;
-    width: 40px;
-    height: 2px;
-    transform: rotate(0deg);
-  }
-  
-  /* Bottom-left corner transition */
   74% {
-    top: calc(100% - 40px);
-    left: -4px;
-    width: 6px;
-    height: 0px;
-    transform: rotate(0deg);
-  }
-  
-  /* Left edge - moving up */
-  75% {
-    top: calc(100% - 120px);
-    left: -4px;
-    width: 6px;
-    height: 0px;
-    transform: rotate(0deg);
-  }
-  97% {
-    top: 40px;
-    left: -4px;
-    width: 6px;
-    height: 0px;
-    transform: rotate(0deg);
-  }
-  
-  /* Approaching top-left corner */
-  98% {
-    top: 10px;
-    left: -4px;
-    width: 6px;
-    height: 0px;
-    transform: rotate(0deg);
-  }
-  
-  /* Top-left corner transition */
-  99% {
-    top: -2px;
+    top: calc(100% - 4px);
     left: 0px;
-    width: 40px;
-    height: 6px;
-    transform: rotate(0deg);
+    width: 120px;
+    height: 4px;
   }
   
+  /* Left edge - moving up (vertical line - only shows corner, not full height) */
+  75% {
+    top: calc(100% - 15px);
+    left: -2px;
+    width: 4px;
+    height: 15px;
+  }
+  99% {
+    top: 0px;
+    left: -2px;
+    width: 4px;
+    height: 15px;
+  }
+  
+  /* Back to start */
   100% {
     top: -2px;
     left: 0%;
-    width: 100px;
-    height: 2px;
-    transform: rotate(0deg);
+    width: 120px;
+    height: 4px;
   }
 }

@@ -269,12 +269,13 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
       const isLargeFile = file.size > vercelLimit;
 
       // For files > 4.5MB, use direct client-side upload to Supabase (bypasses Vercel limit)
+      // Requires RLS policies to be configured in Supabase Storage
       // For smaller files, use server-side upload (more secure, uses service role key)
       if (isLargeFile) {
-        // Direct client-side upload for large files
+        // Direct client-side upload for large files (requires RLS policies)
         await uploadDirectToSupabase(index, file);
       } else {
-        // Server-side upload for smaller files
+        // Server-side upload for smaller files (uses service role key, bypasses RLS)
         await uploadViaServer(index, file);
       }
     } catch (error: any) {
@@ -306,7 +307,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
       // Step 2: Upload directly to Supabase Storage (bypasses Vercel 4.5MB limit)
       const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('property_images')
+        .from('properties')
         .upload(initData.path, file, {
           contentType: file.type,
           upsert: false,
@@ -319,7 +320,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
       // Step 3: Get public URL
       const { data: urlData } = supabase.storage
-        .from('property_images')
+        .from('properties')
         .getPublicUrl(initData.path);
 
       if (urlData?.publicUrl) {
