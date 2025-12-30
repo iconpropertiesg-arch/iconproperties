@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
@@ -95,9 +95,38 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
   const [hoveredArea, setHoveredArea] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
   
-  // Blur reveal effects
-  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
-  const { elementRef: subtitleRef, style: subtitleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
+  // Line-by-line reveal states
+  const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
+  const [subtitleLinesVisible, setSubtitleLinesVisible] = useState<number[]>([]);
+  
+  // Blur reveal effects (these refs will be used for both blur and line reveal)
+  const { elementRef: titleRef, style: titleBlurStyle } = useBlurReveal<HTMLHeadingElement>({ maxBlur: 8, minBlur: 0 });
+  const { elementRef: subtitleRef, style: subtitleBlurStyle } = useBlurReveal<HTMLParagraphElement>({ maxBlur: 8, minBlur: 0 });
+  
+  // Line-by-line reveal effect
+  useEffect(() => {
+    const titleText = "Where We Operate";
+    const subtitleText = "From the South-West's private sea-view villas to Palma's historic penthouses, we specialise in the island's most sought-after locations";
+    
+    const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    const subtitleLines = subtitleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    
+    const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+    const finalSubtitleLines = subtitleLines.length > 0 ? subtitleLines : [subtitleText.trim()];
+    
+    finalTitleLines.forEach((_, index) => {
+      setTimeout(() => {
+        setTitleLinesVisible(prev => [...prev, index]);
+      }, 600 + (index * 500));
+    });
+    
+    const subtitleStartDelay = 600 + (finalTitleLines.length * 500) + 400;
+    finalSubtitleLines.forEach((_, index) => {
+      setTimeout(() => {
+        setSubtitleLinesVisible(prev => [...prev, index]);
+      }, subtitleStartDelay + (index * 500));
+    });
+  }, []);
 
   const handleAreaClick = (areaName: string) => {
     setSelectedArea(areaName);
@@ -110,11 +139,53 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Where We Operate
+          <h2 ref={titleRef} style={titleBlurStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
+            {(() => {
+              const titleText = "Where We Operate";
+              const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+              const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+              
+              return finalTitleLines.map((line, index) => {
+                const isVisible = titleLinesVisible.includes(index);
+                return (
+                  <span
+                    key={index}
+                    className={cn(
+                      "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                  >
+                    {line}
+                  </span>
+                );
+              });
+            })()}
           </h2>
-          <p ref={subtitleRef as React.RefObject<HTMLParagraphElement>} style={subtitleStyle} className="text-xl text-gray-300 max-w-3xl mx-auto">
-            From the South-West's private sea-view villas to Palma's historic penthouses, we specialise in the island's most sought-after locations
+          <p ref={subtitleRef} style={subtitleBlurStyle} className="text-xl text-gray-300 max-w-3xl mx-auto">
+            {(() => {
+              const subtitleText = "From the South-West's private sea-view villas to Palma's historic penthouses, we specialise in the island's most sought-after locations";
+              const subtitleLines = subtitleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+              const finalSubtitleLines = subtitleLines.length > 0 ? subtitleLines : [subtitleText.trim()];
+              
+              return finalSubtitleLines.map((line, index) => {
+                const isVisible = subtitleLinesVisible.includes(index);
+                return (
+                  <span
+                    key={index}
+                    className={cn(
+                      "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                  >
+                    {line}
+                  </span>
+                );
+              });
+            })()}
           </p>
         </div>
 

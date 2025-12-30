@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Bed, Bath, Maximize, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
 
 interface FeaturedPropertiesProps {
@@ -34,9 +35,13 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
   
-  // Blur reveal effects
-  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
-  const { elementRef: descRef, style: descStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
+  // Line-by-line reveal states
+  const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
+  const [descLinesVisible, setDescLinesVisible] = useState<number[]>([]);
+  
+  // Blur reveal effects (these refs will be used for both blur and line reveal)
+  const { elementRef: titleRef, style: titleBlurStyle } = useBlurReveal<HTMLHeadingElement>({ maxBlur: 8, minBlur: 0 });
+  const { elementRef: descRef, style: descBlurStyle } = useBlurReveal<HTMLParagraphElement>({ maxBlur: 8, minBlur: 0 });
   
   // Fetch properties from database
   useEffect(() => {
@@ -99,6 +104,31 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
     fetchProperties();
   }, [locale]);
   
+  // Line-by-line reveal effect
+  useEffect(() => {
+    const titleText = t('home.featuredProperties');
+    const descText = "Discover our hand-picked selection of exceptional properties in Mallorca's most prestigious locations.";
+    
+    const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    const descLines = descText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    
+    const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+    const finalDescLines = descLines.length > 0 ? descLines : [descText.trim()];
+    
+    finalTitleLines.forEach((_, index) => {
+      setTimeout(() => {
+        setTitleLinesVisible(prev => [...prev, index]);
+      }, 600 + (index * 500));
+    });
+    
+    const descStartDelay = 600 + (finalTitleLines.length * 500) + 400;
+    finalDescLines.forEach((_, index) => {
+      setTimeout(() => {
+        setDescLinesVisible(prev => [...prev, index]);
+      }, descStartDelay + (index * 500));
+    });
+  }, [t]);
+  
   // Show 3 cards at a time
   const cardsPerSlide = 3;
   const totalSlides = Math.ceil(properties.length / cardsPerSlide);
@@ -137,11 +167,53 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {t('home.featuredProperties')}
+          <h2 ref={titleRef} className="text-3xl md:text-4xl font-bold text-white mb-4">
+            {(() => {
+              const titleText = t('home.featuredProperties');
+              const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+              const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+              
+              return finalTitleLines.map((line, index) => {
+                const isVisible = titleLinesVisible.includes(index);
+                return (
+                  <span
+                    key={index}
+                    className={cn(
+                      "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                  >
+                    {line}
+                  </span>
+                );
+              });
+            })()}
           </h2>
-          <p ref={descRef as React.RefObject<HTMLParagraphElement>} style={descStyle} className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Discover our hand-picked selection of exceptional properties in Mallorca's most prestigious locations.
+          <p ref={descRef} style={descBlurStyle} className="text-lg text-gray-300 max-w-2xl mx-auto">
+            {(() => {
+              const descText = "Discover our hand-picked selection of exceptional properties in Mallorca's most prestigious locations.";
+              const descLines = descText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+              const finalDescLines = descLines.length > 0 ? descLines : [descText.trim()];
+              
+              return finalDescLines.map((line, index) => {
+                const isVisible = descLinesVisible.includes(index);
+                return (
+                  <span
+                    key={index}
+                    className={cn(
+                      "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                  >
+                    {line}
+                  </span>
+                );
+              });
+            })()}
           </p>
         </div>
 

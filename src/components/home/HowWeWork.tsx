@@ -76,8 +76,24 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
   const [scrollProgress, setScrollProgress] = useState<{ [key: number]: number }>({});
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   
-  // Blur reveal effects
-  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
+  // Line-by-line reveal states
+  const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
+  
+  // Blur reveal effects (this ref will be used for both blur and line reveal)
+  const { elementRef: titleRef, style: titleBlurStyle } = useBlurReveal<HTMLHeadingElement>({ maxBlur: 8, minBlur: 0 });
+  
+  // Line-by-line reveal effect
+  useEffect(() => {
+    const titleText = "The Private Buying Experience";
+    const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+    
+    finalTitleLines.forEach((_, index) => {
+      setTimeout(() => {
+        setTitleLinesVisible(prev => [...prev, index]);
+      }, 600 + (index * 500));
+    });
+  }, []);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -179,8 +195,29 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
           {/* <div className="inline-block mb-4">
             <span className="text-gray-400 text-sm font-semibold tracking-wider uppercase">#7</span>
           </div> */}
-          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
-            The Private Buying Experience
+          <h2 ref={titleRef} style={titleBlurStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
+            {(() => {
+              const titleText = "The Private Buying Experience";
+              const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+              const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+              
+              return finalTitleLines.map((line, index) => {
+                const isVisible = titleLinesVisible.includes(index);
+                return (
+                  <span
+                    key={index}
+                    className={cn(
+                      "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                  >
+                    {line}
+                  </span>
+                );
+              });
+            })()}
           </h2>
         </div>
 

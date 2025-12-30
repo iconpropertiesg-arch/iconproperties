@@ -1,7 +1,9 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
 
 interface RequestPrivatePortfolioProps {
@@ -11,8 +13,24 @@ interface RequestPrivatePortfolioProps {
 export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfolioProps) {
   const router = useRouter();
   
-  // Blur reveal effects
-  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
+  // Line-by-line reveal states
+  const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
+  
+  // Blur reveal effects (this ref will be used for both blur and line reveal)
+  const { elementRef: titleRef, style: titleBlurStyle } = useBlurReveal<HTMLHeadingElement>({ maxBlur: 8, minBlur: 0 });
+  
+  // Line-by-line reveal effect
+  useEffect(() => {
+    const titleText = "Request Private Portfolio";
+    const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+    
+    finalTitleLines.forEach((_, index) => {
+      setTimeout(() => {
+        setTitleLinesVisible(prev => [...prev, index]);
+      }, 600 + (index * 500));
+    });
+  }, []);
 
   const handleRequest = () => {
     router.push(`/${locale}/contact`);
@@ -23,8 +41,29 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
       <div className="container mx-auto max-w-4xl">
         <div className="text-center">
           {/* Title */}
-          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Request Private Portfolio
+          <h2 ref={titleRef} style={titleBlurStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
+            {(() => {
+              const titleText = "Request Private Portfolio";
+              const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+              const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+              
+              return finalTitleLines.map((line, index) => {
+                const isVisible = titleLinesVisible.includes(index);
+                return (
+                  <span
+                    key={index}
+                    className={cn(
+                      "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                  >
+                    {line}
+                  </span>
+                );
+              });
+            })()}
           </h2>
 
           {/* Animated Glow Line */}

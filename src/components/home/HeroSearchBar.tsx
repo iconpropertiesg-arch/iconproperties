@@ -40,6 +40,10 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const areaInputRef = useRef<HTMLInputElement>(null);
   const typeButtonRef = useRef<HTMLButtonElement>(null);
   const borderContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Line-by-line reveal states
+  const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (area.length > 0) {
@@ -51,6 +55,21 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
       setFilteredLocations(mockLocations.slice(0, 8));
     }
   }, [area]);
+  
+  // Line-by-line reveal effect
+  useEffect(() => {
+    if (hideTitle) return;
+    
+    const titleText = t('title');
+    const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+    
+    finalTitleLines.forEach((_, index) => {
+      setTimeout(() => {
+        setTitleLinesVisible(prev => [...prev, index]);
+      }, 600 + (index * 500));
+    });
+  }, [t, hideTitle]);
 
 
   const handleTypeToggle = (type: string) => {
@@ -174,8 +193,29 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     >
       {!hideTitle && (
         <div className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
-            {t('title')}
+          <h2 ref={titleRef} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+            {(() => {
+              const titleText = t('title');
+              const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+              const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+              
+              return finalTitleLines.map((line, index) => {
+                const isVisible = titleLinesVisible.includes(index);
+                return (
+                  <span
+                    key={index}
+                    className={cn(
+                      "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                      isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                  >
+                    {line}
+                  </span>
+                );
+              });
+            })()}
           </h2>
         </div>
       )}

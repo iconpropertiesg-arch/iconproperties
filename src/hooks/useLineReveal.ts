@@ -45,7 +45,11 @@ export const useLineReveal = ({
       // Reveal each line with delay
       lines.forEach((_, index) => {
         setTimeout(() => {
-          setVisibleLines(prev => new Set([...prev, index]));
+          setVisibleLines(prev => {
+            const newSet = new Set(prev);
+            newSet.add(index);
+            return newSet;
+          });
         }, initialDelay + (index * delay));
       });
     }, initialDelay);

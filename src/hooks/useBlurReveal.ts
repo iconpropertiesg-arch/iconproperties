@@ -7,13 +7,13 @@ interface UseBlurRevealOptions {
   minBlur?: number;
 }
 
-export const useBlurReveal = ({
+export const useBlurReveal = <T extends HTMLElement = HTMLElement>({
   threshold = 0,
   rootMargin = '0px',
   maxBlur = 10,
   minBlur = 0,
 }: UseBlurRevealOptions = {}) => {
-  const elementRef = useRef<HTMLElement>(null);
+  const elementRef = useRef<T>(null);
   const [blurAmount, setBlurAmount] = useState(maxBlur);
   const [opacity, setOpacity] = useState(0.3);
 
