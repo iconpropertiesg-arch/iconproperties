@@ -2,6 +2,7 @@
 
 import { Star, Quote } from 'lucide-react';
 import Image from 'next/image';
+import { useBlurReveal } from '@/hooks/useBlurReveal';
 
 interface TestimonialsProps {
   locale: string;
@@ -61,15 +62,19 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function Testimonials({ locale }: TestimonialsProps) {
+  // Blur reveal effects
+  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
+  const { elementRef: subtitleRef, style: subtitleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
+  
   return (
     <section className="relative bg-black py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-4xl md:text-5xl font-bold text-white mb-4">
             What Our Clients Say
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p ref={subtitleRef as React.RefObject<HTMLParagraphElement>} style={subtitleStyle} className="text-xl text-gray-300 max-w-2xl mx-auto">
             Real experiences from property owners who chose our private, discreet service
           </p>
         </div>

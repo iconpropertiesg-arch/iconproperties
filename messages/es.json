@@ -9,8 +9,8 @@
     "faq": "FAQ"
   },
   "portfolio": {
-    "title": "Nuestras Propiedades",
-    "subtitle": "Transacciones e inversiones exitosas"
+    "title": "Explorar Propiedades en Mallorca",
+    "subtitle": "Descubre villas, áticos y fincas cuidadosamente seleccionadas en las ubicaciones más deseables de Mallorca, incluyendo casas privadas y fuera del mercado."
   },
   "hero": {
     "badge": "Explore Nuestro Portafolio",
@@ -23,7 +23,7 @@
       "location": "Área o ciudad",
       "price": "¿Presupuesto máximo?"
     },
-    "searchButton": "Buscar Propiedades"
+    "searchButton": "Buscar"
   },
   "propertyTypes": {
     "apartment": "Apartamento",
@@ -93,22 +93,83 @@
       "newest": "Más Recientes",
       "priceAsc": "Precio: Menor a Mayor",
       "priceDesc": "Precio: Mayor a Menor"
+    },
+    "stats": {
+      "totalValue": "Valor Total de Propiedades",
+      "propertiesManaged": "Propiedades Gestionadas",
+      "clientSatisfaction": "Satisfacción del Cliente"
+    },
+    "noProperties": "No hay propiedades disponibles en este momento.",
+    "viewNow": "Ver Ahora",
+    "cta": {
+      "title": "¿Listo para Invertir?",
+      "description": "Únete a nuestra colección exclusiva de inversiones inmobiliarias premium. Contacta a nuestro equipo para explorar oportunidades actuales.",
+      "button": "Comenzar"
     }
   },
   "about": {
     "title": "Una empresa inmobiliaria boutique construida sobre confianza",
-    "subtitle": "Nuestro ethos, mercados servidos y lo que nos hace diferentes.",
+    "subtitle": "Nuestro ethos, mercados servidos y lo que nos hace diferentes. Nos especializamos en propiedades de lujo en las ubicaciones más deseables de Mallorca, ofreciendo experiencia incomparable y servicio personalizado a clientes exigentes en todo el mundo.",
+    "badge": "Acerca de",
+    "story": {
+      "title": "Nuestra Historia",
+      "paragraph1": "Fundada con la visión de redefinir los bienes raíces de lujo en Mallorca, Lion Capital Inmobiliaria ha crecido de una agencia boutique a uno de los nombres más confiables de la isla en servicios inmobiliarios premium.",
+      "paragraph2": "Nuestro viaje comenzó con una creencia simple: que las propiedades excepcionales merecen un servicio excepcional. Esta filosofía nos ha guiado a través de cada transacción, cada relación con el cliente y cada hito en la evolución de nuestra empresa.",
+      "paragraph3": "Hoy, continuamos estableciendo nuevos estándares en la industria, combinando valores tradicionales de confianza y discreción con estrategias de marketing innovadoras y tecnología de vanguardia.",
+      "imageAlt": "Oficina de Lion Capital Inmobiliaria"
+    },
+    "values": {
+      "title": "Nuestros Valores",
+      "description": "Estos principios fundamentales guían cada aspecto de nuestro negocio y definen nuestro compromiso con la excelencia.",
+      "discretion": "Discreción",
+      "discretionDesc": "Confidencialidad y privacidad completas en cada transacción, respetando la necesidad de discreción de nuestros clientes.",
+      "design": "Curación dirigida por diseño",
+      "designDesc": "Curando solo las mejores propiedades que cumplen con nuestros estándares exigentes de diseño y calidad.",
+      "speed": "Velocidad",
+      "speedDesc": "Garantía de respuesta en 48 horas con procesos optimizados para un servicio rápido y eficiente.",
+      "service": "Servicio",
+      "serviceDesc": "Servicio personalizado de primera clase adaptado a los requisitos y preferencias únicos de cada cliente."
+    },
+    "team": {
+      "title": "Conoce Nuestro Equipo",
+      "description": "Nuestros profesionales experimentados aportan conocimiento local profundo y experiencia internacional a cada interacción con el cliente.",
+      "languages": "Idiomas:",
+      "certifications": "Certificaciones:",
+      "members": {
+        "daniel": {
+          "name": "Daniel Rodriguez",
+          "role": "Fundador y Director General",
+          "description": "Con más de 15 años en bienes raíces de lujo, Daniel aporta un conocimiento de mercado incomparable y una pasión por el servicio excepcional."
+        },
+        "marina": {
+          "name": "Marina Hoffmann",
+          "role": "Directora de Ventas Senior",
+          "description": "Marina se especializa en propiedades residenciales de alta gama y ha facilitado más de €200M en ventas de lujo."
+        },
+        "carlos": {
+          "name": "Carlos Mendez",
+          "role": "Director de Propiedades Comerciales",
+          "description": "Carlos lidera nuestra división comercial con experiencia en propiedades de inversión y bienes raíces comerciales."
+        }
+      }
+    },
+    "achievements": {
+      "title": "Nuestros Logros",
+      "description": "Números que reflejan nuestro compromiso con la excelencia y la satisfacción del cliente.",
+      "totalSales": "Volumen Total de Ventas",
+      "propertiesSold": "Propiedades Vendidas",
+      "clientSatisfaction": "Satisfacción del Cliente",
+      "yearsExperience": "Años de Experiencia"
+    },
+    "cta": {
+      "title": "¿Listo para Trabajar con Nosotros?",
+      "description": "Ya sea que esté comprando, vendiendo o simplemente explorando el mercado de lujo de Mallorca, nuestro equipo está aquí para brindar orientación experta y servicio excepcional.",
+      "button": "Trabaja con nosotros"
+    },
     "founder": {
       "title": "Conoce a Daniel",
       "text": "Con años de experiencia en bienes raíces de lujo, Daniel aporta un conocimiento incomparable del mercado de Mallorca."
-    },
-    "values": {
-      "discretion": "Discreción",
-      "design": "Curación dirigida por diseño",
-      "speed": "Velocidad",
-      "service": "Servicio"
-    },
-    "cta": "Trabaja con nosotros"
+    }
   },
   "contact": {
     "title": "Encontremos tu próximo hogar",
@@ -259,6 +320,16 @@
     "address": "Mallorca, España",
     "quickLinks": "Enlaces Rápidos",
     "social": "Síguenos",
+    "tagline": "Asesoría inmobiliaria privada para compradores y propietarios exigentes en Mallorca.",
+    "areas": "Zonas que Cubrimos",
+    "contact": "Contacto",
+    "ctaTitle": "Comienza",
+    "ctaButton": "Solicitar Portafolio Privado",
+    "ctaDescription": "Accede a listados fuera del mercado y oportunidades de venta privadas.",
+    "newsletterTitle": "Mantén la Privacidad. Recibe Ofertas Fuera del Mercado Primero.",
+    "newsletterDescription": "Solo se envía ocasionalmente. Sin listados públicos.",
+    "submitting": "Enviando...",
+    "subscribe": "Suscribirse",
     "newsletter": {
       "title": "Newsletter",
       "placeholder": "Ingresa tu email"

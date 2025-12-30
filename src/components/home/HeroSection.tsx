@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { ArrowRight, Play, Pause } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface HeroSectionProps {
   locale: string;
@@ -19,6 +20,12 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Line-by-line reveal states
+  const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
+  const [subtitleLinesVisible, setSubtitleLinesVisible] = useState<number[]>([]);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
 
   // Logo images array
   const logos = [
@@ -58,6 +65,36 @@ export default function HeroSection({ locale }: HeroSectionProps) {
       window.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
+
+  // Line-by-line reveal effect for title and subtitle
+  useEffect(() => {
+    const titleText = t('title');
+    const subtitleText = t('subtitle');
+    
+    // Split title into lines (handling \n)
+    const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    // Split subtitle into lines
+    const subtitleLines = subtitleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    
+    // If no explicit line breaks, treat as single line
+    const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+    const finalSubtitleLines = subtitleLines.length > 0 ? subtitleLines : [subtitleText.trim()];
+    
+    // Reveal title lines one by one - slower and smoother
+    finalTitleLines.forEach((_, index) => {
+      setTimeout(() => {
+        setTitleLinesVisible(prev => [...prev, index]);
+      }, 600 + (index * 500)); // 600ms initial delay, 500ms between lines
+    });
+    
+    // Reveal subtitle lines after title (with additional delay)
+    const subtitleStartDelay = 600 + (finalTitleLines.length * 500) + 400;
+    finalSubtitleLines.forEach((_, index) => {
+      setTimeout(() => {
+        setSubtitleLinesVisible(prev => [...prev, index]);
+      }, subtitleStartDelay + (index * 500));
+    });
+  }, [t]);
 
   const toggleVideo = () => {
     if (videoRef.current) {
@@ -134,11 +171,53 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
             {/* Hero Text */}
             <div className="space-y-4 sm:space-y-6">
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight sm:leading-tight whitespace-pre-line">
-                {t('title')}
+              <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight sm:leading-tight">
+                {(() => {
+                  const titleText = t('title');
+                  const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+                  const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
+                  
+                  return finalTitleLines.map((line, index) => {
+                    const isVisible = titleLinesVisible.includes(index);
+                    return (
+                      <span
+                        key={index}
+                        className={cn(
+                          "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                          isVisible
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-4"
+                        )}
+                      >
+                        {line}
+                      </span>
+                    );
+                  });
+                })()}
               </h1>
-              <p className="text-base sm:text-lg md:text-xl leading-relaxed opacity-90 text-gray-200 max-w-xl">
-                {t('subtitle')}
+              <p ref={subtitleRef} className="text-base sm:text-lg md:text-xl leading-relaxed opacity-90 text-gray-200 max-w-xl">
+                {(() => {
+                  const subtitleText = t('subtitle');
+                  const subtitleLines = subtitleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+                  const finalSubtitleLines = subtitleLines.length > 0 ? subtitleLines : [subtitleText.trim()];
+                  
+                  return finalSubtitleLines.map((line, index) => {
+                    const isVisible = subtitleLinesVisible.includes(index);
+                    return (
+                      <span
+                        key={index}
+                        className={cn(
+                          "block transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                          isVisible
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-4"
+                        )}
+                      >
+                        {line}
+                      </span>
+                    );
+                  });
+                })()}
               </p>
             </div>
 
@@ -218,7 +297,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 {/* Second line - vertical extending up (outer, longest) */}
                 <div className="absolute h-32 w-[2px] bg-white/30 -top-8 left-0"></div>
                 {/* Third line - diagonal from corner (shorter) */}
-                <div className="absolute w-20 h-[2px] bg-white/25 -left-5 -top-5 rotate-45 origin-left"></div>
+                <div className="absolute w-10 h-[2px] bg-white/25 -left-5 -top-5 rotate-45 origin-left"></div>
               </div>
 
               {/* Video Container with overflow hidden */}
@@ -240,7 +319,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 
                 {/* Lines Over Video - Full Length */}
                 {/* Center horizontal line - spans full width */}
-                <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[1px] bg-white/30 z-10"></div>
+                {/* <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[1px] bg-white/30 z-10"></div> */}
                 {/* Top border line - spans full width */}
                 <div className="absolute left-0 right-0 top-0 h-[1px] bg-white/30 z-10"></div>
                 {/* Left border line - spans full height */}

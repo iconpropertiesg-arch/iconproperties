@@ -69,8 +69,7 @@ export default function Header({ locale }: HeaderProps) {
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50',
-          'transition-transform duration-500 ease-out',
-          'transition-opacity duration-500 ease-out',
+          'transition-all duration-1000 ease-out',
           isVisible
             ? 'translate-y-0 opacity-100 visible'
             : '-translate-y-full opacity-0 invisible pointer-events-none',

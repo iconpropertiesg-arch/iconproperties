@@ -62,8 +62,10 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   };
 
   const getTypeDisplayText = () => {
-    if (propertyType.length === 0) return 'Home';
+    // When no type is selected, show translated generic placeholder
+    if (propertyType.length === 0) return t('searchPlaceholder.type');
     if (propertyType.length === 1) return tCommon(propertyType[0]);
+    // For multiple selected types, fall back to count-based English label
     return `${propertyType.length} types selected`;
   };
 
@@ -173,7 +175,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
       {!hideTitle && (
         <div className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
-            Find Your Ideal Property in Mallorca
+            {t('title')}
           </h2>
         </div>
       )}
@@ -306,7 +308,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 }}
                 onBlur={() => setTimeout(() => setIsAreaOpen(false), 200)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Area"
+                  placeholder={t('searchPlaceholder.location')}
                   className="w-full bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-3 py-2.5 sm:py-3 lg:py-3 pl-7 sm:pl-8 lg:pl-8 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all duration-200"
                 />
                 <MapPin className="absolute left-2 sm:left-2.5 top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-3.5 text-white/60 flex-shrink-0" />
@@ -411,7 +413,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
               className="w-full lg:w-auto flex-shrink-0 bg-gray-700 hover:bg-gray-600 text-white text-xs sm:text-sm font-semibold rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-2.5 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap"
             >
               <Search className="w-3.5 h-3.5 sm:w-3.5 flex-shrink-0" />
-              <span>Search</span>
+              <span>{t('searchButton')}</span>
             </button>
           </div>
         </div>

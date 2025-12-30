@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useBlurReveal } from '@/hooks/useBlurReveal';
 
 interface AreasWeCoverProps {
   locale: string;
@@ -93,6 +94,10 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
   const router = useRouter();
   const [hoveredArea, setHoveredArea] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
+  
+  // Blur reveal effects
+  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
+  const { elementRef: subtitleRef, style: subtitleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
 
   const handleAreaClick = (areaName: string) => {
     setSelectedArea(areaName);
@@ -105,10 +110,10 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
             Where We Operate
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p ref={subtitleRef as React.RefObject<HTMLParagraphElement>} style={subtitleStyle} className="text-xl text-gray-300 max-w-3xl mx-auto">
             From the South-West's private sea-view villas to Palma's historic penthouses, we specialise in the island's most sought-after locations
           </p>
         </div>

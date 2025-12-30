@@ -9,8 +9,8 @@
     "faq": "FAQ"
   },
   "portfolio": {
-    "title": "Our Properties",
-    "subtitle": "Successful transactions and investments"
+    "title": "Explore Properties in Mallorca",
+    "subtitle": "Discover hand-selected villas, penthouses and fincas across Mallorca's most desirable locations including private and off-market homes."
   },
   "faq": {
     "title": "Frequently Asked Questions",
@@ -27,7 +27,7 @@
       "location": "Area or city",
       "price": "Max budget?"
     },
-    "searchButton": "Search Properties"
+    "searchButton": "Search"
   },
   "propertyTypes": {
     "apartment": "Apartment",
@@ -97,22 +97,83 @@
       "newest": "Newest",
       "priceAsc": "Price: Low to High",
       "priceDesc": "Price: High to Low"
+    },
+    "stats": {
+      "totalValue": "Total Properties Value",
+      "propertiesManaged": "Properties Managed",
+      "clientSatisfaction": "Client Satisfaction"
+    },
+    "noProperties": "No properties available at the moment.",
+    "viewNow": "View Now",
+    "cta": {
+      "title": "Ready to Invest?",
+      "description": "Join our exclusive collection of premium real estate investments. Contact our team to explore current opportunities.",
+      "button": "Get Started"
     }
   },
   "about": {
     "title": "A boutique real estate company built on trust",
-    "subtitle": "Our ethos, markets served, and what makes us different.",
+    "subtitle": "Our ethos, markets served, and what makes us different. We specialize in luxury properties across Mallorca's most desirable locations, offering unparalleled expertise and personalized service to discerning clients worldwide.",
+    "badge": "About Us",
+    "story": {
+      "title": "Our Story",
+      "paragraph1": "Founded with a vision to redefine luxury real estate in Mallorca, Lion Capital Real Estate has grown from a boutique agency to one of the island's most trusted names in premium property services.",
+      "paragraph2": "Our journey began with a simple belief: that exceptional properties deserve exceptional service. This philosophy has guided us through every transaction, every client relationship, and every milestone in our company's evolution.",
+      "paragraph3": "Today, we continue to set new standards in the industry, combining traditional values of trust and discretion with innovative marketing strategies and cutting-edge technology.",
+      "imageAlt": "Lion Capital Real Estate office"
+    },
+    "values": {
+      "title": "Our Values",
+      "description": "These core principles guide every aspect of our business and define our commitment to excellence.",
+      "discretion": "Discretion",
+      "discretionDesc": "Complete confidentiality and privacy in every transaction, respecting our clients' need for discretion.",
+      "design": "Design-led curation", 
+      "designDesc": "Curating only the finest properties that meet our exacting standards for design and quality.",
+      "speed": "Speed",
+      "speedDesc": "48-hour response guarantee with streamlined processes for swift, efficient service.",
+      "service": "Service",
+      "serviceDesc": "Personalized, white-glove service tailored to each client's unique requirements and preferences."
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "description": "Our experienced professionals bring deep local knowledge and international expertise to every client interaction.",
+      "languages": "Languages:",
+      "certifications": "Certifications:",
+      "members": {
+        "daniel": {
+          "name": "Daniel Rodriguez",
+          "role": "Founder & Managing Director",
+          "description": "With over 15 years in luxury real estate, Daniel brings unparalleled market knowledge and a passion for exceptional service."
+        },
+        "marina": {
+          "name": "Marina Hoffmann",
+          "role": "Senior Sales Director",
+          "description": "Marina specializes in high-end residential properties and has facilitated over €200M in luxury sales."
+        },
+        "carlos": {
+          "name": "Carlos Mendez",
+          "role": "Commercial Properties Director",
+          "description": "Carlos leads our commercial division with expertise in investment properties and commercial real estate."
+        }
+      }
+    },
+    "achievements": {
+      "title": "Our Achievements",
+      "description": "Numbers that reflect our commitment to excellence and client satisfaction.",
+      "totalSales": "Total Sales Volume",
+      "propertiesSold": "Properties Sold",
+      "clientSatisfaction": "Client Satisfaction",
+      "yearsExperience": "Years Experience"
+    },
+    "cta": {
+      "title": "Ready to Work with Us?",
+      "description": "Whether you're buying, selling, or simply exploring the Mallorca luxury market, our team is here to provide expert guidance and exceptional service.",
+      "button": "Work with us"
+    },
     "founder": {
       "title": "Meet Daniel",
       "text": "With years of expertise in luxury real estate, Daniel brings unparalleled knowledge of the Mallorca market."
-    },
-    "values": {
-      "discretion": "Discretion",
-      "design": "Design-led curation", 
-      "speed": "Speed",
-      "service": "Service"
-    },
-    "cta": "Work with us"
+    }
   },
   "contact": {
     "title": "Let's find your next home",
@@ -263,6 +324,16 @@
     "address": "Mallorca, Spain",
     "quickLinks": "Quick Links",
     "social": "Follow Us",
+    "tagline": "Private real estate advisory for discerning buyers and property owners in Mallorca.",
+    "areas": "Areas We Serve",
+    "contact": "Contact",
+    "ctaTitle": "Get Started",
+    "ctaButton": "Request Private Portfolio",
+    "ctaDescription": "Access exclusive off-market listings and private sales opportunities.",
+    "newsletterTitle": "Stay Private. Receive Off-Market Listings First.",
+    "newsletterDescription": "Only sent occasionally. No public listings.",
+    "submitting": "Submitting...",
+    "subscribe": "Subscribe",
     "newsletter": {
       "title": "Newsletter",
       "placeholder": "Enter your email"

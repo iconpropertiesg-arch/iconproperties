@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Bed, Bath, Maximize, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { useBlurReveal } from '@/hooks/useBlurReveal';
 
 interface FeaturedPropertiesProps {
   locale: string;
@@ -32,6 +33,10 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
   const [isPaused, setIsPaused] = useState(false);
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  // Blur reveal effects
+  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
+  const { elementRef: descRef, style: descStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
   
   // Fetch properties from database
   useEffect(() => {
@@ -132,10 +137,10 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t('home.featuredProperties')}
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p ref={descRef as React.RefObject<HTMLParagraphElement>} style={descStyle} className="text-lg text-gray-300 max-w-2xl mx-auto">
             Discover our hand-picked selection of exceptional properties in Mallorca's most prestigious locations.
           </p>
         </div>

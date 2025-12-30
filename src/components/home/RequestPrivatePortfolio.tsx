@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
+import { useBlurReveal } from '@/hooks/useBlurReveal';
 
 interface RequestPrivatePortfolioProps {
   locale: string;
@@ -9,6 +10,9 @@ interface RequestPrivatePortfolioProps {
 
 export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfolioProps) {
   const router = useRouter();
+  
+  // Blur reveal effects
+  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
 
   const handleRequest = () => {
     router.push(`/${locale}/contact`);
@@ -19,7 +23,7 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
       <div className="container mx-auto max-w-4xl">
         <div className="text-center">
           {/* Title */}
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
             Request Private Portfolio
           </h2>
 

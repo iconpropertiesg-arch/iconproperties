@@ -12,7 +12,8 @@ interface FooterProps {
 }
 
 export default function Footer({ locale }: FooterProps) {
-  const t = useTranslations('navigation');
+  const tNav = useTranslations('navigation');
+  const tFooter = useTranslations('footer');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,20 +55,22 @@ export default function Footer({ locale }: FooterProps) {
                 />
               </Link>
               <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
-                Private real estate advisory for discerning buyers and property owners in Mallorca.
+                {tFooter('tagline')}
               </p>
             </div>
 
             {/* Explore Links */}
             <div>
-              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Explore</h4>
+              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">
+                {tFooter('quickLinks')}
+              </h4>
               <ul className="space-y-2 sm:space-y-3">
                 <li>
                   <Link 
                     href={`/${locale}/properties`}
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
-                    Properties
+                    {tNav('portfolio')}
                   </Link>
                 </li>
                 <li>
@@ -75,7 +78,7 @@ export default function Footer({ locale }: FooterProps) {
                     href={`/${locale}/sell`}
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
-                    Sell With Us
+                    {tNav('sell')}
                   </Link>
                 </li>
                 <li>
@@ -83,7 +86,7 @@ export default function Footer({ locale }: FooterProps) {
                     href={`/${locale}/about`}
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
-                    About
+                    {tNav('about')}
                   </Link>
                 </li>
                 <li>
@@ -91,7 +94,7 @@ export default function Footer({ locale }: FooterProps) {
                     href={`/${locale}/properties`}
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
-                    Areas We Serve
+                    {tFooter('areas')}
                   </Link>
                 </li>
                 <li>
@@ -99,7 +102,7 @@ export default function Footer({ locale }: FooterProps) {
                     href={`/${locale}/team`}
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
-                    {t('team')}
+                    {tNav('team')}
                   </Link>
                 </li>
                 <li>
@@ -107,7 +110,7 @@ export default function Footer({ locale }: FooterProps) {
                     href={`/${locale}/contact`}
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
                   >
-                    Contact
+                    {tNav('contact')}
                   </Link>
                 </li>
               </ul>
@@ -115,7 +118,9 @@ export default function Footer({ locale }: FooterProps) {
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Contact</h4>
+              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">
+                {tFooter('contact')}
+              </h4>
               <ul className="space-y-3 sm:space-y-4">
                 <li>
                   <a 
@@ -146,16 +151,20 @@ export default function Footer({ locale }: FooterProps) {
 
             {/* CTA Section */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">Get Started</h4>
+              <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">
+                {tFooter('ctaTitle')}
+              </h4>
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base transition-all duration-300 transform hover:scale-105 shadow-lg  flex items-center justify-center gap-2 mb-4 sm:mb-6"
               >
-                <span className="text-xs sm:text-sm md:text-base">Request Private Portfolio</span>
+                <span className="text-xs sm:text-sm md:text-base">
+                  {tFooter('ctaButton')}
+                </span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <p className="text-gray-400 text-xs leading-relaxed">
-                Access exclusive off-market listings and private sales opportunities.
+                {tFooter('ctaDescription')}
               </p>
             </div>
           </div>
@@ -164,8 +173,12 @@ export default function Footer({ locale }: FooterProps) {
           <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/10 p-4 sm:p-6 mb-6 sm:mb-8">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="flex-1 w-full md:w-auto">
-                <h5 className="text-white font-semibold mb-1 text-sm sm:text-base">Stay Private. Receive Off-Market Listings First.</h5>
-                <p className="text-gray-400 text-xs">Only sent occasionally. No public listings.</p>
+                <h5 className="text-white font-semibold mb-1 text-sm sm:text-base">
+                  {tFooter('newsletterTitle')}
+                </h5>
+                <p className="text-gray-400 text-xs">
+                  {tFooter('newsletterDescription')}
+                </p>
               </div>
               {isSubmitted ? (
                 <div className="text-green-400 text-xs sm:text-sm font-medium w-full md:w-auto text-center md:text-left">
@@ -177,7 +190,7 @@ export default function Footer({ locale }: FooterProps) {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter Email Address"
+                    placeholder={tFooter('newsletter.placeholder')}
                     className="flex-1 md:w-64 px-4 py-2.5 sm:py-3 bg-white/10 border border-white/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500/50 text-sm sm:text-base"
                     required
                   />
@@ -187,10 +200,12 @@ export default function Footer({ locale }: FooterProps) {
                     className="px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 text-sm sm:text-base whitespace-nowrap"
                   >
                     {isSubmitting ? (
-                      'Submitting...'
+                      tFooter('submitting')
                     ) : (
                       <>
-                        <span className="hidden md:inline">Subscribe</span>
+                        <span className="hidden md:inline">
+                          {tFooter('subscribe')}
+                        </span>
                         <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                       </>
                     )}
@@ -204,21 +219,21 @@ export default function Footer({ locale }: FooterProps) {
           <div className="border-t border-white/10 pt-6 sm:pt-8">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
               <p className="text-xs sm:text-sm text-gray-400">
-                © {currentYear} ICON PROPERTIES. All rights reserved.
+                © {currentYear} ICON PROPERTIES. {tFooter('copyright')}
               </p>
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
                 <Link 
                   href={`/${locale}/legal/privacy`}
                   className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm"
-                >
-                  Privacy Policy
+                  >
+                    {tFooter('legal.privacy')}
                 </Link>
                 <span className="text-gray-600 hidden sm:inline">|</span>
                 <Link 
                   href={`/${locale}/legal/notice`}
                   className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm"
-                >
-                  Legal Notice
+                  >
+                    {tFooter('legal.terms')}
                 </Link>
                 <a
                   href="https://instagram.com"

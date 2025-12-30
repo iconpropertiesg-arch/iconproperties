@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { MessageCircle, Home, Check, Compass, Trash2, Phone, FileCode, Bell } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useBlurReveal } from '@/hooks/useBlurReveal';
 
 interface HowWeWorkProps {
   locale: string;
@@ -74,6 +75,9 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
   const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set());
   const [scrollProgress, setScrollProgress] = useState<{ [key: number]: number }>({});
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  
+  // Blur reveal effects
+  const { elementRef: titleRef, style: titleStyle } = useBlurReveal({ maxBlur: 8, minBlur: 0 });
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -175,7 +179,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
           {/* <div className="inline-block mb-4">
             <span className="text-gray-400 text-sm font-semibold tracking-wider uppercase">#7</span>
           </div> */}
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} style={titleStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
             The Private Buying Experience
           </h2>
         </div>

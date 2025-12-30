@@ -38,57 +38,57 @@ export default async function AboutPage({ params }: AboutPageProps) {
     {
       icon: Shield,
       title: t('values.discretion'),
-      description: 'Complete confidentiality and privacy in every transaction, respecting our clients\' need for discretion.'
+      description: t('values.discretionDesc')
     },
     {
       icon: Award,
       title: t('values.design'),
-      description: 'Curating only the finest properties that meet our exacting standards for design and quality.'
+      description: t('values.designDesc')
     },
     {
       icon: Clock,
       title: t('values.speed'),
-      description: '48-hour response guarantee with streamlined processes for swift, efficient service.'
+      description: t('values.speedDesc')
     },
     {
       icon: Users,
       title: t('values.service'),
-      description: 'Personalized, white-glove service tailored to each client\'s unique requirements and preferences.'
+      description: t('values.serviceDesc')
     }
   ];
 
   const team = [
     {
-      name: 'Daniel Rodriguez',
-      role: 'Founder & Managing Director',
+      name: t('team.members.daniel.name'),
+      role: t('team.members.daniel.role'),
       image: '/team/daniel.jpg',
-      description: 'With over 15 years in luxury real estate, Daniel brings unparalleled market knowledge and a passion for exceptional service.',
+      description: t('team.members.daniel.description'),
       languages: ['English', 'Spanish', 'German'],
       certifications: ['Licensed Real Estate Agent', 'Luxury Property Specialist']
     },
     {
-      name: 'Marina Hoffmann',
-      role: 'Senior Sales Director',
+      name: t('team.members.marina.name'),
+      role: t('team.members.marina.role'),
       image: '/team/marina.jpg',
-      description: 'Marina specializes in high-end residential properties and has facilitated over €200M in luxury sales.',
+      description: t('team.members.marina.description'),
       languages: ['German', 'English', 'Spanish'],
       certifications: ['Certified International Property Specialist', 'Luxury Home Marketing Specialist']
     },
     {
-      name: 'Carlos Mendez',
-      role: 'Commercial Properties Director',
+      name: t('team.members.carlos.name'),
+      role: t('team.members.carlos.role'),
       image: '/team/carlos.jpg',
-      description: 'Carlos leads our commercial division with expertise in investment properties and commercial real estate.',
+      description: t('team.members.carlos.description'),
       languages: ['Spanish', 'English', 'Catalan'],
       certifications: ['Commercial Real Estate License', 'Investment Property Advisor']
     }
   ];
 
   const achievements = [
-    { number: '€2.5B+', label: 'Total Sales Volume' },
-    { number: '500+', label: 'Properties Sold' },
-    { number: '98%', label: 'Client Satisfaction' },
-    { number: '15+', label: 'Years Experience' }
+    { number: '€2.5B+', label: t('achievements.totalSales') },
+    { number: '500+', label: t('achievements.propertiesSold') },
+    { number: '98%', label: t('achievements.clientSatisfaction') },
+    { number: '15+', label: t('achievements.yearsExperience') }
   ];
 
   return (
@@ -102,14 +102,13 @@ export default async function AboutPage({ params }: AboutPageProps) {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block bg-gray-700 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 animate-fade-in-up">
-              About Us
+              {t('badge')}
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up animation-delay-200">
               {t('title')}
             </h1>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed animate-fade-in-up animation-delay-400">
-              {t('subtitle')} We specialize in luxury properties across Mallorca's most desirable locations, 
-              offering unparalleled expertise and personalized service to discerning clients worldwide.
+              {t('subtitle')}
             </p>
           </div>
         </div>
@@ -120,27 +119,23 @@ export default async function AboutPage({ params }: AboutPageProps) {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/30 rounded-2xl p-8 border border-gray-700">
-              <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
+              <h2 className="text-3xl font-bold text-white mb-6">{t('story.title')}</h2>
               <div className="space-y-4 text-gray-300 leading-relaxed">
                 <p>
-                  Founded with a vision to redefine luxury real estate in Mallorca, Lion Capital Real Estate 
-                  has grown from a boutique agency to one of the island's most trusted names in premium property services.
+                  {t('story.paragraph1')}
                 </p>
                 <p>
-                  Our journey began with a simple belief: that exceptional properties deserve exceptional service. 
-                  This philosophy has guided us through every transaction, every client relationship, and every 
-                  milestone in our company's evolution.
+                  {t('story.paragraph2')}
                 </p>
                 <p>
-                  Today, we continue to set new standards in the industry, combining traditional values of trust 
-                  and discretion with innovative marketing strategies and cutting-edge technology.
+                  {t('story.paragraph3')}
                 </p>
               </div>
             </div>
             <div className="relative rounded-2xl overflow-hidden border border-gray-700">
               <Image
                 src="/about/company-story.jpg"
-                alt="Lion Capital Real Estate office"
+                alt={t('story.imageAlt')}
                 width={600}
                 height={400}
                 className="rounded-2xl"
@@ -154,9 +149,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
       <section className="py-20 relative border-t border-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Our Values</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">{t('values.title')}</h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              These core principles guide every aspect of our business and define our commitment to excellence.
+              {t('values.description')}
             </p>
           </div>
 
@@ -181,9 +176,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
       <section className="py-20 border-t border-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Meet Our Team</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">{t('team.title')}</h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Our experienced professionals bring deep local knowledge and international expertise to every client interaction.
+              {t('team.description')}
             </p>
           </div>
 
@@ -206,7 +201,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
                   
                   <div className="space-y-3">
                     <div>
-                      <h4 className="text-sm font-semibold text-gray-400 mb-2">Languages:</h4>
+                      <h4 className="text-sm font-semibold text-gray-400 mb-2">{t('team.languages')}</h4>
                       <div className="flex flex-wrap gap-2">
                         {member.languages.map((lang) => (
                           <span key={lang} className="bg-gray-700/20 text-gray-300 px-3 py-1 rounded-full text-xs border border-gray-500/30">
@@ -216,7 +211,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-gray-400 mb-2">Certifications:</h4>
+                      <h4 className="text-sm font-semibold text-gray-400 mb-2">{t('team.certifications')}</h4>
                       <ul className="space-y-2">
                         {member.certifications.map((cert, certIndex) => (
                           <li key={certIndex} className="flex items-start text-xs text-gray-300">
@@ -238,9 +233,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
       <section className="py-20 border-t border-gray-800 bg-gray-900/10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Our Achievements</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">{t('achievements.title')}</h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Numbers that reflect our commitment to excellence and client satisfaction.
+              {t('achievements.description')}
             </p>
           </div>
 
@@ -264,17 +259,16 @@ export default async function AboutPage({ params }: AboutPageProps) {
         <div className="container mx-auto px-4">
           <div className="bg-gray-900/20 border border-gray-500/30 rounded-3xl p-12 text-center">
             <h2 className="text-3xl font-bold text-white mb-6">
-              Ready to Work with Us?
+              {t('cta.title')}
             </h2>
             <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              Whether you're buying, selling, or simply exploring the Mallorca luxury market, 
-              our team is here to provide expert guidance and exceptional service.
+              {t('cta.description')}
             </p>
             <Link
               href={`/${locale}/contact`}
               className="inline-flex items-center bg-gray-700 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-600 transition-all duration-300 shadow-lg transform hover:scale-105"
             >
-              {t('cta')}
+              {t('cta.button')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>

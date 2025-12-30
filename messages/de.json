@@ -9,8 +9,8 @@
     "faq": "FAQ"
   },
   "portfolio": {
-    "title": "Unsere Immobilien",
-    "subtitle": "Erfolgreiche Transaktionen und Investitionen"
+    "title": "Entdecken Sie Immobilien auf Mallorca",
+    "subtitle": "Entdecken Sie sorgfältig ausgewählte Villen, Penthäuser und Fincas in den begehrtesten Lagen Mallorcas, einschließlich privater und off-market Immobilien."
   },
   "hero": {
     "badge": "Erkunden Sie unser Portfolio",
@@ -23,7 +23,7 @@
       "location": "Gebiet oder Stadt",
       "price": "Maximales Budget?"
     },
-    "searchButton": "Immobilien suchen"
+    "searchButton": "Immobilien"
   },
   "propertyTypes": {
     "apartment": "Apartment",
@@ -93,22 +93,83 @@
       "newest": "Neueste",
       "priceAsc": "Preis: Niedrig zu Hoch",
       "priceDesc": "Preis: Hoch zu Niedrig"
+    },
+    "stats": {
+      "totalValue": "Gesamtwert der Immobilien",
+      "propertiesManaged": "Verwaltete Immobilien",
+      "clientSatisfaction": "Kundenzufriedenheit"
+    },
+    "noProperties": "Derzeit sind keine Immobilien verfügbar.",
+    "viewNow": "Jetzt ansehen",
+    "cta": {
+      "title": "Bereit zu investieren?",
+      "description": "Werden Sie Teil unserer exklusiven Sammlung von Premium-Immobilieninvestitionen. Kontaktieren Sie unser Team, um aktuelle Möglichkeiten zu erkunden.",
+      "button": "Loslegen"
     }
   },
   "about": {
     "title": "Ein Boutique-Immobilienunternehmen, das auf Vertrauen aufbaut",
-    "subtitle": "Unser Ethos, unsere Märkte und was uns unterscheidet.",
+    "subtitle": "Unser Ethos, unsere Märkte und was uns unterscheidet. Wir spezialisieren uns auf Luxusimmobilien in Mallorcas begehrtesten Lagen und bieten unvergleichliche Expertise und personalisierten Service für anspruchsvolle Kunden weltweit.",
     "founder": {
       "title": "Daniel kennenlernen",
       "text": "Mit jahrelanger Expertise in Luxusimmobilien bringt Daniel unvergleichliches Wissen über den Mallorca-Markt mit."
     },
-    "values": {
-      "discretion": "Diskretion",
-      "design": "Design-geführte Kuration",
-      "speed": "Geschwindigkeit",
-      "service": "Service"
+    "badge": "Über uns",
+    "story": {
+      "title": "Unsere Geschichte",
+      "paragraph1": "Gegründet mit der Vision, Luxusimmobilien in Mallorca neu zu definieren, ist Lion Capital Immobilien von einer Boutique-Agentur zu einem der vertrauenswürdigsten Namen der Insel im Premium-Immobilienservice gewachsen.",
+      "paragraph2": "Unsere Reise begann mit einem einfachen Glauben: dass außergewöhnliche Immobilien außergewöhnlichen Service verdienen. Diese Philosophie hat uns durch jede Transaktion, jede Kundenbeziehung und jeden Meilenstein in der Entwicklung unseres Unternehmens geleitet.",
+      "paragraph3": "Heute setzen wir weiterhin neue Standards in der Branche und kombinieren traditionelle Werte wie Vertrauen und Diskretion mit innovativen Marketingstrategien und modernster Technologie.",
+      "imageAlt": "Lion Capital Immobilien Büro"
     },
-    "cta": "Arbeiten Sie mit uns"
+    "values": {
+      "title": "Unsere Werte",
+      "description": "Diese Grundprinzipien leiten jeden Aspekt unseres Geschäfts und definieren unser Engagement für Exzellenz.",
+      "discretion": "Diskretion",
+      "discretionDesc": "Vollständige Vertraulichkeit und Privatsphäre bei jeder Transaktion, wobei wir das Bedürfnis unserer Kunden nach Diskretion respektieren.",
+      "design": "Design-geführte Kuration",
+      "designDesc": "Wir kuratieren nur die feinsten Immobilien, die unseren strengen Standards für Design und Qualität entsprechen.",
+      "speed": "Geschwindigkeit",
+      "speedDesc": "48-Stunden-Antwortgarantie mit optimierten Prozessen für schnellen, effizienten Service.",
+      "service": "Service",
+      "serviceDesc": "Personalisierter, weißhandschuhartiger Service, der auf die einzigartigen Anforderungen und Präferenzen jedes Kunden zugeschnitten ist."
+    },
+    "team": {
+      "title": "Lernen Sie unser Team kennen",
+      "description": "Unsere erfahrenen Fachkräfte bringen tiefgreifendes lokales Wissen und internationale Expertise in jede Kundeninteraktion ein.",
+      "languages": "Sprachen:",
+      "certifications": "Zertifizierungen:",
+      "members": {
+        "daniel": {
+          "name": "Daniel Rodriguez",
+          "role": "Gründer & Geschäftsführer",
+          "description": "Mit über 15 Jahren Erfahrung im Luxusimmobilienbereich bringt Daniel unvergleichliches Marktwissen und eine Leidenschaft für außergewöhnlichen Service mit."
+        },
+        "marina": {
+          "name": "Marina Hoffmann",
+          "role": "Senior Verkaufsdirektorin",
+          "description": "Marina spezialisiert sich auf hochwertige Wohnimmobilien und hat über €200M an Luxusverkäufen vermittelt."
+        },
+        "carlos": {
+          "name": "Carlos Mendez",
+          "role": "Direktor Gewerbeimmobilien",
+          "description": "Carlos leitet unsere Gewerbeabteilung mit Expertise in Investmentimmobilien und Gewerbeimmobilien."
+        }
+      }
+    },
+    "achievements": {
+      "title": "Unsere Erfolge",
+      "description": "Zahlen, die unser Engagement für Exzellenz und Kundenzufriedenheit widerspiegeln.",
+      "totalSales": "Gesamtumsatz",
+      "propertiesSold": "Verkaufte Immobilien",
+      "clientSatisfaction": "Kundenzufriedenheit",
+      "yearsExperience": "Jahre Erfahrung"
+    },
+    "cta": {
+      "title": "Bereit, mit uns zu arbeiten?",
+      "description": "Ob Sie kaufen, verkaufen oder einfach den Mallorca-Luxusmarkt erkunden möchten, unser Team steht Ihnen zur Verfügung, um fachkundige Beratung und außergewöhnlichen Service zu bieten.",
+      "button": "Arbeiten Sie mit uns"
+    }
   },
   "contact": {
     "title": "Lassen Sie uns Ihr nächstes Zuhause finden",
@@ -259,6 +320,16 @@
     "address": "Mallorca, Spanien",
     "quickLinks": "Schnelllinks",
     "social": "Folgen Sie uns",
+    "tagline": "Private Immobilienberatung für anspruchsvolle Käufer und Eigentümer auf Mallorca.",
+    "areas": "Gebiete, die wir abdecken",
+    "contact": "Kontakt",
+    "ctaTitle": "Jetzt Starten",
+    "ctaButton": "Privates Portfolio Anfordern",
+    "ctaDescription": "Erhalten Sie Zugang zu Off-Market-Listings und privaten Verkaufschancen.",
+    "newsletterTitle": "Bleiben Sie diskret. Erhalten Sie Off-Market-Angebote zuerst.",
+    "newsletterDescription": "Nur gelegentlich versendet. Keine öffentlichen Inserate.",
+    "submitting": "Senden...",
+    "subscribe": "Abonnieren",
     "newsletter": {
       "title": "Newsletter",
       "placeholder": "E-Mail eingeben"

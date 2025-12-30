@@ -52,6 +52,11 @@ export default async function PropertiesPage({
   const { locale } = await params;
   // Enable static rendering
   setRequestLocale(locale);
+  
+  // Get translations
+  const t = await getTranslations('portfolio');
+  const tCommon = await getTranslations('common');
+  const tProperties = await getTranslations('properties');
 
   // Extract search filters from query parameters
   const purposeParam = searchParams.purpose;
@@ -155,17 +160,17 @@ export default async function PropertiesPage({
       value: totalValue >= 1000000 
         ? `€${(totalValue / 1000000).toFixed(0)}M+` 
         : `€${(totalValue / 1000).toFixed(0)}K+`, 
-      label: 'Total Properties Value' 
+      label: tProperties('stats.totalValue')
     },
     { 
       icon: Building2, 
       value: `${portfolioItems.length}+`, 
-      label: 'Properties Managed' 
+      label: tProperties('stats.propertiesManaged')
     },
     { 
       icon: Award, 
       value: '98%', 
-      label: 'Client Satisfaction' 
+      label: tProperties('stats.clientSatisfaction')
     }
   ];
 
@@ -176,10 +181,10 @@ export default async function PropertiesPage({
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Explore Properties in Mallorca
+              {t('title')}
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              Discover hand-selected villas, penthouses and fincas across Mallorca's most desirable locations including private and off-market homes.
+              {t('subtitle')}
             </p>
           </div>
         </div>
@@ -215,7 +220,7 @@ export default async function PropertiesPage({
         <div className="container mx-auto px-4">
           {portfolioItems.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-xl text-gray-400">No properties available at the moment.</p>
+              <p className="text-xl text-gray-400">{tProperties('noProperties')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -309,11 +314,11 @@ export default async function PropertiesPage({
                       <div className="text-2xl font-bold">{item.value}</div>
                       <div className="flex items-center gap-3">
                         <div className="inline-flex items-center text-gray-400 group-hover:text-gray-300 transition-colors font-medium">
-                          View Details
+                          {tCommon('viewDetails')}
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </div>
                         <span className="inline-flex items-center px-4 py-2 rounded-full bg-white text-gray-900 font-semibold shadow-lg transition-transform duration-300 group-hover:scale-105 text-sm">
-                          View Now
+                          {tProperties('viewNow')}
                         </span>
                       </div>
                     </div>
@@ -332,16 +337,16 @@ export default async function PropertiesPage({
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-6">
-              Ready to Invest?
+              {tProperties('cta.title')}
             </h2>
             <p className="text-lg text-gray-300 mb-8">
-              Join our exclusive collection of premium real estate investments. Contact our team to explore current opportunities.
+              {tProperties('cta.description')}
             </p>
             <Link
               href={`/${locale}/contact`}
               className="inline-flex items-center bg-gray-700 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-600 transition-colors shadow-lg"
             >
-              Get Started
+              {tProperties('cta.button')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
