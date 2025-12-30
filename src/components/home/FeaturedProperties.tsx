@@ -167,7 +167,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 ref={titleRef} className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 ref={titleRef} style={titleBlurStyle} className="text-3xl md:text-4xl font-bold text-white mb-4">
             {(() => {
               const titleText = t('home.featuredProperties');
               const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);

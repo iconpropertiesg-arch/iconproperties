@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ChevronDown, Search, MapPin, Home, Building, Store, Euro } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useBlurReveal } from '@/hooks/useBlurReveal';
 
 interface HeroSearchBarProps {
   locale: string;
@@ -43,7 +44,9 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   
   // Line-by-line reveal states
   const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  
+  // Blur reveal effect for title
+  const { elementRef: titleRef, style: titleBlurStyle } = useBlurReveal<HTMLHeadingElement>({ maxBlur: 8, minBlur: 0 });
 
   useEffect(() => {
     if (area.length > 0) {
@@ -80,12 +83,22 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     }
   };
 
+  // Abbreviated display names for property types
+  const getTypeAbbreviation = (type: string): string => {
+    const abbreviations: Record<string, string> = {
+      'apartment': 'Apar',
+      'house': 'House',
+      'commercial': 'Comm',
+    };
+    return abbreviations[type] || type;
+  };
+
   const getTypeDisplayText = () => {
     // When no type is selected, show translated generic placeholder
     if (propertyType.length === 0) return t('searchPlaceholder.type');
-    if (propertyType.length === 1) return tCommon(propertyType[0]);
-    // For multiple selected types, fall back to count-based English label
-    return `${propertyType.length} types selected`;
+    if (propertyType.length === 1) return getTypeAbbreviation(propertyType[0]);
+    // For multiple selected types, show just count with icon
+    return `${propertyType.length}`;
   };
 
   const minPrice = 20000;
@@ -193,7 +206,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
     >
       {!hideTitle && (
         <div className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12">
-          <h2 ref={titleRef} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+          <h2 ref={titleRef} style={titleBlurStyle} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
             {(() => {
               const titleText = t('title');
               const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
@@ -289,15 +302,24 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                   setIsPurposeOpen(false);
                   setIsAreaOpen(false);
                 }}
-                className="w-full lg:w-auto lg:min-w-[60px] lg:max-w-[180px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 lg:py-3 text-white transition-all duration-200"
+                className="w-full lg:w-auto lg:min-w-[60px] lg:max-w-[80px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-3 lg:px-3 py-2.5 sm:py-3 lg:py-3 text-white transition-all duration-200"
               >
-                <div className="flex items-center gap-2 min-w-0">
+                <div className="flex items-center gap-1.5 min-w-0 flex-1">
                   {propertyType.length === 0 && <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />}
                   {propertyType.length > 0 && (
-                    <span className="text-xs sm:text-sm truncate">{getTypeDisplayText()}</span>
+                    <>
+                      {propertyType.length === 1 ? (
+                        <span className="text-xs sm:text-sm truncate">{getTypeDisplayText()}</span>
+                      ) : (
+                        <>
+                          <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                          <span className="text-xs sm:text-sm font-medium">{getTypeDisplayText()}</span>
+                        </>
+                      )}
+                    </>
                   )}
                 </div>
-                <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform flex-shrink-0", isTypeOpen && "rotate-180")} />
+                <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform flex-shrink-0 ml-1", isTypeOpen && "rotate-180")} />
               </button>
               {isTypeOpen && (
                 <>

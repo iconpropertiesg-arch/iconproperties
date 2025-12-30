@@ -16,11 +16,13 @@ export const useBlurReveal = <T extends HTMLElement = HTMLElement>({
   const elementRef = useRef<T>(null);
   const [blurAmount, setBlurAmount] = useState(maxBlur);
   const [opacity, setOpacity] = useState(0.3);
+  const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          setHasStarted(true);
           // Calculate blur based on intersection ratio
           // When ratio is 0 (just entering), blur is max
           // When ratio is 1 (fully visible), blur is min
@@ -30,15 +32,15 @@ export const useBlurReveal = <T extends HTMLElement = HTMLElement>({
           
           setBlurAmount(Math.max(minBlur, newBlur));
           setOpacity(Math.min(1, newOpacity));
-        } else {
-          // If not intersecting, keep it blurred
+        } else if (!hasStarted && entry.boundingClientRect.top > window.innerHeight) {
+          // If element is below viewport and hasn't started, keep it blurred
           setBlurAmount(maxBlur);
           setOpacity(0.3);
         }
       },
       {
         threshold: Array.from({ length: 101 }, (_, i) => i / 100), // 0 to 1 in 0.01 steps
-        rootMargin,
+        rootMargin: rootMargin || '0px',
       }
     );
 
@@ -60,7 +62,7 @@ export const useBlurReveal = <T extends HTMLElement = HTMLElement>({
     style: {
       filter: `blur(${blurAmount}px)`,
       opacity: opacity,
-      transition: 'filter 0.1s ease-out, opacity 0.1s ease-out',
+      transition: 'filter 0.3s ease-out, opacity 0.3s ease-out',
     },
   };
 };
