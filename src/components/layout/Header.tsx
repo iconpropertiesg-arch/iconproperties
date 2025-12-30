@@ -92,28 +92,28 @@ export default function Header({ locale }: HeaderProps) {
             : undefined
         }
       >
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Left side - Logo and Navigation */}
-            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 lg:ml-0 xl:ml-16">
+            <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-8 lg:ml-0 xl:ml-8 2xl:ml-16">
               {/* Logo at the front */}
-              <Link href={`/${locale}`} className="flex items-center gap-2 group">
+              <Link href={`/${locale}`} className="flex items-center gap-2 group flex-shrink-0">
                 <Image
                   src="/images/logo3.png"
                   alt="Property Icon Logo"
                   width={320}
                   height={107}
-                  className="h-16 xl:h-20 w-auto transition-transform duration-300 group-hover:scale-105"
+                  className="h-12 lg:h-14 xl:h-16 2xl:h-20 w-auto transition-transform duration-300 group-hover:scale-105"
                   priority
                 />
               </Link>
 
               {/* Navigation Links */}
-              <nav className="flex items-center space-x-4 xl:space-x-8">
+              <nav className="flex items-center space-x-3 xl:space-x-4 2xl:space-x-8 flex-wrap">
                 <Link
                   href={`/${locale}/about`}
                   className={cn(
-                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
@@ -124,7 +124,7 @@ export default function Header({ locale }: HeaderProps) {
                 <Link
                   href={`/${locale}/properties`}
                   className={cn(
-                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
@@ -135,7 +135,7 @@ export default function Header({ locale }: HeaderProps) {
                 <Link
                   href={`/${locale}/sell`}
                   className={cn(
-                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
@@ -146,7 +146,7 @@ export default function Header({ locale }: HeaderProps) {
                 <Link
                   href={`/${locale}/contact`}
                   className={cn(
-                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
@@ -157,7 +157,7 @@ export default function Header({ locale }: HeaderProps) {
                 <Link
                   href={`/${locale}/team`}
                   className={cn(
-                    "text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
                     isScrolled 
                       ? "text-gray-300 hover:text-gray-400"
                       : "text-white/90 hover:text-white"
@@ -169,24 +169,24 @@ export default function Header({ locale }: HeaderProps) {
             </div>
 
             {/* Logo for mobile */}
-            <Link href={`/${locale}`} className="flex lg:hidden items-center gap-2 group">
+            <Link href={`/${locale}`} className="flex lg:hidden items-center gap-2 group flex-shrink-0">
               <Image
                 src="/images/logo3.png"
                 alt="Property Icon Logo"
                 width={240}
                 height={80}
-                className="h-10 sm:h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="h-8 xs:h-10 sm:h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
                 priority
               />
             </Link>
 
             {/* Right side actions */}
-            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 lg:mr-0 xl:mr-16">
-              <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
+            <div className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 lg:mr-0 xl:mr-8 2xl:mr-16 flex-shrink-0">
+              <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4">
                 <LanguageSwitcher locale={locale} />
                 <Link 
                   href={`/${locale}/contact`}
-                  className="px-4 xl:px-6 py-2 xl:py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs xl:text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:/40 whitespace-nowrap"
+                  className="px-3 lg:px-4 xl:px-5 2xl:px-6 py-1.5 lg:py-2 xl:py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs lg:text-xs xl:text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap"
                 >
                   Request Private portfolio
                 </Link>
@@ -196,7 +196,7 @@ export default function Header({ locale }: HeaderProps) {
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className={cn(
-                  "lg:hidden p-2 rounded-md transition-colors",
+                  "lg:hidden p-1.5 sm:p-2 rounded-md transition-colors flex-shrink-0",
                   isScrolled 
                     ? "hover:bg-gray-800 text-white"
                     : "hover:bg-white/10 text-white"
@@ -221,53 +221,53 @@ export default function Header({ locale }: HeaderProps) {
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <div className="absolute top-0 right-0 h-full w-[85%] sm:w-80 max-w-sm bg-gray-900 shadow-xl overflow-y-auto">
-            <div className="p-4 sm:p-6 pt-16 sm:pt-20">
-              <nav className="space-y-4 sm:space-y-6">
+          <div className="absolute top-0 right-0 h-full w-[85%] xs:w-[75%] sm:w-80 md:w-96 max-w-sm bg-gray-900 shadow-xl overflow-y-auto">
+            <div className="p-4 sm:p-5 md:p-6 pt-12 sm:pt-16 md:pt-20">
+              <nav className="space-y-3 sm:space-y-4 md:space-y-6">
                 <Link
                   href={`/${locale}/about`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
+                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('about')}
                 </Link>
                 <Link
                   href={`/${locale}/properties`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
+                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('portfolio')}
                 </Link>
                 <Link
                   href={`/${locale}/sell`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
+                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('sell')}
                 </Link>
                 <Link
                   href={`/${locale}/contact`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
+                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('contact')}
                 </Link>
                 <Link
                   href={`/${locale}/team`}
-                  className="block text-base sm:text-lg font-medium text-gray-300 hover:text-gray-400 transition-colors"
+                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('team')}
                 </Link>
-                <div className="pt-4 sm:pt-6 space-y-3 sm:space-y-4">
+                <div className="pt-3 sm:pt-4 md:pt-6 space-y-2 sm:space-y-3 md:space-y-4 border-t border-gray-700 mt-3 sm:mt-4 md:mt-6">
                   <Link 
                     href={`/${locale}/contact`}
-                    className="block w-full text-center px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-medium rounded-full transition-all duration-300"
+                    className="block w-full text-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base font-medium rounded-full transition-all duration-300"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Request Private Portfolio
                   </Link>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center pt-1 sm:pt-2">
                     <LanguageSwitcher locale={locale} />
                   </div>
                 </div>
