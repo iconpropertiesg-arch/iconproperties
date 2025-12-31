@@ -72,6 +72,65 @@ export default function Testimonials({ locale }: TestimonialsProps) {
   const { elementRef: titleRef, style: titleBlurStyle } = useBlurReveal<HTMLHeadingElement>({ maxBlur: 8, minBlur: 0 });
   const { elementRef: subtitleRef, style: subtitleBlurStyle } = useBlurReveal<HTMLParagraphElement>({ maxBlur: 8, minBlur: 0 });
   
+  // Refs and blur states for each testimonial card
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [cardBlurs, setCardBlurs] = useState<number[]>(testimonials.map(() => 15));
+  const [cardOpacities, setCardOpacities] = useState<number[]>(testimonials.map(() => 0.3));
+  
+  // Scroll-triggered blur reveal for cards
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+      
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            const ratio = entry.intersectionRatio;
+            const newBlur = 15 - (ratio * 15); // From 15px to 0px
+            const newOpacity = 0.3 + (ratio * 0.7); // From 0.3 to 1.0
+            
+            setCardBlurs(prev => {
+              const newBlurs = [...prev];
+              newBlurs[index] = Math.max(0, newBlur);
+              return newBlurs;
+            });
+            
+            setCardOpacities(prev => {
+              const newOpacities = [...prev];
+              newOpacities[index] = Math.min(1, newOpacity);
+              return newOpacities;
+            });
+          } else if (entry.boundingClientRect.top > window.innerHeight) {
+            // If element is below viewport, keep it blurred
+            setCardBlurs(prev => {
+              const newBlurs = [...prev];
+              newBlurs[index] = 15;
+              return newBlurs;
+            });
+            setCardOpacities(prev => {
+              const newOpacities = [...prev];
+              newOpacities[index] = 0.3;
+              return newOpacities;
+            });
+          }
+        },
+        {
+          threshold: Array.from({ length: 101 }, (_, i) => i / 100),
+          rootMargin: '-50px',
+        }
+      );
+      
+      observer.observe(card);
+      observers.push(observer);
+    });
+    
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+  
   // Line-by-line reveal effect
   useEffect(() => {
     const titleText = "What Our Clients Say";
@@ -98,8 +157,15 @@ export default function Testimonials({ locale }: TestimonialsProps) {
   }, []);
   
   return (
-    <section className="relative bg-black py-20 px-4">
-      <div className="container mx-auto max-w-7xl">
+    <section className="relative bg-black py-20 px-4 overflow-hidden">
+      {/* Subtle glowing effects overlay - enhanced for better blur effect */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-500/15 rounded-full blur-[120px] transform -translate-x-1/2 -translate-y-1/2" />
+      </div>
+      
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 ref={titleRef} style={titleBlurStyle} className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -157,13 +223,53 @@ export default function Testimonials({ locale }: TestimonialsProps) {
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="relative bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 lg:p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group"
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              className="relative rounded-2xl p-6 lg:p-8 transition-all duration-300 group overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                backdropFilter: "blur(20px) saturate(180%)",
+                WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                position: "relative",
+                zIndex: 1,
+                willChange: "transform, backdrop-filter, filter, opacity",
+                filter: `blur(${cardBlurs[index]}px)`,
+                opacity: cardOpacities[index],
+                transition: 'filter 0.3s ease-out, opacity 0.3s ease-out',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%)";
+                e.currentTarget.style.border = "1px solid rgba(255, 255, 255, 0.3)";
+                e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(31, 38, 135, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3)";
+                e.currentTarget.style.backdropFilter = "blur(25px) saturate(200%)";
+                e.currentTarget.style.WebkitBackdropFilter = "blur(25px) saturate(200%)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)";
+                e.currentTarget.style.border = "1px solid rgba(255, 255, 255, 0.2)";
+                e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)";
+                e.currentTarget.style.backdropFilter = "blur(20px) saturate(180%)";
+                e.currentTarget.style.WebkitBackdropFilter = "blur(20px) saturate(180%)";
+              }}
             >
+              {/* Inner glow overlay for enhanced glassy effect */}
+              <div 
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{
+                  background: "radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 0%, transparent 50%)",
+                  mixBlendMode: "overlay",
+                }}
+              />
               {/* Quote Icon - Top Right */}
-              <div className="absolute top-6 right-6 opacity-20 group-hover:opacity-30 transition-opacity">
+              <div className="absolute top-6 right-6 opacity-20 group-hover:opacity-30 transition-opacity z-10">
                 <Quote className="w-8 h-8 text-gray-400" />
               </div>
 
+              {/* Content wrapper with relative positioning */}
+              <div className="relative z-10">
               {/* Avatar */}
               <div className="flex items-start gap-4 mb-4">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-gray-400/30 flex-shrink-0">
@@ -203,6 +309,7 @@ export default function Testimonials({ locale }: TestimonialsProps) {
                 <span className="text-gray-400 text-xs mt-1">
                   {testimonial.location}
                 </span>
+              </div>
               </div>
             </div>
           ))}
