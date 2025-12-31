@@ -567,14 +567,14 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   0% {
     top: -2px;
     left: 0%;
-    width: 100px;
+    width: 70px;
     height: 4px;
     background: linear-gradient(90deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   24% {
     top: -2px;
     left: calc(100% - 120px);
-    width: 120px;
+    width: 70px;
     height: 4px;
     background: linear-gradient(90deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
@@ -606,7 +606,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   74% {
     top: calc(100% - 4px);
     left: 0px;
-    width: 120px;
+    width: 70px;
     height: 4px;
     background: linear-gradient(270deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
