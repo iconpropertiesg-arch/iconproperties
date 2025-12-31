@@ -571,15 +571,24 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     height: 4px;
     background: linear-gradient(90deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
-  24% {
+  23% {
     top: -2px;
-    left: calc(100% - 120px);
+    left: calc(100% - 70px);
     width: 70px;
     height: 4px;
     background: linear-gradient(90deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   
-  /* Right edge - moving down (vertical line - only shows corner, not full height) */
+  /* Smooth transition to right edge */
+  24% {
+    top: -2px;
+    left: calc(100% - 20px);
+    width: 20px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
+  }
+  
+  /* Right edge - moving down (vertical line) */
   25% {
     top: 0%;
     left: calc(100% - 2px);
@@ -587,43 +596,70 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     height: 70px;
     background: linear-gradient(180deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%); 
   }
-  49% {
-    top: calc(100% - 15px);
+  48% {
+    top: calc(100% - 70px);
     left: calc(100% - 2px);
     width: 4px;
     height: 70px;
     background: linear-gradient(180deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   
+  /* Smooth transition to bottom edge */
+  49% {
+    top: calc(100% - 2px);
+    left: calc(100% - 2px);
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(180deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
+  }
+  
   /* Bottom edge - moving left (horizontal line) */
   50% {
     top: calc(100% - 4px);
-    left: calc(100% - 120px);
+    left: calc(100% - 70px);
     width: 70px;
     height: 4px;
     background: linear-gradient(270deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
-  74% {
+  73% {
     top: calc(100% - 4px);
-    left: 0px;
+    left: 20px;
     width: 70px;
     height: 4px;
     background: linear-gradient(270deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   
-  /* Left edge - moving up (vertical line - only shows corner, not full height) */
+  /* Smooth transition to left edge */
+  74% {
+    top: calc(100% - 4px);
+    left: 0px;
+    width: 20px;
+    height: 4px;
+    background: linear-gradient(270deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
+  }
+  
+  /* Left edge - moving up (vertical line) */
   75% {
-    top: calc(100% - 15px);
+    top: calc(100% - 70px);
     left: -2px;
     width: 4px;
     height: 70px;
     background: linear-gradient(0deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
+  98% {
+    top: 20px;
+    left: -2px;
+    width: 4px;
+    height: 70px;
+    background: linear-gradient(0deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
+  }
+  
+  /* Smooth transition back to top edge */
   99% {
     top: 0px;
     left: -2px;
     width: 4px;
-    height: 70px;
+    height: 20px;
     background: linear-gradient(0deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   
