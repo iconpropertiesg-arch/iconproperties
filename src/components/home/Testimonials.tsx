@@ -245,14 +245,14 @@ export default function Testimonials({ locale }: TestimonialsProps) {
                 e.currentTarget.style.border = "1px solid rgba(255, 255, 255, 0.3)";
                 e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(31, 38, 135, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3)";
                 e.currentTarget.style.backdropFilter = "blur(25px) saturate(200%)";
-                e.currentTarget.style.WebkitBackdropFilter = "blur(25px) saturate(200%)";
+                (e.currentTarget.style as any).WebkitBackdropFilter = "blur(25px) saturate(200%)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)";
                 e.currentTarget.style.border = "1px solid rgba(255, 255, 255, 0.2)";
                 e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)";
                 e.currentTarget.style.backdropFilter = "blur(20px) saturate(180%)";
-                e.currentTarget.style.WebkitBackdropFilter = "blur(20px) saturate(180%)";
+                (e.currentTarget.style as any).WebkitBackdropFilter = "blur(20px) saturate(180%)";
               }}
             >
               {/* Inner glow overlay for enhanced glassy effect */}
