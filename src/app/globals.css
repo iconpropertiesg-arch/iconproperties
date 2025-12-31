@@ -569,26 +569,30 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     left: 0%;
     width: 100px;
     height: 4px;
+    background: linear-gradient(90deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   24% {
     top: -2px;
     left: calc(100% - 120px);
     width: 120px;
     height: 4px;
+    background: linear-gradient(90deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   
   /* Right edge - moving down (vertical line - only shows corner, not full height) */
   25% {
     top: 0%;
     left: calc(100% - 8px);
-    width: 50px;
-    height: 4px;
+    width: 4px;
+    height: 70px;
+    background: linear-gradient(180deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%); 
   }
   49% {
     top: calc(100% - 15px);
     left: calc(100% - 8px);
-    width: 60px;
-    height: 5px;
+    width: 4px;
+    height: 70px;
+    background: linear-gradient(180deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   
   /* Bottom edge - moving left (horizontal line) */
@@ -597,12 +601,14 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     left: calc(100% - 120px);
     width: 70px;
     height: 4px;
+    background: linear-gradient(270deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   74% {
     top: calc(100% - 4px);
     left: 0px;
     width: 120px;
     height: 4px;
+    background: linear-gradient(270deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   
   /* Left edge - moving up (vertical line - only shows corner, not full height) */
@@ -610,13 +616,15 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     top: calc(100% - 15px);
     left: -2px;
     width: 4px;
-    height: 15px;
+    height: 70px;
+    background: linear-gradient(0deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   99% {
     top: 0px;
     left: -2px;
     width: 4px;
-    height: 15px;
+    height: 70px;
+    background: linear-gradient(0deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
   
   /* Back to start */
@@ -625,6 +633,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
     left: 0%;
     width: 70px;
     height: 4px;
+    background: linear-gradient(90deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
   }
 }
 @keyframes revolve-glow-border-lg {
