@@ -582,14 +582,14 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   /* Right edge - moving down (vertical line - only shows corner, not full height) */
   25% {
     top: 0%;
-    left: calc(100% - 8px);
+    left: calc(100% - 4px);
     width: 4px;
     height: 70px;
     background: linear-gradient(180deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%); 
   }
   49% {
     top: calc(100% - 15px);
-    left: calc(100% - 8px);
+    left: calc(100% - 4px);
     width: 4px;
     height: 70px;
     background: linear-gradient(180deg, transparent 0%, #F02FC2 20%, #FFC080 50%, #FF4500 80%, transparent 100%);
