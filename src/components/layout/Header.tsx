@@ -68,7 +68,7 @@ export default function Header({ locale }: HeaderProps) {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50',
+          'fixed top-0 left-0 right-0 z-50 w-full',
           'transition-all duration-1000 ease-out',
           isVisible
             ? 'translate-y-0 opacity-100 visible'
@@ -216,13 +216,13 @@ export default function Header({ locale }: HeaderProps) {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
+        <div className="fixed inset-0 z-[60] lg:hidden m-0 p-0">
           <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm m-0"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <div className="absolute top-0 right-0 h-full w-[85%] xs:w-[75%] sm:w-80 md:w-96 max-w-sm bg-gray-900 shadow-xl overflow-y-auto">
-            <div className="p-4 sm:p-5 md:p-6 pt-12 sm:pt-16 md:pt-20">
+          <div className="absolute top-0 right-0 h-full w-[85%] xs:w-[75%] sm:w-80 md:w-96 max-w-sm bg-gray-900 shadow-2xl overflow-y-auto transform transition-transform duration-300 ease-out m-0 p-0">
+            <div className="p-4 sm:p-5 md:p-6 pt-16 sm:pt-20 md:pt-24 m-0">
               <nav className="space-y-3 sm:space-y-4 md:space-y-6">
                 <Link
                   href={`/${locale}/about`}
