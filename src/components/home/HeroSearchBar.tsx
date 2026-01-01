@@ -30,7 +30,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const t = useTranslations('hero');
   const tCommon = useTranslations('propertyTypes');
   const tPurpose = useTranslations('purpose');
-  const [purpose, setPurpose] = useState<'buy' | 'rent'>('buy');
+  const [purpose, setPurpose] = useState<'buy' | 'rent' | null>(null);
   const [propertyType, setPropertyType] = useState<string[]>([]);
   const [area, setArea] = useState('');
   const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 39500000 });
@@ -315,7 +315,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 className="w-full lg:w-auto lg:min-w-[100px] flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-3 py-2.5 sm:py-3 lg:py-3 text-white transition-all duration-200"
               >
                 <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
-                  {tPurpose(purpose)}
+                  {purpose ? tPurpose(purpose) : `${tPurpose('buy')} / ${tPurpose('rent')}`}
                 </span>
                 <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 ml-1.5 sm:ml-2 transition-transform flex-shrink-0", isPurposeOpen && "rotate-180")} />
               </button>
@@ -340,20 +340,26 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                     <button
                       type="button"
                       onClick={() => {
-                        setPurpose('buy');
+                        setPurpose(purpose === 'buy' ? null : 'buy');
                         setIsPurposeOpen(false);
                       }}
-                      className="w-full px-6 py-3 text-left text-gray-900 hover:bg-gray-100 transition-colors"
+                      className={cn(
+                        "w-full px-6 py-3 text-left text-gray-900 hover:bg-gray-100 transition-colors",
+                        purpose === 'buy' && "bg-gray-100 font-semibold"
+                      )}
                     >
                       {tPurpose('buy')}
                     </button>
                     <button
                       type="button"
                       onClick={() => {
-                        setPurpose('rent');
+                        setPurpose(purpose === 'rent' ? null : 'rent');
                         setIsPurposeOpen(false);
                       }}
-                      className="w-full px-6 py-3 text-left text-gray-900 hover:bg-gray-100 transition-colors"
+                      className={cn(
+                        "w-full px-6 py-3 text-left text-gray-900 hover:bg-gray-100 transition-colors",
+                        purpose === 'rent' && "bg-gray-100 font-semibold"
+                      )}
                     >
                       {tPurpose('rent')}
                     </button>
