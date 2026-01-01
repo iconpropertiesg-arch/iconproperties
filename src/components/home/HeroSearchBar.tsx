@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ChevronDown, Search, MapPin, Home, Building, Store, Euro } from 'lucide-react';
@@ -40,7 +41,18 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const [filteredLocations, setFilteredLocations] = useState<string[]>(mockLocations.slice(0, 8));
   const areaInputRef = useRef<HTMLInputElement>(null);
   const typeButtonRef = useRef<HTMLButtonElement>(null);
+  const purposeButtonRef = useRef<HTMLButtonElement>(null);
   const borderContainerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [dropdownPositions, setDropdownPositions] = useState<{
+    purpose?: { top: number; left: number; width: number };
+    type?: { top: number; left: number; width: number };
+    area?: { top: number; left: number; width: number };
+  }>({});
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   // Line-by-line reveal states
   const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
@@ -58,6 +70,60 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
       setFilteredLocations(mockLocations.slice(0, 8));
     }
   }, [area]);
+
+  // Calculate dropdown positions for fixed positioning
+  const calculateDropdownPosition = (element: HTMLElement | null) => {
+    if (!element) return null;
+    const rect = element.getBoundingClientRect();
+    return {
+      top: rect.bottom + 8,
+      left: rect.left,
+      width: rect.width,
+    };
+  };
+
+  // Update positions when dropdowns open - use setTimeout to ensure DOM is ready
+  useEffect(() => {
+    if (isPurposeOpen && purposeButtonRef.current) {
+      const timer = setTimeout(() => {
+        if (purposeButtonRef.current) {
+          const pos = calculateDropdownPosition(purposeButtonRef.current);
+          if (pos) {
+            setDropdownPositions(prev => ({ ...prev, purpose: pos }));
+          }
+        }
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [isPurposeOpen]);
+
+  useEffect(() => {
+    if (isTypeOpen && typeButtonRef.current) {
+      const timer = setTimeout(() => {
+        if (typeButtonRef.current) {
+          const pos = calculateDropdownPosition(typeButtonRef.current);
+          if (pos) {
+            setDropdownPositions(prev => ({ ...prev, type: pos }));
+          }
+        }
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [isTypeOpen]);
+
+  useEffect(() => {
+    if (isAreaOpen && areaInputRef.current) {
+      const timer = setTimeout(() => {
+        if (areaInputRef.current) {
+          const pos = calculateDropdownPosition(areaInputRef.current);
+          if (pos) {
+            setDropdownPositions(prev => ({ ...prev, area: pos }));
+          }
+        }
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [isAreaOpen]);
   
   // Line-by-line reveal effect
   useEffect(() => {
@@ -238,9 +304,11 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
             {/* Buy / Rent Dropdown */}
             <div className="relative flex-shrink-0">
               <button
+                ref={purposeButtonRef}
                 type="button"
                 onClick={() => {
-                  setIsPurposeOpen(!isPurposeOpen);
+                  const willOpen = !isPurposeOpen;
+                  setIsPurposeOpen(willOpen);
                   setIsTypeOpen(false);
                   setIsAreaOpen(false);
                 }}
@@ -251,11 +319,24 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 </span>
                 <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 ml-1.5 sm:ml-2 transition-transform flex-shrink-0", isPurposeOpen && "rotate-180")} />
               </button>
-              {/* Purpose dropdown */}
-              {isPurposeOpen && (
+              {/* Purpose dropdown - rendered via portal */}
+              {isPurposeOpen && mounted && createPortal(
                 <>
-                  <div className="fixed inset-0 z-[100]" onClick={() => setIsPurposeOpen(false)} />
-                  <div className="absolute top-full left-0 w-full mt-2 bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 overflow-hidden z-[110]">
+                  <div className="fixed inset-0 z-[9998] bg-transparent" onClick={() => setIsPurposeOpen(false)} />
+                  <div 
+                    className="fixed bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 overflow-hidden z-[9999]"
+                    style={(() => {
+                      if (purposeButtonRef.current) {
+                        const rect = purposeButtonRef.current.getBoundingClientRect();
+                        return {
+                          top: `${rect.bottom + 8}px`,
+                          left: `${rect.left}px`,
+                          width: `${rect.width}px`,
+                        };
+                      }
+                      return { top: '100px', left: '100px', width: '200px' };
+                    })()}
+                  >
                     <button
                       type="button"
                       onClick={() => {
@@ -277,7 +358,8 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       {tPurpose('rent')}
                     </button>
                   </div>
-                </>
+                </>,
+                document.body
               )}
             </div>
 
@@ -290,7 +372,8 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 ref={typeButtonRef}
                 type="button"
                 onClick={() => {
-                  setIsTypeOpen(!isTypeOpen);
+                  const willOpen = !isTypeOpen;
+                  setIsTypeOpen(willOpen);
                   setIsPurposeOpen(false);
                   setIsAreaOpen(false);
                 }}
@@ -313,10 +396,24 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 </div>
                 <ChevronDown className={cn("w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform flex-shrink-0 ml-1", isTypeOpen && "rotate-180")} />
               </button>
-              {isTypeOpen && (
+              {isTypeOpen && mounted && createPortal(
                 <>
-                  <div className="fixed inset-0 z-[190]" onClick={() => setIsTypeOpen(false)} />
-                  <div className="absolute top-full left-0 w-full lg:w-auto lg:min-w-[200px] mt-2 bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 overflow-hidden z-[200]">
+                  <div className="fixed inset-0 z-[9998] bg-transparent" onClick={() => setIsTypeOpen(false)} />
+                  <div 
+                    className="fixed bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 overflow-hidden z-[9999]"
+                    style={(() => {
+                      if (typeButtonRef.current) {
+                        const rect = typeButtonRef.current.getBoundingClientRect();
+                        return {
+                          top: `${rect.bottom + 8}px`,
+                          left: `${rect.left}px`,
+                          width: window.innerWidth >= 1024 ? 'auto' : `${rect.width}px`,
+                          minWidth: window.innerWidth >= 1024 ? '200px' : 'auto',
+                        };
+                      }
+                      return { top: '100px', left: '100px', width: '200px', minWidth: '200px' };
+                    })()}
+                  >
                     {propertyTypes.map((type) => {
                       const Icon = type.icon;
                       const isSelected = propertyType.includes(type.key);
@@ -337,7 +434,8 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       );
                     })}
                   </div>
-                </>
+                </>,
+                document.body
               )}
             </div>
 
@@ -367,10 +465,23 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                 />
                 <MapPin className="absolute left-2 sm:left-2.5 top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-3.5 text-white/60 flex-shrink-0" />
               </div>
-              {isAreaOpen && filteredLocations.length > 0 && (
+              {isAreaOpen && filteredLocations.length > 0 && mounted && createPortal(
                 <>
-                  <div className="fixed inset-0 z-[100]" onClick={() => setIsAreaOpen(false)} />
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 overflow-hidden z-[110] max-h-64 overflow-y-auto">
+                  <div className="fixed inset-0 z-[9998] bg-transparent" onClick={() => setIsAreaOpen(false)} />
+                  <div 
+                    className="fixed bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 overflow-hidden z-[9999] max-h-64 overflow-y-auto"
+                    style={(() => {
+                      if (areaInputRef.current) {
+                        const rect = areaInputRef.current.getBoundingClientRect();
+                        return {
+                          top: `${rect.bottom + 8}px`,
+                          left: `${rect.left}px`,
+                          width: `${rect.width}px`,
+                        };
+                      }
+                      return { top: '100px', left: '100px', width: '300px' };
+                    })()}
+                  >
                     {filteredLocations.map((location) => (
                       <button
                         key={location}
@@ -386,7 +497,8 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
                       </button>
                     ))}
                   </div>
-                </>
+                </>,
+                document.body
               )}
             </div>
 
