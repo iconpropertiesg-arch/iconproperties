@@ -409,7 +409,7 @@ useEffect(() => {
     <div
       className={`relative z-10 mx-auto px-3 sm:px-4 md:px-6 lg:px-8 ${
         hideTitle ? "my-0" : "-mt-8 sm:-mt-12 md:-mt-16 mb-8 sm:mb-12 md:mb-16"
-      } lg:max-w-[750px]`}
+      } lg:max-w-[900px] xl:max-w-[1050px]`}
     >
       {!hideTitle && (
         <div className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12">
@@ -819,10 +819,12 @@ useEffect(() => {
             <button
               type="button"
               onClick={handleSearch}
-              className="w-full lg:w-auto flex-shrink-0 bg-gray-700 hover:bg-gray-600 text-white text-xs sm:text-sm font-semibold rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-2.5 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap"
+              className="w-full lg:w-auto min-w-0 lg:min-w-[140px] bg-gray-700 hover:bg-gray-600 text-white text-xs sm:text-sm font-semibold rounded-xl lg:rounded-full px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-2.5 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-1.5"
             >
               <Search className="w-3.5 h-3.5 sm:w-3.5 flex-shrink-0" />
-              <span>{t("searchButton")}</span>
+              <span className="truncate max-w-[140px]">
+                {t("searchButton")}
+              </span>
             </button>
           </div>
         </div>
