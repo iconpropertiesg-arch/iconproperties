@@ -75,23 +75,6 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
   const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set());
   const [scrollProgress, setScrollProgress] = useState<{ [key: number]: number }>({});
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const textRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
-  const subtitleRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const [titleBlurs, setTitleBlurs] = useState<number[]>(steps.map(() => 15));
-  const [titleOpacities, setTitleOpacities] = useState<number[]>(steps.map(() => 1)); // Start visible but blurred
-  const [subtitleBlurs, setSubtitleBlurs] = useState<number[]>(steps.map(() => 15));
-  const [subtitleOpacities, setSubtitleOpacities] = useState<number[]>(steps.map(() => 1)); // Start visible but blurred
-  
-  // Element visibility states for step-by-step reveal - start all false (hidden)
-  const [elementVisibility, setElementVisibility] = useState<{
-    [key: number]: {
-      title: boolean;
-      subtitle: boolean;
-      tags: boolean;
-      features: boolean;
-    }
-  }>({});
   
   // Line-by-line reveal states
   const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
@@ -141,82 +124,6 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                 ...prev,
                 [index]: progress
               }));
-              
-              // Step-by-step reveal: reveal elements sequentially when card enters viewport
-              // Only trigger once per card
-              if (!elementVisibility[index] || !elementVisibility[index].title) {
-                const revealDelay = 300; // 300ms between each element
-                
-                // Initialize visibility state for this card (start all hidden for animation)
-                setElementVisibility(prev => ({
-                  ...prev,
-                  [index]: { title: false, subtitle: false, tags: false, features: false }
-                }));
-                
-                // Set initial blur states (visible but blurred)
-                setTitleBlurs(prev => {
-                  const newBlurs = [...prev];
-                  newBlurs[index] = 15;
-                  return newBlurs;
-                });
-                setTitleOpacities(prev => {
-                  const newOpacities = [...prev];
-                  newOpacities[index] = 1;
-                  return newOpacities;
-                });
-                setSubtitleBlurs(prev => {
-                  const newBlurs = [...prev];
-                  newBlurs[index] = 15;
-                  return newBlurs;
-                });
-                setSubtitleOpacities(prev => {
-                  const newOpacities = [...prev];
-                  newOpacities[index] = 1;
-                  return newOpacities;
-                });
-                
-                // Reveal title first and clear blur
-                setTimeout(() => {
-                  setElementVisibility(prev => ({
-                    ...prev,
-                    [index]: { ...prev[index], title: true }
-                  }));
-                  setTitleBlurs(prev => {
-                    const newBlurs = [...prev];
-                    newBlurs[index] = 0;
-                    return newBlurs;
-                  });
-                }, revealDelay);
-                
-                // Then subtitle and clear blur
-                setTimeout(() => {
-                  setElementVisibility(prev => ({
-                    ...prev,
-                    [index]: { ...prev[index], subtitle: true }
-                  }));
-                  setSubtitleBlurs(prev => {
-                    const newBlurs = [...prev];
-                    newBlurs[index] = 0;
-                    return newBlurs;
-                  });
-                }, revealDelay * 2);
-                
-                // Then tags
-                setTimeout(() => {
-                  setElementVisibility(prev => ({
-                    ...prev,
-                    [index]: { ...prev[index], tags: true }
-                  }));
-                }, revealDelay * 3);
-                
-                // Then features
-                setTimeout(() => {
-                  setElementVisibility(prev => ({
-                    ...prev,
-                    [index]: { ...prev[index], features: true }
-                  }));
-                }, revealDelay * 4);
-              }
             }
           });
         },
@@ -230,130 +137,39 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
       observers.push(observer);
     });
 
-    // Also track scroll for smooth blur updates - based on how much is visible
+    // Also track scroll for smooth blur updates
     const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      
       stepRefs.current.forEach((ref, index) => {
         if (!ref) return;
         const rect = ref.getBoundingClientRect();
-        const cardHeight = rect.height;
+        const windowHeight = window.innerHeight;
         
-        // Calculate how much of the card is visible in the viewport
-        const cardTop = Math.max(0, rect.top); // Top of visible portion
-        const cardBottom = Math.min(windowHeight, rect.bottom); // Bottom of visible portion
-        const visibleHeight = Math.max(0, cardBottom - cardTop);
-        const visibleRatio = cardHeight > 0 ? visibleHeight / cardHeight : 0;
+        // Calculate progress: 0 = blurred (below viewport), 1 = clear (visible on screen)
+        let progress = 1; // Default to clear (no blur)
         
-        // If less than 50% is visible (meaning more than 50% is below screen), apply blur
-        let progress = 1;
+        // Only blur cards that are below the viewport (not yet scrolled into view)
         if (rect.top >= windowHeight) {
-          // Completely below viewport - maximum blur
+          // Card is completely below viewport - should be blurred
           progress = 0;
-        } else if (visibleRatio < 0.5) {
-          // More than half is below - apply blur based on how much is hidden
-          progress = visibleRatio * 2; // Scale 0-0.5 to 0-1
-        } else {
-          // More than half is visible - clear
+        } else if (rect.top < windowHeight && rect.top >= 0) {
+          // Card is entering from bottom - start clearing blur as soon as any part is visible
+          // Calculate how much of the card is visible
+          const visibleHeight = windowHeight - rect.top;
+          const cardHeight = rect.height;
+          
+          // Clear blur immediately as card enters viewport
+          // Use a small transition zone for smoothness
+          const transitionZone = cardHeight * 0.3; // Quick transition over 30% of card
+          progress = Math.max(0, Math.min(1, visibleHeight / transitionZone));
+        } else if (rect.top < 0) {
+          // Card is fully above viewport or fully visible - no blur
           progress = 1;
         }
         
-        setScrollProgress((prev) => {
-          // Only update if progress actually changed to prevent unnecessary re-renders
-          if (prev[index] !== progress) {
-            return {
-              ...prev,
-              [index]: progress
-            };
-          }
-          return prev;
-        });
-      });
-      
-      // Update title blur - if any part is below screen, apply blur
-      titleRefs.current.forEach((title, index) => {
-        if (!title) return;
-        const rect = title.getBoundingClientRect();
-        
-        let progress = 1;
-        if (rect.bottom > windowHeight) {
-          // Any part below screen - calculate blur based on how much is below
-          const belowHeight = Math.max(0, rect.bottom - windowHeight);
-          const totalHeight = rect.height;
-          const belowRatio = totalHeight > 0 ? Math.min(1, belowHeight / totalHeight) : 0;
-          // More gradual blur - starts blurring as soon as any part goes below
-          progress = Math.max(0, 1 - belowRatio);
-        } else if (rect.top >= windowHeight) {
-          // Completely below
-          progress = 0;
-        } else {
-          // Fully visible
-          progress = 1;
-        }
-        
-        const newBlur = 15 - (progress * 15);
-        const newOpacity = 0.3 + (progress * 0.7);
-        
-        setTitleBlurs(prev => {
-          const newBlurs = [...prev];
-          if (newBlurs[index] !== newBlur) {
-            newBlurs[index] = Math.max(0, newBlur);
-            return newBlurs;
-          }
-          return prev;
-        });
-        
-        setTitleOpacities(prev => {
-          const newOpacities = [...prev];
-          if (newOpacities[index] !== newOpacity) {
-            newOpacities[index] = Math.min(1, newOpacity);
-            return newOpacities;
-          }
-          return prev;
-        });
-      });
-      
-      // Update subtitle blur - if any part is below screen, apply blur
-      subtitleRefs.current.forEach((subtitle, index) => {
-        if (!subtitle) return;
-        const rect = subtitle.getBoundingClientRect();
-        
-        let progress = 1;
-        if (rect.bottom > windowHeight) {
-          // Any part below screen - calculate blur based on how much is below
-          const belowHeight = Math.max(0, rect.bottom - windowHeight);
-          const totalHeight = rect.height;
-          const belowRatio = totalHeight > 0 ? Math.min(1, belowHeight / totalHeight) : 0;
-          // More gradual blur - starts blurring as soon as any part goes below
-          progress = Math.max(0, 1 - belowRatio);
-        } else if (rect.top >= windowHeight) {
-          // Completely below
-          progress = 0;
-        } else {
-          // Fully visible
-          progress = 1;
-        }
-        
-        const newBlur = 15 - (progress * 15);
-        const newOpacity = 0.3 + (progress * 0.7);
-        
-        setSubtitleBlurs(prev => {
-          const newBlurs = [...prev];
-          if (newBlurs[index] !== newBlur) {
-            newBlurs[index] = Math.max(0, newBlur);
-            return newBlurs;
-          }
-          return prev;
-        });
-        
-        setSubtitleOpacities(prev => {
-          const newOpacities = [...prev];
-          if (newOpacities[index] !== newOpacity) {
-            newOpacities[index] = Math.min(1, newOpacity);
-            return newOpacities;
-          }
-          return prev;
-        });
+        setScrollProgress((prev) => ({
+          ...prev,
+          [index]: progress
+        }));
       });
     };
 
@@ -438,10 +254,6 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
               const blurAmount = progress < 1 ? Math.max(0, 20 * (1 - progress)) : 0; // Blur from 20px to 0px, 0 when visible
               const opacity = progress < 1 ? Math.max(0.5, 0.5 + (progress * 0.5)) : 1; // Opacity from 0.5 to 1.0, 1 when visible
               
-              // Calculate text blur and opacity to match card (don't set state here, use calculated values)
-              const textBlur = blurAmount;
-              const textOpacity = opacity;
-              
               return (
                 <div
                   key={index}
@@ -469,16 +281,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                 >
                   {index === 0 ? (
                     // First card: "Sell your Home Privately" design
-                    <div
-                      ref={(el) => {
-                        textRefs.current[index] = el;
-                      }}
-                      style={{
-                        filter: `blur(${textBlur}px)`,
-                        opacity: textOpacity,
-                        transition: 'filter 0.15s ease-out, opacity 0.15s ease-out',
-                      }}
-                    >
+                    <div>
                       {/* Top Icons */}
                       <div className="flex justify-between items-start mb-6">
                         {/* Top Left Icon - House Outline */}
@@ -493,49 +296,26 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       </div>
 
                       {/* Title */}
-                      <h3 
-                        ref={(el) => {
-                          titleRefs.current[index] = el;
-                        }}
-                        className={cn(
-                          "font-bold text-white mb-3 transition-all duration-700 ease-out",
-                          elementVisibility[index]?.title ? "text-2xl sm:text-3xl scale-100 translate-y-0" : "text-xl sm:text-2xl scale-95 translate-y-4"
-                        )}
-                        style={{
-                          filter: `blur(${titleBlurs[index]}px)`,
-                          opacity: 1,
-                          transition: 'filter 0.5s ease-out, transform 0.7s ease-out',
-                        }}
-                      >
+                      <h3 className={cn(
+                        "font-bold text-white mb-3 transition-all duration-700 ease-out",
+                        isVisible ? "text-2xl sm:text-3xl scale-100" : "text-xl sm:text-2xl scale-95"
+                      )}>
                         {step.title}
                       </h3>
 
                       {/* Subtitle */}
                       {step.subtitle && (
-                        <p 
-                          ref={(el) => {
-                            subtitleRefs.current[index] = el;
-                          }}
-                          className={cn(
-                            "text-gray-300 mb-4 leading-relaxed transition-all duration-700 ease-out",
-                            elementVisibility[index]?.subtitle ? "text-sm sm:text-base translate-y-0" : "text-xs sm:text-sm translate-y-4"
-                          )}
-                          style={{
-                            filter: `blur(${subtitleBlurs[index]}px)`,
-                            opacity: 1,
-                            transition: 'filter 0.5s ease-out, transform 0.7s ease-out',
-                          }}
-                        >
+                        <p className={cn(
+                          "text-gray-300 mb-4 leading-relaxed transition-all duration-700 ease-out delay-100",
+                          isVisible ? "text-sm sm:text-base opacity-100" : "text-xs sm:text-sm opacity-70"
+                        )}>
                           {step.subtitle}
                         </p>
                       )}
 
                       {/* Tags */}
                       {step.tags && (
-                        <div className={cn(
-                          "flex gap-2 mb-6 flex-wrap transition-all duration-500 ease-out",
-                          elementVisibility[index]?.tags ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                        )}>
+                        <div className="flex gap-2 mb-6 flex-wrap">
                           {step.tags.map((tag, tagIndex) => {
                             const hasBold = 'bold' in tag && tag.bold;
                             return (
@@ -556,10 +336,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
 
                       {/* Features List */}
                       {step.features && (
-                        <ul className={cn(
-                          "space-y-3 transition-all duration-500 ease-out",
-                          elementVisibility[index]?.features ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                        )}>
+                        <ul className="space-y-3">
                           {step.features.map((feature, featIndex) => (
                             <li key={featIndex} className="flex items-center gap-3 text-white text-sm">
                               <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
@@ -573,16 +350,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                     </div>
                   ) : (
                     // Second and Third cards: Similar design with different icons
-                    <div
-                      ref={(el) => {
-                        textRefs.current[index] = el;
-                      }}
-                      style={{
-                        filter: `blur(${textBlur}px)`,
-                        opacity: textOpacity,
-                        transition: 'filter 0.15s ease-out, opacity 0.15s ease-out',
-                      }}
-                    >
+                    <div>
                       {/* Top Icons */}
                       <div className="flex justify-between items-start mb-6">
                         {/* Top Left Icon - Compass for Investment, Phone for Buy Luxury, FileCode for Property Management */}
@@ -609,49 +377,26 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       </div>
 
                       {/* Title */}
-                      <h3 
-                        ref={(el) => {
-                          titleRefs.current[index] = el;
-                        }}
-                        className={cn(
-                          "font-bold text-white mb-3 transition-all duration-700 ease-out",
-                          elementVisibility[index]?.title ? "text-2xl sm:text-3xl scale-100 translate-y-0" : "text-xl sm:text-2xl scale-95 translate-y-4"
-                        )}
-                        style={{
-                          filter: `blur(${titleBlurs[index]}px)`,
-                          opacity: 1,
-                          transition: 'filter 0.5s ease-out, transform 0.7s ease-out',
-                        }}
-                      >
+                      <h3 className={cn(
+                        "font-bold text-white mb-3 transition-all duration-700 ease-out",
+                        isVisible ? "text-2xl sm:text-3xl scale-100" : "text-xl sm:text-2xl scale-95"
+                      )}>
                         {step.title}
                       </h3>
 
                       {/* Subtitle */}
                       {step.subtitle && (
-                        <p 
-                          ref={(el) => {
-                            subtitleRefs.current[index] = el;
-                          }}
-                          className={cn(
-                            "text-gray-300 mb-4 leading-relaxed transition-all duration-700 ease-out",
-                            elementVisibility[index]?.subtitle ? "text-sm sm:text-base translate-y-0" : "text-xs sm:text-sm translate-y-4"
-                          )}
-                          style={{
-                            filter: `blur(${subtitleBlurs[index]}px)`,
-                            opacity: 1,
-                            transition: 'filter 0.5s ease-out, transform 0.7s ease-out',
-                          }}
-                        >
+                        <p className={cn(
+                          "text-gray-300 mb-4 leading-relaxed transition-all duration-700 ease-out delay-100",
+                          isVisible ? "text-sm sm:text-base opacity-100" : "text-xs sm:text-sm opacity-70"
+                        )}>
                           {step.subtitle}
                         </p>
                       )}
 
                       {/* Tags */}
                       {step.tags && (
-                        <div className={cn(
-                          "flex gap-2 mb-6 flex-wrap transition-all duration-500 ease-out",
-                          elementVisibility[index]?.tags ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                        )}>
+                        <div className="flex gap-2 mb-6 flex-wrap">
                           {step.tags.map((tag, tagIndex) => {
                             const hasBold = 'bold' in tag && tag.bold;
                             return (
@@ -672,10 +417,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
 
                       {/* Features List */}
                       {step.features && (
-                        <ul className={cn(
-                          "space-y-3 mb-6 transition-all duration-500 ease-out",
-                          elementVisibility[index]?.features ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                        )}>
+                        <ul className="space-y-3 mb-6">
                           {step.features.map((feature, featIndex) => (
                             <li key={featIndex} className="flex items-center gap-3 text-white text-sm">
                               <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
@@ -689,10 +431,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
 
                       {/* CTA Button for third card */}
                       {step.ctaButton && (
-                        <button className={cn(
-                          "w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg blue-glow",
-                          elementVisibility[index]?.features ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                        )}>
+                        <button className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg  blue-glow">
                           {step.ctaButton}
                         </button>
                       )}

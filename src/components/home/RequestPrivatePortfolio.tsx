@@ -19,14 +19,6 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
   // Blur reveal effects (this ref will be used for both blur and line reveal)
   const { elementRef: titleRef, style: titleBlurStyle } = useBlurReveal<HTMLHeadingElement>({ maxBlur: 8, minBlur: 0 });
   
-  // Text blur states
-  const subheadingRef = useRef<HTMLParagraphElement>(null);
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const [subheadingBlur, setSubheadingBlur] = useState(15);
-  const [subheadingOpacity, setSubheadingOpacity] = useState(0.3);
-  const [descriptionBlur, setDescriptionBlur] = useState(15);
-  const [descriptionOpacity, setDescriptionOpacity] = useState(0.3);
-  
   // Line-by-line reveal effect
   useEffect(() => {
     const titleText = "Request Private Portfolio";
@@ -38,55 +30,6 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
         setTitleLinesVisible(prev => [...prev, index]);
       }, 600 + (index * 500));
     });
-  }, []);
-  
-  // Scroll-triggered blur for text - based on how much is visible
-  useEffect(() => {
-    const handleScroll = () => {
-      [subheadingRef, descriptionRef].forEach((ref, idx) => {
-        if (!ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const elementHeight = rect.height;
-        
-        // Calculate how much of the element is visible in the viewport
-        const elementTop = Math.max(0, rect.top); // Top of visible portion
-        const elementBottom = Math.min(windowHeight, rect.bottom); // Bottom of visible portion
-        const visibleHeight = Math.max(0, elementBottom - elementTop);
-        const visibleRatio = elementHeight > 0 ? visibleHeight / elementHeight : 0;
-        
-        // If less than 50% is visible (meaning more than 50% is below screen), apply blur
-        let progress = 1;
-        if (rect.top >= windowHeight) {
-          // Completely below viewport - maximum blur
-          progress = 0;
-        } else if (visibleRatio < 0.5) {
-          // More than half is below - apply blur based on how much is hidden
-          progress = visibleRatio * 2; // Scale 0-0.5 to 0-1
-        } else {
-          // More than half is visible - clear
-          progress = 1;
-        }
-        
-        const newBlur = 15 - (progress * 15);
-        const newOpacity = 0.3 + (progress * 0.7);
-        
-        if (idx === 0) {
-          setSubheadingBlur(Math.max(0, newBlur));
-          setSubheadingOpacity(Math.min(1, newOpacity));
-        } else {
-          setDescriptionBlur(Math.max(0, newBlur));
-          setDescriptionOpacity(Math.min(1, newOpacity));
-        }
-      });
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
   }, []);
 
   const handleRequest = () => {
@@ -198,28 +141,12 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
           </div>
 
           {/* Subheading */}
-          <p 
-            ref={subheadingRef}
-            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
-            style={{
-              filter: `blur(${subheadingBlur}px)`,
-              opacity: subheadingOpacity,
-              transition: 'filter 0.3s ease-out, opacity 0.3s ease-out',
-            }}
-          >
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             Most of Mallorca's finest properties are sold privately, without ever appearing on public portals.
           </p>
 
           {/* Description */}
-          <p 
-            ref={descriptionRef}
-            className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed"
-            style={{
-              filter: `blur(${descriptionBlur}px)`,
-              opacity: descriptionOpacity,
-              transition: 'filter 0.3s ease-out, opacity 0.3s ease-out',
-            }}
-          >
+          <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
             Get access to exclusive listings, pre-market opportunities, and private sales, personally curated for your lifestyle and investment needs.
           </p>
 

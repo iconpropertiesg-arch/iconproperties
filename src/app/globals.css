@@ -741,8 +741,7 @@ content:none !important;
     top: calc(100% - 15px);
     left: calc(100% - 4px);
     width: 10px;
-    height:95px;
-    border-radius: 30%;
+    height: 5px;
   }
   
   /* Bottom edge - moving left (horizontal line) */
@@ -770,7 +769,7 @@ content:none !important;
     top: 0px;
     left: -2px;
     width: 4px;
-    height: 95px;
+    height: 15px;
   }
   
   /* Back to start */

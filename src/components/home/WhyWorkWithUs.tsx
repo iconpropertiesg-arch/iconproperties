@@ -44,14 +44,6 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
   const [cardBlurs, setCardBlurs] = useState<number[]>(features.map(() => 15));
   const [cardOpacities, setCardOpacities] = useState<number[]>(features.map(() => 0.3));
   
-  // Refs and blur states for text elements inside cards (title and description)
-  const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
-  const descRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const [titleBlurs, setTitleBlurs] = useState<number[]>(features.map(() => 15));
-  const [titleOpacities, setTitleOpacities] = useState<number[]>(features.map(() => 0.3));
-  const [descBlurs, setDescBlurs] = useState<number[]>(features.map(() => 15));
-  const [descOpacities, setDescOpacities] = useState<number[]>(features.map(() => 0.3));
-  
   // Line-by-line reveal effect
   useEffect(() => {
     const titleText = "Why Work With Us";
@@ -77,125 +69,57 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
     });
   }, []);
   
-  // Scroll-triggered blur reveal for cards and individual text elements
+  // Scroll-triggered blur reveal for cards
   useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      
-      // Update card blur
-      cardRefs.current.forEach((card, index) => {
-        if (!card) return;
-        const rect = card.getBoundingClientRect();
-        const cardHeight = rect.height;
-        
-        const cardTop = Math.max(0, rect.top);
-        const cardBottom = Math.min(windowHeight, rect.bottom);
-        const visibleHeight = Math.max(0, cardBottom - cardTop);
-        const visibleRatio = cardHeight > 0 ? visibleHeight / cardHeight : 0;
-        
-        let progress = 1;
-        if (rect.top >= windowHeight) {
-          progress = 0;
-        } else if (visibleRatio < 0.5) {
-          progress = visibleRatio * 2;
-        } else {
-          progress = 1;
-        }
-        
-        const newBlur = 15 - (progress * 15);
-        const newOpacity = 0.3 + (progress * 0.7);
-        
-        setCardBlurs(prev => {
-          const newBlurs = [...prev];
-          newBlurs[index] = Math.max(0, newBlur);
-          return newBlurs;
-        });
-        
-        setCardOpacities(prev => {
-          const newOpacities = [...prev];
-          newOpacities[index] = Math.min(1, newOpacity);
-          return newOpacities;
-        });
-      });
-      
-      // Update title blur - if any part is below screen, apply blur
-      titleRefs.current.forEach((title, index) => {
-        if (!title) return;
-        const rect = title.getBoundingClientRect();
-        
-        let progress = 1;
-        if (rect.bottom > windowHeight) {
-          // Any part below screen - calculate blur based on how much is below
-          const belowHeight = Math.max(0, rect.bottom - windowHeight);
-          const totalHeight = rect.height;
-          const belowRatio = totalHeight > 0 ? belowHeight / totalHeight : 0;
-          progress = Math.max(0, 1 - (belowRatio * 2)); // More below = more blur
-        } else if (rect.top >= windowHeight) {
-          // Completely below
-          progress = 0;
-        } else {
-          // Fully visible
-          progress = 1;
-        }
-        
-        const newBlur = 15 - (progress * 15);
-        const newOpacity = 0.3 + (progress * 0.7);
-        
-        setTitleBlurs(prev => {
-          const newBlurs = [...prev];
-          newBlurs[index] = Math.max(0, newBlur);
-          return newBlurs;
-        });
-        
-        setTitleOpacities(prev => {
-          const newOpacities = [...prev];
-          newOpacities[index] = Math.min(1, newOpacity);
-          return newOpacities;
-        });
-      });
-      
-      // Update description blur - if any part is below screen, apply blur
-      descRefs.current.forEach((desc, index) => {
-        if (!desc) return;
-        const rect = desc.getBoundingClientRect();
-        
-        let progress = 1;
-        if (rect.bottom > windowHeight) {
-          // Any part below screen - calculate blur based on how much is below
-          const belowHeight = Math.max(0, rect.bottom - windowHeight);
-          const totalHeight = rect.height;
-          const belowRatio = totalHeight > 0 ? belowHeight / totalHeight : 0;
-          progress = Math.max(0, 1 - (belowRatio * 2)); // More below = more blur
-        } else if (rect.top >= windowHeight) {
-          // Completely below
-          progress = 0;
-        } else {
-          // Fully visible
-          progress = 1;
-        }
-        
-        const newBlur = 15 - (progress * 15);
-        const newOpacity = 0.3 + (progress * 0.7);
-        
-        setDescBlurs(prev => {
-          const newBlurs = [...prev];
-          newBlurs[index] = Math.max(0, newBlur);
-          return newBlurs;
-        });
-        
-        setDescOpacities(prev => {
-          const newOpacities = [...prev];
-          newOpacities[index] = Math.min(1, newOpacity);
-          return newOpacities;
-        });
-      });
-    };
+    const observers: IntersectionObserver[] = [];
     
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+      
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            const ratio = entry.intersectionRatio;
+            const newBlur = 15 - (ratio * 15); // From 15px to 0px
+            const newOpacity = 0.3 + (ratio * 0.7); // From 0.3 to 1.0
+            
+            setCardBlurs(prev => {
+              const newBlurs = [...prev];
+              newBlurs[index] = Math.max(0, newBlur);
+              return newBlurs;
+            });
+            
+            setCardOpacities(prev => {
+              const newOpacities = [...prev];
+              newOpacities[index] = Math.min(1, newOpacity);
+              return newOpacities;
+            });
+          } else if (entry.boundingClientRect.top > window.innerHeight) {
+            // If element is below viewport, keep it blurred
+            setCardBlurs(prev => {
+              const newBlurs = [...prev];
+              newBlurs[index] = 15;
+              return newBlurs;
+            });
+            setCardOpacities(prev => {
+              const newOpacities = [...prev];
+              newOpacities[index] = 0.3;
+              return newOpacities;
+            });
+          }
+        },
+        {
+          threshold: Array.from({ length: 101 }, (_, i) => i / 100),
+          rootMargin: '-50px',
+        }
+      );
+      
+      observer.observe(card);
+      observers.push(observer);
+    });
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      observers.forEach(observer => observer.disconnect());
     };
   }, []);
 
@@ -321,32 +245,12 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
                   </div>
 
                   {/* Title */}
-                  <h3 
-                    ref={(el) => {
-                      titleRefs.current[index] = el;
-                    }}
-                    className="text-2xl font-bold text-white mb-4"
-                    style={{
-                      filter: `blur(${titleBlurs[index]}px)`,
-                      opacity: titleOpacities[index],
-                      transition: 'filter 0.3s ease-out, opacity 0.3s ease-out',
-                    }}
-                  >
+                  <h3 className="text-2xl font-bold text-white mb-4">
                     {feature.title}
                   </h3>
 
                   {/* Description */}
-                  <p 
-                    ref={(el) => {
-                      descRefs.current[index] = el;
-                    }}
-                    className="text-gray-300 leading-relaxed text-lg"
-                    style={{
-                      filter: `blur(${descBlurs[index]}px)`,
-                      opacity: descOpacities[index],
-                      transition: 'filter 0.3s ease-out, opacity 0.3s ease-out',
-                    }}
-                  >
+                  <p className="text-gray-300 leading-relaxed text-lg">
                     {feature.description}
                   </p>
                 </div>
