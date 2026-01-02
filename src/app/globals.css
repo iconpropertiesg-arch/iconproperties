@@ -525,18 +525,17 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   animation-play-state: paused;
 }
 /* Revolving Border Line Effect */
-/* Revolving Border Line Effect */
 .revolving-border-line {
   position: relative;
-  overflow: hidden; /* Keep overflow hidden only on the animation wrapper */
+overflow: hidden; 
 }
 
 .revolving-border-line::before {
-  content: '';
+content:none !important; 
   position: absolute;
   top: -2px;
   left: 0;
-  width: 120px;
+  width: 90px;
   height: 4px;
   background: linear-gradient(
     90deg,
@@ -556,6 +555,49 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
   pointer-events: none;
   opacity: 0.95;
 }
+.rb-seg{
+  z-index: 1;
+}
+.revolving-border-line > .flex{
+  position: relative;
+  z-index: 2;
+}
+.rb-seg{
+  transform-origin: center;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.rb-seg{
+  position:absolute;
+  top:0;
+  left:0;
+
+  width:90px;
+  height:4px;
+  border-radius:999px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #F02FC2 20%,
+    #FFC080 50%,
+    #FF4500 80%,
+    transparent 100%
+  );
+
+  box-shadow:
+    0 0 12px rgba(240,47,194,.9),
+    0 0 24px rgba(255,192,128,.7),
+    0 0 36px rgba(255,69,0,.5);
+
+  z-index: 9999;        /* 🔥 FORCE ABOVE */
+  pointer-events:none;
+  opacity:1;
+
+  will-change: transform;
+}
+
 
 @media (min-width: 1200px) {
   .revolving-border-line::before {
