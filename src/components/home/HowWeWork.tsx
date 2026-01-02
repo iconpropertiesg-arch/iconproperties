@@ -137,32 +137,48 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
       observers.push(observer);
     });
 
-    // Also track scroll for smooth blur updates
-    const handleScroll = () => {
+    // Also track scroll for smooth blur updates - optimized for mobile
+    let rafId: number | null = null;
+    let ticking = false;
+    
+    const updateBlurs = () => {
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      
       stepRefs.current.forEach((ref, index) => {
         if (!ref) return;
         const rect = ref.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
+        const cardHeight = rect.height;
+        
+        // Account for mobile viewport variations
+        const cardTop = rect.top + scrollY;
+        const cardBottom = cardTop + cardHeight;
+        const viewportTop = scrollY;
+        const viewportBottom = scrollY + windowHeight;
+        
+        // Calculate visible portion
+        const visibleTop = Math.max(cardTop, viewportTop);
+        const visibleBottom = Math.min(cardBottom, viewportBottom);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const visibleRatio = cardHeight > 0 ? visibleHeight / cardHeight : 0;
+        
+        // More lenient threshold for mobile (30% instead of 30% of card)
+        const threshold = window.innerWidth < 768 ? 0.3 : 0.3;
         
         // Calculate progress: 0 = blurred (below viewport), 1 = clear (visible on screen)
         let progress = 1; // Default to clear (no blur)
         
-        // Only blur cards that are below the viewport (not yet scrolled into view)
-        if (rect.top >= windowHeight) {
-          // Card is completely below viewport - should be blurred
+        if (cardBottom <= viewportTop) {
+          // Card is above viewport
           progress = 0;
-        } else if (rect.top < windowHeight && rect.top >= 0) {
-          // Card is entering from bottom - start clearing blur as soon as any part is visible
-          // Calculate how much of the card is visible
-          const visibleHeight = windowHeight - rect.top;
-          const cardHeight = rect.height;
-          
-          // Clear blur immediately as card enters viewport
-          // Use a small transition zone for smoothness
-          const transitionZone = cardHeight * 0.3; // Quick transition over 30% of card
-          progress = Math.max(0, Math.min(1, visibleHeight / transitionZone));
-        } else if (rect.top < 0) {
-          // Card is fully above viewport or fully visible - no blur
+        } else if (cardTop >= viewportBottom) {
+          // Card is below viewport - should be blurred
+          progress = 0;
+        } else if (visibleRatio < threshold) {
+          // Less than threshold visible, apply blur
+          progress = visibleRatio / threshold;
+        } else {
+          // More than threshold visible, fully clear
           progress = 1;
         }
         
@@ -171,14 +187,37 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
           [index]: progress
         }));
       });
+      
+      ticking = false;
+    };
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        rafId = requestAnimationFrame(updateBlurs);
+        ticking = true;
+      }
+    };
+    
+    const handleResize = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateBlurs);
     };
 
+    // Initial check with delay for mobile viewport to settle
+    setTimeout(() => {
+      updateBlurs();
+    }, 100);
+    
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial calculation
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
 
     return () => {
       observers.forEach((observer) => observer.disconnect());
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
     };
   }, []);
 

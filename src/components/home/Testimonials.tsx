@@ -77,30 +77,47 @@ export default function Testimonials({ locale }: TestimonialsProps) {
   const [cardBlurs, setCardBlurs] = useState<number[]>(testimonials.map(() => 15));
   const [cardOpacities, setCardOpacities] = useState<number[]>(testimonials.map(() => 0.7));
   
-  // Scroll-triggered blur reveal for cards
+  // Scroll-triggered blur reveal for cards - optimized for mobile
   useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight;
+    let rafId: number | null = null;
+    let ticking = false;
+    
+    const updateBlurs = () => {
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
       
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
         const rect = card.getBoundingClientRect();
         const cardHeight = rect.height;
         
-        const cardTop = Math.max(0, rect.top);
-        const cardBottom = Math.min(windowHeight, rect.bottom);
-        const visibleHeight = Math.max(0, cardBottom - cardTop);
+        // Account for mobile viewport variations
+        const cardTop = rect.top + scrollY;
+        const cardBottom = cardTop + cardHeight;
+        const viewportTop = scrollY;
+        const viewportBottom = scrollY + windowHeight;
+        
+        // Calculate visible portion
+        const visibleTop = Math.max(cardTop, viewportTop);
+        const visibleBottom = Math.min(cardBottom, viewportBottom);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
         const visibleRatio = cardHeight > 0 ? visibleHeight / cardHeight : 0;
         
+        // More lenient threshold for mobile (30% instead of 50%)
+        const threshold = window.innerWidth < 768 ? 0.3 : 0.5;
+        
         let progress = 1;
-        if (rect.top >= windowHeight) {
+        if (cardBottom <= viewportTop) {
+          // Card is above viewport
+          progress = 0;
+        } else if (cardTop >= viewportBottom) {
           // Card is below viewport
           progress = 0;
-        } else if (visibleRatio < 0.5) {
-          // Less than 50% visible, apply blur
-          progress = visibleRatio * 2;
+        } else if (visibleRatio < threshold) {
+          // Less than threshold visible, apply blur
+          progress = visibleRatio / threshold;
         } else {
-          // More than 50% visible, fully clear
+          // More than threshold visible, fully clear
           progress = 1;
         }
         
@@ -119,17 +136,36 @@ export default function Testimonials({ locale }: TestimonialsProps) {
           return newOpacities;
         });
       });
+      
+      ticking = false;
     };
     
-    // Initial check
-    handleScroll();
+    const handleScroll = () => {
+      if (!ticking) {
+        rafId = requestAnimationFrame(updateBlurs);
+        ticking = true;
+      }
+    };
+    
+    const handleResize = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateBlurs);
+    };
+    
+    // Initial check with delay for mobile viewport to settle
+    setTimeout(() => {
+      updateBlurs();
+    }, 100);
     
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
     
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
     };
   }, []);
   
