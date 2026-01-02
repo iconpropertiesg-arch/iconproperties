@@ -45,6 +45,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const borderContainerRef = useRef<HTMLDivElement>(null);
   const segRef = useRef<HTMLSpanElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [pathData, setPathData] = useState<{ mobile: string; desktop: string }>({ mobile: '', desktop: '' });
   const [dropdownPositions, setDropdownPositions] = useState<{
     purpose?: { top: number; left: number; width: number };
     type?: { top: number; left: number; width: number };
@@ -54,153 +55,153 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   useEffect(() => {
     setMounted(true);
   }, []);
-useEffect(() => {
-  const box = borderContainerRef.current;
-  const seg = segRef.current;
-  if (!box || !seg) return;
 
-  let raf = 0;
-  let last = performance.now();
-  let t = 0;
+  useEffect(() => {
+    const box = borderContainerRef.current;
+    const seg = segRef.current;
+    if (!box || !seg) return;
 
-  const clamp = (v: number, a: number, b: number) =>
-    Math.max(a, Math.min(b, v));
+    let raf = 0;
+    let last = performance.now();
+    let t = 0;
 
-  const tick = (now: number) => {
-    const dt = (now - last) / 1000;
-    last = now;
+    const clamp = (v: number, a: number, b: number) =>
+      Math.max(a, Math.min(b, v));
 
-    const rect = box.getBoundingClientRect();
-    const w = rect.width;
-    const h = rect.height;
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000;
+      last = now;
 
-    const cs = getComputedStyle(box);
-    const br = parseFloat(cs.borderTopLeftRadius || "0") || 24;
+      const rect = box.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
 
-    const segW = seg.offsetWidth;
-    const segH = seg.offsetHeight;
+      const cs = getComputedStyle(box);
+      const br = parseFloat(cs.borderTopLeftRadius || "0") || 24;
 
-    const inset = Math.max(segH, 2);
-    const r = clamp(br, 0, Math.min(w, h) / 2) - inset;
+      const segW = seg.offsetWidth;
+      const segH = seg.offsetHeight;
 
-    const innerW = w - 2 * inset;
-    const innerH = h - 2 * inset;
+      const inset = Math.max(segH, 2);
+      const r = clamp(br, 0, Math.min(w, h) / 2) - inset;
 
-    const straightTop = Math.max(0, innerW - 2 * r);
-    const straightRight = Math.max(0, innerH - 2 * r);
-    const arc = (Math.PI / 2) * r;
-    const P = 2 * (straightTop + straightRight) + 4 * arc;
+      const innerW = w - 2 * inset;
+      const innerH = h - 2 * inset;
 
-    const speed = 220; // tune
-    t = (t + speed * dt) % P;
+      const straightTop = Math.max(0, innerW - 2 * r);
+      const straightRight = Math.max(0, innerH - 2 * r);
+      const arc = (Math.PI / 2) * r;
+      const P = 2 * (straightTop + straightRight) + 4 * arc;
 
-    const snapDeg = (deg: number) => {
-      const step = 1; // 1 degree snap (stable)
-      return Math.round(deg / step) * step;
-    };
+      const speed = 220; // tune
+      t = (t + speed * dt) % P;
 
-    const boostScaleY = (deg: number) => {
-      
-      let base = 1.08;
+      const snapDeg = (deg: number) => {
+        const step = 1; // 1 degree snap (stable)
+        return Math.round(deg / step) * step;
+      };
 
-     
-      const a = ((deg % 360) + 360) % 360;
+      const boostScaleY = (deg: number) => {
+        
+        let base = 1.08;
 
-      const bottomBoost = a >= 135 && a <= 225 ? 0.14 : 0;
+       
+        const a = ((deg % 360) + 360) % 360;
 
-      const verticalPenalty =
-        (a >= 75 && a <= 105) || (a >= 255 && a <= 285) ? -0.04 : 0;
+        const bottomBoost = a >= 135 && a <= 225 ? 0.14 : 0;
 
-      return base + bottomBoost + verticalPenalty;
-    };
+        const verticalPenalty =
+          (a >= 75 && a <= 105) || (a >= 255 && a <= 285) ? -0.04 : 0;
 
-    const set = (x: number, y: number, deg: number) => {
-      const rdeg = snapDeg(deg);
+        return base + bottomBoost + verticalPenalty;
+      };
 
-      const tx = Math.round(x - segW / 2);
-      const ty = Math.round(y - segH / 2);
+      const set = (x: number, y: number, deg: number) => {
+        const rdeg = snapDeg(deg);
 
-      const sy = boostScaleY(rdeg);
+        const tx = Math.round(x - segW / 2);
+        const ty = Math.round(y - segH / 2);
 
-      seg.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotate(${rdeg}deg) scaleY(${sy})`;
-    };
+        const sy = boostScaleY(rdeg);
+
+        seg.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotate(${rdeg}deg) scaleY(${sy})`;
+      };
 
 
-    let d = t;
+      let d = t;
 
-    if (d <= straightTop) {
-      set(inset + r + d, inset, 0);
-      raf = requestAnimationFrame(tick);
-      return;
-    }
-    d -= straightTop;
+      if (d <= straightTop) {
+        set(inset + r + d, inset, 0);
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      d -= straightTop;
 
-    if (d <= arc) {
-      const a = d / r;
-      const cx = inset + r + straightTop;
-      const cy = inset + r;
-      set(cx + Math.sin(a) * r, cy - Math.cos(a) * r, (a * 180) / Math.PI);
-      raf = requestAnimationFrame(tick);
-      return;
-    }
-    d -= arc;
+      if (d <= arc) {
+        const a = d / r;
+        const cx = inset + r + straightTop;
+        const cy = inset + r;
+        set(cx + Math.sin(a) * r, cy - Math.cos(a) * r, (a * 180) / Math.PI);
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      d -= arc;
 
-    if (d <= straightRight) {
-      set(inset + r + straightTop + r, inset + r + d, 90);
-      raf = requestAnimationFrame(tick);
-      return;
-    }
-    d -= straightRight;
+      if (d <= straightRight) {
+        set(inset + r + straightTop + r, inset + r + d, 90);
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      d -= straightRight;
 
-    if (d <= arc) {
-      const a = d / r;
-      const cx = inset + r + straightTop;
-      const cy = inset + r + straightRight;
-      set(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 90 + (a * 180) / Math.PI);
-      raf = requestAnimationFrame(tick);
-      return;
-    }
-    d -= arc;
+      if (d <= arc) {
+        const a = d / r;
+        const cx = inset + r + straightTop;
+        const cy = inset + r + straightRight;
+        set(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 90 + (a * 180) / Math.PI);
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      d -= arc;
 
-    if (d <= straightTop) {
-      set(inset + r + straightTop - d, inset + r + straightRight + r, 180);
-      raf = requestAnimationFrame(tick);
-      return;
-    }
-    d -= straightTop;
+      if (d <= straightTop) {
+        set(inset + r + straightTop - d, inset + r + straightRight + r, 180);
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      d -= straightTop;
 
-    if (d <= arc) {
+      if (d <= arc) {
+        const a = d / r;
+        const cx = inset + r;
+        const cy = inset + r + straightRight;
+        set(
+          cx - Math.sin(a) * r,
+          cy + Math.cos(a) * r,
+          180 + (a * 180) / Math.PI
+        );
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      d -= arc;
+
+      if (d <= straightRight) {
+        set(inset, inset + r + straightRight - d, 270);
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      d -= straightRight;
+
       const a = d / r;
       const cx = inset + r;
-      const cy = inset + r + straightRight;
-      set(
-        cx - Math.sin(a) * r,
-        cy + Math.cos(a) * r,
-        180 + (a * 180) / Math.PI
-      );
+      const cy = inset + r;
+      set(cx - Math.cos(a) * r, cy - Math.sin(a) * r, 270 + (a * 180) / Math.PI);
       raf = requestAnimationFrame(tick);
-      return;
-    }
-    d -= arc;
+    };
 
-    if (d <= straightRight) {
-      set(inset, inset + r + straightRight - d, 270);
-      raf = requestAnimationFrame(tick);
-      return;
-    }
-    d -= straightRight;
-
-    const a = d / r;
-    const cx = inset + r;
-    const cy = inset + r;
-    set(cx - Math.cos(a) * r, cy - Math.sin(a) * r, 270 + (a * 180) / Math.PI);
     raf = requestAnimationFrame(tick);
-  };
-
-  raf = requestAnimationFrame(tick);
-  return () => cancelAnimationFrame(raf);
-}, []);
-
+    return () => cancelAnimationFrame(raf);
+  }, []);
   // Line-by-line reveal states
   const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
   
@@ -325,7 +326,7 @@ useEffect(() => {
   const getPriceDisplayText = () => {
     const minText = formatPrice(priceRange.min);
     const maxText = formatPrice(priceRange.max);
-    return `${minText} to ${maxText}`;
+    return `${minText} - ${maxText}`;
   };
 
   const getPercentage = (value: number) => {
@@ -406,10 +407,8 @@ useEffect(() => {
   };
 
   return (
-    <div
-      className={`relative z-10 mx-auto px-3 sm:px-4 md:px-6 lg:px-8 ${
-        hideTitle ? "my-0" : "-mt-8 sm:-mt-12 md:-mt-16 mb-8 sm:mb-12 md:mb-16"
-      } lg:max-w-[900px] xl:max-w-[1050px]`}
+    <div 
+      className={`relative z-10 mx-auto px-3 sm:px-4 md:px-6 lg:px-8 ${hideTitle ? 'my-0' : '-mt-8 sm:-mt-12 md:-mt-16 mb-8 sm:mb-12 md:mb-16'} lg:max-w-[790px]`}
     >
       {!hideTitle && (
         <div className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12">
@@ -458,9 +457,7 @@ useEffect(() => {
               "0 8px 32px rgba(37, 99, 235, 0.3), 0 0 60px rgba(59, 130, 246, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.2)",
           }}
         >
-          <span ref={segRef} className="rb-seg" aria-hidden="true"></span>
-
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-1 sm:gap-1.5 p-1 sm:p-2 overflow-visible">
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-0.5 sm:gap-1 p-1 sm:p-2 overflow-visible">
             {/* Buy / Rent Dropdown */}
             <div className="relative flex-shrink-0">
               <button
