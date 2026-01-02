@@ -42,7 +42,7 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
   // Refs and blur states for each feature card
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [cardBlurs, setCardBlurs] = useState<number[]>(features.map(() => 15));
-  const [cardOpacities, setCardOpacities] = useState<number[]>(features.map(() => 0.3));
+  const [cardOpacities, setCardOpacities] = useState<number[]>(features.map(() => 0.7));
   
   // Line-by-line reveal effect
   useEffect(() => {
@@ -71,55 +71,57 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
   
   // Scroll-triggered blur reveal for cards
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    
-    cardRefs.current.forEach((card, index) => {
-      if (!card) return;
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
       
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            const ratio = entry.intersectionRatio;
-            const newBlur = 15 - (ratio * 15); // From 15px to 0px
-            const newOpacity = 0.3 + (ratio * 0.7); // From 0.3 to 1.0
-            
-            setCardBlurs(prev => {
-              const newBlurs = [...prev];
-              newBlurs[index] = Math.max(0, newBlur);
-              return newBlurs;
-            });
-            
-            setCardOpacities(prev => {
-              const newOpacities = [...prev];
-              newOpacities[index] = Math.min(1, newOpacity);
-              return newOpacities;
-            });
-          } else if (entry.boundingClientRect.top > window.innerHeight) {
-            // If element is below viewport, keep it blurred
-            setCardBlurs(prev => {
-              const newBlurs = [...prev];
-              newBlurs[index] = 15;
-              return newBlurs;
-            });
-            setCardOpacities(prev => {
-              const newOpacities = [...prev];
-              newOpacities[index] = 0.3;
-              return newOpacities;
-            });
-          }
-        },
-        {
-          threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-          rootMargin: '-50px',
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const cardHeight = rect.height;
+        
+        const cardTop = Math.max(0, rect.top);
+        const cardBottom = Math.min(windowHeight, rect.bottom);
+        const visibleHeight = Math.max(0, cardBottom - cardTop);
+        const visibleRatio = cardHeight > 0 ? visibleHeight / cardHeight : 0;
+        
+        let progress = 1;
+        if (rect.top >= windowHeight) {
+          // Card is below viewport
+          progress = 0;
+        } else if (visibleRatio < 0.5) {
+          // Less than 50% visible, apply blur
+          progress = visibleRatio * 2;
+        } else {
+          // More than 50% visible, fully clear
+          progress = 1;
         }
-      );
-      
-      observer.observe(card);
-      observers.push(observer);
-    });
+        
+        const newBlur = 15 - (progress * 15);
+        const newOpacity = 0.7 + (progress * 0.3); // From 0.7 to 1.0
+        
+        setCardBlurs(prev => {
+          const newBlurs = [...prev];
+          newBlurs[index] = Math.max(0, newBlur);
+          return newBlurs;
+        });
+        
+        setCardOpacities(prev => {
+          const newOpacities = [...prev];
+          newOpacities[index] = Math.min(1, newOpacity);
+          return newOpacities;
+        });
+      });
+    };
+    
+    // Initial check
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     
     return () => {
-      observers.forEach(observer => observer.disconnect());
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, []);
 
@@ -210,7 +212,7 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
                   willChange: "transform, backdrop-filter, filter, opacity",
                   filter: `blur(${cardBlurs[index]}px)`,
                   opacity: cardOpacities[index],
-                  transition: 'filter 0.3s ease-out, opacity 0.3s ease-out',
+                  transition: 'filter 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%)";
