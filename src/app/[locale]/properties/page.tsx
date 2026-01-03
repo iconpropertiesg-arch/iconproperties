@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, TrendingUp, Award, Building2 } from 'lucide-react';
 import { prisma } from '@/lib/db';
-import HeroSearchBar from '@/components/home/HeroSearchBar';
+import PropertiesFilterBar from '@/components/properties/PropertiesFilterBar';
 
 interface PropertiesPageProps {
   params: Promise<{ locale: string }>;
@@ -190,9 +190,11 @@ export default async function PropertiesPage({
         </div>
       </section>
 
-      {/* Search Bar Section */}
-      <section className="relative bg-black py-12">
-        <HeroSearchBar locale={locale} hideTitle={true} />
+      {/* Filter Bar Section */}
+      <section className="relative bg-black py-8">
+        <div className="container mx-auto px-4">
+          <PropertiesFilterBar locale={locale} searchParams={searchParams} />
+        </div>
       </section>
 
       {/* Stats Section */}
