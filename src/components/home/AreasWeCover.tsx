@@ -38,8 +38,8 @@ const areas: Area[] = [
   },
   {
     name: 'Pollensa',
-    x: 40,
-    y: 22,
+    x: 56,
+    y: 18,
     description: 'Historic mountain town',
     properties: 'Mountain villas & traditional homes'
   },
@@ -61,8 +61,8 @@ const areas: Area[] = [
   // Southern areas
   {
     name: 'Santanyí',
-    x: 65,
-    y: 65,
+    x: 72,
+    y: 60,
     description: 'Historic southern town',
     properties: 'Traditional properties & villas'
   },
@@ -84,7 +84,7 @@ const areas: Area[] = [
   {
     name: 'Felanitx',
     x: 60,
-    y: 58,
+    y: 62,
     description: 'Historic eastern town',
     properties: 'Traditional villas & fincas'
   }
@@ -192,14 +192,14 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
         {/* Interactive Map */}
         <div className="relative bg-gradient-to-br from-gray-900/30 to-gray-800/20 rounded-3xl border border-white/10 p-8 md:p-12 overflow-hidden">
           {/* Map Container */}
-          <div className="relative w-full h-[500px] md:h-[600px] rounded-2xl border border-white/10 overflow-hidden bg-white">
+          <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] xl:h-[900px] rounded-2xl border border-white/10 overflow-hidden bg-white">
             {/* Real Map Image */}
             <div className="relative w-full h-full">
               <Image
-                src="/images/maps2.jpg"
+                src="/images/maps3.jpg"
                 alt="Mallorca Map"
                 fill
-                className="object-contain"
+                className="object-cover w-full h-full"
                 unoptimized
               />
             </div>
