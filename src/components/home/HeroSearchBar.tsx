@@ -455,7 +455,7 @@ useEffect(() => {
           className="relative bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-full border border-white/20 p-2 sm:p-3 lg:p-2 shadow-2xl revolving-border-line"
           style={{
             boxShadow:
-              "0 8px 32px rgba(37, 99, 235, 0.3), 0 0 60px rgba(59, 130, 246, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.2)",
+              "0 8px 32px rgba(240, 47, 194, 0.3), 0 0 60px rgba(255, 192, 128, 0.2), 0 0 80px rgba(255, 69, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2)",
           }}
         >
           <span ref={segRef} className="rb-seg" aria-hidden="true"></span>

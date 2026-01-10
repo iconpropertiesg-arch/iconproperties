@@ -20,73 +20,143 @@ interface Area {
 }
 
 const areas: Area[] = [
-  // Western/Southwestern areas
-  {
-    name: 'Palma',
-    x: 32,
-    y: 52,
-    description: 'Historic city center and modern districts',
-    properties: 'Historic penthouses & modern apartments'
-  },
   // Northern areas
   {
     name: 'Puerto Pollensa',
-    x: 42,
-    y: 25,
+    x: 65,
+    y: 12,
     description: 'Charming northern port',
     properties: 'Coastal properties & apartments'
   },
   {
     name: 'Pollensa',
-    x: 56,
-    y: 18,
+    x: 60,
+    y: 20,
     description: 'Historic mountain town',
     properties: 'Mountain villas & traditional homes'
   },
   {
     name: 'Puerto Alcúdia',
-    x: 55,
-    y: 28,
+    x: 68,
+    y: 22,
     description: 'Popular resort area',
     properties: 'Resort properties & apartments'
   },
-  // Central areas (in red highlighted zone)
   {
-    name: 'Inca',
-    x: 38,
-    y: 40,
-    description: 'Central market town',
-    properties: 'Traditional properties & townhouses'
+    name: 'Sóller',
+    x: 35,
+    y: 30,
+    description: 'Historic northwestern port town',
+    properties: 'Historic properties & coastal villas'
   },
-  // Southern areas
   {
-    name: 'Santanyí',
-    x: 72,
-    y: 60,
-    description: 'Historic southern town',
-    properties: 'Traditional properties & villas'
+    name: 'Deià',
+    x: 32,
+    y: 35,
+    description: 'Artistic coastal village',
+    properties: 'Luxury villas & artistic retreats'
   },
-  // Eastern areas
   {
     name: 'Artà',
-    x: 62,
-    y: 30,
+    x: 80,
+    y: 37,
     description: 'Eastern mountain town',
     properties: 'Mountain properties & fincas'
   },
+  // Central areas
   {
-    name: 'Manacor',
-    x: 58,
-    y: 48,
-    description: 'Eastern market town',
-    properties: 'Traditional properties & apartments'
+    name: 'Alaró',
+    x: 47,
+    y: 37,
+    description: 'Central mountain town',
+    properties: 'Mountain properties & traditional homes'
   },
   {
-    name: 'Felanitx',
-    x: 60,
-    y: 62,
-    description: 'Historic eastern town',
-    properties: 'Traditional villas & fincas'
+    name: 'Inca',
+    x: 54,
+    y: 37,
+    description: 'Central market town',
+    properties: 'Traditional properties & townhouses'
+  },
+  {
+    name: 'Santa Maria',
+    x: 46,
+    y: 50,
+    description: 'Central town',
+    properties: 'Traditional properties & fincas'
+  },
+  {
+    name: 'Son Vida',
+    x: 33,
+    y: 45,
+    description: 'Exclusive residential area',
+    properties: 'Luxury estates & penthouses'
+  },
+  // Western/Southwestern areas
+  {
+    name: 'Port Andratx',
+    x: 21,
+    y: 50,
+    description: 'Exclusive southwestern port',
+    properties: 'Luxury waterfront properties'
+  },
+  {
+    name: 'Palma',
+    x: 33,
+    y: 55,
+    description: 'Historic city center and modern districts',
+    properties: 'Historic penthouses & modern apartments'
+  },
+  {
+    name: 'Portals',
+    x: 27,
+    y: 55,
+    description: 'Exclusive southwestern area',
+    properties: 'Luxury properties & villas'
+  },
+  {
+    name: 'Palma Beach',
+    x: 40,
+    y: 58,
+    description: 'Coastal beach area',
+    properties: 'Beachfront properties & apartments'
+  },
+  {
+    name: 'Santa Ponsa',
+    x: 22,
+    y: 60,
+    description: 'Southwestern coastal resort',
+    properties: 'Resort properties & apartments'
+  },
+  // Eastern areas
+  // {
+  //   name: 'Manacor',
+  //   x: 64,
+  //   y: 48,
+  //   description: 'Eastern market town',
+  //   properties: 'Traditional properties & apartments'
+  // },
+  // {
+  //   name: 'Felanitx',
+  //   x: 66,
+  //   y: 62,
+  //   description: 'Historic eastern town',
+  //   properties: 'Traditional villas & fincas'
+  // },
+  // Southern areas
+  {
+    name: 'Llucmajor',
+    x: 50,
+    y: 68,
+    description: 'South-central town',
+    properties: 'Traditional properties & villas'
+  },
+  {
+    name: 'Santanyí',
+    x: 72,
+    y: 80,
+    description: 'Historic southern town',
+    properties: 'Traditional properties & villas'
   }
 ];
 
@@ -205,7 +275,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
             </div>
             
             {/* Overlay for better marker visibility */}
-            <div className="absolute inset-0 pointer-events-none" />
+            <div className="absolute inset-0 pointer-events-none z-20" />
             {/* Clickable Area Markers */}
             {areas.map((area) => {
               const isHovered = hoveredArea === area.name;
@@ -269,22 +339,6 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                         {area.name}
                       </span>
                     </div>
-
-                    {/* Tooltip with details - Only show on hover */}
-                    {isHovered && (
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-64 z-50">
-                        <div className="bg-white/95 backdrop-blur-xl rounded-xl p-4 shadow-2xl border border-white/20">
-                          <h3 className="font-bold text-gray-900 mb-1">{area.name}</h3>
-                          <p className="text-sm text-gray-600 mb-2">{area.description}</p>
-                          {area.properties && (
-                            <p className="text-xs text-gray-600 font-medium">{area.properties}</p>
-                          )}
-                          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
-                            <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/95" />
-                          </div>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               );

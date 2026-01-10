@@ -128,16 +128,16 @@ export default function Footer({ locale }: FooterProps) {
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm flex items-center gap-2 break-all"
                   >
                     <Mail className="w-4 h-4 flex-shrink-0" />
-                    <span>info@iconproperties.es</span>
+                    <span>iconpropertiesg@gmail.com</span>
                   </a>
                 </li>
                 <li>
                   <a 
-                    href="tel:+34XXXXXXXXX"
+                    href="tel:+34 630 412 443"
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm flex items-center gap-2"
                   >
                     <Phone className="w-4 h-4 flex-shrink-0" />
-                    <span>+34 XXX XXX XXX</span>
+                    <span>+34 630 412 443</span>
                   </a>
                 </li>
                 <li>

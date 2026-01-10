@@ -14,22 +14,22 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
     {
       icon: Phone,
       label: t('info.phone'),
-      value: '+34 123 456 789',
-      href: 'tel:+34123456789',
+      value: '+34 630 412 443',
+      href: 'tel:+34 630 412 443',
       description: 'Call us directly'
     },
     {
       icon: Mail,
       label: t('info.email'),
-      value: 'info@lioncapitala.com',
-      href: 'mailto:info@lioncapitala.com',
+      value: 'iconpropertiesg@gmail.com',
+      href: 'mailto:iconpropertiesg@gmail.com',
       description: 'Send us an email'
     },
     {
       icon: MessageCircle,
       label: 'WhatsApp',
-      value: '+34 123 456 789',
-      href: 'https://wa.me/34123456789',
+      value: '+34 630 412 443',
+      href: 'https://wa.me/34 630 412 443',
       description: 'Chat with us on WhatsApp'
     }
   ];
@@ -111,7 +111,7 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
             Call Now
           </a>
           <a
-            href="https://wa.me/34123456789"
+            href="https://wa.me/34630412443"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center w-full bg-green-600 hover:bg-green-700 rounded-lg py-3 px-4 font-medium transition-colors text-white shadow-lg hover:shadow-green-600/50"
