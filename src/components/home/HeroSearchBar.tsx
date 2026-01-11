@@ -325,7 +325,7 @@ useEffect(() => {
   const getPriceDisplayText = () => {
     const minText = formatPrice(priceRange.min);
     const maxText = formatPrice(priceRange.max);
-    return `${minText} to ${maxText}`;
+    return `${minText} - ${maxText}`;
   };
 
   const getPercentage = (value: number) => {
