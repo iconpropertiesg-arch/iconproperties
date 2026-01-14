@@ -232,7 +232,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
           </div>
 
           <div className="mt-8 text-center">
-            <p className="text-gray-400 text-sm">Hover a region to highlight it. Click a pin to view properties.</p>
+            <p className="text-gray-400 text-sm">Click on any area to view available properties.</p>
           </div>
         </div>
       </div>
