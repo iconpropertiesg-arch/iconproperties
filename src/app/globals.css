@@ -524,4 +524,91 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label,
 .animate-logo-scroll:hover {
   animation-play-state: paused;
 }
+/* Animated Glow Effect - Left to Right */
+@keyframes glow-sweep-left {
+  0% {
+    box-shadow:
+      0 8px 32px rgba(240, 47, 194, 0.1),
+      0 0 60px rgba(255, 192, 128, 0.05),
+      0 0 90px rgba(255, 69, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    box-shadow:
+      -20px 8px 60px rgba(240, 47, 194, 0.4),
+      -30px 0 100px rgba(255, 192, 128, 0.3),
+      -40px 0 120px rgba(255, 69, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 8px 32px rgba(240, 47, 194, 0.1),
+      0 0 60px rgba(255, 192, 128, 0.05),
+      0 0 90px rgba(255, 69, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  75% {
+    box-shadow:
+      20px 8px 60px rgba(240, 47, 194, 0.4),
+      30px 0 100px rgba(255, 192, 128, 0.3),
+      40px 0 120px rgba(255, 69, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow:
+      0 8px 32px rgba(240, 47, 194, 0.1),
+      0 0 60px rgba(255, 192, 128, 0.05),
+      0 0 90px rgba(255, 69, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes glow-sweep-right {
+  0% {
+    box-shadow:
+      0 8px 32px rgba(240, 47, 194, 0.1),
+      0 0 60px rgba(255, 192, 128, 0.05),
+      0 0 90px rgba(255, 69, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    box-shadow:
+      20px 8px 60px rgba(240, 47, 194, 0.4),
+      30px 0 100px rgba(255, 192, 128, 0.3),
+      40px 0 120px rgba(255, 69, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 8px 32px rgba(240, 47, 194, 0.1),
+      0 0 60px rgba(255, 192, 128, 0.05),
+      0 0 90px rgba(255, 69, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  75% {
+    box-shadow:
+      -20px 8px 60px rgba(240, 47, 194, 0.4),
+      -30px 0 100px rgba(255, 192, 128, 0.3),
+      -40px 0 120px rgba(255, 69, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow:
+      0 8px 32px rgba(240, 47, 194, 0.1),
+      0 0 60px rgba(255, 192, 128, 0.05),
+      0 0 90px rgba(255, 69, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.animate-glow-sweep {
+  animation: glow-sweep-left 15s ease-in-out infinite;
+  transition: box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-glow-sweep-alt {
+  animation: glow-sweep-right 15s ease-in-out infinite;
+  transition: box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Revolving Border Line Effect */

@@ -45,6 +45,7 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   const borderContainerRef = useRef<HTMLDivElement>(null);
   const segRef = useRef<HTMLSpanElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [glowDirection, setGlowDirection] = useState<'left' | 'right'>('left');
   const [dropdownPositions, setDropdownPositions] = useState<{
     purpose?: { top: number; left: number; width: number };
     type?: { top: number; left: number; width: number };
@@ -53,6 +54,15 @@ export default function HeroSearchBar({ locale, hideTitle = false }: HeroSearchB
   
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Randomly alternate glow direction
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlowDirection((prev) => (prev === 'left' ? 'right' : 'left'));
+    }, 7500 + Math.random() * 3000); // Random interval between 7.5-10.5 seconds for slower transitions
+
+    return () => clearInterval(interval);
   }, []);
 useEffect(() => {
   const box = borderContainerRef.current;
@@ -452,11 +462,10 @@ useEffect(() => {
       <div className="glow-wrapper overflow-visible">
         <div
           ref={borderContainerRef}
-          className="relative bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-full border border-white/20 p-2 sm:p-3 lg:p-2 shadow-2xl revolving-border-line"
-          style={{
-            boxShadow:
-              "0 8px 32px rgba(240, 47, 194, 0.3), 0 0 60px rgba(255, 192, 128, 0.2), 0 0 90px rgba(255, 69, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2)",
-          }}
+          className={cn(
+            "relative bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-full border border-white/20 p-2 sm:p-3 lg:p-2 shadow-2xl revolving-border-line",
+            glowDirection === 'left' ? 'animate-glow-sweep' : 'animate-glow-sweep-alt'
+          )}
         >
           <span ref={segRef} className="rb-seg" aria-hidden="true"></span>
 

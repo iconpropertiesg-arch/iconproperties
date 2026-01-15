@@ -111,8 +111,8 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
           </p>
         </div>
 
-        <div className="relative bg-gradient-to-br from-gray-900/30 to-gray-800/20 rounded-3xl border border-white/10 p-8 md:p-12 overflow-hidden">
-          <div className="relative w-full rounded-2xl border border-white/10 overflow-hidden bg-white aspect-video">
+        <div className="relative bg-black rounded-3xl border border-white/10 p-8 md:p-12 overflow-hidden">
+          <div className="relative w-full rounded-2xl border-2 border-white/20 overflow-hidden bg-black aspect-video">
            
             <svg
               xmlns="http://www.w3.org/2000/svg"
