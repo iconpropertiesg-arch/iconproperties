@@ -145,17 +145,22 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
   }
 
   return (
-    <section id="valuation-form" className="py-20 bg-white px-4">
-      <div className="container mx-auto max-w-7xl">
+    <section id="valuation-form" className="relative bg-black py-20 px-4">
+      {/* Subtle glowing effects overlay */}
+      <div className="absolute inset-0 opacity-25">
+        <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <div className="w-16 h-16 bg-gray-700/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Calculator className="w-8 h-8 text-gray-600" />
+            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Calculator className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               {tSell('title')}
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-300">
               {tSell('subtitle')}
             </p>
           </div>
@@ -163,22 +168,22 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-2xl shadow-xl p-8">
+              <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Personal Information */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Information</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">Your Information</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           {t('common.name')} *
                         </label>
                         <input
                           type="text"
                           value={formData.name}
                           onChange={(e) => handleInputChange('name', e.target.value)}
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-gray-500 focus:border-gray-500 ${
-                            errors.name ? 'border-red-300' : 'border-gray-300'
+                          className={`w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-white/50 focus:border-white/50 ${
+                            errors.name ? 'border-red-400' : ''
                           }`}
                           placeholder="Your full name"
                         />
@@ -186,15 +191,15 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           {t('common.email')} *
                         </label>
                         <input
                           type="email"
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-gray-500 focus:border-gray-500 ${
-                            errors.email ? 'border-red-300' : 'border-gray-300'
+                          className={`w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-white/50 focus:border-white/50 ${
+                            errors.email ? 'border-red-400' : ''
                           }`}
                           placeholder="your.email@example.com"
                         />
@@ -205,18 +210,18 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
 
                   {/* Property Information */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Property Details</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">Property Details</h3>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           {tSell('form.address')} *
                         </label>
                         <input
                           type="text"
                           value={formData.propertyLocation}
                           onChange={(e) => handleInputChange('propertyLocation', e.target.value)}
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-gray-500 focus:border-gray-500 ${
-                            errors.propertyLocation ? 'border-red-300' : 'border-gray-300'
+                          className={`w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-white/50 focus:border-white/50 ${
+                            errors.propertyLocation ? 'border-red-400' : ''
                           }`}
                           placeholder="e.g., Portals Nous, Santa Ponsa..."
                         />

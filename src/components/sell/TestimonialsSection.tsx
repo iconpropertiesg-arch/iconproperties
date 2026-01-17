@@ -22,10 +22,15 @@ export default function TestimonialsSection({ locale }: TestimonialsSectionProps
   ];
 
   return (
-    <section className="py-20 bg-white px-4">
-      <div className="container mx-auto max-w-7xl">
+    <section className="relative bg-black py-20 px-4">
+      {/* Subtle glowing effects overlay */}
+      <div className="absolute inset-0 opacity-25">
+        <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {t('title')}
           </h2>
         </div>
@@ -34,7 +39,7 @@ export default function TestimonialsSection({ locale }: TestimonialsSectionProps
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-black rounded-2xl p-8 shadow-lg relative border border-white/10"
+              className="relative bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
             >
               <div className="absolute top-6 right-6">
                 <Quote className="w-12 h-12 text-gray-400/20" />
