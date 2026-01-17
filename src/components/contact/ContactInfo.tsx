@@ -14,8 +14,8 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
     {
       icon: Phone,
       label: t('info.phone'),
-      value: '+34 630 412 443',
-      href: 'tel:+34 630 412 443',
+      value: '+34 686 08 86 91',
+      href: 'tel:+34 686 08 86 91',
       description: 'Call us directly'
     },
     {

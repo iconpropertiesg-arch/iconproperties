@@ -133,11 +133,11 @@ export default function Footer({ locale }: FooterProps) {
                 </li>
                 <li>
                   <a 
-                    href="tel:+34 630 412 443"
+                    href="tel:+34 686 08 86 91"
                     className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm flex items-center gap-2"
                   >
                     <Phone className="w-4 h-4 flex-shrink-0" />
-                    <span>+34 630 412 443</span>
+                    <span>+34 686 08 86 91</span>
                   </a>
                 </li>
                 <li>
