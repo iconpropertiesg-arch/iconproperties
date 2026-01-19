@@ -92,7 +92,12 @@
       "sort": "Ordenar por",
       "newest": "Más Recientes",
       "priceAsc": "Precio: Menor a Mayor",
-      "priceDesc": "Precio: Mayor a Menor"
+      "priceDesc": "Precio: Mayor a Menor",
+      "objectType": "Tipo de objeto",
+      "price": "Precio",
+      "priceRange": "Rango de precio",
+      "saveSearch": "Guardar búsqueda",
+      "selected": "seleccionado"
     },
     "stats": {
       "totalValue": "Valor Total de Propiedades",

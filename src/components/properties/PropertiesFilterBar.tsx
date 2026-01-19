@@ -12,10 +12,11 @@ interface PropertiesFilterBarProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
+// Property types will use translations in the component
 const propertyTypes = [
-  { key: 'apartment', icon: Building, label: 'Apartment' },
-  { key: 'house', icon: Home, label: 'House' },
-  { key: 'commercial', icon: Store, label: 'Commercial' },
+  { key: 'apartment', icon: Building },
+  { key: 'house', icon: Home },
+  { key: 'commercial', icon: Store },
 ];
 
 const mockLocations = [
@@ -28,8 +29,9 @@ export default function PropertiesFilterBar({ locale, searchParams }: Properties
   const router = useRouter();
   const urlSearchParams = useSearchParams();
   const t = useTranslations('hero');
-  const tCommon = useTranslations('propertyTypes');
+  const tPropertyTypes = useTranslations('propertyTypes');
   const tPurpose = useTranslations('purpose');
+  const tFilters = useTranslations('properties.filters');
   
   // Initialize from URL params
   const initialPurpose = (searchParams.purpose as 'buy' | 'rent') || null;
@@ -124,12 +126,11 @@ export default function PropertiesFilterBar({ locale, searchParams }: Properties
   };
 
   const getTypeDisplayText = () => {
-    if (propertyType.length === 0) return 'Object type';
+    if (propertyType.length === 0) return tFilters('objectType');
     if (propertyType.length === 1) {
-      const type = propertyTypes.find(t => t.key === propertyType[0]);
-      return type ? type.label : propertyType[0];
+      return tPropertyTypes(propertyType[0]);
     }
-    return `${propertyType.length} selected`;
+    return `${propertyType.length} ${tFilters('selected')}`;
   };
 
   const minPrice = 0;
@@ -146,7 +147,7 @@ export default function PropertiesFilterBar({ locale, searchParams }: Properties
 
   const getPriceDisplayText = () => {
     if (priceRange.min === minPrice && priceRange.max === maxPrice) {
-      return 'Price';
+      return tFilters('price');
     }
     return `${formatPrice(priceRange.min)} - ${formatPrice(priceRange.max)}`;
   };
@@ -365,7 +366,7 @@ export default function PropertiesFilterBar({ locale, searchParams }: Properties
                     >
                       <Icon className="w-5 h-5" />
                       <span className="font-medium text-gray-900">
-                        {type.label}
+                        {tPropertyTypes(type.key)}
                       </span>
                       {isSelected && (
                         <div className="ml-auto w-2 h-2 bg-gray-900 rounded-full" />
@@ -496,7 +497,7 @@ export default function PropertiesFilterBar({ locale, searchParams }: Properties
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-700 font-medium">Price Range</span>
+                    <span className="text-gray-700 font-medium">{tFilters('priceRange')}</span>
                     <span className="text-gray-500">
                       {formatPrice(priceRange.min)} - {formatPrice(priceRange.max)}
                     </span>
@@ -566,7 +567,7 @@ export default function PropertiesFilterBar({ locale, searchParams }: Properties
             <Bell className="w-4 h-4" />
             <Plus className="w-2.5 h-2.5 absolute -top-1 -right-1 bg-white text-red-600 rounded-full" />
           </div>
-          <span className="text-sm">Save search</span>
+          <span className="text-sm">{tFilters('saveSearch')}</span>
         </button>
         </div>
       </div>

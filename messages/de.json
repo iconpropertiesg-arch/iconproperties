@@ -92,7 +92,12 @@
       "sort": "Sortieren nach",
       "newest": "Neueste",
       "priceAsc": "Preis: Niedrig zu Hoch",
-      "priceDesc": "Preis: Hoch zu Niedrig"
+      "priceDesc": "Preis: Hoch zu Niedrig",
+      "objectType": "Objekttyp",
+      "price": "Preis",
+      "priceRange": "Preisspanne",
+      "saveSearch": "Suche speichern",
+      "selected": "ausgewählt"
     },
     "stats": {
       "totalValue": "Gesamtwert der Immobilien",

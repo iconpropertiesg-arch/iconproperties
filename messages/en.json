@@ -96,7 +96,12 @@
       "sort": "Sort by",
       "newest": "Newest",
       "priceAsc": "Price: Low to High",
-      "priceDesc": "Price: High to Low"
+      "priceDesc": "Price: High to Low",
+      "objectType": "Object type",
+      "price": "Price",
+      "priceRange": "Price Range",
+      "saveSearch": "Save search",
+      "selected": "selected"
     },
     "stats": {
       "totalValue": "Total Properties Value",
