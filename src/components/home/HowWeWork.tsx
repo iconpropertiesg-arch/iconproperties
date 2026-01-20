@@ -222,7 +222,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
   }, []);
 
   return (
-    <section className="relative bg-black py-20 px-4">
+    <section className="relative bg-black py-20">
       {/* Subtle blue and purple glow effects */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-gray-600/30 rounded-full blur-[120px]" />
