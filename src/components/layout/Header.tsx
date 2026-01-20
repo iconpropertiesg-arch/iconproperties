@@ -92,8 +92,8 @@ export default function Header({ locale }: HeaderProps) {
             : undefined
         }
       >
-        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
-          <div className="flex items-center justify-between gap-2 sm:gap-4">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 overflow-hidden">
+          <div className="flex items-center justify-between gap-2 sm:gap-4 min-w-0">
             {/* Left side - Logo and Navigation */}
             <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-8 lg:ml-0 xl:ml-8 2xl:ml-16">
               {/* Logo at the front */}
@@ -169,13 +169,13 @@ export default function Header({ locale }: HeaderProps) {
             </div>
 
             {/* Logo for mobile */}
-            <Link href={`/${locale}`} className="flex lg:hidden items-center gap-2 group flex-shrink-0">
+            <Link href={`/${locale}`} className="flex lg:hidden items-center gap-2 group min-w-0 flex-1 overflow-hidden">
               <Image
                 src="/images/logo3.png"
                 alt="Property Icon Logo"
                 width={240}
                 height={80}
-                className="h-8 xs:h-10 sm:h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="h-7 xs:h-8 sm:h-10 md:h-12 w-auto max-w-full transition-transform duration-300 group-hover:scale-105"
                 priority
               />
             </Link>
