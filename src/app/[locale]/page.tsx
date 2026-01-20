@@ -5,7 +5,7 @@ import { setRequestLocale } from 'next-intl/server';
 import HeroSection from '@/components/home/HeroSection';
 import HeroSearchBar from '@/components/home/HeroSearchBar';
 import FeaturedProperties from '@/components/home/FeaturedProperties';
-// import WhyWorkWithUs from '@/components/home/WhyWorkWithUs';
+import WhyWorkWithUs from '@/components/home/WhyWorkWithUs';
 // import AreasWeCover from '@/components/home/AreasWeCover';
 // import HowWeWork from '@/components/home/HowWeWork';
 // import RequestPrivatePortfolio from '@/components/home/RequestPrivatePortfolio';
@@ -65,7 +65,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <FeaturedProperties locale={locale} />
 
       {/* Why Work With Us */}
-      {/* <WhyWorkWithUs locale={locale} /> */}
+      <WhyWorkWithUs locale={locale} />
 
       {/* Areas We Cover */}
       {/* <AreasWeCover locale={locale} /> */}
