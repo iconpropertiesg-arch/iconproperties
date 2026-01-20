@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
 import HeroSection from '@/components/home/HeroSection';
-// import HeroSearchBar from '@/components/home/HeroSearchBar';
+import HeroSearchBar from '@/components/home/HeroSearchBar';
 // import FeaturedProperties from '@/components/home/FeaturedProperties';
 // import WhyWorkWithUs from '@/components/home/WhyWorkWithUs';
 // import AreasWeCover from '@/components/home/AreasWeCover';
@@ -58,7 +58,7 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="absolute inset-0 opacity-25">
           <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
         </div>
-        {/* <HeroSearchBar locale={locale} /> */}
+        <HeroSearchBar locale={locale} />
       </section>
 
       {/* Featured Properties */}
