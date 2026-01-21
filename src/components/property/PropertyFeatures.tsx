@@ -56,7 +56,7 @@ export default function PropertyFeatures({ property, locale }: PropertyFeaturesP
       </div>
 
       {/* Additional Features Categories */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+      {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
         <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
           <h3 className="text-lg font-semibold text-white mb-4">Energy & Sustainability</h3>
           <ul className="space-y-3">
@@ -100,7 +100,7 @@ export default function PropertyFeatures({ property, locale }: PropertyFeaturesP
             </li>
           </ul>
         </div>
-      </div>
+      </div> */}
 
       {/* Floorplan Section */}
       <div className="border-t border-gray-700 pt-8">
