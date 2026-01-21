@@ -10,10 +10,10 @@ import AreasWeCover from '@/components/home/AreasWeCover';
 import HowWeWork from '@/components/home/HowWeWork';
 import RequestPrivatePortfolio from '@/components/home/RequestPrivatePortfolio';
 import Testimonials from '@/components/home/Testimonials';
-import AboutSnippet from '@/components/home/AboutSnippet';
-import CallToAction from '@/components/home/CallToAction';
-import AreaHighlights from '@/components/home/AreaHighlights';
-import Newsletter from '@/components/home/Newsletter';
+// import AboutSnippet from '@/components/home/AboutSnippet';
+// import CallToAction from '@/components/home/CallToAction';
+// import AreaHighlights from '@/components/home/AreaHighlights';
+// import Newsletter from '@/components/home/Newsletter';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -80,16 +80,16 @@ export default async function HomePage({ params }: HomePageProps) {
       <Testimonials locale={locale} />
 
       {/* About Company Snapshot */}
-      <AboutSnippet locale={locale} />
+      {/* <AboutSnippet locale={locale} /> */}
 
       {/* Call to Action - Hiring or Sell/Rent */}
-      <CallToAction locale={locale} variant="sell" />
+      {/* <CallToAction locale={locale} variant="sell" /> */}
 
       {/* Area Highlights */}
-      <AreaHighlights locale={locale} />
+      {/* <AreaHighlights locale={locale} /> */}
 
       {/* Newsletter Signup */}
-      <Newsletter locale={locale} />
+      {/* <Newsletter locale={locale} /> */}
     </div>
   );
 }
