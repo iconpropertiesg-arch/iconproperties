@@ -92,7 +92,7 @@ export default function Header({ locale }: HeaderProps) {
             : undefined
         }
       >
-        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 overflow-hidden">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
           <div className="flex items-center justify-between gap-2 sm:gap-4 min-w-0">
             {/* Left side - Logo and Navigation */}
             <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-8 lg:ml-0 xl:ml-8 2xl:ml-16">
