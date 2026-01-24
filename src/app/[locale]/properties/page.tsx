@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, TrendingUp, Award, Building2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { prisma } from '@/lib/db';
 import PropertiesFilterBar from '@/components/properties/PropertiesFilterBar';
 
@@ -87,7 +87,6 @@ export default async function PropertiesPage({
     slug: string;
     purpose: string;
   }> = [];
-  let totalValue = 0;
 
   try {
     // Build where clause for filtering
@@ -127,9 +126,6 @@ export default async function PropertiesPage({
       },
     });
 
-    // Calculate total value from raw prices
-    totalValue = properties.reduce((sum, property) => sum + property.price, 0);
-
     portfolioItems = properties.map((property) => {
       const translation = property.translations[0];
       const firstImage = property.images && property.images.length > 0 
@@ -154,26 +150,6 @@ export default async function PropertiesPage({
     // If there's an error, portfolioItems will remain empty
   }
 
-  const stats = [
-    { 
-      icon: TrendingUp, 
-      value: totalValue >= 1000000 
-        ? `€${(totalValue / 1000000).toFixed(0)}M+` 
-        : `€${(totalValue / 1000).toFixed(0)}K+`, 
-      label: tProperties('stats.totalValue')
-    },
-    { 
-      icon: Building2, 
-      value: `${portfolioItems.length}+`, 
-      label: tProperties('stats.propertiesManaged')
-    },
-    { 
-      icon: Award, 
-      value: '98%', 
-      label: tProperties('stats.clientSatisfaction')
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
@@ -194,26 +170,6 @@ export default async function PropertiesPage({
       <section className="relative bg-black py-8">
         <div className="container mx-auto px-4">
           <PropertiesFilterBar locale={locale} searchParams={searchParams} />
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 border-y border-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-gray-700/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-8 h-8 text-gray-400" />
-                  </div>
-                  <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
-                  <div className="text-gray-400">{stat.label}</div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
