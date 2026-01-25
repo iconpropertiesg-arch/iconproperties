@@ -14,9 +14,9 @@ interface HeroSearchBarProps {
 }
 
 const propertyTypes = [
-  { key: 'apartment', icon: Building, label: 'Apartment' },
-  { key: 'house', icon: Home, label: 'House' },
-  { key: 'commercial', icon: Store, label: 'Commercial' },
+  { key: 'apartment', icon: Building },
+  { key: 'house', icon: Home },
+  { key: 'commercial', icon: Store },
 ];
 
 const mockLocations = [
@@ -646,7 +646,7 @@ useEffect(() => {
                           >
                             <Icon className="w-5 h-5" />
                             <span className="font-medium text-gray-900">
-                              {type.label}
+                              {tCommon(type.key)}
                             </span>
                             {isSelected && (
                               <div className="ml-auto w-2 h-2 bg-gray-900 rounded-full" />
