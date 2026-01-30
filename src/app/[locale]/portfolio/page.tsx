@@ -14,13 +14,13 @@ export async function generateMetadata({ params }: PortfolioPageProps): Promise<
   const t = await getTranslations({ locale, namespace: 'portfolio' });
 
   return {
-    title: 'Properties - Property Icon',
+    title: 'Properties - Icon properties',
     description: 'View our properties of successful real estate transactions and investments.',
     alternates: {
       canonical: `/${locale}/portfolio`,
     },
     openGraph: {
-      title: 'Properties - Property Icon',
+      title: 'Properties - icon propeties',
       description: 'View our properties of successful real estate transactions and investments.',
       images: ['/og-portfolio.jpg'],
     },

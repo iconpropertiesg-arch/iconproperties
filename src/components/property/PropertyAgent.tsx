@@ -96,8 +96,8 @@ export default function PropertyAgent({ property, locale }: PropertyAgentProps) 
   return (
     <div className="space-y-6">
       {/* Agent Card */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-        <div className="text-center mb-6">
+      <div className="bg-black rounded-xl shadow-lg p-6 border border-gray-200">
+        <div className="text-center text-white mb-6">
           <div className="relative w-20 h-20 mx-auto mb-4">
             <Image
               src={agent.avatar}
@@ -107,8 +107,8 @@ export default function PropertyAgent({ property, locale }: PropertyAgentProps) 
               sizes="80px"
             />
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-1">{agent.name}</h3>
-          <p className="text-gray-600">Licensed Real Estate Agent</p>
+          <h3 className="text-xl font-semibold text-white mb-1">{agent.name}</h3>
+          <p className="text-white">Licensed Real Estate Agent</p>
           <div className="flex justify-center space-x-2 mt-2">
             {agent.languages.map((lang) => (
               <span

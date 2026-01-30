@@ -95,7 +95,7 @@ async function getPropertyBySlug(slug: string, locale: string): Promise<Property
     // Default agent (you can customize this or fetch from database)
     const agent = {
       id: 'default',
-      name: 'Property Icon Team',
+      name: 'Icon properties',
       email: 'info@propertyicon.com',
       phone: '+34 971 123 456',
       whatsapp: '+34 971 123 456',
@@ -202,32 +202,36 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8">
       {/* Property Details - Show First */}
       <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 pt-28 md:pt-32 pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-12">
-            <PropertyDetails property={property} locale={locale} />
-          </div>
+{/* Gallery - Show Second, Moved Lower */}
+<div className="pt-8 pb-8 px-4 md:px-8 lg:px-12 xl:px-16">
+        <PropertyGallery property={property} locale={locale} />
+      </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-8">
-              <PropertyAgent property={property} locale={locale} />
-            </div>
-          </div>
+
+        
         </div>
       </div>
 
-      {/* Gallery - Show Second, Moved Lower */}
-      <div className="pt-8 pb-8 px-4 md:px-8 lg:px-12 xl:px-16">
-        <PropertyGallery property={property} locale={locale} />
-      </div>
+      
 
       {/* Property Highlights - Show After Gallery */}
       <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8">
         <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/30 rounded-2xl p-8 border border-gray-700">
+        
+        <div className="lg:col-span-2 space-y-12">
+            <PropertyDetails property={property} locale={locale} />
+          </div>
+  {/* Sidebar */}
+          <div className="lg:col-span-1 bg-black">
+            // <div className="sticky top-24 space-y-8">
+              <PropertyAgent property={property} locale={locale} />
+            </div>
+          </div>
           <h3 className="text-xl font-bold text-white mb-6">Property Highlights</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -256,7 +260,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
       {/* Additional Property Details */}
       <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
             <PropertyFeatures property={property} locale={locale} />
