@@ -112,7 +112,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
         </div>
 
         <div className="relative bg-black rounded-3xl border border-white/10 p-8 md:p-12 overflow-hidden">
-          <div className="relative w-full rounded-2xl border-2 border-white/20 overflow-hidden bg-black aspect-video">
+          <div className="relative w-full rounded-2xl border-2 border-white/20 overflow-hidden bg-black aspect-[3/4] md:aspect-video">
            
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -211,18 +211,18 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                     aria-label={`View properties in ${area.name}`}
                   >
                     <div className="relative filter drop-shadow-[0_0_4px_rgba(255,255,255,0.9)] drop-shadow-[0_0_8px_rgba(37,99,235,0.8)]">
-                      <MapPin className="w-9 h-9 text-gray-600 transition-all duration-300" fill="#2563eb" />
+                      <MapPin className="w-5 h-5 md:w-9 md:h-9 text-gray-600 transition-all duration-300" fill="#2563eb" />
                     </div>
                     <div
                       className={cn(
                         'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-lg',
-                        selectedArea === area.name ? 'w-3 h-3' : 'w-2.5 h-2.5'
+                        selectedArea === area.name ? 'w-2 h-2 md:w-3 md:h-3' : 'w-1.5 h-1.5 md:w-2.5 md:h-2.5'
                       )}
                     />
                   </button>
 
-                  <div className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap">
-                    <span className="text-white text-xs font-semibold bg-gray-700/80 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-400/50">
+                  <div className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-1 md:mt-2 whitespace-nowrap">
+                    <span className="text-white text-[9px] md:text-xs font-semibold bg-gray-700/80 backdrop-blur-sm px-1.5 py-0.5 md:px-2 md:py-1 rounded-full border border-gray-400/50">
                       {area.name}
                     </span>
                   </div>
