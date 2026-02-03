@@ -232,9 +232,9 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
               <PropertyAgent property={property} locale={locale} />
             </div>
           </div>
-          <h3 className="text-xl font-bold text-white mb-6">Property Highlights</h3>
+          {/* <h3 className="text-xl font-bold text-white mb-6">Property Highlights</h3> */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
+            {/* <div>
               <h4 className="font-semibold text-white mb-3">Interior Features</h4>
               <ul className="space-y-2 text-gray-300">
                 <li>• Open-plan living and dining areas</li>
@@ -243,8 +243,8 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                 <li>• Floor-to-ceiling windows throughout</li>
                 <li>• Air conditioning and underfloor heating</li>
               </ul>
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <h4 className="font-semibold text-white mb-3">Exterior Features</h4>
               <ul className="space-y-2 text-gray-300">
                 <li>• Infinity swimming pool</li>
@@ -253,7 +253,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                 <li>• Outdoor kitchen and dining area</li>
                 <li>• Private garage for 2 cars</li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
