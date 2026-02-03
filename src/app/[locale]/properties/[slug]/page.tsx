@@ -208,7 +208,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
         <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8">
           {/* Main Content */}
 {/* Gallery - Show Second, Moved Lower */}
-<div className="pt-8 pb-8 px-4 md:px-8 lg:px-12 xl:px-16">
+<div className="pt-6 pb-4 px-4 md:px-8 lg:px-10 xl:px-12">
         <PropertyGallery property={property} locale={locale} />
       </div>
 
