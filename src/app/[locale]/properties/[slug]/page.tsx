@@ -7,7 +7,7 @@ import PropertyDetails from '@/components/property/PropertyDetails';
 import PropertyFeatures from '@/components/property/PropertyFeatures';
 import PropertyLocation from '@/components/property/PropertyLocation';
 import PropertyAgent from '@/components/property/PropertyAgent';
-import RelatedProperties from '@/components/property/RelatedProperties';
+// import RelatedProperties from '@/components/property/RelatedProperties';
 import { generateSEOTitle, generateSEODescription } from '@/lib/utils';
 import { Property, PropertyImage } from '@/types';
 import { prisma } from '@/lib/db';
@@ -270,9 +270,9 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       </div>
 
       {/* Related Properties */}
-      <div className="px-4 md:px-8 lg:px-12 xl:px-16 pb-12">
+      {/* <div className="px-4 md:px-8 lg:px-12 xl:px-16 pb-12">
         <RelatedProperties property={property} locale={locale} />
-      </div>
+      </div> */}
     </div>
   );
 }
