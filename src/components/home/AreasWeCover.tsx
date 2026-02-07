@@ -112,7 +112,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
         </div>
 
         <div className="relative bg-black rounded-3xl border border-white/10 p-8 md:p-12 overflow-hidden">
-          <div className="relative w-full rounded-2xl h-[650px] md:h-[full] border-2 border-white/20 overflow-hidden bg-black aspect-[3/4] md:aspect-video">
+          <div className="relative w-full rounded-2xl border-2 border-white/20 overflow-hidden bg-black aspect-[841.9/595.3] md:aspect-video">
            
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -221,8 +221,8 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                     />
                   </button>
 
-                  <div className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-1 md:mt-2 whitespace-nowrap">
-                    <span className="text-white text-[9px] md:text-xs font-semibold bg-gray-700/80 backdrop-blur-sm px-1.5 py-0.5 md:px-2 md:py-1 rounded-full border border-gray-400/50">
+                  <div className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 whitespace-nowrap">
+                    <span className="text-white text-[6px] md:text-xs font-semibold">
                       {area.name}
                     </span>
                   </div>
