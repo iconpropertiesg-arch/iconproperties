@@ -112,7 +112,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
         </div>
 
         <div className="relative bg-black rounded-3xl border border-white/10 p-8 md:p-12 overflow-hidden">
-          <div className="relative w-full rounded-2xl border-2 border-white/20 overflow-hidden bg-black aspect-[3/4] md:aspect-video">
+          <div className="relative w-full rounded-2xl h-[650px] md:h-[full] border-2 border-white/20 overflow-hidden bg-black aspect-[3/4] md:aspect-video">
            
             <svg
               xmlns="http://www.w3.org/2000/svg"
