@@ -7,7 +7,7 @@ import HeroSearchBar from '@/components/home/HeroSearchBar';
 import FeaturedProperties from '@/components/home/FeaturedProperties';
 import WhyWorkWithUs from '@/components/home/WhyWorkWithUs';
 import AreasWeCover from '@/components/home/AreasWeCover';
-import HowWeWork from '@/components/home/HowWeWork';
+// import HowWeWork from '@/components/home/H/owWeWork';
 import RequestPrivatePortfolio from '@/components/home/RequestPrivatePortfolio';
 import Testimonials from '@/components/home/Testimonials';
 // import AboutSnippet from '@/components/home/AboutSnippet';
@@ -71,7 +71,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <AreasWeCover locale={locale} />
 
       {/* How We Work */}
-      <HowWeWork locale={locale} />
+      {/* <HowWeWork locale={locale} /> */}
 
       {/* Request Private Portfolio */}
       <RequestPrivatePortfolio locale={locale} />
