@@ -222,15 +222,15 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
   }, []);
 
   return (
-    <section className="relative bg-black py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
+    <section className="relative bg-black py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 w-full">
       {/* Subtle blue and purple glow effects */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gray-600/30 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]" />
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-gray-600/30 rounded-full blur-[120px] max-w-full" />
+        <div className="absolute bottom-0 right-1/4 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-purple-500/20 rounded-full blur-[120px] max-w-full" />
       </div>
-      <div className="container mx-auto max-w-7xl relative z-10">
+      <div className="container mx-auto max-w-7xl relative z-10 w-full">
         {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16 w-full">
           {/* <div className="inline-block mb-4">
             <span className="text-gray-400 text-sm font-semibold tracking-wider uppercase">#7</span>
           </div> */}
@@ -261,10 +261,10 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
         </div>
 
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-start w-full min-w-0">
           {/* Left Side - Image */}
-          <div className="relative lg:sticky lg:top-20 mb-8 sm:mb-10 lg:mb-0">
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="relative lg:sticky lg:top-20 mb-8 sm:mb-10 lg:mb-0 w-full min-w-0">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl w-full">
               <div className="relative aspect-[4/5] sm:aspect-[4/5] w-full bg-gradient-to-br from-gray-900/20 to-black/40">
                 <Image
                   src="/images/home_section_property.jpg"
@@ -282,7 +282,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
           </div>
 
           {/* Right Side - Steps */}
-          <div className="space-y-4 sm:space-y-5 md:space-y-6">
+          <div className="space-y-4 sm:space-y-5 md:space-y-6 w-full min-w-0">
             {steps.map((step, index) => {
               const isVisible = visibleSteps.has(index);
               const progress = scrollProgress[index] ?? 0;
@@ -300,7 +300,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                     stepRefs.current[index] = el;
                   }}
                   className={cn(
-                    "relative rounded-xl sm:rounded-2xl border border-white/20 p-4 sm:p-5 md:p-6 transition-all duration-700 ease-out overflow-hidden",
+                    "relative rounded-xl sm:rounded-2xl border border-white/20 p-4 sm:p-5 md:p-6 transition-all duration-700 ease-out overflow-hidden w-full min-w-0",
                     isVisible
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-8"
@@ -320,7 +320,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                 >
                   {index === 0 ? (
                     // First card: "Sell your Home Privately" design
-                    <div>
+                    <div className="w-full min-w-0">
                       {/* Top Icons */}
                       <div className="flex justify-between items-start mb-4 sm:mb-5 md:mb-6">
                         {/* Top Left Icon - House Outline */}
@@ -336,8 +336,8 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
 
                       {/* Title */}
                       <h3 className={cn(
-                        "font-bold text-white mb-3 transition-all duration-700 ease-out",
-                        isVisible ? "text-2xl sm:text-3xl scale-100" : "text-xl sm:text-2xl scale-95"
+                        "font-bold text-white mb-2 sm:mb-3 transition-all duration-700 ease-out break-words",
+                        isVisible ? "text-xl sm:text-2xl md:text-3xl scale-100" : "text-lg sm:text-xl md:text-2xl scale-95"
                       )}>
                         {step.title}
                       </h3>
@@ -345,8 +345,8 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       {/* Subtitle */}
                       {step.subtitle && (
                         <p className={cn(
-                          "text-gray-300 mb-4 leading-relaxed transition-all duration-700 ease-out delay-100",
-                          isVisible ? "text-sm sm:text-base opacity-100" : "text-xs sm:text-sm opacity-70"
+                          "text-gray-300 mb-3 sm:mb-4 leading-relaxed transition-all duration-700 ease-out delay-100 break-words",
+                          isVisible ? "text-xs sm:text-sm md:text-base opacity-100" : "text-xs sm:text-sm opacity-70"
                         )}>
                           {step.subtitle}
                         </p>
@@ -354,11 +354,11 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
 
                       {/* Tags */}
                       {step.tags && (
-                        <div className="flex gap-2 mb-6 flex-wrap">
+                        <div className="flex gap-2 mb-4 sm:mb-5 md:mb-6 flex-wrap">
                           {step.tags.map((tag, tagIndex) => {
                             const hasBold = 'bold' in tag && tag.bold;
                             return (
-                              <span key={tagIndex} className="px-3 py-1.5 bg-slate-800/60 text-white text-xs rounded-lg border border-white/10">
+                              <span key={tagIndex} className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-800/60 text-white text-[10px] sm:text-xs rounded-lg border border-white/10 break-words">
                                 {hasBold ? (
                                   <>
                                     <span className="font-semibold">{tag.bold}</span>{' '}
@@ -377,11 +377,11 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       {step.features && (
                         <ul className="space-y-2 sm:space-y-3">
                           {step.features.map((feature, featIndex) => (
-                            <li key={featIndex} className="flex items-center gap-2 sm:gap-3 text-white text-xs sm:text-sm">
-                              <div className="w-4 h-4 sm:w-5 sm:h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
+                            <li key={featIndex} className="flex items-start gap-2 sm:gap-3 text-white text-xs sm:text-sm min-w-0">
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                                 <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
                               </div>
-                              <span>{feature}</span>
+                              <span className="break-words min-w-0 flex-1">{feature}</span>
                             </li>
                           ))}
                         </ul>
@@ -389,7 +389,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                     </div>
                   ) : (
                     // Second and Third cards: Similar design with different icons
-                    <div>
+                    <div className="w-full min-w-0">
                       {/* Top Icons */}
                       <div className="flex justify-between items-start mb-4 sm:mb-5 md:mb-6">
                         {/* Top Left Icon - Compass for Investment, Phone for Buy Luxury, FileCode for Property Management */}
@@ -458,11 +458,11 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                       {step.features && (
                         <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 md:mb-6">
                           {step.features.map((feature, featIndex) => (
-                            <li key={featIndex} className="flex items-center gap-2 sm:gap-3 text-white text-xs sm:text-sm">
-                              <div className="w-4 h-4 sm:w-5 sm:h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0">
+                            <li key={featIndex} className="flex items-start gap-2 sm:gap-3 text-white text-xs sm:text-sm min-w-0">
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                                 <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
                               </div>
-                              <span>{feature}</span>
+                              <span className="break-words min-w-0 flex-1">{feature}</span>
                             </li>
                           ))}
                         </ul>
