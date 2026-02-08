@@ -99,7 +99,7 @@ async function getPropertyBySlug(slug: string, locale: string): Promise<Property
       email: 'info@propertyicon.com',
       phone: '+34 971 123 456',
       whatsapp: '+34 971 123 456',
-      avatar: '/agents/default.jpg',
+      avatar: '/images/logo3.png',
       languages: ['en', 'es', 'de'],
     };
 
