@@ -189,7 +189,7 @@ async function getRelatedProperties(
         // Default agent
         const agent = {
           id: 'default',
-          // name: 'Icon properties',
+          name: 'Icon properties',
           email: 'info@propertyicon.com',
           phone: '+34 971 123 456',
           whatsapp: '+34 971 123 456',
