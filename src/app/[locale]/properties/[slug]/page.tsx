@@ -28,6 +28,17 @@ function mapType(dbType: string): 'apartment' | 'house' | 'commercial' | 'villa'
   return typeMap[dbType.toLowerCase()] || 'house';
 }
 
+// Helper function to reverse map Property type back to possible database types
+function reverseMapType(propertyType: 'apartment' | 'house' | 'commercial' | 'villa'): string[] {
+  const reverseMap: Record<string, string[]> = {
+    'house': ['residential', 'house'],
+    'apartment': ['apartment'],
+    'commercial': ['commercial'],
+    'villa': ['villa'],
+  };
+  return reverseMap[propertyType] || ['residential', 'house'];
+}
+
 // Helper function to map database status to Property status
 function mapStatus(dbStatus: string): 'buy' | 'rent' {
   const rentStatuses = ['rent', 'rented', 'lease', 'leased'];
@@ -41,6 +52,190 @@ function mapAvailability(dbStatus: string): 'available' | 'sold' | 'rented' | 'p
   if (status === 'rented' || status === 'leased') return 'rented';
   if (status === 'pending') return 'pending';
   return 'available';
+}
+
+// Fetch related properties from database
+async function getRelatedProperties(
+  currentPropertyId: string,
+  propertyType: 'apartment' | 'house' | 'commercial' | 'villa',
+  propertyLocation: string,
+  propertyPrice: number,
+  locale: string,
+  limit: number = 4
+): Promise<Property[]> {
+  try {
+    // Calculate price range (±30%)
+    const minPrice = propertyPrice * 0.7;
+    const maxPrice = propertyPrice * 1.3;
+
+    // Get possible database types for this property type
+    const possibleDbTypes = reverseMapType(propertyType);
+
+    // Find related properties
+    const relatedProperties = await prisma.property.findMany({
+      where: {
+        AND: [
+          { id: { not: currentPropertyId } },
+          { type: { in: possibleDbTypes } },
+          { location: { contains: propertyLocation.split(',')[0], mode: 'insensitive' } },
+          { price: { gte: minPrice, lte: maxPrice } },
+          { 
+            status: { 
+              notIn: ['sold', 'rented', 'leased'] 
+            } 
+          },
+        ],
+      },
+      include: {
+        translations: {
+          where: { locale },
+        },
+      },
+      take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    // If not enough properties found, try with broader criteria (same type, any location)
+    if (relatedProperties.length < limit) {
+      const additionalProperties = await prisma.property.findMany({
+        where: {
+          AND: [
+            { id: { not: currentPropertyId } },
+            { id: { notIn: relatedProperties.map(p => p.id) } },
+            { type: { in: possibleDbTypes } },
+            { 
+              status: { 
+                notIn: ['sold', 'rented', 'leased'] 
+              } 
+            },
+          ],
+        },
+        include: {
+          translations: {
+            where: { locale },
+          },
+        },
+        take: limit - relatedProperties.length,
+        orderBy: {
+          createdAt: 'desc',
+        },
+      });
+      relatedProperties.push(...additionalProperties);
+    }
+
+    // If still not enough, get any available properties (any type, any location)
+    if (relatedProperties.length < limit) {
+      const fallbackProperties = await prisma.property.findMany({
+        where: {
+          AND: [
+            { id: { not: currentPropertyId } },
+            { id: { notIn: relatedProperties.map(p => p.id) } },
+            { 
+              status: { 
+                notIn: ['sold', 'rented', 'leased'] 
+              } 
+            },
+          ],
+        },
+        include: {
+          translations: {
+            where: { locale },
+          },
+        },
+        take: limit - relatedProperties.length,
+        orderBy: {
+          createdAt: 'desc',
+        },
+      });
+      relatedProperties.push(...fallbackProperties);
+    }
+
+    // Map database properties to Property interface
+    return relatedProperties
+      .filter(p => p.translations.length > 0)
+      .map(property => {
+        const translation = property.translations[0];
+        
+        // Parse coordinates if they exist
+        let location = {
+          lat: 39.5696,
+          lng: 2.6502,
+          address: property.location || 'Mallorca, Spain',
+        };
+
+        if (property.coordinates) {
+          try {
+            const coords = JSON.parse(property.coordinates);
+            if (coords.lat && coords.lng) {
+              location.lat = coords.lat;
+              location.lng = coords.lng;
+            }
+          } catch (e) {
+            // Use default coordinates
+          }
+        }
+
+        // Map images
+        const images: PropertyImage[] = property.images.map((url, index) => ({
+          id: `${property.id}-${index}`,
+          url: url,
+          alt: translation.title || 'Property image',
+          caption: translation.subtitle || undefined,
+          order: index + 1,
+        }));
+
+        // Default agent
+        const agent = {
+          id: 'default',
+          // name: 'Icon properties',
+          email: 'info@propertyicon.com',
+          phone: '+34 971 123 456',
+          whatsapp: '+34 971 123 456',
+          avatar: '/images/logo3.png',
+          languages: ['en', 'es', 'de'],
+        };
+
+        return {
+          id: property.id,
+          title: translation.title,
+          slug: property.slug,
+          status: (property.purpose as 'buy' | 'rent') || mapStatus(property.status),
+          type: mapType(property.type),
+          area: property.location || 'Mallorca',
+          price: property.price,
+          beds: property.bedrooms || undefined,
+          baths: property.bathrooms || undefined,
+          interiorSize: property.area || undefined,
+          plotSize: undefined,
+          yearBuilt: property.year || undefined,
+          description: translation.description,
+          features: translation.features || [],
+          images: images.length > 0 ? images : [
+            {
+              id: 'default',
+              url: '/portfolio/villa-son-vida.jpg',
+              alt: translation.title,
+              order: 1,
+            },
+          ],
+          videoUrl: undefined,
+          matterportUrl: undefined,
+          location,
+          agent,
+          referenceId: property.id.substring(0, 8).toUpperCase(),
+          availability: mapAvailability(property.status),
+          seo: {
+            title: `${translation.title} - €${property.price.toLocaleString()}`,
+            description: translation.subtitle || translation.description.substring(0, 160),
+          },
+        };
+      });
+  } catch (error) {
+    console.error('Error fetching related properties:', error);
+    return [];
+  }
 }
 
 // Fetch property from database by slug
@@ -201,6 +396,16 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     notFound();
   }
 
+  // Fetch related properties
+  const relatedProperties = await getRelatedProperties(
+    property.id,
+    property.type,
+    property.area,
+    property.price,
+    locale,
+    4
+  );
+
   return (
     <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8">
       {/* Property Details - Show First */}
@@ -271,7 +476,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
       {/* Related Properties */}
       <div className="px-4 md:px-8 lg:px-12 xl:px-16 pb-12">
-        <RelatedProperties property={property} locale={locale} />
+        <RelatedProperties property={property} relatedProperties={relatedProperties} locale={locale} />
       </div>
     </div>
   );

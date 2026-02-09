@@ -61,6 +61,107 @@
   },
   "home": {
     "featuredProperties": "Propiedades Destacadas",
+    "featuredPropertiesDesc": "Descubre nuestra selección cuidadosamente elegida de propiedades excepcionales en las ubicaciones más prestigiosas de Mallorca.",
+    "whyWorkWithUs": {
+      "title": "Por Qué Trabajar Con Nosotros",
+      "subtitle": "Un servicio privado y de asesoría diseñado para compradores y vendedores internacionales exigentes.",
+      "feature1": {
+        "title": "Acceso Fuera del Mercado",
+        "description": "La mayoría de las mejores propiedades de Mallorca nunca llegan a portales públicos. Ofrecemos a nuestros clientes acceso privilegiado a listados privados, oportunidades previas al mercado y mandatos exclusivos que no se pueden encontrar en línea."
+      },
+      "feature2": {
+        "title": "Servicio Discreto y Boutique",
+        "description": "Trabajamos con un número limitado de clientes a la vez, ofreciendo orientación confidencial, listas curadas y un único punto de contacto durante todo el proceso de compra o venta."
+      },
+      "feature3": {
+        "title": "Experiencia Comprobada en Ubicaciones Premium",
+        "description": "Desde Son Vida hasta Port Andratx, nos especializamos exclusivamente en las áreas más deseables de Mallorca, combinando conocimiento local con inteligencia de compradores internacionales."
+      },
+      "cta": "Solicitar Portafolio Privado"
+    },
+    "areasWeCover": {
+      "title": "Dónde Operamos",
+      "subtitle": "Desde las villas privadas con vista al mar del Suroeste hasta los áticos históricos de Palma, nos especializamos en las ubicaciones más buscadas de la isla"
+    },
+    "howWeWork": {
+      "title": "La Experiencia de Compra Privada",
+      "step1": {
+        "title": "Vende tu Casa en Privado",
+        "subtitle": "Estrategias fuera del mercado para máximo valor y total discreción",
+        "tag1": "Gratis / Evaluación",
+        "tag1Bold": "Gratis",
+        "tag2": "Promedio de Venta 3 Meses",
+        "tag2Bold": "3 Meses",
+        "feature1": "Sin anuncios, sin letreros",
+        "feature2": "Precios y Presentación Estratégicos",
+        "feature3": "Acceso directo a compradores preseleccionados con alta intención"
+      },
+      "step2": {
+        "title": "Oportunidades de Inversión",
+        "subtitle": "¿Buscas un lugar inteligente para hacer crecer tu capital? Desde desarrollo de terrenos hasta renovaciones y propiedades de ingresos por alquiler, conectamos inversores con ofertas que tienen sentido — dentro y fuera del mercado.",
+        "tag1": "Búsqueda de Ofertas / Dentro y Fuera del Mercado",
+        "tag2": "~9% ROI",
+        "feature1": "Análisis y Proyección de ROI",
+        "feature2": "Presentación con arquitectos, abogados, constructores... nuestra red",
+        "feature3": "Estrategias de Salida y asesoramiento de reventa"
+      },
+      "step3": {
+        "title": "Comprar Propiedades de Lujo",
+        "subtitle": "Ayudamos a compradores exigentes a encontrar el hogar perfecto, ya sea una villa frente al mar, una finca histórica o un ático moderno. Gracias a nuestro inventario fuera del mercado, muchas de nuestras mejores propiedades nunca se publican en línea.",
+        "tag1": "ES DE GB / Agentes multilingües",
+        "tag2": "Acceso Anticipado",
+        "tag2Bold": "Acceso",
+        "feature1": "Emparejamiento de Propiedades Personalizado",
+        "feature2": "Apoyo con financiación y reubicación",
+        "feature3": "Negociación y orientación legal",
+        "cta": "Reservar una Cita"
+      },
+      "step4": {
+        "title": "Gestión de Propiedades y Conserjería",
+        "subtitle": "Para propietarios que viven en el extranjero o quieren tranquilidad, nuestro equipo de gestión asegura que tu propiedad esté siempre en óptimas condiciones — y tus huéspedes o inquilinos estén cuidados.",
+        "tag1": "+45 / Proyecto",
+        "tag2": "Manejo fiscal y legal",
+        "tag2Bold": "Fiscal y legal",
+        "feature1": "Mantenimiento, reparaciones y controles de seguridad",
+        "feature2": "Gestión de alquileres y permisos a corto plazo",
+        "feature3": "Estilismo y escenificación de interiores",
+        "cta": "Reservar una Cita"
+      }
+    },
+    "testimonials": {
+      "title": "Lo Que Dicen Nuestros Clientes",
+      "subtitle": "Experiencias reales de propietarios que eligieron nuestro servicio privado y discreto",
+      "testimonial1": {
+        "text": "Dudé en listar mi casa. No quería que estuviera por todo internet. En 6 semanas, Daniel me trajo dos compradores serios. Sin estrés, sin drama",
+        "name": "John M.",
+        "location": "Palma"
+      },
+      "testimonial2": {
+        "text": "Goldie fue muy profesional en el proceso. Me ayudó a vender mi propiedad en Santa Ponsa trayendo compradores serios.",
+        "name": "Jessica R.",
+        "location": "Santa Ponsa"
+      },
+      "testimonial3": {
+        "text": "Su estrategia es realmente diferente. No quería que mi apartamento estuviera expuesto en todas partes — y no tuve que hacerlo. Dos compradores serios llegaron en semanas.",
+        "name": "David L.",
+        "location": "Cala Vinyes"
+      },
+      "testimonial4": {
+        "text": "Fue muy agradable vender mi apartamento sin lidiar con cinco agencias y llamadas telefónicas constantes. Todo fue fluido, respetuoso y efectivo.",
+        "name": "Michael K.",
+        "location": "Portals Nous"
+      },
+      "testimonial5": {
+        "text": "Evitamos tanto tiempo perdido. Sin casas abiertas, sin visitas aleatorias. Solo compradores calificados que realmente hicieron ofertas. Eso es raro.",
+        "name": "Sarah T.",
+        "location": "Son Vida"
+      },
+      "testimonial6": {
+        "text": "Al principio no estaba seguro si fuera del mercado funcionaría, pero el enfoque de Daniel funcionó. Mi villa se vendió silenciosamente y rápido, tal como prometió.",
+        "name": "Robert P.",
+        "location": "Puerto Portals"
+      }
+    },
     "aboutSnippet": {
       "title": "Conoce al Equipo",
       "text": "Una empresa inmobiliaria boutique construida sobre confianza, discreción y excelencia."

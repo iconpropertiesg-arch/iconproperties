@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { MessageCircle, Home, Check, Compass, Trash2, Phone, FileCode, Bell } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
@@ -10,68 +11,69 @@ interface HowWeWorkProps {
   locale: string;
 }
 
-const steps = [
-  {
-    number: '1',
-    title: 'Sell your Home Privately',
-    subtitle: 'Off-market strategies for maximum value and full discretion',
-    tags: [
-      { text: 'Free / Evaluation', bold: 'Free' },
-      { text: '3 Months Avg. Sale', bold: '3 Months' }
-    ],
-    features: [
-      'No ads, no signs',
-      'Strategic Pricing & Presentation',
-      'Direct access to pre-vetted, high intent buyers'
-    ]
-  },
-  {
-    number: '2',
-    title: 'Investment Opportunities',
-    subtitle: 'Looking for a smart place to grow your capital? From land development to renovation flips and rental income properties, we connect investors with deals that make sense — on and off the market.',
-    tags: [
-      { text: 'Deal Sourcing / On & Off Market' },
-      { text: '~9% ROI' }
-    ],
-    features: [
-      'ROI Analysis & Projection',
-      'Introduction to architects, lawyers, builders... our network',
-      'Exit Strategies & resale advice'
-    ]
-  },
-  {
-    number: '3',
-    title: 'Buy Luxury Properties',
-    subtitle: 'We help discerning buyers find the perfect home, whether it\'s a frontline villa, historic finca, or modern penthouse. Thanks to our off-market inventory, many of our best properties are never published online.',
-    tags: [
-      { text: 'ES DE GB / Multilingual agents' },
-      { text: 'Early Access', bold: 'Early' }
-    ],
-    features: [
-      'Personalized Property matching',
-      'Support with financing & relocation',
-      'Negotiation & Legal guidance'
-    ],
-    ctaButton: 'Book an Appointment'
-  },
-  {
-    number: '4',
-    title: 'Property Management & Concierge',
-    subtitle: 'For owners who live abroad or want peace of mind, our management team ensures your property is always in top condition — and your guests or tenants are cared for.',
-    tags: [
-      { text: '+45 / Project' },
-      { text: 'Tax & legal handling', bold: 'Tax & legal' }
-    ],
-    features: [
-      'Maintenance, repairs & security checks',
-      'Rental management & short-term permits',
-      'Interior styling & staging'
-    ],
-    ctaButton: 'Book an Appointment'
-  }
-];
-
 export default function HowWeWork({ locale }: HowWeWorkProps) {
+  const t = useTranslations('home.howWeWork');
+  
+  const steps = [
+    {
+      number: '1',
+      title: t('step1.title'),
+      subtitle: t('step1.subtitle'),
+      tags: [
+        { text: t('step1.tag1'), bold: t('step1.tag1Bold') },
+        { text: t('step1.tag2'), bold: t('step1.tag2Bold') }
+      ],
+      features: [
+        t('step1.feature1'),
+        t('step1.feature2'),
+        t('step1.feature3')
+      ]
+    },
+    {
+      number: '2',
+      title: t('step2.title'),
+      subtitle: t('step2.subtitle'),
+      tags: [
+        { text: t('step2.tag1') },
+        { text: t('step2.tag2') }
+      ],
+      features: [
+        t('step2.feature1'),
+        t('step2.feature2'),
+        t('step2.feature3')
+      ]
+    },
+    {
+      number: '3',
+      title: t('step3.title'),
+      subtitle: t('step3.subtitle'),
+      tags: [
+        { text: t('step3.tag1') },
+        { text: t('step3.tag2'), bold: t('step3.tag2Bold') }
+      ],
+      features: [
+        t('step3.feature1'),
+        t('step3.feature2'),
+        t('step3.feature3')
+      ],
+      ctaButton: t('step3.cta')
+    },
+    {
+      number: '4',
+      title: t('step4.title'),
+      subtitle: t('step4.subtitle'),
+      tags: [
+        { text: t('step4.tag1') },
+        { text: t('step4.tag2'), bold: t('step4.tag2Bold') }
+      ],
+      features: [
+        t('step4.feature1'),
+        t('step4.feature2'),
+        t('step4.feature3')
+      ],
+      ctaButton: t('step4.cta')
+    }
+  ];
   const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set());
   const [scrollProgress, setScrollProgress] = useState<{ [key: number]: number }>({});
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -84,7 +86,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
   
   // Line-by-line reveal effect
   useEffect(() => {
-    const titleText = "The Private Buying Experience";
+    const titleText = t('title');
     const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
     
@@ -236,7 +238,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
           </div> */}
           <h2 ref={titleRef} style={titleBlurStyle} className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-5 md:mb-6">
             {(() => {
-              const titleText = "The Private Buying Experience";
+              const titleText = t('title');
               const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
               const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
               

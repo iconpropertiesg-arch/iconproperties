@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Lock, Users, MapPin, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
@@ -12,22 +13,23 @@ interface WhyWorkWithUsProps {
 
 export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
   const router = useRouter();
+  const t = useTranslations('home.whyWorkWithUs');
   
   const features = [
     {
       icon: Lock,
-      title: 'Off-Market Access',
-      description: "Most of Mallorca's finest properties never reach public portals. We give our clients privileged access to private listings, pre-market opportunities and exclusive mandates you cannot find online."
+      title: t('feature1.title'),
+      description: t('feature1.description')
     },
     {
       icon: Users,
-      title: 'Discreet, Boutique Service',
-      description: 'We work with a limited number of clients at a time, offering confidential guidance, curated shortlists and a single point of contact throughout the entire buying or selling process.'
+      title: t('feature2.title'),
+      description: t('feature2.description')
     },
     {
       icon: MapPin,
-      title: 'Proven Expertise in Prime Locations',
-      description: "From Son Vida to Port Andratx, we specialise exclusively in Mallorca's most desirable areas, combining local knowledge with international buyer intelligence."
+      title: t('feature3.title'),
+      description: t('feature3.description')
     }
   ];
   
@@ -37,7 +39,7 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
   
   // Blur reveal effects (these refs will be used for both blur and line reveal)
   const { elementRef: titleRef, style: titleBlurStyle } = useBlurReveal<HTMLHeadingElement>({ maxBlur: 8, minBlur: 0 });
-  const { elementRef: subtitleRef, style: subtitleBlurStyle } = useBlurReveal<HTMLParagraphElement>({ maxBlur: 8, minBlur: 0 });
+  const { elementRef: subtitleRef, style: subtitleBlurStyle } = useBlurReveal<HTMLParagraphElement>({ maxBlur: 4, minBlur: 0, rootMargin: '-50px 0px' });
   
   // Refs and blur states for each feature card
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -46,8 +48,8 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
   
   // Line-by-line reveal effect
   useEffect(() => {
-    const titleText = "Why Work With Us";
-    const subtitleText = "A private, advisory-style service built for discerning international buyers and sellers.";
+    const titleText = t('title');
+    const subtitleText = t('subtitle');
     
     const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const subtitleLines = subtitleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
@@ -178,7 +180,7 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
           </div> */}
           <h2 ref={titleRef} style={titleBlurStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
             {(() => {
-              const titleText = "Why Work With Us";
+              const titleText = t('title');
               const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
               const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
               
@@ -200,9 +202,18 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
               });
             })()}
           </h2>
-          <p ref={subtitleRef} style={subtitleBlurStyle} className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p 
+            ref={subtitleRef} 
+            style={{
+              ...subtitleBlurStyle,
+              filter: subtitleLinesVisible.length > 0 ? 'blur(0px)' : subtitleBlurStyle.filter,
+              opacity: subtitleLinesVisible.length > 0 ? 1 : subtitleBlurStyle.opacity,
+              transition: 'filter 0.5s ease-out, opacity 0.5s ease-out',
+            }} 
+            className="text-xl text-gray-300 max-w-3xl mx-auto"
+          >
             {(() => {
-              const subtitleText = "A private, advisory-style service built for discerning international buyers and sellers.";
+              const subtitleText = t('subtitle');
               const subtitleLines = subtitleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
               const finalSubtitleLines = subtitleLines.length > 0 ? subtitleLines : [subtitleText.trim()];
               
@@ -303,7 +314,7 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
             onClick={() => router.push(`/${locale}/contact`)}
             className="group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl inline-flex items-center gap-2"
           >
-            <span>Request Private Portfolio</span>
+            <span>{t('cta')}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>

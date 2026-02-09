@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
@@ -57,6 +58,7 @@ const areas: Area[] = [
 
 export default function AreasWeCover({ locale }: AreasWeCoverProps) {
   const router = useRouter();
+  const t = useTranslations('home');
 
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
   const [hoveredRegion, setHoveredRegion] = useState<RegionKey | null>(null);
@@ -95,7 +97,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                 titleLinesVisible.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               )}
             >
-              Where We Operate
+              {t('areasWeCover.title')}
             </span>
           </h2>
 
@@ -106,7 +108,7 @@ export default function AreasWeCover({ locale }: AreasWeCoverProps) {
                 subtitleLinesVisible.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               )}
             >
-              From the South-West&apos;s private sea-view villas to Palma&apos;s historic penthouses, we specialise in the island&apos;s most sought-after locations
+              {t('areasWeCover.subtitle')}
             </span>
           </p>
         </div>

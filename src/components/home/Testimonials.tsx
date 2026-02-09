@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { Star, Quote } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
@@ -18,52 +19,53 @@ interface Testimonial {
   avatar: string;
 }
 
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: 'John M.',
-    location: 'Palma',
-    text: "I was hesitant to list my home. I didn't want it all over the internet. Within 6 weeks, Daniel brought me two serious buyers. No stress, no drama",
-    avatar: '/testimonials/john-m.jpg'
-  },
-  {
-    id: 2,
-    name: 'Jessica R.',
-    location: 'Santa Ponsa',
-    text: 'Goldie was very professional in the process. She helped me sell my premise in Santa Ponsa bringing serious buyers.',
-    avatar: '/testimonials/jessica-r.jpg'
-  },
-  {
-    id: 3,
-    name: 'David L.',
-    location: 'Cala Vinyes',
-    text: "Their strategy is truly different. I didn't want my apartment exposed everywhere — and I didn't have to. Two serious buyers came through in weeks.",
-    avatar: '/testimonials/david-l.jpg'
-  },
-  {
-    id: 4,
-    name: 'Michael K.',
-    location: 'Portals Nous',
-    text: 'It was very pleasant to sell my apartment without dealing with five agencies and constant phone calls. Everything was smooth, respectful, and effective.',
-    avatar: '/testimonials/michael-k.jpg'
-  },
-  {
-    id: 5,
-    name: 'Sarah T.',
-    location: 'Son Vida',
-    text: 'We avoided so much wasted time. No open houses, no random viewings. Just qualified buyers who actually made offers. That\'s rare.',
-    avatar: '/testimonials/sarah-t.jpg'
-  },
-  {
-    id: 6,
-    name: 'Robert P.',
-    location: 'Puerto Portals',
-    text: "At first I wasn't sure if off-market would work, but Daniel's approach delivered. My villa was sold quietly and fast, just like he promised.",
-    avatar: '/testimonials/robert-p.jpg'
-  }
-];
-
 export default function Testimonials({ locale }: TestimonialsProps) {
+  const t = useTranslations('home.testimonials');
+  
+  const testimonials: Testimonial[] = [
+    {
+      id: 1,
+      name: t('testimonial1.name'),
+      location: t('testimonial1.location'),
+      text: t('testimonial1.text'),
+      avatar: '/testimonials/john-m.jpg'
+    },
+    {
+      id: 2,
+      name: t('testimonial2.name'),
+      location: t('testimonial2.location'),
+      text: t('testimonial2.text'),
+      avatar: '/testimonials/jessica-r.jpg'
+    },
+    {
+      id: 3,
+      name: t('testimonial3.name'),
+      location: t('testimonial3.location'),
+      text: t('testimonial3.text'),
+      avatar: '/testimonials/david-l.jpg'
+    },
+    {
+      id: 4,
+      name: t('testimonial4.name'),
+      location: t('testimonial4.location'),
+      text: t('testimonial4.text'),
+      avatar: '/testimonials/michael-k.jpg'
+    },
+    {
+      id: 5,
+      name: t('testimonial5.name'),
+      location: t('testimonial5.location'),
+      text: t('testimonial5.text'),
+      avatar: '/testimonials/sarah-t.jpg'
+    },
+    {
+      id: 6,
+      name: t('testimonial6.name'),
+      location: t('testimonial6.location'),
+      text: t('testimonial6.text'),
+      avatar: '/testimonials/robert-p.jpg'
+    }
+  ];
   // Line-by-line reveal states
   const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
   const [subtitleLinesVisible, setSubtitleLinesVisible] = useState<number[]>([]);
@@ -171,8 +173,8 @@ export default function Testimonials({ locale }: TestimonialsProps) {
   
   // Line-by-line reveal effect
   useEffect(() => {
-    const titleText = "What Our Clients Say";
-    const subtitleText = "Real experiences from property owners who chose our private, discreet service";
+    const titleText = t('title');
+    const subtitleText = t('subtitle');
     
     const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const subtitleLines = subtitleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
@@ -192,7 +194,7 @@ export default function Testimonials({ locale }: TestimonialsProps) {
         setSubtitleLinesVisible(prev => [...prev, index]);
       }, subtitleStartDelay + (index * 500));
     });
-  }, []);
+  }, [t]);
   
   return (
     <section className="relative bg-black py-20 px-4 overflow-hidden">
@@ -208,7 +210,7 @@ export default function Testimonials({ locale }: TestimonialsProps) {
         <div className="text-center mb-16">
           <h2 ref={titleRef} style={titleBlurStyle} className="text-4xl md:text-5xl font-bold text-white mb-4">
             {(() => {
-              const titleText = "What Our Clients Say";
+              const titleText = t('title');
               const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
               const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
               
@@ -232,7 +234,7 @@ export default function Testimonials({ locale }: TestimonialsProps) {
           </h2>
           <p ref={subtitleRef} style={subtitleBlurStyle} className="text-xl text-gray-300 max-w-2xl mx-auto">
             {(() => {
-              const subtitleText = "Real experiences from property owners who chose our private, discreet service";
+              const subtitleText = t('subtitle');
               const subtitleLines = subtitleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
               const finalSubtitleLines = subtitleLines.length > 0 ? subtitleLines : [subtitleText.trim()];
               

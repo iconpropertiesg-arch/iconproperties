@@ -65,6 +65,107 @@
   },
   "home": {
     "featuredProperties": "Featured Properties",
+    "featuredPropertiesDesc": "Discover our hand-picked selection of exceptional properties in Mallorca's most prestigious locations.",
+    "whyWorkWithUs": {
+      "title": "Why Work With Us",
+      "subtitle": "A private, advisory-style service built for discerning international buyers and sellers.",
+      "feature1": {
+        "title": "Off-Market Access",
+        "description": "Most of Mallorca's finest properties never reach public portals. We give our clients privileged access to private listings, pre-market opportunities and exclusive mandates you cannot find online."
+      },
+      "feature2": {
+        "title": "Discreet, Boutique Service",
+        "description": "We work with a limited number of clients at a time, offering confidential guidance, curated shortlists and a single point of contact throughout the entire buying or selling process."
+      },
+      "feature3": {
+        "title": "Proven Expertise in Prime Locations",
+        "description": "From Son Vida to Port Andratx, we specialise exclusively in Mallorca's most desirable areas, combining local knowledge with international buyer intelligence."
+      },
+      "cta": "Request Private Portfolio"
+    },
+    "areasWeCover": {
+      "title": "Where We Operate",
+      "subtitle": "From the South-West's private sea-view villas to Palma's historic penthouses, we specialise in the island's most sought-after locations"
+    },
+    "howWeWork": {
+      "title": "The Private Buying Experience",
+      "step1": {
+        "title": "Sell your Home Privately",
+        "subtitle": "Off-market strategies for maximum value and full discretion",
+        "tag1": "Free / Evaluation",
+        "tag1Bold": "Free",
+        "tag2": "3 Months Avg. Sale",
+        "tag2Bold": "3 Months",
+        "feature1": "No ads, no signs",
+        "feature2": "Strategic Pricing & Presentation",
+        "feature3": "Direct access to pre-vetted, high intent buyers"
+      },
+      "step2": {
+        "title": "Investment Opportunities",
+        "subtitle": "Looking for a smart place to grow your capital? From land development to renovation flips and rental income properties, we connect investors with deals that make sense — on and off the market.",
+        "tag1": "Deal Sourcing / On & Off Market",
+        "tag2": "~9% ROI",
+        "feature1": "ROI Analysis & Projection",
+        "feature2": "Introduction to architects, lawyers, builders... our network",
+        "feature3": "Exit Strategies & resale advice"
+      },
+      "step3": {
+        "title": "Buy Luxury Properties",
+        "subtitle": "We help discerning buyers find the perfect home, whether it's a frontline villa, historic finca, or modern penthouse. Thanks to our off-market inventory, many of our best properties are never published online.",
+        "tag1": "ES DE GB / Multilingual agents",
+        "tag2": "Early Access",
+        "tag2Bold": "Early",
+        "feature1": "Personalized Property matching",
+        "feature2": "Support with financing & relocation",
+        "feature3": "Negotiation & Legal guidance",
+        "cta": "Book an Appointment"
+      },
+      "step4": {
+        "title": "Property Management & Concierge",
+        "subtitle": "For owners who live abroad or want peace of mind, our management team ensures your property is always in top condition — and your guests or tenants are cared for.",
+        "tag1": "+45 / Project",
+        "tag2": "Tax & legal handling",
+        "tag2Bold": "Tax & legal",
+        "feature1": "Maintenance, repairs & security checks",
+        "feature2": "Rental management & short-term permits",
+        "feature3": "Interior styling & staging",
+        "cta": "Book an Appointment"
+      }
+    },
+    "testimonials": {
+      "title": "What Our Clients Say",
+      "subtitle": "Real experiences from property owners who chose our private, discreet service",
+      "testimonial1": {
+        "text": "I was hesitant to list my home. I didn't want it all over the internet. Within 6 weeks, Daniel brought me two serious buyers. No stress, no drama",
+        "name": "John M.",
+        "location": "Palma"
+      },
+      "testimonial2": {
+        "text": "Goldie was very professional in the process. She helped me sell my premise in Santa Ponsa bringing serious buyers.",
+        "name": "Jessica R.",
+        "location": "Santa Ponsa"
+      },
+      "testimonial3": {
+        "text": "Their strategy is truly different. I didn't want my apartment exposed everywhere — and I didn't have to. Two serious buyers came through in weeks.",
+        "name": "David L.",
+        "location": "Cala Vinyes"
+      },
+      "testimonial4": {
+        "text": "It was very pleasant to sell my apartment without dealing with five agencies and constant phone calls. Everything was smooth, respectful, and effective.",
+        "name": "Michael K.",
+        "location": "Portals Nous"
+      },
+      "testimonial5": {
+        "text": "We avoided so much wasted time. No open houses, no random viewings. Just qualified buyers who actually made offers. That's rare.",
+        "name": "Sarah T.",
+        "location": "Son Vida"
+      },
+      "testimonial6": {
+        "text": "At first I wasn't sure if off-market would work, but Daniel's approach delivered. My villa was sold quietly and fast, just like he promised.",
+        "name": "Robert P.",
+        "location": "Puerto Portals"
+      }
+    },
     "aboutSnippet": {
       "title": "Meet the Team",
       "text": "A boutique real estate company built on trust, discretion, and excellence."

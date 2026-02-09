@@ -61,6 +61,107 @@
   },
   "home": {
     "featuredProperties": "Ausgewählte Immobilien",
+    "featuredPropertiesDesc": "Entdecken Sie unsere handverlesene Auswahl außergewöhnlicher Immobilien in Mallorcas prestigeträchtigsten Lagen.",
+    "whyWorkWithUs": {
+      "title": "Warum Mit Uns Arbeiten",
+      "subtitle": "Ein privater, beratungsorientierter Service für anspruchsvolle internationale Käufer und Verkäufer.",
+      "feature1": {
+        "title": "Off-Market-Zugang",
+        "description": "Die meisten der besten Immobilien Mallorcas erreichen nie öffentliche Portale. Wir geben unseren Kunden privilegierten Zugang zu privaten Angeboten, Pre-Market-Möglichkeiten und exklusiven Mandaten, die Sie online nicht finden können."
+      },
+      "feature2": {
+        "title": "Diskreter, Boutique-Service",
+        "description": "Wir arbeiten mit einer begrenzten Anzahl von Kunden gleichzeitig und bieten vertrauliche Beratung, kuratierte Shortlists und einen einzigen Ansprechpartner während des gesamten Kauf- oder Verkaufsprozesses."
+      },
+      "feature3": {
+        "title": "Bewiesene Expertise in Premium-Lagen",
+        "description": "Von Son Vida bis Port Andratx spezialisieren wir uns ausschließlich auf Mallorcas begehrteste Gebiete und kombinieren lokales Wissen mit internationaler Käuferintelligenz."
+      },
+      "cta": "Privates Portfolio Anfordern"
+    },
+    "areasWeCover": {
+      "title": "Wo Wir Tätig Sind",
+      "subtitle": "Von den privaten Villen mit Meerblick im Südwesten bis zu Palmas historischen Penthäusern spezialisieren wir uns auf die begehrtesten Lagen der Insel"
+    },
+    "howWeWork": {
+      "title": "Die Private Kauferfahrung",
+      "step1": {
+        "title": "Verkaufen Sie Ihr Zuhause Privat",
+        "subtitle": "Off-Market-Strategien für maximalen Wert und vollständige Diskretion",
+        "tag1": "Kostenlos / Bewertung",
+        "tag1Bold": "Kostenlos",
+        "tag2": "Durchschnittlicher Verkauf 3 Monate",
+        "tag2Bold": "3 Monate",
+        "feature1": "Keine Anzeigen, keine Schilder",
+        "feature2": "Strategische Preisgestaltung & Präsentation",
+        "feature3": "Direkter Zugang zu vorab geprüften Käufern mit hoher Absicht"
+      },
+      "step2": {
+        "title": "Investitionsmöglichkeiten",
+        "subtitle": "Suchen Sie einen klugen Ort, um Ihr Kapital zu vermehren? Von Landentwicklung bis Renovierungsflips und Mieteinnahmen-Immobilien verbinden wir Investoren mit Angeboten, die Sinn machen — im und außerhalb des Marktes.",
+        "tag1": "Deal-Sourcing / Im und Außerhalb des Marktes",
+        "tag2": "~9% ROI",
+        "feature1": "ROI-Analyse & Projektion",
+        "feature2": "Einführung zu Architekten, Anwälten, Bauunternehmern... unser Netzwerk",
+        "feature3": "Exit-Strategien & Wiederverkaufsberatung"
+      },
+      "step3": {
+        "title": "Luxusimmobilien Kaufen",
+        "subtitle": "Wir helfen anspruchsvollen Käufern, das perfekte Zuhause zu finden, ob es eine Frontline-Villa, eine historische Finca oder ein modernes Penthouse ist. Dank unseres Off-Market-Inventars werden viele unserer besten Immobilien nie online veröffentlicht.",
+        "tag1": "ES DE GB / Mehrsprachige Agenten",
+        "tag2": "Früher Zugang",
+        "tag2Bold": "Früher",
+        "feature1": "Personalisierte Immobilienvermittlung",
+        "feature2": "Unterstützung bei Finanzierung & Umzug",
+        "feature3": "Verhandlung & rechtliche Beratung",
+        "cta": "Termin Vereinbaren"
+      },
+      "step4": {
+        "title": "Immobilienverwaltung & Concierge",
+        "subtitle": "Für Eigentümer, die im Ausland leben oder Seelenfrieden wollen, stellt unser Management-Team sicher, dass Ihre Immobilie immer in Top-Zustand ist — und Ihre Gäste oder Mieter versorgt werden.",
+        "tag1": "+45 / Projekt",
+        "tag2": "Steuer- und Rechtsabwicklung",
+        "tag2Bold": "Steuer & rechtlich",
+        "feature1": "Wartung, Reparaturen & Sicherheitskontrollen",
+        "feature2": "Mietverwaltung & Kurzzeitgenehmigungen",
+        "feature3": "Innenarchitektur & Staging",
+        "cta": "Termin Vereinbaren"
+      }
+    },
+    "testimonials": {
+      "title": "Was Unsere Kunden Sagen",
+      "subtitle": "Echte Erfahrungen von Immobilieneigentümern, die unseren privaten, diskreten Service gewählt haben",
+      "testimonial1": {
+        "text": "Ich zögerte, mein Zuhause zu listen. Ich wollte es nicht überall im Internet haben. Innerhalb von 6 Wochen brachte Daniel mir zwei ernsthafte Käufer. Kein Stress, kein Drama",
+        "name": "John M.",
+        "location": "Palma"
+      },
+      "testimonial2": {
+        "text": "Goldie war sehr professionell im Prozess. Sie half mir, meine Immobilie in Santa Ponsa zu verkaufen und brachte ernsthafte Käufer.",
+        "name": "Jessica R.",
+        "location": "Santa Ponsa"
+      },
+      "testimonial3": {
+        "text": "Ihre Strategie ist wirklich anders. Ich wollte nicht, dass meine Wohnung überall exponiert wird — und musste es auch nicht. Zwei ernsthafte Käufer kamen innerhalb von Wochen.",
+        "name": "David L.",
+        "location": "Cala Vinyes"
+      },
+      "testimonial4": {
+        "text": "Es war sehr angenehm, meine Wohnung zu verkaufen, ohne mit fünf Agenturen und ständigen Telefonanrufen zu tun zu haben. Alles verlief reibungslos, respektvoll und effektiv.",
+        "name": "Michael K.",
+        "location": "Portals Nous"
+      },
+      "testimonial5": {
+        "text": "Wir haben so viel verschwendete Zeit vermieden. Keine offenen Häuser, keine zufälligen Besichtigungen. Nur qualifizierte Käufer, die tatsächlich Angebote machten. Das ist selten.",
+        "name": "Sarah T.",
+        "location": "Son Vida"
+      },
+      "testimonial6": {
+        "text": "Zuerst war ich mir nicht sicher, ob Off-Market funktionieren würde, aber Daniels Ansatz hat funktioniert. Meine Villa wurde leise und schnell verkauft, genau wie er versprochen hatte.",
+        "name": "Robert P.",
+        "location": "Puerto Portals"
+      }
+    },
     "aboutSnippet": {
       "title": "Unser Team kennenlernen",
       "text": "Ein Boutique-Immobilienunternehmen, das auf Vertrauen, Diskretion und Exzellenz aufbaut."

@@ -107,7 +107,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
   // Line-by-line reveal effect
   useEffect(() => {
     const titleText = t('home.featuredProperties');
-    const descText = "Discover our hand-picked selection of exceptional properties in Mallorca's most prestigious locations.";
+    const descText = t('home.featuredPropertiesDesc');
     
     const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const descLines = descText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
@@ -193,7 +193,7 @@ export default function FeaturedProperties({ locale }: FeaturedPropertiesProps) 
           </h2>
           <p ref={descRef} style={descBlurStyle} className="text-lg text-gray-300 max-w-2xl mx-auto">
             {(() => {
-              const descText = "Discover our hand-picked selection of exceptional properties in Mallorca's most prestigious locations.";
+              const descText = t('home.featuredPropertiesDesc');
               const descLines = descText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
               const finalDescLines = descLines.length > 0 ? descLines : [descText.trim()];
               
