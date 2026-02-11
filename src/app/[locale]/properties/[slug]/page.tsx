@@ -191,8 +191,8 @@ async function getRelatedProperties(
           id: 'default',
           name: 'Icon properties',
           email: 'info@propertyicon.com',
-          phone: '+34 971 123 456',
-          whatsapp: '+34 971 123 456',
+          phone: '+34686088691',
+          whatsapp: '+34686088691',
           avatar: '/images/logo3.png',
           languages: ['en', 'es', 'de'],
         };
