@@ -103,7 +103,7 @@ export default function PropertyFeatures({ property, locale }: PropertyFeaturesP
       </div> */}
 
       {/* Floorplan Section */}
-      <div className="border-t border-gray-700 pt-8">
+      {/* <div className="border-t border-gray-700 pt-8">
         <h3 className="text-xl font-semibold text-white mb-6">Floor Plans</h3>
         <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-8 text-center">
           <div className="w-16 h-16 bg-gray-700/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-500/30">
@@ -117,7 +117,7 @@ export default function PropertyFeatures({ property, locale }: PropertyFeaturesP
             Request Floor Plans
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -48,10 +48,10 @@ export default function PropertyLocation({ property, locale }: PropertyLocationP
 
   return (
     <div className="space-y-8">
-      <h2 className="text-2xl font-bold text-white">Location & Neighborhood</h2>
+      {/* <h2 className="text-2xl font-bold text-white">Location & Neighborhood</h2> */}
 
       {/* Address & Map Placeholder */}
-      <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
+      {/* <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
         <div className="flex items-start space-x-4 mb-6">
           <div className="w-12 h-12 bg-gray-700/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-500/30">
             <MapPin className="w-6 h-6 text-gray-400" />
@@ -65,10 +65,10 @@ export default function PropertyLocation({ property, locale }: PropertyLocationP
               * Exact location shown to qualified buyers only
             </p>
           </div>
-        </div>
+        </div> */}
 
         {/* Map Placeholder */}
-        <div className="w-full h-64 bg-gray-900 rounded-lg flex items-center justify-center border border-gray-700">
+        {/* <div className="w-full h-64 bg-gray-900 rounded-lg flex items-center justify-center border border-gray-700">
           <div className="text-center">
             <MapPin className="w-12 h-12 text-gray-500 mx-auto mb-2" />
             <p className="text-gray-400">Interactive map will be shown here</p>
@@ -77,7 +77,7 @@ export default function PropertyLocation({ property, locale }: PropertyLocationP
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Transportation */}
       <div>
