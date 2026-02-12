@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -16,31 +16,89 @@ export default function Header({ locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
+  const scrollDirection = useRef<'up' | 'down' | null>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const momentumScrollRef = useRef(false);
   const t = useTranslations('navigation');
+
+  // Detect Safari browser
+  const isSafari = useRef(false);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      isSafari.current = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    }
+  }, []);
 
   useEffect(() => {
     let ticking = false;
+    let lastScrollTime = Date.now();
     
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScroll = window.scrollY;
+          const currentTime = Date.now();
+          const timeDelta = currentTime - lastScrollTime;
+          lastScrollTime = currentTime;
+          
           setIsScrolled(currentScroll > 20);
+          
+          // Safari momentum scrolling detection
+          // If scroll events are firing very rapidly (< 16ms), it's likely momentum scrolling
+          if (isSafari.current && timeDelta < 16) {
+            momentumScrollRef.current = true;
+            // Clear momentum flag after a delay
+            if (scrollTimeoutRef.current) {
+              clearTimeout(scrollTimeoutRef.current);
+            }
+            scrollTimeoutRef.current = setTimeout(() => {
+              momentumScrollRef.current = false;
+            }, 150);
+          }
+          
+          // Threshold for scroll direction change (minimum 5px difference)
+          const scrollThreshold = 5;
+          const scrollDifference = Math.abs(currentScroll - lastScrollY.current);
           
           // Hide navbar when scrolling down, show when scrolling up
           if (currentScroll < 10) {
             // At the top, always show
             setIsVisible(true);
-          } else if (currentScroll > lastScrollY && currentScroll > 30) {
-            // Scrolling down and past 30px - hide navbar (slide up)
-            setIsVisible(false);
-          } else if (currentScroll < lastScrollY) {
-            // Scrolling up - show navbar (slide down from top)
-            setIsVisible(true);
+            scrollDirection.current = null;
+          } else if (scrollDifference >= scrollThreshold) {
+            // Only update if scroll difference is significant
+            if (currentScroll > lastScrollY.current) {
+              // Scrolling down
+              scrollDirection.current = 'down';
+              if (currentScroll > 30) {
+                // Hide navbar when scrolling down and past 30px
+                // Allow hiding during momentum scrolling too (user intent was to scroll down)
+                setIsVisible(false);
+              }
+            } else if (currentScroll < lastScrollY.current) {
+              // Scrolling up
+              scrollDirection.current = 'up';
+              setIsVisible(true);
+            }
+            // Update lastScrollY only when there's a significant change
+            lastScrollY.current = currentScroll;
+          } else if (currentScroll === lastScrollY.current) {
+            // Handle case where scroll position hasn't changed
+            // During momentum scrolling, maintain state based on last known direction
+            // This prevents unwanted toggling when Safari fires events with same scrollY
+            if (momentumScrollRef.current) {
+              if (scrollDirection.current === 'down' && currentScroll > 30) {
+                // Keep hidden during momentum scroll down
+                setIsVisible(false);
+              } else if (scrollDirection.current === 'up') {
+                // Keep visible during momentum scroll up
+                setIsVisible(true);
+              }
+            }
+            // If not momentum scrolling and scroll hasn't changed, maintain current state
           }
           
-          setLastScrollY(currentScroll);
           ticking = false;
         });
         ticking = true;
@@ -49,8 +107,14 @@ export default function Header({ locale }: HeaderProps) {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []); // Empty dependency array - no re-registration needed
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -88,8 +152,11 @@ export default function Header({ locale }: HeaderProps) {
                 WebkitBackdropFilter: 'blur(20px) saturate(180%)',
                 boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
+                willChange: 'transform, opacity',
               }
-            : undefined
+            : {
+                willChange: 'transform, opacity',
+              }
         }
       >
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
