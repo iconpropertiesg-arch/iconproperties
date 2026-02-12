@@ -9,7 +9,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Lion Capital Real Estate - Luxury Properties in Mallorca',
+  title: 'Icon Protertie Real Estate - Luxury Properties in Mallorca',
   description: 'Curated luxury villas, apartments, and commercial spaces in Mallorca. Discretion, speed, and white-glove service from start to keys.',
   keywords: 'luxury real estate, Mallorca properties, villas, apartments, commercial real estate',
   authors: [{ name: 'Lion Capital Real Estate' }],
@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Lion Capital Real Estate - Luxury Properties in Mallorca',
+    title: 'Icon Properties Real Estate - Luxury Properties in Mallorca',
     description: 'Curated luxury villas, apartments, and commercial spaces in Mallorca. Discretion, speed, and white-glove service from start to keys.',
     url: 'https://lioncapitala.com',
-    siteName: 'Lion Capital Real Estate',
+    siteName: 'Icon Properties Real Estate',
     images: [
       {
         url: '/og-image.jpg',
