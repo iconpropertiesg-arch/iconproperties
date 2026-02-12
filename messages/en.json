@@ -188,6 +188,12 @@
     "areas": {
       "title": "Explore Areas",
       "cta": "View All Areas"
+    },
+    "requestPrivatePortfolio": {
+      "title": "Request Private Portfolio",
+      "subheading": "Most of Mallorca's finest properties are sold privately, without ever appearing on public portals.",
+      "description": "Get access to exclusive listings, pre-market opportunities, and private sales, personally curated for your lifestyle and investment needs.",
+      "cta": "Request Private Portfolio"
     }
   },
   "properties": {

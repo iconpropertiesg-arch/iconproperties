@@ -184,6 +184,12 @@
     "areas": {
       "title": "Explorar Áreas",
       "cta": "Ver Todas las Áreas"
+    },
+    "requestPrivatePortfolio": {
+      "title": "Solicitar Portafolio Privado",
+      "subheading": "La mayoría de las mejores propiedades de Mallorca se venden en privado, sin aparecer nunca en portales públicos.",
+      "description": "Obtén acceso a listados exclusivos, oportunidades previas al mercado y ventas privadas, personalmente curadas para tu estilo de vida y necesidades de inversión.",
+      "cta": "Solicitar Portafolio Privado"
     }
   },
   "properties": {

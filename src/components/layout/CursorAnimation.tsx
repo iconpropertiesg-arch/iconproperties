@@ -29,7 +29,7 @@ export default function CursorAnimation() {
     <>
       {isVisible && (
         <div 
-          className="cursor-dot-global"
+          className="cursor-dot-global hidden md:block"
           style={{
             left: `${mousePosition.x}px`,
             top: `${mousePosition.y}px`,

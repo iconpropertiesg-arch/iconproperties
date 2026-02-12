@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
@@ -12,6 +13,7 @@ interface RequestPrivatePortfolioProps {
 
 export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfolioProps) {
   const router = useRouter();
+  const t = useTranslations('home.requestPrivatePortfolio');
   
   // Line-by-line reveal states
   const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
@@ -21,7 +23,7 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
   
   // Line-by-line reveal effect
   useEffect(() => {
-    const titleText = "Request Private Portfolio";
+    const titleText = t('title');
     const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
     
@@ -30,7 +32,7 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
         setTitleLinesVisible(prev => [...prev, index]);
       }, 600 + (index * 500));
     });
-  }, []);
+  }, [t]);
 
   const handleRequest = () => {
     router.push(`/${locale}/contact`);
@@ -43,7 +45,7 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
           {/* Title */}
           <h2 ref={titleRef} style={titleBlurStyle} className="text-4xl md:text-5xl font-bold text-white mb-6">
             {(() => {
-              const titleText = "Request Private Portfolio";
+              const titleText = t('title');
               const titleLines = titleText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
               const finalTitleLines = titleLines.length > 0 ? titleLines : [titleText.trim()];
               
@@ -142,12 +144,12 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Most of Mallorca's finest properties are sold privately, without ever appearing on public portals.
+            {t('subheading')}
           </p>
 
           {/* Description */}
           <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Get access to exclusive listings, pre-market opportunities, and private sales, personally curated for your lifestyle and investment needs.
+            {t('description')}
           </p>
 
           {/* CTA Button */}
@@ -155,7 +157,7 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
             onClick={handleRequest}
             className="group px-8 py-4 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl  inline-flex items-center gap-2"
           >
-            <span>Request Private Portfolio</span>
+            <span>{t('cta')}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>

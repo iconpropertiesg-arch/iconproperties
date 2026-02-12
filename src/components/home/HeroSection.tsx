@@ -142,7 +142,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
       {/* Custom cursor dot */}
       {isMouseInSection && (
         <div 
-          className="custom-cursor-dot"
+          className="custom-cursor-dot hidden md:block"
           style={{
             left: `${mousePosition.x}px`,
             top: `${mousePosition.y}px`,

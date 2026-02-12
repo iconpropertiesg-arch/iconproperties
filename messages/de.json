@@ -184,6 +184,12 @@
     "areas": {
       "title": "Gebiete erkunden",
       "cta": "Alle Gebiete anzeigen"
+    },
+    "requestPrivatePortfolio": {
+      "title": "Privates Portfolio Anfordern",
+      "subheading": "Die meisten der besten Immobilien Mallorcas werden privat verkauft, ohne jemals auf öffentlichen Portalen zu erscheinen.",
+      "description": "Erhalten Sie Zugang zu exklusiven Angeboten, Vormarktchancen und privaten Verkäufen, persönlich kuratiert für Ihren Lebensstil und Ihre Investitionsbedürfnisse.",
+      "cta": "Privates Portfolio Anfordern"
     }
   },
   "properties": {
