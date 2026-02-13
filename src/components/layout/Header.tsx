@@ -18,8 +18,6 @@ export default function Header({ locale }: HeaderProps) {
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
   const scrollDirection = useRef<'up' | 'down' | null>(null);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const momentumScrollRef = useRef(false);
   const t = useTranslations('navigation');
 
   // Detect Safari browser
@@ -32,71 +30,46 @@ export default function Header({ locale }: HeaderProps) {
 
   useEffect(() => {
     let ticking = false;
-    let lastScrollTime = Date.now();
     
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScroll = window.scrollY;
-          const currentTime = Date.now();
-          const timeDelta = currentTime - lastScrollTime;
-          lastScrollTime = currentTime;
           
           setIsScrolled(currentScroll > 20);
           
-          // Safari momentum scrolling detection
-          // If scroll events are firing very rapidly (< 16ms), it's likely momentum scrolling
-          if (isSafari.current && timeDelta < 16) {
-            momentumScrollRef.current = true;
-            // Clear momentum flag after a delay
-            if (scrollTimeoutRef.current) {
-              clearTimeout(scrollTimeoutRef.current);
-            }
-            scrollTimeoutRef.current = setTimeout(() => {
-              momentumScrollRef.current = false;
-            }, 150);
-          }
+          // Minimum scroll threshold to prevent jitter
+          const scrollThreshold = 3;
+          const scrollDifference = currentScroll - lastScrollY.current;
           
-          // Threshold for scroll direction change (minimum 5px difference)
-          const scrollThreshold = 5;
-          const scrollDifference = Math.abs(currentScroll - lastScrollY.current);
-          
-          // Hide navbar when scrolling down, show when scrolling up
+          // At the top, always show
           if (currentScroll < 10) {
-            // At the top, always show
             setIsVisible(true);
             scrollDirection.current = null;
-          } else if (scrollDifference >= scrollThreshold) {
-            // Only update if scroll difference is significant
-            if (currentScroll > lastScrollY.current) {
+            lastScrollY.current = currentScroll;
+          } 
+          // Only update if scroll difference is significant
+          else if (Math.abs(scrollDifference) >= scrollThreshold) {
+            if (scrollDifference > 0) {
               // Scrolling down
               scrollDirection.current = 'down';
               if (currentScroll > 30) {
-                // Hide navbar when scrolling down and past 30px
-                // Allow hiding during momentum scrolling too (user intent was to scroll down)
                 setIsVisible(false);
               }
-            } else if (currentScroll < lastScrollY.current) {
-              // Scrolling up
+            } else {
+              // Scrolling up - ALWAYS show immediately
               scrollDirection.current = 'up';
               setIsVisible(true);
             }
-            // Update lastScrollY only when there's a significant change
+            
+            // Always update lastScrollY when there's significant change
             lastScrollY.current = currentScroll;
-          } else if (currentScroll === lastScrollY.current) {
-            // Handle case where scroll position hasn't changed
-            // During momentum scrolling, maintain state based on last known direction
-            // This prevents unwanted toggling when Safari fires events with same scrollY
-            if (momentumScrollRef.current) {
-              if (scrollDirection.current === 'down' && currentScroll > 30) {
-                // Keep hidden during momentum scroll down
-                setIsVisible(false);
-              } else if (scrollDirection.current === 'up') {
-                // Keep visible during momentum scroll up
-                setIsVisible(true);
-              }
-            }
-            // If not momentum scrolling and scroll hasn't changed, maintain current state
+          }
+          // For Safari: if we're scrolling up (even slightly), show header
+          else if (isSafari.current && scrollDifference < 0) {
+            setIsVisible(true);
+            scrollDirection.current = 'up';
+            lastScrollY.current = currentScroll;
           }
           
           ticking = false;
@@ -105,16 +78,35 @@ export default function Header({ locale }: HeaderProps) {
       }
     };
 
+    // For Safari iOS, also listen to touchstart/touchmove to detect scroll intent
+    let touchStartY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isSafari.current) return;
+      
+      const touchY = e.touches[0].clientY;
+      const touchDiff = touchStartY - touchY;
+      
+      // If swiping down (negative diff), show header immediately
+      if (touchDiff < -5 && window.scrollY > 30) {
+        setIsVisible(true);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
     handleScroll();
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []); // Empty dependency array - no re-registration needed
+  }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -133,7 +125,7 @@ export default function Header({ locale }: HeaderProps) {
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 w-full',
-          'transition-all duration-1000 ease-out',
+          'transition-all duration-300 ease-out',
           isVisible
             ? 'translate-y-0 opacity-100 visible'
             : '-translate-y-full opacity-0 invisible pointer-events-none',
