@@ -9,10 +9,10 @@ import FinalCTA from '@/components/home/FinalCTA';
 import MinimalFooter from '@/components/layout/MinimalFooter';
 
 export const metadata: Metadata = {
-  title: 'Buying Properties - Lion Capital Real Estate',
+  title: 'Buying Properties - Icon Properties Real Estate',
   description: 'Explore luxury properties for buying in Mallorca. Curated villas, apartments, and commercial spaces.',
   openGraph: {
-    title: 'Buying Properties - Lion Capital Real Estate',
+    title: 'Buying Properties - Icon Properties Real Estate',
     description: 'Explore luxury properties for buying in Mallorca. Curated villas, apartments, and commercial spaces.',
     images: ['/og-home.jpg'],
   },

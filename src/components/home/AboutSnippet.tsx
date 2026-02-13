@@ -91,7 +91,7 @@ export default function AboutSnippet({ locale }: AboutSnippetProps) {
             <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden border border-gray-700">
               <Image
                 src="/daniel-founder.jpg"
-                alt="Daniel - Founder of Lion Capital Real Estate"
+                alt="Daniel - Founder of Icon Properties Real Estate"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

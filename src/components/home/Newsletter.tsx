@@ -124,7 +124,7 @@ export default function Newsletter({ locale }: NewsletterProps) {
                   required
                 />
                 <span className="text-sm text-white/80 leading-relaxed">
-                  I agree to receive marketing communications from Lion Capital Real Estate. 
+                  I agree to receive marketing communications from Icon Properties Real Estate. 
                   I understand I can unsubscribe at any time. View our{' '}
                   <a 
                     href={`/${locale}/legal/privacy`} 

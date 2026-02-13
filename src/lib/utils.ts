@@ -135,7 +135,7 @@ export function generateSEODescription(
     if (size) description += ` spanning ${size}m²`;
   }
   
-  description += '. Contact Lion Capital Real Estate for exclusive viewing.';
+  description += '. Contact Icon Properties Real Estate for exclusive viewing.';
   return description;
 }
 

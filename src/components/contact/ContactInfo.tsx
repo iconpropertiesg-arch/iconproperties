@@ -28,8 +28,8 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
     {
       icon: MessageCircle,
       label: 'WhatsApp',
-      value: '+34 630 412 443',
-      href: 'https://wa.me/34 630 412 443',
+      value: ':+34 686 08 86 91',
+      href: 'https://wa.me/34 686 08 86 91',
       description: 'Chat with us on WhatsApp'
     }
   ];

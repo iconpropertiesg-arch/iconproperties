@@ -16,13 +16,13 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
 
   return {
     title: t('title'),
-    description: 'Contact Lion Capital Real Estate for luxury properties in Mallorca. Expert consultation and personalized service.',
+    description: 'Contact Icon Properties Real Estate for luxury properties in Mallorca. Expert consultation and personalized service.',
     alternates: {
       canonical: `/${locale}/contact`,
     },
     openGraph: {
       title: t('title'),
-      description: 'Contact Lion Capital Real Estate for luxury properties in Mallorca. Expert consultation and personalized service.',
+      description: 'Contact Icon Properties Real Estate for luxury properties in Mallorca. Expert consultation and personalized service.',
       images: ['/og-contact.jpg'],
     },
   };

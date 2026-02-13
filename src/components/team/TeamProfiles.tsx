@@ -45,10 +45,17 @@ export default function TeamProfiles({ locale }: TeamProfilesProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
               {/* Image */}
               <div className="md:col-span-1">
-                <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-gray-800">
+                <div className="relative aspect-[2/4] rounded-xl overflow-hidden bg-gray-800">
                   {/* Placeholder for Daniel's portrait - replace with actual image */}
                   <div className="w-full h-full bg-gradient-to-br from-gray-900/30 to-gray-800/30 flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Daniel's Portrait</span>
+                  <Image
+      src="/images/danial.JPG"
+      alt="Daniel's Portrait"
+      fill
+      className="object-cover"
+      sizes="(max-width: 768px) 100vw, 33vw"
+      priority
+    />
                   </div>
                 </div>
               </div>
