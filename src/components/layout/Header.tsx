@@ -17,94 +17,90 @@ export default function Header({ locale }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
-  const scrollDirection = useRef<'up' | 'down' | null>(null);
+  const ticking = useRef(false);
   const t = useTranslations('navigation');
 
-  // Detect Safari browser
-  const isSafari = useRef(false);
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      isSafari.current = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    }
-  }, []);
-
-  useEffect(() => {
-    let ticking = false;
+    // Force initial state
+    lastScrollY.current = window.scrollY;
     
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScroll = window.scrollY;
-          
-          setIsScrolled(currentScroll > 20);
-          
-          // Minimum scroll threshold to prevent jitter
-          const scrollThreshold = 3;
-          const scrollDifference = currentScroll - lastScrollY.current;
-          
-          // At the top, always show
-          if (currentScroll < 10) {
-            setIsVisible(true);
-            scrollDirection.current = null;
-            lastScrollY.current = currentScroll;
-          } 
-          // Only update if scroll difference is significant
-          else if (Math.abs(scrollDifference) >= scrollThreshold) {
-            if (scrollDifference > 0) {
-              // Scrolling down
-              scrollDirection.current = 'down';
-              if (currentScroll > 30) {
-                setIsVisible(false);
-              }
-            } else {
-              // Scrolling up - ALWAYS show immediately
-              scrollDirection.current = 'up';
-              setIsVisible(true);
-            }
-            
-            // Always update lastScrollY when there's significant change
-            lastScrollY.current = currentScroll;
-          }
-          // For Safari: if we're scrolling up (even slightly), show header
-          else if (isSafari.current && scrollDifference < 0) {
-            setIsVisible(true);
-            scrollDirection.current = 'up';
-            lastScrollY.current = currentScroll;
-          }
-          
-          ticking = false;
-        });
-        ticking = true;
+    const updateHeader = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Update scrolled state
+      setIsScrolled(currentScrollY > 20);
+      
+      // Always show at top
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+      
+      // Calculate difference
+      const difference = currentScrollY - lastScrollY.current;
+      
+      // Scrolling UP - SHOW HEADER (even 1px up)
+      if (difference < 0) {
+        setIsVisible(true);
+      }
+      // Scrolling DOWN - HIDE HEADER (only if scrolled down enough and difference > 5px)
+      else if (difference > 5 && currentScrollY > 50) {
+        setIsVisible(false);
+      }
+      
+      // Update last position
+      lastScrollY.current = currentScrollY;
+      ticking.current = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking.current) {
+        // Use setTimeout instead of requestAnimationFrame for better Safari support
+        setTimeout(() => {
+          updateHeader();
+        }, 0);
+        ticking.current = true;
       }
     };
 
-    // For Safari iOS, also listen to touchstart/touchmove to detect scroll intent
-    let touchStartY = 0;
+    // Also handle touch events for iOS
+    let touchStart = 0;
+    let touchEnd = 0;
+    
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
+      touchStart = e.touches[0].clientY;
     };
     
     const handleTouchMove = (e: TouchEvent) => {
-      if (!isSafari.current) return;
+      touchEnd = e.touches[0].clientY;
       
-      const touchY = e.touches[0].clientY;
-      const touchDiff = touchStartY - touchY;
-      
-      // If swiping down (negative diff), show header immediately
-      if (touchDiff < -5 && window.scrollY > 30) {
+      // If dragging down (scrolling up the page), show header
+      if (touchEnd > touchStart && window.scrollY > 50) {
         setIsVisible(true);
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Multiple event listeners for maximum Safari compatibility
+    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
-    handleScroll();
+    
+    // Also try scrollend event for Safari
+    if ('onscrollend' in window) {
+      window.addEventListener('scrollend', updateHeader as EventListener, { passive: true });
+    }
+    
+    // Initial call
+    updateHeader();
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', onScroll);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
+      if ('onscrollend' in window) {
+        window.removeEventListener('scrollend', updateHeader as EventListener);
+      }
     };
   }, []);
 
@@ -127,14 +123,8 @@ export default function Header({ locale }: HeaderProps) {
           'fixed top-0 left-0 right-0 z-50 w-full',
           'transition-all duration-300 ease-out',
           isVisible
-            ? 'translate-y-0 opacity-100 visible'
-            : '-translate-y-full opacity-0 invisible pointer-events-none',
-          // Glass effect when scrolled and visible
-          isScrolled && isVisible
-            ? 'py-2 sm:py-2 border-b border-white/20 shadow-2xl'
-            : isScrolled
-            ? 'py-2 sm:py-2 shadow-lg border-b border-white/10'
-            : 'py-2 sm:py-3'
+            ? 'translate-y-0 opacity-100'
+            : '-translate-y-full opacity-0'
         )}
         style={
           isScrolled && isVisible
@@ -144,130 +134,135 @@ export default function Header({ locale }: HeaderProps) {
                 WebkitBackdropFilter: 'blur(20px) saturate(180%)',
                 boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
-                willChange: 'transform, opacity',
+                transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
               }
             : {
-                willChange: 'transform, opacity',
+                transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
               }
         }
       >
-        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
-          <div className="flex items-center justify-between gap-2 sm:gap-4 min-w-0">
-            {/* Left side - Logo and Navigation */}
-            <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-8 lg:ml-0 xl:ml-8 2xl:ml-16">
-              {/* Logo at the front */}
-              <Link href={`/${locale}`} className="flex items-center gap-2 group flex-shrink-0">
+        <div className={cn(
+          'transition-all duration-300',
+          isScrolled ? 'py-2 sm:py-2' : 'py-2 sm:py-3'
+        )}>
+          <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
+            <div className="flex items-center justify-between gap-2 sm:gap-4 min-w-0">
+              {/* Left side - Logo and Navigation */}
+              <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-8 lg:ml-0 xl:ml-8 2xl:ml-16">
+                {/* Logo at the front */}
+                <Link href={`/${locale}`} className="flex items-center gap-2 group flex-shrink-0">
+                  <Image
+                    src="/images/logo3.png"
+                    alt="Property Icon Logo"
+                    width={320}
+                    height={107}
+                    className="h-12 lg:h-14 xl:h-16 2xl:h-20 w-auto transition-transform duration-300 group-hover:scale-105"
+                    priority
+                  />
+                </Link>
+
+                {/* Navigation Links */}
+                <nav className="flex items-center space-x-3 xl:space-x-4 2xl:space-x-8 flex-wrap">
+                  <Link
+                    href={`/${locale}/about`}
+                    className={cn(
+                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                      isScrolled 
+                        ? "text-gray-300 hover:text-gray-400"
+                        : "text-white/90 hover:text-white"
+                    )}
+                  >
+                    {t('about')}
+                  </Link>
+                  <Link
+                    href={`/${locale}/properties`}
+                    className={cn(
+                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                      isScrolled 
+                        ? "text-gray-300 hover:text-gray-400"
+                        : "text-white/90 hover:text-white"
+                    )}
+                  >
+                    {t('portfolio')}
+                  </Link>
+                  <Link
+                    href={`/${locale}/sell`}
+                    className={cn(
+                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                      isScrolled 
+                        ? "text-gray-300 hover:text-gray-400"
+                        : "text-white/90 hover:text-white"
+                    )}
+                  >
+                    {t('sell')}
+                  </Link>
+                  <Link
+                    href={`/${locale}/contact`}
+                    className={cn(
+                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                      isScrolled 
+                        ? "text-gray-300 hover:text-gray-400"
+                        : "text-white/90 hover:text-white"
+                    )}
+                  >
+                    {t('contact')}
+                  </Link>
+                  <Link
+                    href={`/${locale}/team`}
+                    className={cn(
+                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                      isScrolled 
+                        ? "text-gray-300 hover:text-gray-400"
+                        : "text-white/90 hover:text-white"
+                    )}
+                  >
+                    {t('team')}
+                  </Link>
+                </nav>
+              </div>
+
+              {/* Logo for mobile */}
+              <Link href={`/${locale}`} className="flex lg:hidden items-center gap-2 group min-w-0 flex-1 overflow-hidden">
                 <Image
                   src="/images/logo3.png"
                   alt="Property Icon Logo"
-                  width={320}
-                  height={107}
-                  className="h-12 lg:h-14 xl:h-16 2xl:h-20 w-auto transition-transform duration-300 group-hover:scale-105"
+                  width={240}
+                  height={80}
+                  className="h-7 xs:h-8 sm:h-10 md:h-12 w-auto max-w-full transition-transform duration-300 group-hover:scale-105"
                   priority
                 />
               </Link>
 
-              {/* Navigation Links */}
-              <nav className="flex items-center space-x-3 xl:space-x-4 2xl:space-x-8 flex-wrap">
-                <Link
-                  href={`/${locale}/about`}
+              {/* Right side actions */}
+              <div className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 lg:mr-0 xl:mr-8 2xl:mr-16 flex-shrink-0">
+                <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4">
+                  <LanguageSwitcher locale={locale} />
+                  <Link 
+                    href={`/${locale}/contact`}
+                    className="px-3 lg:px-4 xl:px-5 2xl:px-6 py-1.5 lg:py-2 xl:py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs lg:text-xs xl:text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap"
+                  >
+                    Request Private portfolio
+                  </Link>
+                </div>
+                
+                {/* Mobile Menu Button */}
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   className={cn(
-                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
+                    "lg:hidden p-1.5 sm:p-2 rounded-md transition-colors flex-shrink-0",
                     isScrolled 
-                      ? "text-gray-300 hover:text-gray-400"
-                      : "text-white/90 hover:text-white"
+                      ? "hover:bg-gray-800 text-white"
+                      : "hover:bg-white/10 text-white"
                   )}
+                  aria-label="Toggle mobile menu"
                 >
-                  {t('about')}
-                </Link>
-                <Link
-                  href={`/${locale}/properties`}
-                  className={cn(
-                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                    isScrolled 
-                      ? "text-gray-300 hover:text-gray-400"
-                      : "text-white/90 hover:text-white"
+                  {isMobileMenuOpen ? (
+                    <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                  ) : (
+                    <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
                   )}
-                >
-                  {t('portfolio')}
-                </Link>
-                <Link
-                  href={`/${locale}/sell`}
-                  className={cn(
-                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                    isScrolled 
-                      ? "text-gray-300 hover:text-gray-400"
-                      : "text-white/90 hover:text-white"
-                  )}
-                >
-                  {t('sell')}
-                </Link>
-                <Link
-                  href={`/${locale}/contact`}
-                  className={cn(
-                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                    isScrolled 
-                      ? "text-gray-300 hover:text-gray-400"
-                      : "text-white/90 hover:text-white"
-                  )}
-                >
-                  {t('contact')}
-                </Link>
-                <Link
-                  href={`/${locale}/team`}
-                  className={cn(
-                    "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                    isScrolled 
-                      ? "text-gray-300 hover:text-gray-400"
-                      : "text-white/90 hover:text-white"
-                  )}
-                >
-                  {t('team')}
-                </Link>
-              </nav>
-            </div>
-
-            {/* Logo for mobile */}
-            <Link href={`/${locale}`} className="flex lg:hidden items-center gap-2 group min-w-0 flex-1 overflow-hidden">
-              <Image
-                src="/images/logo3.png"
-                alt="Property Icon Logo"
-                width={240}
-                height={80}
-                className="h-7 xs:h-8 sm:h-10 md:h-12 w-auto max-w-full transition-transform duration-300 group-hover:scale-105"
-                priority
-              />
-            </Link>
-
-            {/* Right side actions */}
-            <div className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 lg:mr-0 xl:mr-8 2xl:mr-16 flex-shrink-0">
-              <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4">
-                <LanguageSwitcher locale={locale} />
-                <Link 
-                  href={`/${locale}/contact`}
-                  className="px-3 lg:px-4 xl:px-5 2xl:px-6 py-1.5 lg:py-2 xl:py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs lg:text-xs xl:text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap"
-                >
-                  Request Private portfolio
-                </Link>
+                </button>
               </div>
-              
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={cn(
-                  "lg:hidden p-1.5 sm:p-2 rounded-md transition-colors flex-shrink-0",
-                  isScrolled 
-                    ? "hover:bg-gray-800 text-white"
-                    : "hover:bg-white/10 text-white"
-                )}
-                aria-label="Toggle mobile menu"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
-                ) : (
-                  <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
-                )}
-              </button>
             </div>
           </div>
         </div>
