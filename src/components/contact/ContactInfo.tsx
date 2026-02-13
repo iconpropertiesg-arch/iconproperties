@@ -104,14 +104,14 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
         </p>
         <div className="space-y-2">
           <a
-            href="tel:+34123456789"
+            href="tel::+34686088691"
             className="flex items-center justify-center w-full bg-gray-700 hover:bg-gray-800 rounded-lg py-3 px-4 font-medium transition-colors text-white shadow-lg "
           >
             <Phone className="w-5 h-5 mr-2" />
             Call Now
           </a>
           <a
-            href="https://wa.me/34630412443"
+            href="https://wa.me/34686088691"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center w-full bg-green-600 hover:bg-green-700 rounded-lg py-3 px-4 font-medium transition-colors text-white shadow-lg hover:shadow-green-600/50"

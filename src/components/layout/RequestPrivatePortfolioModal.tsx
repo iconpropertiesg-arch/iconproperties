@@ -144,10 +144,10 @@ export default function RequestPrivatePortfolioModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center p-4">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/90 backdrop-blur-sm"
         onClick={handleClose}
       />
 
@@ -156,7 +156,7 @@ export default function RequestPrivatePortfolioModal({
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-6 right-6 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+          className="absolute top-6 right-6 z-10 w-10 h-10 bg-black border border-white/20 hover:bg-white/10 rounded-full flex items-center justify-center transition-colors"
           aria-label="Close"
         >
           <X className="w-5 h-5 text-white" />
@@ -175,7 +175,7 @@ export default function RequestPrivatePortfolioModal({
             </p>
             <button
               onClick={handleClose}
-              className="px-8 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-full transition-all duration-300"
+              className="px-8 py-3 bg-black border border-white/20 hover:bg-white/10 text-white font-semibold rounded-full transition-all duration-300"
             >
               Close
             </button>
@@ -183,7 +183,7 @@ export default function RequestPrivatePortfolioModal({
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Left Side - Form */}
-            <div className="p-8 lg:p-12">
+            <div className="p-8 lg:p-12 bg-black">
               <h2 className="text-3xl font-bold text-white mb-2">Request Private Portfolio</h2>
               <p className="text-gray-400 mb-8">
                 Fill out the form below and we'll get back to you with exclusive listings.
@@ -201,7 +201,7 @@ export default function RequestPrivatePortfolioModal({
                     value={formData.name}
                     onChange={handleChange}
                     className={cn(
-                      "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all",
+                      "w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all",
                       errors.name && "border-red-400"
                     )}
                     placeholder="Jane"
@@ -220,7 +220,7 @@ export default function RequestPrivatePortfolioModal({
                     value={formData.email}
                     onChange={handleChange}
                     className={cn(
-                      "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all",
+                      "w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all",
                       errors.email && "border-red-400"
                     )}
                     placeholder="jane@example.com"
@@ -239,7 +239,7 @@ export default function RequestPrivatePortfolioModal({
                     value={formData.phone}
                     onChange={handleChange}
                     className={cn(
-                      "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all",
+                      "w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all",
                       errors.phone && "border-red-400"
                     )}
                     placeholder="+34 XXX XXX XXX"
@@ -258,7 +258,7 @@ export default function RequestPrivatePortfolioModal({
                       value={formData.buyerOrSeller}
                       onChange={handleChange}
                       className={cn(
-                        "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all appearance-none cursor-pointer pr-10",
+                        "w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all appearance-none cursor-pointer pr-10",
                         errors.buyerOrSeller && "border-red-400"
                       )}
                     >
@@ -282,7 +282,7 @@ export default function RequestPrivatePortfolioModal({
                     name="budget"
                     value={formData.budget}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all"
+                    className="w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
                     placeholder="e.g., €500,000 - €1,000,000"
                   />
                 </div>
@@ -297,7 +297,7 @@ export default function RequestPrivatePortfolioModal({
                     name="preferredAreas"
                     value={formData.preferredAreas}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all"
+                    className="w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
                     placeholder="e.g., Portals Nous, Palma, Son Vida"
                   />
                 </div>
@@ -312,7 +312,7 @@ export default function RequestPrivatePortfolioModal({
                       name="typeOfHome"
                       value={formData.typeOfHome}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all appearance-none cursor-pointer pr-10"
+                      className="w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all appearance-none cursor-pointer pr-10"
                     >
                       <option value="">Select type...</option>
                       <option value="apartment">Apartment</option>
@@ -335,7 +335,7 @@ export default function RequestPrivatePortfolioModal({
                       name="timeline"
                       value={formData.timeline}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-gray-500/50 transition-all appearance-none cursor-pointer pr-10"
+                      className="w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white focus:outline-none transition-all appearance-none cursor-pointer pr-10"
                     >
                       <option value="">Select timeline...</option>
                       <option value="immediate">Immediate</option>
@@ -359,7 +359,7 @@ export default function RequestPrivatePortfolioModal({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg  disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full bg-white text-black hover:bg-gray-200 font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     'Submitting...'
@@ -374,54 +374,54 @@ export default function RequestPrivatePortfolioModal({
             </div>
 
             {/* Right Side - Contact Info */}
-            <div className="bg-white/5 backdrop-blur-sm p-8 lg:p-12 border-l border-white/10">
+            <div className="bg-black p-8 lg:p-12 border-l border-white/10">
               <h3 className="text-2xl font-bold text-white mb-8">Contact Information</h3>
               
               <div className="space-y-6">
                 {/* Email Card */}
-                <div className="bg-white/5 rounded-2xl border border-white/10 p-6">
+                <div className="bg-black border border-white/20 rounded-2xl p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-gray-700/20 rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-black border border-white/20 rounded-full flex items-center justify-center">
                       <Mail className="w-5 h-5 text-gray-400" />
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-white font-semibold">Email</span>
-                      <span className="px-2 py-0.5 bg-gray-700 rounded-full text-xs text-white font-medium">24/7</span>
+                      <span className="px-2 py-0.5 bg-white/10 border border-white/20 rounded-full text-xs text-white font-medium">24/7</span>
                     </div>
                   </div>
                   <a 
                     href="mailto:info@iconproperties.es"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    info@iconproperties.es
+                    iconpropertiesg@gmail.com
                   </a>
                 </div>
 
                 {/* Phone Card */}
-                <div className="bg-white/5 rounded-2xl border border-white/10 p-6">
+                <div className="bg-black border border-white/20 rounded-2xl p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-gray-700/20 rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-black border border-white/20 rounded-full flex items-center justify-center">
                       <Phone className="w-5 h-5 text-gray-400" />
                     </div>
                     <span className="text-white font-semibold">Phone</span>
                   </div>
                   <a 
-                    href="tel:+34XXXXXXXXX"
+                    href="tel:+34 686 08 86 91"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    +34 XXX XXX XXX
+                    +34 686 08 86 91
                   </a>
                 </div>
 
                 {/* Address Card */}
-                <div className="bg-white/5 rounded-2xl border border-white/10 p-6">
+                <div className="bg-black border border-white/20 rounded-2xl p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-gray-700/20 rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-black border border-white/20 rounded-full flex items-center justify-center">
                       <MapPin className="w-5 h-5 text-gray-400" />
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-white font-semibold">Address</span>
-                      <span className="px-2 py-0.5 bg-gray-700 rounded-full text-xs text-white font-medium">REMOTE</span>
+                      <span className="px-2 py-0.5 bg-white/10 border border-white/20 rounded-full text-xs text-white font-medium">REMOTE</span>
                     </div>
                   </div>
                   <div className="text-gray-300 text-sm space-y-1">
@@ -438,4 +438,3 @@ export default function RequestPrivatePortfolioModal({
     </div>
   );
 }
-

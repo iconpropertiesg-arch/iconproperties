@@ -61,7 +61,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
     {
       name: t('team.members.daniel.name'),
       role: t('team.members.daniel.role'),
-      image: '/team/daniel.jpg',
+      image: '/images/member1.png',
       description: t('team.members.daniel.description'),
       languages: ['English', 'Spanish', 'German'],
       certifications: ['Licensed Real Estate Agent', 'Luxury Property Specialist']
@@ -69,7 +69,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
     {
       name: t('team.members.marina.name'),
       role: t('team.members.marina.role'),
-      image: '/team/marina.jpg',
+      image: '/images/member2.png',
       description: t('team.members.marina.description'),
       languages: ['German', 'English', 'Spanish'],
       certifications: ['Certified International Property Specialist', 'Luxury Home Marketing Specialist']
@@ -77,7 +77,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
     {
       name: t('team.members.carlos.name'),
       role: t('team.members.carlos.role'),
-      image: '/team/carlos.jpg',
+      image: '/images/member3.png',
       description: t('team.members.carlos.description'),
       languages: ['Spanish', 'English', 'Catalan'],
       certifications: ['Commercial Real Estate License', 'Investment Property Advisor']
@@ -134,7 +134,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
             </div>
             <div className="relative rounded-2xl overflow-hidden border border-gray-700">
               <Image
-                src="/about/company-story.jpg"
+                src="/images/about_page.jpg"
                 alt={t('story.imageAlt')}
                 width={600}
                 height={400}
