@@ -362,10 +362,10 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
 
             {/* Contact Info */}
             <div className="lg:col-span-1">
-              <div className="bg-gray-50 rounded-2xl p-6 space-y-6">
+              <div className="bg-black rounded-2xl p-6 space-y-6 border border-white/10">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Need Help?</h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <h3 className="text-lg font-semibold text-white mb-4">Need Help?</h3>
+                  <p className="text-gray-300 text-sm mb-4">
                     Our valuation experts are available to assist you with any questions.
                   </p>
                 </div>
@@ -373,23 +373,23 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                 <div className="space-y-4">
                   <a
                     href="tel:+34123456789"
-                    className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors border border-white/10"
                   >
-                    <Phone className="w-5 h-5 text-gray-600" />
+                    <Phone className="w-5 h-5 text-white" />
                     <div>
-                      <div className="font-medium text-gray-900">Call Direct</div>
-                      <div className="text-sm text-gray-600">+34 123 456 789</div>
+                      <div className="font-medium text-white">Call Direct</div>
+                      <div className="text-sm text-gray-300">+34 123 456 789</div>
                     </div>
                   </a>
 
                   <a
                     href="mailto:valuations@lioncapitala.com"
-                    className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors border border-white/10"
                   >
-                    <Mail className="w-5 h-5 text-gray-600" />
+                    <Mail className="w-5 h-5 text-white" />
                     <div>
-                      <div className="font-medium text-gray-900">Email Us</div>
-                      <div className="text-sm text-gray-600">valuations@lioncapitala.com</div>
+                      <div className="font-medium text-white">Email Us</div>
+                      <div className="text-sm text-gray-300">valuations@lioncapitala.com</div>
                     </div>
                   </a>
 
@@ -397,19 +397,19 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                     href="https://wa.me/34123456789"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors border border-white/10"
                   >
-                    <MessageCircle className="w-5 h-5 text-gray-600" />
+                    <MessageCircle className="w-5 h-5 text-white" />
                     <div>
-                      <div className="font-medium text-gray-900">WhatsApp</div>
-                      <div className="text-sm text-gray-600">Quick response</div>
+                      <div className="font-medium text-white">WhatsApp</div>
+                      <div className="text-sm text-gray-300">Quick response</div>
                     </div>
                   </a>
                 </div>
 
-                <div className="bg-gray-700/10 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">Free Service</h4>
-                  <p className="text-sm text-gray-600">
+                <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+                  <h4 className="font-semibold text-white mb-2">Free Service</h4>
+                  <p className="text-sm text-gray-300">
                     Our property valuation is completely free with no obligations. 
                     Professional, confidential, and delivered within 24 hours.
                   </p>

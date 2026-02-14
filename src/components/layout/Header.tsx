@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import LanguageSwitcher from './LanguageSwitcher';
+import RequestPrivatePortfolioModal from './RequestPrivatePortfolioModal';
 
 interface HeaderProps {
   locale: string;
@@ -15,6 +16,7 @@ interface HeaderProps {
 export default function Header({ locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPortfolioModalOpen, setIsPortfolioModalOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
@@ -237,12 +239,13 @@ export default function Header({ locale }: HeaderProps) {
               <div className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 lg:mr-0 xl:mr-8 2xl:mr-16 flex-shrink-0">
                 <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4">
                   <LanguageSwitcher locale={locale} />
-                  <Link 
-                    href={`/${locale}/contact`}
+                  <button
+                    type="button"
+                    onClick={() => setIsPortfolioModalOpen(true)}
                     className="px-3 lg:px-4 xl:px-5 2xl:px-6 py-1.5 lg:py-2 xl:py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs lg:text-xs xl:text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap"
                   >
                     Request Private portfolio
-                  </Link>
+                  </button>
                 </div>
                 
                 {/* Mobile Menu Button */}
@@ -314,13 +317,16 @@ export default function Header({ locale }: HeaderProps) {
                   {t('team')}
                 </Link>
                 <div className="pt-3 sm:pt-4 md:pt-6 space-y-2 sm:space-y-3 md:space-y-4 border-t border-gray-700 mt-3 sm:mt-4 md:mt-6">
-                  <Link 
-                    href={`/${locale}/contact`}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsPortfolioModalOpen(true);
+                    }}
                     className="block w-full text-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base font-medium rounded-full transition-all duration-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Request Private Portfolio
-                  </Link>
+                  </button>
                   <div className="flex justify-center pt-1 sm:pt-2">
                     <LanguageSwitcher locale={locale} />
                   </div>
@@ -330,6 +336,13 @@ export default function Header({ locale }: HeaderProps) {
           </div>
         </div>
       )}
+
+      {/* Request Private Portfolio Modal - same as footer */}
+      <RequestPrivatePortfolioModal
+        isOpen={isPortfolioModalOpen}
+        onClose={() => setIsPortfolioModalOpen(false)}
+        locale={locale}
+      />
     </>
   );
 }

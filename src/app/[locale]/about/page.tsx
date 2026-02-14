@@ -85,10 +85,10 @@ export default async function AboutPage({ params }: AboutPageProps) {
   ];
 
   const achievements = [
-    { number: '€2.5B+', label: t('achievements.totalSales') },
-    { number: '500+', label: t('achievements.propertiesSold') },
+    { number: '47+million €', label: t('achievements.totalSales') },
+    { number: '80+', label: t('achievements.propertiesSold') },
     { number: '98%', label: t('achievements.clientSatisfaction') },
-    { number: '15+', label: t('achievements.yearsExperience') }
+    { number: '8+', label: t('achievements.yearsExperience') }
   ];
 
   return (
