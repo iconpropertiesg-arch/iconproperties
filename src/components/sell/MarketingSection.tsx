@@ -13,25 +13,21 @@ export default function MarketingSection({ locale }: MarketingSectionProps) {
   const features = [
     {
       icon: Camera,
-      emoji: '📸',
       title: t('photography.title'),
       description: t('photography.description'),
     },
     {
       icon: Globe,
-      emoji: '🎥',
       title: t('online.title'),
       description: t('online.description'),
     },
     {
       icon: FileText,
-      emoji: '🗞',
       title: t('brochures.title'),
       description: t('brochures.description'),
     },
     {
       icon: MapPin,
-      emoji: '🌍',
       title: t('international.title'),
       description: t('international.description'),
     },
@@ -54,7 +50,6 @@ export default function MarketingSection({ locale }: MarketingSectionProps) {
                 key={index}
                 className="text-center relative bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group"
               >
-                <div className="text-5xl mb-4">{feature.emoji}</div>
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-600/20 to-gray-700/20 flex items-center justify-center mx-auto mb-6 border border-gray-400/30 group-hover:border-gray-400/50 transition-colors">
                   <Icon className="w-8 h-8 text-gray-400 stroke-[1.5]" />
                 </div>
