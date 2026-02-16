@@ -230,14 +230,14 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
                             {tSell('form.type')} *
                           </label>
                           <select
                             value={formData.propertyType}
                             onChange={(e) => handleInputChange('propertyType', e.target.value)}
-                            className={`w-full px-4 py-3 border rounded-lg focus:ring-gray-500 focus:border-gray-500 ${
-                              errors.propertyType ? 'border-red-300' : 'border-gray-300'
+                            className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white focus:ring-white/50 focus:border-white/50 ${
+                              errors.propertyType ? 'border-red-400' : 'border-white/20'
                             }`}
                           >
                             <option value="">Select property type</option>
@@ -250,13 +250,13 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
                             {tSell('form.value')}
                           </label>
                           <select
                             value={formData.estimatedPrice}
                             onChange={(e) => handleInputChange('estimatedPrice', parseInt(e.target.value))}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-gray-500 focus:border-gray-500"
+                            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:ring-white/50 focus:border-white/50"
                           >
                             <option value={0}>I'm not sure</option>
                             <option value={500000}>€300k - €500k</option>
@@ -272,18 +272,18 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
 
                   {/* Contact Preferences */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Preferences</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">Contact Preferences</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           {t('common.phone')}
                         </label>
                         <input
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary ${
-                            errors.phone ? 'border-red-300' : 'border-gray-300'
+                          className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:ring-white/50 focus:border-white/50 ${
+                            errors.phone ? 'border-red-400' : 'border-white/20'
                           }`}
                           placeholder="+34 123 456 789"
                         />
@@ -291,13 +291,13 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           {t('sell.form.contactMethod')}
                         </label>
                         <select
                           value={formData.contactMethod}
                           onChange={(e) => handleInputChange('contactMethod', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-gray-500 focus:border-gray-500"
+                          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:ring-white/50 focus:border-white/50"
                         >
                           <option value="email">Email</option>
                           <option value="phone">Phone</option>
@@ -307,14 +307,14 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         {tSell('form.message')}
                       </label>
                       <textarea
                         value={formData.message}
                         onChange={(e) => handleInputChange('message', e.target.value)}
                         rows={4}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-white/50 focus:border-white/50"
                         placeholder="Tell us more about your property, timeline, or any specific requirements..."
                       />
                     </div>
@@ -327,13 +327,13 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                         type="checkbox"
                         checked={formData.consent}
                         onChange={(e) => handleInputChange('consent', e.target.checked)}
-                        className={`mt-1 w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 rounded focus:ring-gray-500 ${
-                          errors.consent ? 'border-red-300' : ''
+                        className={`mt-1 w-4 h-4 text-white bg-white/10 border-white/30 rounded focus:ring-white/50 ${
+                          errors.consent ? 'border-red-400' : ''
                         }`}
                       />
-                      <span className="text-sm text-gray-600 leading-relaxed">
+                      <span className="text-sm text-gray-300 leading-relaxed">
                         {t('common.consent')}. View our{' '}
-                        <a href={`/${locale}/legal/privacy`} className="text-gray-600 hover:text-gray-800 underline">
+                        <a href={`/${locale}/legal/privacy`} className="text-gray-300 hover:text-white underline">
                           Privacy Policy
                         </a>.
                       </span>
@@ -372,13 +372,13 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
 
                 <div className="space-y-4">
                   <a
-                    href="tel:+34123456789"
+                    href="tel:+34686088691"
                     className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors border border-white/10"
                   >
                     <Phone className="w-5 h-5 text-white" />
                     <div>
                       <div className="font-medium text-white">Call Direct</div>
-                      <div className="text-sm text-gray-300">+34 123 456 789</div>
+                      <div className="text-sm text-gray-300">+34 686 088 691</div>
                     </div>
                   </a>
 
@@ -389,12 +389,12 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                     <Mail className="w-5 h-5 text-white" />
                     <div>
                       <div className="font-medium text-white">Email Us</div>
-                      <div className="text-sm text-gray-300">valuations@lioncapitala.com</div>
+                      <div className="text-sm text-gray-300">iconporpertiesg@gmail.com</div>
                     </div>
                   </a>
 
                   <a
-                    href="https://wa.me/34123456789"
+                    href="https://wa.me/34 686 088 691"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors border border-white/10"
