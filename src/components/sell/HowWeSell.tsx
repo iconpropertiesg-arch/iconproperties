@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { FileText, Camera, Users, CheckCircle } from 'lucide-react';
 
 interface HowWeSellProps {
@@ -10,24 +11,28 @@ interface HowWeSellProps {
 const steps = [
   {
     number: '1',
+    image: '/images/3.jpg',
     icon: FileText,
     title: 'Property Review & Pricing Strategy',
     description: 'We analyse your home and recommend the ideal pricing aligned with current demand.'
   },
   {
     number: '2',
+    image: '/images/2.jpg',
     icon: Camera,
-    title: 'Premium Preparation',
+    title: 'Premium Preparationss',
     description: 'Professional photography, video, drone and a bespoke presentation to highlight your property.'
   },
   {
     number: '3',
+    image: '/images/3.jpg',
     icon: Users,
     title: 'Private Network + Online Marketing',
     description: 'We introduce your property to verified buyers, banks and launch it using google and meta ads online with premium marketing, expenses on us.'
   },
   {
     number: '4',
+    image: '/images/step-4.jpg',
     icon: CheckCircle,
     title: 'Viewings, Negotiation & Closing',
     description: 'We handle everything from viewings to negotiations and coordinate with lawyers and notaries through completion.'
@@ -36,6 +41,7 @@ const steps = [
 
 export default function HowWeSell({ locale }: HowWeSellProps) {
   const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set());
+  const [imgErrors, setImgErrors] = useState<Set<number>>(new Set());
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -88,12 +94,8 @@ export default function HowWeSell({ locale }: HowWeSellProps) {
           {steps.map((step, index) => {
             const isVisible = visibleSteps.has(index);
             const Icon = step.icon;
-            
-            if (!Icon) {
-              console.error(`Icon is undefined for step ${index}`);
-              return null;
-            }
-            
+            const imgFailed = imgErrors.has(index);
+
             return (
               <div
                 key={index}
@@ -109,12 +111,23 @@ export default function HowWeSell({ locale }: HowWeSellProps) {
                   transitionDelay: isVisible ? `${index * 150}ms` : '0ms'
                 }}
               >
-                {/* Numbered Circle */}
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gray-600/20 to-gray-700/20 border-2 border-gray-400/30 flex items-center justify-center group-hover:border-gray-400/50 transition-colors">
-                    {Icon && <Icon className="w-8 h-8 text-gray-400" />}
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
+                {/* Step image or icon fallback */}
+                <div className="relative mb-6 w-full max-w-[280px] aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-gray-600/20 to-gray-700/20 border-2 border-gray-400/30">
+                  {!imgFailed ? (
+                    <Image
+                      src={step.image}
+                      alt={step.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 280px"
+                      onError={() => setImgErrors((prev) => new Set(Array.from(prev).concat(index)))}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      {Icon && <Icon className="w-12 h-12 text-gray-400" />}
+                    </div>
+                  )}
+                  <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center border-2 border-black">
                     <span className="text-sm font-bold text-white">{step.number}</span>
                   </div>
                 </div>

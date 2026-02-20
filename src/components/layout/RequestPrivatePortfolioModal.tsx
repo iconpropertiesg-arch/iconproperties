@@ -87,26 +87,33 @@ export default function RequestPrivatePortfolioModal({
         throw new Error(data.error || 'Failed to submit portfolio request');
       }
 
-      // Check for warnings (like database errors)
+      // Check for warnings (like database or email errors)
       if (data.warnings && data.warnings.length > 0) {
         console.warn('⚠️ Submission completed with warnings:', data.warnings);
-        
-        // Show database errors prominently
         const dbWarning = data.warnings.find((w: string) => w.includes('Database'));
+        const emailWarning = data.warnings.find((w: string) => w.includes('email') || w.includes('Email'));
         if (dbWarning) {
           console.error('❌ DATABASE ERROR:', dbWarning);
-          console.error('💡 Solution: Update SUPABASE_SERVICE_ROLE_KEY in .env.local and restart server');
-          // Still show success to user since emails were sent, but log the issue
+          console.error('💡 Fix: Check DATABASE_URL and Supabase keys in .env.local, then restart the dev server.');
+        }
+        if (emailWarning) {
+          console.error('❌ EMAIL ERROR:', emailWarning);
+          console.error('💡 Fix: Check RESEND_API_KEY and EMAIL_FROM in .env.local, then restart the dev server.');
         }
       }
 
-      // Log success
+      // If email failed, show user a helpful message (form still "succeeded" but emails did not send)
+      const emailStatus = data.emailStatus;
+      if (emailStatus && (!emailStatus.userEmailSent || !emailStatus.adminEmailSent)) {
+        const msg = [emailStatus.userEmailError, emailStatus.adminEmailError].filter(Boolean).join(' ');
+        if (msg) console.error('❌ Email sending failed:', msg);
+      }
+
       if (data.id) {
         console.log('✅ Portfolio request saved successfully to database with ID:', data.id);
-      } else {
-        console.error('❌ WARNING: Portfolio request submitted but NOT saved to database!');
-        console.error('💡 Check your server terminal for database connection errors.');
-        console.error('💡 Make sure SUPABASE_SERVICE_ROLE_KEY is set in .env.local');
+      } else if (data.success) {
+        console.warn('⚠️ Portfolio request submitted but NOT saved to database.');
+        console.warn('💡 Check DATABASE_URL in .env.local and restart the dev server.');
       }
 
       setIsSubmitted(true);

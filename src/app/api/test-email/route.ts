@@ -3,14 +3,15 @@ import { NextRequest, NextResponse } from 'next/server';
 // Test endpoint to verify email configuration
 export async function GET(request: NextRequest) {
   try {
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    const EMAIL_FROM = process.env.EMAIL_FROM;
-    const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+    // Trim and strip quotes so keys from .env work reliably
+    const RESEND_API_KEY = (process.env.RESEND_API_KEY || '').trim().replace(/^["']|["']$/g, '');
+    const EMAIL_FROM = (process.env.EMAIL_FROM || '').trim().replace(/^["']|["']$/g, '') || undefined;
+    const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || '').trim().replace(/^["']|["']$/g, '') || undefined;
 
     // Check configuration
     const config = {
       hasResendKey: !!RESEND_API_KEY,
-      resendKeyPrefix: RESEND_API_KEY?.substring(0, 10) || 'NOT SET',
+      resendKeyPrefix: RESEND_API_KEY ? RESEND_API_KEY.substring(0, 10) + '...' : 'NOT SET',
       emailFrom: EMAIL_FROM || 'NOT SET',
       adminEmail: ADMIN_EMAIL || 'NOT SET',
     };
@@ -19,7 +20,7 @@ export async function GET(request: NextRequest) {
     if (!RESEND_API_KEY) {
       return NextResponse.json({
         success: false,
-        error: 'RESEND_API_KEY is not set',
+        error: 'RESEND_API_KEY is not set. Add it to .env.local and restart the dev server.',
         config,
       }, { status: 500 });
     }
@@ -28,7 +29,7 @@ export async function GET(request: NextRequest) {
     
     console.log('🧪 Testing email service...');
     console.log('   API Key:', RESEND_API_KEY.substring(0, 10) + '...');
-    console.log('   From:', EMAIL_FROM);
+    console.log('   From:', EMAIL_FROM || 'onboarding@resend.dev');
     console.log('   To:', testEmail);
 
     const response = await fetch('https://api.resend.com/emails', {

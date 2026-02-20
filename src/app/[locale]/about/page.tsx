@@ -69,7 +69,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
     {
       name: t('team.members.marina.name'),
       role: t('team.members.marina.role'),
-      image: '/images/member2.png',
+      image: '/images/member3.png',
       description: t('team.members.marina.description'),
       languages: ['German', 'English', 'Spanish'],
       certifications: ['Certified International Property Specialist', 'Luxury Home Marketing Specialist']
@@ -77,7 +77,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
     {
       name: t('team.members.carlos.name'),
       role: t('team.members.carlos.role'),
-      image: '/images/member3.png',
+      image: '/images/member2.png',
       description: t('team.members.carlos.description'),
       languages: ['Spanish', 'English', 'Catalan'],
       certifications: ['Commercial Real Estate License', 'Investment Property Advisor']

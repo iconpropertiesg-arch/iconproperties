@@ -3,16 +3,19 @@ import { prisma } from '@/lib/db';
 
 // Email service - using Resend (you can replace with SendGrid, Mailgun, etc.)
 async function sendEmail(to: string, subject: string, html: string) {
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+  // Trim and strip quotes so pasted keys from .env work reliably
+  let RESEND_API_KEY = (process.env.RESEND_API_KEY || '').trim().replace(/^["']|["']$/g, '');
   
   if (!RESEND_API_KEY) {
     console.error('❌ RESEND_API_KEY not set in environment variables');
-    throw new Error('Email service not configured: RESEND_API_KEY is missing');
+    throw new Error('Email service not configured: RESEND_API_KEY is missing. Add RESEND_API_KEY to .env.local and restart the dev server.');
+  }
+  if (!RESEND_API_KEY.startsWith('re_')) {
+    console.warn('⚠️ RESEND_API_KEY should usually start with "re_". Check you copied the full key from Resend dashboard.');
   }
 
   // Clean up EMAIL_FROM - remove quotes if present
-  let EMAIL_FROM = process.env.EMAIL_FROM || 'onboarding@resend.dev';
-  EMAIL_FROM = EMAIL_FROM.replace(/^["']|["']$/g, ''); // Remove surrounding quotes
+  let EMAIL_FROM = (process.env.EMAIL_FROM || 'onboarding@resend.dev').trim().replace(/^["']|["']$/g, '');
   
   if (!EMAIL_FROM) {
     console.warn('⚠️ EMAIL_FROM not set, using default');
@@ -29,12 +32,14 @@ async function sendEmail(to: string, subject: string, html: string) {
   console.log('   Subject:', subject);
 
   try {
-    const emailPayload = {
+    const adminEmail = (process.env.ADMIN_EMAIL || '').trim().replace(/^["']|["']$/g, '');
+    const emailPayload: Record<string, string> = {
       from: EMAIL_FROM,
       to,
       subject,
       html,
     };
+    if (adminEmail) emailPayload.reply_to = adminEmail;
 
     console.log('📤 Sending email via Resend API...');
     const response = await fetch('https://api.resend.com/emails', {
@@ -63,24 +68,17 @@ async function sendEmail(to: string, subject: string, html: string) {
         errorMessage = responseText || errorMessage;
       }
       
-      // Check for specific error types
-      if (response.status === 422) {
+      // Check for specific error types so user gets clear fix instructions
+      if (response.status === 401) {
+        errorMessage = 'Invalid Resend API key. Check RESEND_API_KEY in .env.local (copy from https://resend.com/api-keys), then restart the dev server.';
+      } else if (response.status === 422) {
         errorMessage = `Invalid email data: ${errorDetails?.message || errorMessage}`;
       } else if (response.status === 429) {
         errorMessage = 'Rate limit exceeded. Please try again later.';
       } else if (response.status === 403) {
-        // 403 Forbidden usually means:
-        // 1. Domain not verified in Resend
-        // 2. Using onboarding@resend.dev which has restrictions
-        // 3. API key doesn't have permission
+        // 403 Forbidden usually means domain not verified or API key restriction
         const detailedError = errorDetails?.message || errorMessage;
-        errorMessage = `Email sending forbidden (403). This usually means:
-- The "from" domain (${EMAIL_FROM}) is not verified in Resend
-- Using onboarding@resend.dev has restrictions on recipient addresses
-- Your API key may need domain verification
-
-Solution: Verify your domain in Resend dashboard or use a verified email address.
-Error details: ${detailedError}`;
+        errorMessage = `Email sending forbidden (403). Either the "from" address domain (${EMAIL_FROM}) is not verified in Resend, or the API key has restrictions. Fix: verify your domain at https://resend.com/domains or use a valid RESEND_API_KEY. Details: ${detailedError}`;
       }
       
       console.error('❌ Email send failed:', errorMessage);
@@ -145,6 +143,9 @@ function generateThankYouEmail(name: string) {
         </div>
         <p style="font-size: 14px; color: #666; margin-top: 30px;">
           If you have any questions, feel free to reach out to us at <a href="mailto:info@iconproperties.es" style="color: #2563eb;">info@iconproperties.es</a>
+        </p>
+        <p style="font-size: 12px; color: #9ca3af; margin-top: 24px;">
+          If you don't see this email in your inbox, please check your <strong>Spam</strong> or <strong>Promotions</strong> folder.
         </p>
         <p style="font-size: 14px; color: #666; margin-top: 20px;">
           Best regards,<br>
@@ -303,7 +304,7 @@ export async function POST(request: NextRequest) {
         code: dbError_caught.code,
         meta: dbError_caught.meta,
       });
-      dbError = `Database error: ${dbError_caught.message || 'Unknown error'}`;
+      dbError = `Database error: ${dbError_caught.message || 'Unknown error'}. Check DATABASE_URL in .env.local and restart the dev server.`;
       
       if (dbError_caught.code === 'P2002') {
         dbError = 'Duplicate entry. This email may have already submitted a request.';
