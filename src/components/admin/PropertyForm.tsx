@@ -25,7 +25,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
   // Basic property data
   const [slug, setSlug] = useState('');
   const [status, setStatus] = useState('available');
-  const [type, setType] = useState('residential');
+  const [type, setType] = useState('house');
   const [purpose, setPurpose] = useState('buy');
   const [year, setYear] = useState('');
   const [price, setPrice] = useState('');
@@ -62,7 +62,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
         // Set basic data
         setSlug(property.slug || '');
         setStatus(property.status || 'available');
-        setType(property.type || 'residential');
+        setType(['house', 'apartment', 'commercial'].includes(property.type) ? property.type : 'house');
         setPurpose(property.purpose || 'buy');
         setYear(property.year?.toString() || '');
         setPrice(property.price?.toString() || '');
@@ -519,10 +519,9 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 required
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
-                <option value="residential">Residential</option>
+                <option value="house">House</option>
+                <option value="apartment">Apartment</option>
                 <option value="commercial">Commercial</option>
-                <option value="hospitality">Hospitality</option>
-                <option value="land">Land</option>
               </select>
             </div>
 
