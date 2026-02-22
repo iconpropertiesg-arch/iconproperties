@@ -154,9 +154,9 @@ export default function PropertyAgent({ property, locale }: PropertyAgentProps) 
           >
             {t('common.requestDetails')}
           </button>
-          <button className="w-full bg-gray-900 text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+          {/* <button className="w-full bg-gray-900 text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
             {t('common.scheduleViewing')}
-          </button>
+          </button> */}
         </div>
 
         {/* Secondary Actions */}

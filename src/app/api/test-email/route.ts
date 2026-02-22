@@ -3,8 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 // Test endpoint to verify email configuration
 export async function GET(request: NextRequest) {
   try {
-    // Trim and strip quotes so keys from .env work reliably
-    const RESEND_API_KEY = (process.env.RESEND_API_KEY || '').trim().replace(/^["']|["']$/g, '');
+    // Trim and strip quotes; support RESEND_API_KEY or RESEND_API_KEY_TOKEN
+    const RESEND_API_KEY = (process.env.RESEND_API_KEY || process.env.RESEND_API_KEY_TOKEN || '')
+      .trim()
+      .replace(/^["']|["']$/g, '');
     const EMAIL_FROM = (process.env.EMAIL_FROM || '').trim().replace(/^["']|["']$/g, '') || undefined;
     const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || '').trim().replace(/^["']|["']$/g, '') || undefined;
 

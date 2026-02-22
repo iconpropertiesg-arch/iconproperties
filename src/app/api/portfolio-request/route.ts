@@ -1,14 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 
+// Helper: get Resend API key from env (supports RESEND_API_KEY or RESEND_API_KEY_TOKEN)
+function getResendApiKey(): string {
+  const raw =
+    (process.env.RESEND_API_KEY || process.env.RESEND_API_KEY_TOKEN || '').trim().replace(/^["']|["']$/g, '');
+  return raw;
+}
+
 // Email service - using Resend (you can replace with SendGrid, Mailgun, etc.)
 async function sendEmail(to: string, subject: string, html: string) {
-  // Trim and strip quotes so pasted keys from .env work reliably
-  let RESEND_API_KEY = (process.env.RESEND_API_KEY || '').trim().replace(/^["']|["']$/g, '');
-  
+  const RESEND_API_KEY = getResendApiKey();
+
   if (!RESEND_API_KEY) {
     console.error('❌ RESEND_API_KEY not set in environment variables');
-    throw new Error('Email service not configured: RESEND_API_KEY is missing. Add RESEND_API_KEY to .env.local and restart the dev server.');
+    throw new Error(
+      'Email service not configured: RESEND_API_KEY is missing. Add RESEND_API_KEY to .env.local (get key from https://resend.com/api-keys, e.g. key named "sending form emails"), then restart the dev server.'
+    );
   }
   if (!RESEND_API_KEY.startsWith('re_')) {
     console.warn('⚠️ RESEND_API_KEY should usually start with "re_". Check you copied the full key from Resend dashboard.');
@@ -273,6 +281,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Early check: Resend API key must be set for emails to work
+    const resendKey = getResendApiKey();
+    if (!resendKey) {
+      console.error('❌ RESEND_API_KEY is not set. Add it to .env.local and restart the dev server.');
+      return NextResponse.json(
+        {
+          error: 'Email service not configured. Add RESEND_API_KEY to .env.local (get key from https://resend.com/api-keys, e.g. "sending form emails"), then restart the dev server.',
+          code: 'RESEND_KEY_MISSING',
+        },
+        { status: 503 }
+      );
+    }
+    if (!resendKey.startsWith('re_')) {
+      console.warn('⚠️ RESEND_API_KEY should start with "re_". You may have copied the wrong value.');
+    }
+
     // Store in database using Prisma (same approach as properties)
     let portfolioRequestId = null;
     let dbError = null;
@@ -341,7 +365,8 @@ export async function POST(request: NextRequest) {
       }
       
       console.log('📧 Email configuration check:');
-      console.log('   RESEND_API_KEY:', process.env.RESEND_API_KEY ? 'SET (' + process.env.RESEND_API_KEY.substring(0, 10) + '...)' : 'NOT SET');
+      const key = getResendApiKey();
+      console.log('   RESEND_API_KEY:', key ? 'SET (' + key.substring(0, 10) + '...)' : 'NOT SET');
       console.log('   EMAIL_FROM:', process.env.EMAIL_FROM || 'NOT SET');
       
       const thankYouHtml = generateThankYouEmail(name);
