@@ -1,19 +1,19 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Lock, Users, MapPin, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
+import RequestPrivatePortfolioModal from '@/components/layout/RequestPrivatePortfolioModal';
 
 interface WhyWorkWithUsProps {
   locale: string;
 }
 
 export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
-  const router = useRouter();
   const t = useTranslations('home.whyWorkWithUs');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const features = [
     {
@@ -308,16 +308,24 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
           })}
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button - opens Request Private Portfolio modal (same as header) */}
         <div className="text-center">
           <button
-            onClick={() => router.push(`/${locale}/contact`)}
+            type="button"
+            onClick={() => setIsModalOpen(true)}
             className="group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl inline-flex items-center gap-2"
           >
             <span>{t('cta')}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
+
+        {/* Request Private Portfolio Modal - same as header */}
+        <RequestPrivatePortfolioModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          locale={locale}
+        />
       </div>
     </section>
   );

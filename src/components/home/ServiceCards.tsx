@@ -201,10 +201,15 @@ export default function ServiceCards() {
             </li>
           </ul>
 
-          {/* CTA Button */}
-          <button className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+          {/* CTA Button - opens WhatsApp */}
+          <a
+            href="https://wa.me/34686088691"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-center"
+          >
             Book an Appointment
-          </button>
+          </a>
         </div>
       </div>
     </div>

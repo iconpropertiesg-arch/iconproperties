@@ -25,8 +25,21 @@ export default function Footer({ locale }: FooterProps) {
 
     setIsSubmitting(true);
     try {
-      // TODO: Implement email collection API
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, locale }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error('Email submission failed:', data);
+        throw new Error(data.error || 'Failed to subscribe');
+      }
+
       setIsSubmitted(true);
       setEmail('');
     } catch (error) {

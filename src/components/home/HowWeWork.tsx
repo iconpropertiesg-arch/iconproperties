@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { MessageCircle, Home, Check, Compass, Trash2, Phone, FileCode, Bell } from 'lucide-react';
+import { MessageCircle, Home, Check, Compass, Phone, FileCode, Bell } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
 
@@ -405,10 +405,10 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                           )}
                         </div>
                         
-                        {/* Top Right Icon - Trash Can for Investment, Colorful House for Buy Luxury, Bell for Property Management */}
+                        {/* Top Right Icon - Compass for Investment (same as left), Colorful House for Buy Luxury, Bell for Property Management */}
                         <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-600/20 rounded-lg flex items-center justify-center border border-gray-400/30">
                           {index === 1 ? (
-                            <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
+                            <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                           ) : index === 2 ? (
                             <Home className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400 fill-orange-400" />
                           ) : (
@@ -470,11 +470,16 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                         </ul>
                       )}
 
-                      {/* CTA Button for third card */}
+                      {/* CTA Button - opens WhatsApp */}
                       {step.ctaButton && (
-                        <button className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg blue-glow">
+                        <a
+                          href="https://wa.me/34686088691"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg blue-glow text-center"
+                        >
                           {step.ctaButton}
-                        </button>
+                        </a>
                       )}
                     </div>
                   )}

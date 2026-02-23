@@ -37,96 +37,113 @@ export default function RelatedProperties({ property, relatedProperties, locale 
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredRelatedProperties.map((relatedProperty) => (
-            <Link
-              key={relatedProperty.id}
-              href={`/${locale}/properties/${relatedProperty.slug}`}
-              className="property-card bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-gray-500/50 shadow-xl hover:shadow-2xl hover:/20 transition-all duration-300 block cursor-pointer"
-            >
-              <div className="relative h-48 overflow-hidden bg-gray-900">
-                {relatedProperty.images && relatedProperty.images.length > 0 && relatedProperty.images[0]?.url ? (
-                  relatedProperty.images[0].url.startsWith('http://') || relatedProperty.images[0].url.startsWith('https://') ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredRelatedProperties.map((relatedProperty) => {
+            const firstImageUrl = relatedProperty.images?.[0]?.url;
+            const isExternalImage = firstImageUrl?.startsWith('http://') || firstImageUrl?.startsWith('https://');
+            return (
+              <Link
+                key={relatedProperty.id}
+                href={`/${locale}/properties/${relatedProperty.slug}`}
+                className="group relative h-[420px] rounded-2xl overflow-hidden border border-white/10 hover:border-gray-500 transition-all duration-300 cursor-pointer block hover:-translate-y-1 hover:shadow-xl"
+              >
+                {/* Full-cover background image - same as homepage */}
+                {firstImageUrl ? (
+                  isExternalImage ? (
                     <img
-                      src={relatedProperty.images[0].url}
+                      src={firstImageUrl}
                       alt={relatedProperty.images[0].alt || relatedProperty.title}
-                      className="w-full h-full object-contain"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   ) : (
                     <Image
-                      src={relatedProperty.images[0].url}
+                      src={firstImageUrl}
                       alt={relatedProperty.images[0].alt || relatedProperty.title}
                       fill
-                      className="object-contain transition-transform duration-300"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     />
                   )
                 ) : (
-                  <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
                     <span className="text-gray-500 text-sm">No Image</span>
                   </div>
                 )}
-                <div className="absolute top-3 left-3">
-                  <span className="bg-gray-700 text-white px-2 py-1 rounded-full text-xs font-medium">
-                    {t(`propertyTypes.${relatedProperty.type}`) || relatedProperty.type}
-                  </span>
-                </div>
-                <div className="absolute top-3 right-3">
-                  <span className="bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-bold">
-                    {formatPrice(relatedProperty.price, locale)}
-                    {relatedProperty.status === 'rent' && (
-                      <span className="text-[10px] font-normal ml-1">
-                        {t('common.perMonth')}
-                      </span>
-                    )}
-                  </span>
-                </div>
-              </div>
 
-              <div className="p-4">
-                <div className="mb-3">
-                  <h3 className="text-lg font-semibold text-white mb-1 line-clamp-2">
-                    {relatedProperty.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm">{relatedProperty.area}</p>
-                </div>
+                {/* Dark overlay for text readability - same as homepage */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 group-hover:from-black/85 group-hover:via-black/50 transition-all duration-300" />
 
-                <div className="flex items-center space-x-4 mb-4 text-xs text-gray-400">
-                  {relatedProperty.beds && (
-                    <div className="flex items-center space-x-1">
-                      <Bed className="w-3 h-3 text-gray-400" />
-                      <span>{relatedProperty.beds}</span>
-                    </div>
-                  )}
-                  {relatedProperty.baths && (
-                    <div className="flex items-center space-x-1">
-                      <Bath className="w-3 h-3 text-gray-400" />
-                      <span>{relatedProperty.baths}</span>
-                    </div>
-                  )}
-                  {relatedProperty.interiorSize && (
-                    <div className="flex items-center space-x-1">
-                      <Maximize className="w-3 h-3 text-gray-400" />
-                      <span>{relatedProperty.interiorSize}m²</span>
-                    </div>
-                  )}
-                </div>
+                {/* Content overlay - same structure as homepage cards */}
+                <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
+                  {/* Top badges */}
+                  <div className="flex items-start justify-between">
+                    <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+                      {t(`propertyTypes.${relatedProperty.type}`) || relatedProperty.type}
+                    </span>
+                    <span className="bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                      {formatPrice(relatedProperty.price, locale)}
+                      {(relatedProperty.purpose === 'rent' || relatedProperty.status === 'rent') && (
+                        <span className="text-xs font-normal ml-1">
+                          {t('common.perMonth')}
+                        </span>
+                      )}
+                    </span>
+                  </div>
 
-                <div className="inline-flex items-center justify-center w-full bg-gray-700 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors group">
-                  {t('common.viewDetails')}
-                  <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
+                  {/* Spacer for middle area */}
+                  <div className="flex-1" />
+
+                  {/* Bottom info */}
+                  <div className="space-y-3">
+                    <div>
+                      <h3 className="text-xl font-bold mb-1 group-hover:text-gray-300 transition-colors line-clamp-1">
+                        {relatedProperty.title}
+                      </h3>
+                      <p className="text-sm text-gray-300 line-clamp-1">
+                        {relatedProperty.area}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center space-x-4 text-sm text-gray-300">
+                      {relatedProperty.beds != null && (
+                        <div className="flex items-center space-x-1">
+                          <Bed className="w-4 h-4" />
+                          <span>{relatedProperty.beds} {t('common.beds')}</span>
+                        </div>
+                      )}
+                      {relatedProperty.baths != null && (
+                        <div className="flex items-center space-x-1">
+                          <Bath className="w-4 h-4" />
+                          <span>{relatedProperty.baths} {t('common.baths')}</span>
+                        </div>
+                      )}
+                      {relatedProperty.interiorSize != null && (
+                        <div className="flex items-center space-x-1">
+                          <Maximize className="w-4 h-4" />
+                          <span>{relatedProperty.interiorSize}{t('common.sqm')}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-2 border-t border-white/20">
+                      <div className="inline-flex items-center text-gray-400 group-hover:text-gray-300 transition-colors font-medium">
+                        {t('common.viewDetails')}
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="text-center mt-12">
           <Link
             href={`/${locale}/properties`}
-            className="inline-flex items-center bg-gray-700 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors shadow-lg"
+            className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
-            View All Properties
+            {t('common.exploreAll')}
             <ArrowRight className="w-5 h-5 ml-2" />
           </Link>
         </div>
