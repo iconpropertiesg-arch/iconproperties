@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { MessageCircle, Home, Check, Compass, Phone, FileCode, Bell } from 'lucide-react';
+import { MessageCircle, Home, Check, Compass, Phone, FileCode } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
 
@@ -405,14 +405,14 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
                           )}
                         </div>
                         
-                        {/* Top Right Icon - Compass for Investment (same as left), Colorful House for Buy Luxury, Bell for Property Management */}
+                        {/* Top Right Icon - same as left for each card (Compass, Phone, FileCode) */}
                         <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-600/20 rounded-lg flex items-center justify-center border border-gray-400/30">
                           {index === 1 ? (
                             <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                           ) : index === 2 ? (
-                            <Home className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400 fill-orange-400" />
+                            <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                           ) : (
-                            <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                            <FileCode className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                           )}
                         </div>
                       </div>
