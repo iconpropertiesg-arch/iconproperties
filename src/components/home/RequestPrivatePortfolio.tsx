@@ -1,19 +1,19 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useBlurReveal } from '@/hooks/useBlurReveal';
+import RequestPrivatePortfolioModal from '@/components/layout/RequestPrivatePortfolioModal';
 
 interface RequestPrivatePortfolioProps {
   locale: string;
 }
 
 export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfolioProps) {
-  const router = useRouter();
   const t = useTranslations('home.requestPrivatePortfolio');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   // Line-by-line reveal states
   const [titleLinesVisible, setTitleLinesVisible] = useState<number[]>([]);
@@ -33,10 +33,6 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
       }, 600 + (index * 500));
     });
   }, [t]);
-
-  const handleRequest = () => {
-    router.push(`/${locale}/contact`);
-  };
 
   return (
     <section className="relative bg-black py-20 px-4">
@@ -152,9 +148,9 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
             {t('description')}
           </p>
 
-          {/* CTA Button */}
+          {/* CTA Button - opens Request Private Portfolio modal */}
           <button
-            onClick={handleRequest}
+            onClick={() => setIsModalOpen(true)}
             className="group px-8 py-4 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl  inline-flex items-center gap-2"
           >
             <span>{t('cta')}</span>
@@ -162,6 +158,12 @@ export default function RequestPrivatePortfolio({ locale }: RequestPrivatePortfo
           </button>
         </div>
       </div>
+
+      <RequestPrivatePortfolioModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        locale={locale}
+      />
     </section>
   );
 }
