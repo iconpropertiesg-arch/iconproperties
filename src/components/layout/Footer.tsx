@@ -64,7 +64,7 @@ export default function Footer({ locale }: FooterProps) {
                   alt="ICON PROPERTIES"
                   width={320}
                   height={107}
-                  className="h-16 sm:h-18 w-auto"
+                  className="h-20 sm:h-24 w-auto"
                 />
               </Link>
               <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">

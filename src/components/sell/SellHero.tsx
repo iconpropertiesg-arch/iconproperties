@@ -24,17 +24,9 @@ export default function SellHero({ locale }: SellHeroProps) {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Background - Photo or video with dark overlay */}
-      <div className="absolute inset-0 bg-black">
-        {/* You can add a background image/video here */}
-        <div className="absolute inset-0 bg-black/30" />
-      </div>
-      
-      {/* Subtle glowing effects */}
-      <div className="absolute inset-0 opacity-30">
-        
-        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-purple-500/15 rounded-full blur-[100px] animate-pulse-slow animation-delay-2000" />
-      </div>
+      {/* Animated blob shapes - same as About page hero */}
+      <div className="absolute top-1/2 right-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-xl opacity-20 animate-blob animation-delay-2000" />
+      <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-pink-500 rounded-full mix-blend-screen filter blur-xl opacity-20 animate-blob animation-delay-4000" />
 
       <div className="container mx-auto px-4 relative z-10 py-20">
         <div className="max-w-4xl mx-auto text-center">

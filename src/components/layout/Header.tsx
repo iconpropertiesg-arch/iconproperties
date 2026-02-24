@@ -158,7 +158,7 @@ export default function Header({ locale }: HeaderProps) {
                     alt="Property Icon Logo"
                     width={420}
                     height={207}
-                    className="h-16 lg:h-18 xl:h-20 2xl:h-22 w-auto transition-transform duration-300 group-hover:scale-105"
+                    className="h-20 lg:h-24 xl:h-28 2xl:h-32 w-auto transition-transform duration-300 group-hover:scale-105"
                     priority
                   />
                 </Link>
@@ -228,9 +228,9 @@ export default function Header({ locale }: HeaderProps) {
                 <Image
                   src="/images/logo3.png"
                   alt="Property Icon Logo"
-                  width={240}
-                  height={80}
-                  className="h-7 xs:h-8 sm:h-10 md:h-12 w-auto max-w-full transition-transform duration-300 group-hover:scale-105"
+                  width={280}
+                  height={117}
+                  className="h-9 xs:h-10 sm:h-12 md:h-14 w-auto max-w-full transition-transform duration-300 group-hover:scale-105"
                   priority
                 />
               </Link>
