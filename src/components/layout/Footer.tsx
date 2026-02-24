@@ -62,9 +62,9 @@ export default function Footer({ locale }: FooterProps) {
                 <Image
                   src="/images/logo3.png"
                   alt="ICON PROPERTIES"
-                  width={200}
-                  height={67}
-                  className="h-10 sm:h-12 w-auto"
+                  width={320}
+                  height={107}
+                  className="h-16 sm:h-18 w-auto"
                 />
               </Link>
               <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">

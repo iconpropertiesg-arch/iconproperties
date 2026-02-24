@@ -156,9 +156,9 @@ export default function Header({ locale }: HeaderProps) {
                   <Image
                     src="/images/logo3.png"
                     alt="Property Icon Logo"
-                    width={320}
-                    height={107}
-                    className="h-12 lg:h-14 xl:h-16 2xl:h-20 w-auto transition-transform duration-300 group-hover:scale-105"
+                    width={420}
+                    height={207}
+                    className="h-16 lg:h-18 xl:h-20 2xl:h-22 w-auto transition-transform duration-300 group-hover:scale-105"
                     priority
                   />
                 </Link>
