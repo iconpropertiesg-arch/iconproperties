@@ -23,86 +23,67 @@ export default function Header({ locale }: HeaderProps) {
   const t = useTranslations('navigation');
 
   useEffect(() => {
-    // Force initial state
-    lastScrollY.current = window.scrollY;
-    
+    // Safari-friendly scroll position (pageYOffset/scrollY can lag on iOS)
+    const getScrollY = () =>
+      typeof window.pageYOffset === 'number'
+        ? window.pageYOffset
+        : document.documentElement?.scrollTop ?? 0;
+
+    lastScrollY.current = getScrollY();
+
     const updateHeader = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Update scrolled state
+      const currentScrollY = getScrollY();
+
       setIsScrolled(currentScrollY > 20);
-      
-      // Always show at top
+
       if (currentScrollY < 10) {
         setIsVisible(true);
         lastScrollY.current = currentScrollY;
+        ticking.current = false;
         return;
       }
-      
-      // Calculate difference
+
       const difference = currentScrollY - lastScrollY.current;
-      
-      // Scrolling UP - SHOW HEADER (even 1px up)
-      if (difference < 0) {
+      const scrollDownThreshold = 8;
+      const minScrollToHide = 60;
+
+      if (difference < -2) {
         setIsVisible(true);
-      }
-      // Scrolling DOWN - HIDE HEADER (only if scrolled down enough and difference > 5px)
-      else if (difference > 5 && currentScrollY > 50) {
+      } else if (difference > scrollDownThreshold && currentScrollY > minScrollToHide) {
         setIsVisible(false);
       }
-      
-      // Update last position
+
       lastScrollY.current = currentScrollY;
       ticking.current = false;
     };
 
     const onScroll = () => {
       if (!ticking.current) {
-        // Use setTimeout instead of requestAnimationFrame for better Safari support
-        setTimeout(() => {
-          updateHeader();
-        }, 0);
         ticking.current = true;
+        requestAnimationFrame(updateHeader);
       }
     };
 
-    // Also handle touch events for iOS
-    let touchStart = 0;
-    let touchEnd = 0;
-    
+    let touchStartY = 0;
     const handleTouchStart = (e: TouchEvent) => {
-      touchStart = e.touches[0].clientY;
+      touchStartY = e.touches[0].clientY;
     };
-    
-    const handleTouchMove = (e: TouchEvent) => {
-      touchEnd = e.touches[0].clientY;
-      
-      // If dragging down (scrolling up the page), show header
-      if (touchEnd > touchStart && window.scrollY > 50) {
-        setIsVisible(true);
-      }
+    const handleTouchEnd = () => {
+      requestAnimationFrame(updateHeader);
     };
 
-    // Multiple event listeners for maximum Safari compatibility
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
-    
-    // Also try scrollend event for Safari
-    if ('onscrollend' in window) {
-      window.addEventListener('scrollend', updateHeader as EventListener, { passive: true });
-    }
-    
-    // Initial call
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('scrollend', updateHeader as EventListener, { passive: true });
+
     updateHeader();
-    
+
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
-      if ('onscrollend' in window) {
-        window.removeEventListener('scrollend', updateHeader as EventListener);
-      }
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('scrollend', updateHeader as EventListener);
     };
   }, []);
 
@@ -123,10 +104,10 @@ export default function Header({ locale }: HeaderProps) {
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 w-full',
-          'transition-all duration-300 ease-out',
+          'transition-transform duration-300 ease-out transition-opacity duration-300 ease-out',
           isVisible
             ? 'translate-y-0 opacity-100'
-            : '-translate-y-full opacity-0'
+            : '-translate-y-full opacity-0 pointer-events-none'
         )}
         style={
           isScrolled && isVisible
@@ -136,11 +117,8 @@ export default function Header({ locale }: HeaderProps) {
                 WebkitBackdropFilter: 'blur(20px) saturate(180%)',
                 boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
-                transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
               }
-            : {
-                transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
-              }
+            : undefined
         }
       >
         <div className={cn(
