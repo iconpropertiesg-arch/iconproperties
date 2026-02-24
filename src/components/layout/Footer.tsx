@@ -242,11 +242,11 @@ export default function Footer({ locale }: FooterProps) {
                     {tFooter('legal.privacy')}
                 </Link>
                 <span className="text-gray-600 hidden sm:inline">|</span>
-                <Link 
-                  href={`/${locale}/legal/notice`}
+<Link 
+                  href={`/${locale}/legal/terms`}
                   className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm"
-                  >
-                    {tFooter('legal.terms')}
+                >
+                  {tFooter('legal.terms')}
                 </Link>
                 <a
                   href="https://instagram.com"

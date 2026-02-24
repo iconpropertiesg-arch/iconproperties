@@ -243,7 +243,7 @@ export default function ValuationForm({ locale }: ValuationFormProps) {
                             <option value="">Select property type</option>
                             <option value="villa">Villa</option>
                             <option value="finca">Finca</option>
-                            <option value="apartment">Apartment</option>
+                            <option value="apartment">Apartments</option>
                             <option value="plot">Plot</option>
                           </select>
                           {errors.propertyType && <p className="mt-1 text-sm text-red-600">{errors.propertyType}</p>}

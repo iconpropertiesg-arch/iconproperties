@@ -322,10 +322,10 @@ export default function RequestPrivatePortfolioModal({
                       className="w-full px-4 py-3 bg-black border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all appearance-none cursor-pointer pr-10"
                     >
                       <option value="">Select type...</option>
-                      <option value="apartment">Apartment</option>
-                      <option value="house">House</option>
+                      <option value="apartment">Apartments</option>
+                      <option value="house">Villas</option>
                       <option value="villa">Villa</option>
-                      <option value="commercial">Commercial</option>
+                      <option value="commercial">Commercials</option>
                       <option value="any">Any</option>
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />

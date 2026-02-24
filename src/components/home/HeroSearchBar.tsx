@@ -309,8 +309,8 @@ useEffect(() => {
   // Abbreviated display names for property types
   const getTypeAbbreviation = (type: string): string => {
     const abbreviations: Record<string, string> = {
-      'apartment': 'Apar',
-      'house': 'House',
+      'apartment': 'Apts',
+      'house': 'Villas',
       'commercial': 'Comm',
     };
     return abbreviations[type] || type;

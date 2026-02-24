@@ -514,5 +514,36 @@
       "impressum": "Impressum"
     },
     "copyright": "Alle Rechte vorbehalten."
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "description": "Wie ICON PROPERTIES Ihre personenbezogenen Daten erhebt, nutzt und schützt.",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "intro": "ICON PROPERTIES ('wir', 'uns', 'unser') verpflichtet sich zum Schutz Ihrer Privatsphäre. Diese Richtlinie erklärt, wie wir Ihre personenbezogenen Daten bei der Nutzung unserer Website und Dienstleistungen, einschließlich privater Immobilienberatung auf Mallorca, erheben, nutzen, speichern und schützen.",
+    "sections": {
+      "dataWeCollect": { "title": "Von uns erhobene Daten", "content": "Wir können erheben: (1) Kontakt- und Identitätsdaten (Name, E-Mail, Telefon, Adresse) bei Anfragen oder Portfolio-Anfragen; (2) Immobilienpräferenzen; (3) Technische Daten (IP, Browser); (4) Ihre Korrespondenz. Wir verkaufen Ihre Daten nicht an Dritte." },
+      "howWeUse": { "title": "Verwendung Ihrer Daten", "content": "Wir nutzen Ihre Daten zur Erbringung unserer Beratungs- und Off-Market-Dienstleistungen, zum Versand angeforderter Informationen und gelegentlicher Marketing-Mitteilungen (bei Einwilligung), zur Verbesserung der Website und zur Erfüllung gesetzlicher Pflichten." },
+      "discretion": { "title": "Diskretion und Vertraulichkeit", "content": "Wir behandeln alle Kunden- und Anfragendaten streng vertraulich. Der Zugang zu personenbezogenen Daten ist auf diejenigen beschränkt, die sie zur Erbringung unserer Dienstleistungen benötigen." },
+      "cookies": { "title": "Cookies", "content": "Unsere Website kann Cookies zur Verbesserung der Funktionalität und zur Nutzungsanalyse verwenden. Sie können Cookies in Ihrem Browser verwalten." },
+      "retention": { "title": "Aufbewahrung", "content": "Wir speichern Ihre Daten nur so lange wie für die in dieser Richtlinie genannten Zwecke erforderlich. Sie können die Löschung Ihrer Daten gemäß geltendem Recht beantragen." },
+      "rights": { "title": "Ihre Rechte", "content": "Je nach Ihrem Standort haben Sie möglicherweise Rechte auf Zugang, Berichtigung, Löschung oder Einschränkung der Verarbeitung. Wenden Sie sich an uns, um diese Rechte auszuüben." },
+      "contact": { "title": "Kontakt", "content": "Datenschutzfragen: ICON PROPERTIES, iconpropertiesg@gmail.com oder +34 686 08 86 91, Mallorca, Spanien." }
+    }
+  },
+  "terms": {
+    "title": "Nutzungsbedingungen",
+    "description": "Allgemeine Geschäftsbedingungen für die Nutzung der Website und Beratungsleistungen von ICON PROPERTIES.",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "intro": "Diese Nutzungsbedingungen ('AGB') regeln Ihre Nutzung der ICON PROPERTIES-Website und der zugehörigen Beratungs- und Listing-Dienstleistungen. Mit der Nutzung unserer Website oder unserer Leistungen akzeptieren Sie diese AGB.",
+    "sections": {
+      "services": { "title": "Art der Leistungen", "content": "ICON PROPERTIES bietet private Immobilienberatung auf Mallorca, einschließlich Zugang zu Off-Market-Angeboten. Unsere Leistungen sind beratender Natur; wir garantieren nicht die Verfügbarkeit oder Rechtmäßigkeit von Immobilien; Transaktionen unterliegen separaten Vereinbarungen und lokalem Recht." },
+      "useOfSite": { "title": "Nutzung der Website", "content": "Sie verpflichten sich, die Website nur für legale Zwecke zu nutzen und keine unbefugten Zugriffe auf unsere Systeme vorzunehmen." },
+      "intellectualProperty": { "title": "Geistiges Eigentum", "content": "Alle Inhalte dieser Website sind Eigentum von oder lizenziert an ICON PROPERTIES. Ohne vorherige schriftliche Zustimmung dürfen Sie Inhalte nicht kopieren, modifizieren oder kommerziell nutzen." },
+      "noAgency": { "title": "Kein Mandatsverhältnis oder Garantie", "content": "Das Ansehen von Listings oder der Erhalt von Informationen begründet kein Vertragsverhältnis, sofern nicht schriftlich vereinbart. Sie sollten eigene Due-Diligence durchführen und unabhängige Rechts- oder Steuerberatung einholen." },
+      "limitation": { "title": "Haftungsbeschränkung", "content": "Im gesetzlich zulässigen Umfang haftet ICON PROPERTIES nicht für indirekte oder Folgeschäden. Unsere Gesamthaftung übersteigt nicht den Betrag, den Sie uns in den zwölf Monaten vor dem Anspruch gezahlt haben." },
+      "governingLaw": { "title": "Anwendbares Recht", "content": "Diese AGB unterliegen dem Recht Spaniens. Streitigkeiten unterliegen der ausschließlichen Zuständigkeit der spanischen Gerichte." },
+      "changes": { "title": "Änderungen", "content": "Wir können diese AGB aktualisieren. Das Datum 'Zuletzt aktualisiert' wird angepasst. Die fortgesetzte Nutzung nach Änderungen gilt als Akzeptanz der aktualisierten AGB." },
+      "contact": { "title": "Kontakt", "content": "Fragen zu diesen AGB: ICON PROPERTIES, iconpropertiesg@gmail.com oder +34 686 08 86 91, Mallorca, Spanien." }
+    }
   }
 }

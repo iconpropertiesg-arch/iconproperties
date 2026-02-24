@@ -519,9 +519,9 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                 required
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
-                <option value="house">House</option>
-                <option value="apartment">Apartment</option>
-                <option value="commercial">Commercial</option>
+                <option value="house">Villas</option>
+                <option value="apartment">Apartments</option>
+                <option value="commercial">Commercials</option>
               </select>
             </div>
 

@@ -23,16 +23,16 @@
     "cta": "Request your Strategy",
     "searchPlaceholder": {
       "purpose": "I want to…",
-      "type": "Apartment, House, Commercial",
+      "type": "Apartments, Villas, Commercials",
       "location": "Area or city",
       "price": "Max budget?"
     },
     "searchButton": "Search"
   },
   "propertyTypes": {
-    "apartment": "Apartment",
-    "house": "House",
-    "commercial": "Commercial",
+    "apartment": "Apartments",
+    "house": "Villas",
+    "commercial": "Commercials",
     "villa": "Villa",
     "residential": "Residential",
     "hospitality": "Hospitality",
@@ -518,5 +518,81 @@
       "impressum": "Impressum"
     },
     "copyright": "© All rights reserved."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "description": "How ICON PROPERTIES collects, uses and protects your personal data.",
+    "lastUpdated": "Last updated",
+    "intro": "ICON PROPERTIES ('we', 'us', 'our') is committed to protecting your privacy. This policy explains how we collect, use, store and protect your personal information when you use our website and services, including private real estate advisory in Mallorca.",
+    "sections": {
+      "dataWeCollect": {
+        "title": "Information We Collect",
+        "content": "We may collect: (1) Contact and identity data (name, email, phone, address) when you enquire, subscribe or request a portfolio; (2) Property preferences and requirements when you search or express interest in properties; (3) Technical data (IP address, browser type, device) when you use our website; (4) Communications and correspondence you send to us."
+      },
+      "howWeUse": {
+        "title": "How We Use Your Information",
+        "content": "We use your information to: provide our real estate advisory and off-market listing services; send you requested information, property updates and occasional marketing (where you have agreed); improve our website and services; comply with legal obligations; and protect our rights and those of our clients. We do not sell your personal data to third parties."
+      },
+      "discretion": {
+        "title": "Discretion and Confidentiality",
+        "content": "We treat all client and enquirer information as strictly confidential. Access to personal data is limited to those who need it to perform our services. We do not publish or share your identity or property interests without your explicit consent."
+      },
+      "cookies": {
+        "title": "Cookies and Similar Technologies",
+        "content": "Our website may use cookies and similar technologies to improve functionality, analyse usage and remember preferences. You can manage cookie settings in your browser. Disabling certain cookies may affect site functionality."
+      },
+      "retention": {
+        "title": "Data Retention",
+        "content": "We retain your data only for as long as necessary to fulfil the purposes set out in this policy, to comply with legal obligations, or to resolve disputes. You may request deletion of your data subject to applicable law."
+      },
+      "rights": {
+        "title": "Your Rights",
+        "content": "Depending on your location, you may have rights to access, correct, delete or restrict processing of your personal data, to data portability, and to object to or withdraw consent from certain processing. To exercise these rights or ask questions, contact us using the details below."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "For privacy-related questions or requests, contact ICON PROPERTIES at iconpropertiesg@gmail.com or +34 686 08 86 91, Mallorca, Spain."
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "description": "Terms and conditions for using ICON PROPERTIES website and advisory services.",
+    "lastUpdated": "Last updated",
+    "intro": "These Terms of Service ('Terms') govern your use of the ICON PROPERTIES website and any related advisory, listing or communication services ('Services'). By using our website or engaging our services, you agree to these Terms.",
+    "sections": {
+      "services": {
+        "title": "Nature of Services",
+        "content": "ICON PROPERTIES provides private real estate advisory in Mallorca, including access to off-market and exclusive listings, buying and selling support, and personalised property recommendations. Our services are advisory in nature; we do not guarantee the availability, condition or legality of any property, and any transaction is subject to separate agreements and local law."
+      },
+      "useOfSite": {
+        "title": "Use of the Website",
+        "content": "You agree to use our website only for lawful purposes and in a way that does not infringe the rights of others or restrict their use. You must not attempt to gain unauthorised access to our systems, scrape or harvest data without permission, or use the site to distribute malware or spam. We reserve the right to suspend or restrict access at our discretion."
+      },
+      "intellectualProperty": {
+        "title": "Intellectual Property",
+        "content": "All content on this website (text, images, logos, layout) is owned by or licensed to ICON PROPERTIES and is protected by copyright and other intellectual property laws. You may not copy, modify, distribute or use such content for commercial purposes without our prior written consent."
+      },
+      "noAgency": {
+        "title": "No Agency or Guarantee",
+        "content": "Viewing listings or receiving information from us does not create an agency or contractual relationship unless agreed in writing. Property details are provided in good faith but we do not warrant their accuracy or completeness. You should carry out your own due diligence and seek independent legal or tax advice where appropriate."
+      },
+      "limitation": {
+        "title": "Limitation of Liability",
+        "content": "To the fullest extent permitted by law, ICON PROPERTIES shall not be liable for any indirect, incidental, special or consequential damages arising from your use of the website or our services. Our total liability shall not exceed the amount you have paid to us in the twelve months preceding the claim, if any."
+      },
+      "governingLaw": {
+        "title": "Governing Law",
+        "content": "These Terms are governed by the laws of Spain. Any disputes shall be subject to the exclusive jurisdiction of the courts of Spain, unless otherwise required by mandatory law."
+      },
+      "changes": {
+        "title": "Changes to These Terms",
+        "content": "We may update these Terms from time to time. The 'Last updated' date at the top will be revised. Continued use of the website or services after changes constitutes acceptance of the updated Terms. We encourage you to review this page periodically."
+      },
+      "contact": {
+        "title": "Contact",
+        "content": "For questions about these Terms, contact ICON PROPERTIES at iconpropertiesg@gmail.com or +34 686 08 86 91, Mallorca, Spain."
+      }
+    }
   }
 }

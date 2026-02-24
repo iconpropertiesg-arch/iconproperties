@@ -35,11 +35,16 @@ export default function PropertiesFilterBar({ locale, searchParams }: Properties
   
   // Initialize from URL params
   const initialPurpose = (searchParams.purpose as 'buy' | 'rent') || null;
-  const initialType = Array.isArray(searchParams.type) 
-    ? searchParams.type 
-    : searchParams.type 
-      ? [searchParams.type as string] 
-      : [];
+  const initialType = (() => {
+    const typeParam = searchParams.type;
+    if (!typeParam) return [];
+
+    const rawTypes = Array.isArray(typeParam) ? typeParam : [typeParam as string];
+    return rawTypes
+      .flatMap(t => t.split(','))
+      .map(t => t.trim())
+      .filter(Boolean);
+  })();
   const initialLocation = (searchParams.location as string) || '';
   const initialMinPrice = parseInt(searchParams.minPrice as string) || 0;
   const initialMaxPrice = parseInt(searchParams.maxPrice as string) || 39500000;
@@ -79,7 +84,11 @@ export default function PropertiesFilterBar({ locale, searchParams }: Properties
       setPurpose(purposeParam || null);
     }
     if (typeParam !== undefined) {
-      const types = Array.isArray(typeParam) ? typeParam : [typeParam as string];
+      const rawTypes = Array.isArray(typeParam) ? typeParam : [typeParam as string];
+      const types = rawTypes
+        .flatMap(t => t.split(','))
+        .map(t => t.trim())
+        .filter(Boolean);
       setPropertyType(types);
     }
     if (locationParam !== undefined) {

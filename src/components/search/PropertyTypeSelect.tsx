@@ -38,7 +38,14 @@ export default function PropertyTypeSelect({
 
   const getDisplayText = () => {
     if (value.length === 0) return placeholder;
-    if (value.length === 1) return t(value[0]);
+    if (value.length === 1) {
+      const key = value[0];
+      // Guard against malformed keys like "apartment,house"
+      if (key.includes(',')) {
+        return placeholder;
+      }
+      return t(key);
+    }
     return `${value.length} types selected`;
   };
 

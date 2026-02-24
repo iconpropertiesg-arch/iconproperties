@@ -12,9 +12,9 @@ interface HeroSearchBarProps {
 }
 
 const propertyTypes = [
-  { key: 'apartment', icon: Building, label: 'Apartment' },
-  { key: 'house', icon: Home, label: 'House' },
-  { key: 'commercial', icon: Store, label: 'Commercial' },
+  { key: 'apartment', icon: Building, label: 'Apartments' },
+  { key: 'house', icon: Home, label: 'Villas' },
+  { key: 'commercial', icon: Store, label: 'Commercials' },
 ];
 
 const mockLocations = [
