@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
-import Link from 'next/link';
 import { Shield } from 'lucide-react';
+import BackLink from '@/components/layout/BackLink';
 
 interface PrivacyPageProps {
   params: Promise<{ locale: string }>;
@@ -41,16 +41,16 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
   const t = await getTranslations({ locale, namespace: 'privacy' });
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white pt-24 md:pt-28">
       <section className="border-b border-white/10">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-12 sm:py-16 md:py-20">
           <div className="max-w-3xl mx-auto">
-            <Link
-              href={`/${locale}`}
+            <BackLink
+              locale={locale}
               className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-6 transition-colors"
             >
               ← Back
-            </Link>
+            </BackLink>
             <div className="flex items-center gap-3 mb-4">
               <Shield className="w-8 h-8 text-blue-500" aria-hidden />
               <h1 className="text-3xl sm:text-4xl font-bold">{t('title')}</h1>
@@ -82,12 +82,12 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
 
       <section className="border-t border-white/10 py-8">
         <div className="container mx-auto px-4 text-center">
-          <Link
-            href={`/${locale}`}
+          <BackLink
+            locale={locale}
             className="text-gray-400 hover:text-white text-sm transition-colors"
           >
             ← Return to home
-          </Link>
+          </BackLink>
         </div>
       </section>
     </div>

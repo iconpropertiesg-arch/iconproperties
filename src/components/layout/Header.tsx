@@ -123,7 +123,7 @@ export default function Header({ locale }: HeaderProps) {
       >
         <div className={cn(
           'transition-all duration-300',
-          isScrolled ? 'py-2 sm:py-2' : 'py-2 sm:py-3'
+          isScrolled ? 'py-1.5 sm:py-1.5' : 'py-1.5 sm:py-2'
         )}>
           <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
             <div className="flex items-center justify-between gap-2 sm:gap-4 min-w-0">

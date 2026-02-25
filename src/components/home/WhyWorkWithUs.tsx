@@ -309,24 +309,24 @@ export default function WhyWorkWithUs({ locale }: WhyWorkWithUsProps) {
         </div>
 
         {/* CTA Button - opens Request Private Portfolio modal (same as header) */}
-        <div className="text-center">
-          <button
+        {/* <div className="text-center"> */}
+          {/* <button
             type="button"
             onClick={() => setIsModalOpen(true)}
             className="group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl inline-flex items-center gap-2"
           >
             <span>{t('cta')}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </button> */}
         </div>
 
         {/* Request Private Portfolio Modal - same as header */}
-        <RequestPrivatePortfolioModal
+        {/* <RequestPrivatePortfolioModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           locale={locale}
-        />
-      </div>
+        /> */}
+      {/* </div> */}
     </section>
   );
 }
