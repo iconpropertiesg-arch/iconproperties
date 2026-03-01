@@ -51,7 +51,7 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
       {/* Header */}
       <div className="border-b border-gray-700 pb-8">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
-          <div className="flex-1">
+            <div className="flex-1">
             <div className="flex items-center space-x-3 mb-4">
               <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium">
                 {t(`propertyTypes.${property.type}`)}
@@ -66,9 +66,9 @@ export default function PropertyDetails({ property, locale }: PropertyDetailsPro
               </span>
             </div>
             
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <p className="text-2xl md:text-3xl font-bold text-white mb-4">
               {property.title}
-            </h1>
+            </p>
             
             <div className="flex items-center text-gray-300 mb-6">
               <MapPin className="w-5 h-5 mr-2 text-gray-400" />

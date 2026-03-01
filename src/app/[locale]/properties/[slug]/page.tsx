@@ -408,17 +408,25 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
   return (
     <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8">
-      {/* Property Details - Show First */}
+      {/* Title at top, then gallery below */}
       <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 pt-28 md:pt-32 pb-8">
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8">
-          {/* Main Content */}
-{/* Gallery - Show Second, Moved Lower */}
-<div className="pt-6 pb-4 px-4 md:px-8 lg:px-10 xl:px-12">
-        <PropertyGallery property={property} locale={locale} />
-      </div>
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+          {/* Title section - top of page */}
+          <div className="mb-6 md:mb-8">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+              {property.title}
+            </h1>
+            {(property.location?.address || property.area) && (
+              <p className="text-gray-400 text-lg">
+                {property.location?.address || property.area}
+              </p>
+            )}
+          </div>
 
-
-        
+          {/* Gallery - below title */}
+          <div className="pt-2 pb-4 px-0 md:px-0 lg:px-0 xl:px-0">
+            <PropertyGallery property={property} locale={locale} />
+          </div>
         </div>
       </div>
 
