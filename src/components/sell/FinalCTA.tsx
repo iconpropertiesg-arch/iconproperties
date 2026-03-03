@@ -22,7 +22,7 @@ export default function FinalCTA({ locale }: FinalCTAProps) {
             {t('description')}
           </p>
           <Link
-            href="#valuation-form"
+            href={`/${locale}/contact`}
             className="group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl "
           >
             {t('cta')}

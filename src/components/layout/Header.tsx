@@ -23,11 +23,13 @@ export default function Header({ locale }: HeaderProps) {
   const t = useTranslations('navigation');
 
   useEffect(() => {
-    // Safari-friendly scroll position (pageYOffset/scrollY can lag on iOS)
-    const getScrollY = () =>
-      typeof window.pageYOffset === 'number'
-        ? window.pageYOffset
-        : document.documentElement?.scrollTop ?? 0;
+    // Safari (Mac/iOS) can report scroll position late; use multiple sources and re-check
+    const getScrollY = () => {
+      if (typeof window === 'undefined') return 0;
+      const fromWindow = typeof window.pageYOffset === 'number' ? window.pageYOffset : 0;
+      const fromDoc = document.documentElement ? document.documentElement.scrollTop : 0;
+      return Math.max(fromWindow, fromDoc, 0);
+    };
 
     lastScrollY.current = getScrollY();
 
@@ -36,7 +38,8 @@ export default function Header({ locale }: HeaderProps) {
 
       setIsScrolled(currentScrollY > 20);
 
-      if (currentScrollY < 10) {
+      // Always show header when near top (Safari needs larger threshold)
+      if (currentScrollY < 80) {
         setIsVisible(true);
         lastScrollY.current = currentScrollY;
         ticking.current = false;
@@ -44,10 +47,11 @@ export default function Header({ locale }: HeaderProps) {
       }
 
       const difference = currentScrollY - lastScrollY.current;
-      const scrollDownThreshold = 8;
-      const minScrollToHide = 60;
+      const scrollDownThreshold = 6;
+      const minScrollToHide = 80;
 
-      if (difference < -2) {
+      // Show on any scroll up (Safari can report small deltas)
+      if (difference < 0) {
         setIsVisible(true);
       } else if (difference > scrollDownThreshold && currentScrollY > minScrollToHide) {
         setIsVisible(false);
@@ -60,7 +64,11 @@ export default function Header({ locale }: HeaderProps) {
     const onScroll = () => {
       if (!ticking.current) {
         ticking.current = true;
-        requestAnimationFrame(updateHeader);
+        requestAnimationFrame(() => {
+          updateHeader();
+          // Safari often updates scroll after rAF; re-check once
+          requestAnimationFrame(updateHeader);
+        });
       }
     };
 
@@ -106,8 +114,8 @@ export default function Header({ locale }: HeaderProps) {
           'fixed top-0 left-0 right-0 z-50 w-full',
           'transition-transform duration-300 ease-out transition-opacity duration-300 ease-out',
           isVisible
-            ? 'translate-y-0 opacity-100'
-            : '-translate-y-full opacity-0 pointer-events-none'
+            ? 'translate-y-0 opacity-100 visible'
+            : '-translate-y-full opacity-0 pointer-events-none invisible'
         )}
         style={
           isScrolled && isVisible
