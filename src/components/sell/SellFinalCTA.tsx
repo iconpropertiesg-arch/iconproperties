@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 interface SellFinalCTAProps {
@@ -7,18 +8,12 @@ interface SellFinalCTAProps {
 }
 
 export default function SellFinalCTA({ locale }: SellFinalCTAProps) {
-  const scrollToForm = () => {
-    const form = document.getElementById('valuation-form');
-    if (form) {
-      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  const contactHref = `/${locale}/contact`;
 
   return (
     <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
       <div className="absolute inset-0 opacity-25">
-        
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
       </div>
 
@@ -34,14 +29,14 @@ export default function SellFinalCTA({ locale }: SellFinalCTAProps) {
             Let us prepare a private valuation and sales strategy for your property.
           </p>
 
-          {/* CTA Button */}
-          <button
-            onClick={scrollToForm}
-            className="group px-8 py-4 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl  inline-flex items-center gap-2"
+          {/* CTA Button - go to contact page */}
+          <Link
+            href={contactHref}
+            className="group px-8 py-4 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl inline-flex items-center gap-2"
           >
-            <span>Request Valuation</span>
+            <span>Request a Private Sales Consultation</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -10,12 +10,12 @@ interface JoinTeamProps {
 
 export default function JoinTeam({ locale }: JoinTeamProps) {
   const t = useTranslations('team.join');
+  const whatsappUrl = 'https://wa.me/34686088691'; // WhatsApp using main phone number
   
   return (
     <section className="relative bg-black py-20 px-4">
       {/* Subtle glowing effects overlay */}
       <div className="absolute inset-0 opacity-25">
-        
         <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-[100px]" />
       </div>
 
@@ -31,7 +31,9 @@ export default function JoinTeam({ locale }: JoinTeamProps) {
             {t('description2')}
           </p>
           <Link
-            href={`/${locale}/join-us`}
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl "
           >
             {t('button')}
