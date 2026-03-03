@@ -11,8 +11,8 @@ export default function FinalCTA({ locale }: FinalCTAProps) {
   const t = useTranslations('sell.finalCta');
 
   return (
-    <section className="relative bg-black py-20 px-4">
-      <div className="container mx-auto max-w-4xl">
+    <section className="relative z-[100] bg-black py-20 px-4">
+      <div className="container mx-auto max-w-4xl relative z-[110]">
         <div className="text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {t('title')}
@@ -22,7 +22,7 @@ export default function FinalCTA({ locale }: FinalCTAProps) {
           </p>
           <a
             href={`/${locale}/contact`}
-            className="group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl cursor-pointer"
+            className="relative z-[120] group inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl cursor-pointer"
             role="button"
           >
             {t('cta')}
