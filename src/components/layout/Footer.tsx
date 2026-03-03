@@ -50,10 +50,11 @@ export default function Footer({ locale }: FooterProps) {
   };
 
   const currentYear = new Date().getFullYear();
+  const localePrefix = locale || 'en';
 
   return (
     <>
-      <footer className="bg-black text-white">
+      <footer className="bg-black text-white relative z-10">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 sm:py-12 md:py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
             {/* Company Info */}
@@ -80,48 +81,48 @@ export default function Footer({ locale }: FooterProps) {
               <ul className="space-y-2 sm:space-y-3">
                 <li>
                   <Link 
-                    href={`/${locale}/properties`}
-                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
+                    href={`/${localePrefix}/properties`}
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm cursor-pointer inline-block"
                   >
                     {tNav('portfolio')}
                   </Link>
                 </li>
                 <li>
                   <Link 
-                    href={`/${locale}/sell`}
-                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
+                    href={`/${localePrefix}/sell`}
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm cursor-pointer inline-block"
                   >
                     {tNav('sell')}
                   </Link>
                 </li>
                 <li>
                   <Link 
-                    href={`/${locale}/about`}
-                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
+                    href={`/${localePrefix}/about`}
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm cursor-pointer inline-block"
                   >
                     {tNav('about')}
                   </Link>
                 </li>
                 <li>
                   <Link 
-                    href={`/${locale}/properties`}
-                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
+                    href={`/${localePrefix}/properties`}
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm cursor-pointer inline-block"
                   >
                     {tFooter('areas')}
                   </Link>
                 </li>
                 <li>
                   <Link 
-                    href={`/${locale}/team`}
-                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
+                    href={`/${localePrefix}/team`}
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm cursor-pointer inline-block"
                   >
                     {tNav('team')}
                   </Link>
                 </li>
                 <li>
                   <Link 
-                    href={`/${locale}/contact`}
-                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
+                    href={`/${localePrefix}/contact`}
+                    className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm cursor-pointer inline-block"
                   >
                     {tNav('contact')}
                   </Link>
@@ -236,15 +237,15 @@ export default function Footer({ locale }: FooterProps) {
               </p>
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
                 <Link 
-                  href={`/${locale}/legal/privacy`}
-                  className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm"
-                  >
-                    {tFooter('legal.privacy')}
+                  href={`/${localePrefix}/legal/privacy`}
+                  className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm cursor-pointer"
+                >
+                  {tFooter('legal.privacy')}
                 </Link>
                 <span className="text-gray-600 hidden sm:inline">|</span>
-<Link 
-                  href={`/${locale}/legal/terms`}
-                  className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm"
+                <Link 
+                  href={`/${localePrefix}/legal/terms`}
+                  className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm cursor-pointer"
                 >
                   {tFooter('legal.terms')}
                 </Link>
