@@ -18,17 +18,23 @@ export default function Header({ locale }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPortfolioModalOpen, setIsPortfolioModalOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+
   const lastScrollY = useRef(0);
+  const lastScrollDirection = useRef<'up' | 'down' | null>(null);
   const ticking = useRef(false);
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // iOS Safari: track touch velocity to detect scroll-up intent
+  const touchStartY = useRef(0);
+  const touchStartTime = useRef(0);
+
   const t = useTranslations('navigation');
 
   useEffect(() => {
-    // Safari (Mac/iOS) can report scroll position late; use multiple sources and re-check
-    const getScrollY = () => {
-      if (typeof window === 'undefined') return 0;
-      const fromWindow = typeof window.pageYOffset === 'number' ? window.pageYOffset : 0;
-      const fromDoc = document.documentElement ? document.documentElement.scrollTop : 0;
-      return Math.max(fromWindow, fromDoc, 0);
+    // iOS Safari can return negative scroll values during bounce — clamp to 0
+    const getScrollY = (): number => {
+      const y = window.pageYOffset ?? document.documentElement.scrollTop ?? 0;
+      return Math.max(0, y);
     };
 
     lastScrollY.current = getScrollY();
@@ -36,24 +42,32 @@ export default function Header({ locale }: HeaderProps) {
     const updateHeader = () => {
       const currentScrollY = getScrollY();
 
-      setIsScrolled(currentScrollY > 20);
-
-      // Always show header when near top (Safari needs larger threshold)
+      // Always show near the top
       if (currentScrollY < 80) {
+        setIsScrolled(false);
         setIsVisible(true);
         lastScrollY.current = currentScrollY;
         ticking.current = false;
         return;
       }
 
-      const difference = currentScrollY - lastScrollY.current;
-      const scrollDownThreshold = 6;
-      const minScrollToHide = 80;
+      setIsScrolled(true);
 
-      // Show on any scroll up (Safari can report small deltas)
-      if (difference < 0) {
+      const diff = currentScrollY - lastScrollY.current;
+
+      // Ignore tiny jitter (iOS can fire many near-zero deltas)
+      if (Math.abs(diff) < 3) {
+        ticking.current = false;
+        return;
+      }
+
+      if (diff < 0) {
+        // Scrolling UP — always show
+        lastScrollDirection.current = 'up';
         setIsVisible(true);
-      } else if (difference > scrollDownThreshold && currentScrollY > minScrollToHide) {
+      } else if (diff > 6) {
+        // Scrolling DOWN — hide
+        lastScrollDirection.current = 'down';
         setIsVisible(false);
       }
 
@@ -61,28 +75,65 @@ export default function Header({ locale }: HeaderProps) {
       ticking.current = false;
     };
 
-    const onScroll = () => {
+    const scheduleUpdate = () => {
       if (!ticking.current) {
         ticking.current = true;
-        requestAnimationFrame(() => {
-          updateHeader();
-          // Safari often updates scroll after rAF; re-check once
-          requestAnimationFrame(updateHeader);
-        });
+        requestAnimationFrame(updateHeader);
       }
     };
 
-    let touchStartY = 0;
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
+    const onScroll = () => {
+      scheduleUpdate();
+
+      // iOS momentum scroll: keep checking after scroll events stop
+      if (scrollTimer.current) clearTimeout(scrollTimer.current);
+      scrollTimer.current = setTimeout(() => {
+        ticking.current = false;
+        updateHeader();
+      }, 150);
     };
+
+    // --- iOS Touch handling ---
+    // We track swipe direction independently because iOS scroll events can lag
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+      touchStartTime.current = Date.now();
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const deltaY = touchStartY.current - e.touches[0].clientY; // positive = scroll down
+      const currentScrollY = getScrollY();
+
+      if (currentScrollY < 80) {
+        setIsVisible(true);
+        return;
+      }
+
+      // Use swipe velocity: if finger is moving up (negative deltaY), show header immediately
+      if (deltaY < -8) {
+        setIsVisible(true);
+        lastScrollDirection.current = 'up';
+      } else if (deltaY > 12) {
+        setIsVisible(false);
+        lastScrollDirection.current = 'down';
+      }
+    };
+
     const handleTouchEnd = () => {
-      requestAnimationFrame(updateHeader);
+      // Re-evaluate after iOS finishes its momentum scroll (debounced)
+      if (scrollTimer.current) clearTimeout(scrollTimer.current);
+      scrollTimer.current = setTimeout(() => {
+        ticking.current = false;
+        updateHeader();
+      }, 300);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    // scrollend — supported in newer browsers, nice bonus
     window.addEventListener('scrollend', updateHeader as EventListener, { passive: true });
 
     updateHeader();
@@ -90,8 +141,10 @@ export default function Header({ locale }: HeaderProps) {
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
       window.removeEventListener('scrollend', updateHeader as EventListener);
+      if (scrollTimer.current) clearTimeout(scrollTimer.current);
     };
   }, []);
 
@@ -101,7 +154,6 @@ export default function Header({ locale }: HeaderProps) {
     } else {
       document.body.style.overflow = 'unset';
     }
-
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -112,32 +164,35 @@ export default function Header({ locale }: HeaderProps) {
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 w-full',
-          'transition-transform duration-300 ease-out transition-opacity duration-300 ease-out',
+          'transition-transform duration-300 ease-out',
           isVisible
-            ? 'translate-y-0 opacity-100 visible'
-            : '-translate-y-full opacity-0 pointer-events-none invisible'
+            ? 'translate-y-0 opacity-100'
+            : '-translate-y-full opacity-0 pointer-events-none'
         )}
         style={
           isScrolled && isVisible
             ? {
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                background:
+                  'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)',
                 backdropFilter: 'blur(20px) saturate(180%)',
                 WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
+                boxShadow:
+                  '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
               }
             : undefined
         }
       >
-        <div className={cn(
-          'transition-all duration-300',
-          isScrolled ? 'py-1.5 sm:py-1.5' : 'py-1.5 sm:py-2'
-        )}>
+        <div
+          className={cn(
+            'transition-all duration-300',
+            isScrolled ? 'py-1.5 sm:py-1.5' : 'py-1.5 sm:py-2'
+          )}
+        >
           <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
             <div className="flex items-center justify-between gap-2 sm:gap-4 min-w-0">
               {/* Left side - Logo and Navigation */}
               <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-8 lg:ml-0 xl:ml-8 2xl:ml-16">
-                {/* Logo at the front */}
                 <Link href={`/${locale}`} className="flex items-center gap-2 group flex-shrink-0">
                   <Image
                     src="/images/logo3.png"
@@ -149,15 +204,14 @@ export default function Header({ locale }: HeaderProps) {
                   />
                 </Link>
 
-                {/* Navigation Links */}
                 <nav className="flex items-center space-x-3 xl:space-x-4 2xl:space-x-8 flex-wrap">
                   <Link
                     href={`/${locale}/about`}
                     className={cn(
-                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                      isScrolled 
-                        ? "text-gray-300 hover:text-gray-400"
-                        : "text-white/90 hover:text-white"
+                      'text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap',
+                      isScrolled
+                        ? 'text-gray-300 hover:text-gray-400'
+                        : 'text-white/90 hover:text-white'
                     )}
                   >
                     {t('about')}
@@ -165,10 +219,10 @@ export default function Header({ locale }: HeaderProps) {
                   <Link
                     href={`/${locale}/properties`}
                     className={cn(
-                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                      isScrolled 
-                        ? "text-gray-300 hover:text-gray-400"
-                        : "text-white/90 hover:text-white"
+                      'text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap',
+                      isScrolled
+                        ? 'text-gray-300 hover:text-gray-400'
+                        : 'text-white/90 hover:text-white'
                     )}
                   >
                     {t('portfolio')}
@@ -176,10 +230,10 @@ export default function Header({ locale }: HeaderProps) {
                   <Link
                     href={`/${locale}/sell`}
                     className={cn(
-                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                      isScrolled 
-                        ? "text-gray-300 hover:text-gray-400"
-                        : "text-white/90 hover:text-white"
+                      'text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap',
+                      isScrolled
+                        ? 'text-gray-300 hover:text-gray-400'
+                        : 'text-white/90 hover:text-white'
                     )}
                   >
                     {t('sell')}
@@ -187,10 +241,10 @@ export default function Header({ locale }: HeaderProps) {
                   <Link
                     href={`/${locale}/contact`}
                     className={cn(
-                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                      isScrolled 
-                        ? "text-gray-300 hover:text-gray-400"
-                        : "text-white/90 hover:text-white"
+                      'text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap',
+                      isScrolled
+                        ? 'text-gray-300 hover:text-gray-400'
+                        : 'text-white/90 hover:text-white'
                     )}
                   >
                     {t('contact')}
@@ -198,10 +252,10 @@ export default function Header({ locale }: HeaderProps) {
                   <Link
                     href={`/${locale}/team`}
                     className={cn(
-                      "text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap",
-                      isScrolled 
-                        ? "text-gray-300 hover:text-gray-400"
-                        : "text-white/90 hover:text-white"
+                      'text-xs lg:text-xs xl:text-sm font-medium transition-colors whitespace-nowrap',
+                      isScrolled
+                        ? 'text-gray-300 hover:text-gray-400'
+                        : 'text-white/90 hover:text-white'
                     )}
                   >
                     {t('team')}
@@ -210,7 +264,10 @@ export default function Header({ locale }: HeaderProps) {
               </div>
 
               {/* Logo for mobile */}
-              <Link href={`/${locale}`} className="flex lg:hidden items-center gap-2 group min-w-0 flex-1 overflow-hidden">
+              <Link
+                href={`/${locale}`}
+                className="flex lg:hidden items-center gap-2 group min-w-0 flex-1 overflow-hidden"
+              >
                 <Image
                   src="/images/logo3.png"
                   alt="Property Icon Logo"
@@ -233,15 +290,15 @@ export default function Header({ locale }: HeaderProps) {
                     Request Private portfolio
                   </button>
                 </div>
-                
+
                 {/* Mobile Menu Button */}
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   className={cn(
-                    "lg:hidden p-1.5 sm:p-2 rounded-md transition-colors flex-shrink-0",
-                    isScrolled 
-                      ? "hover:bg-gray-800 text-white"
-                      : "hover:bg-white/10 text-white"
+                    'lg:hidden p-1.5 sm:p-2 rounded-md transition-colors flex-shrink-0',
+                    isScrolled
+                      ? 'hover:bg-gray-800 text-white'
+                      : 'hover:bg-white/10 text-white'
                   )}
                   aria-label="Toggle mobile menu"
                 >
@@ -323,7 +380,6 @@ export default function Header({ locale }: HeaderProps) {
         </div>
       )}
 
-      {/* Request Private Portfolio Modal - same as footer */}
       <RequestPrivatePortfolioModal
         isOpen={isPortfolioModalOpen}
         onClose={() => setIsPortfolioModalOpen(false)}

@@ -154,7 +154,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
       <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-12 sm:py-16 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
           {/* Left Column - Text Content */}
-          <div className="text-white space-y-6 sm:space-y-8">
+          <div className="text-white space-y-6 sm:space-y-8 lg:pl-8 xl:pl-12">
             {/* New Badge Banner */}
             <div className="relative inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 mt-8 md:mt-12 py-3 backdrop-blur-sm rounded-lg border border-gray-600/30">
               {/* Small white dot */}
