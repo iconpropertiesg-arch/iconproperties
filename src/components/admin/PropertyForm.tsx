@@ -258,7 +258,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
       }
 
       // Validate file type
-      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
       if (!allowedTypes.includes(file.type)) {
         alert('Invalid file type. Only images are allowed.');
         setUploading((prev) => ({ ...prev, [index]: false }));
@@ -374,7 +374,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
 
     // Validate all files first
     const maxSize = 50 * 1024 * 1024; // 50MB
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
     
     const invalidFiles: string[] = [];
     files.forEach((file) => {
@@ -659,7 +659,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
               <input
                 ref={multipleFileInputRef}
                 type="file"
-                accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/svg+xml"
                 multiple
                 onChange={handleMultipleFileSelect}
                 className="hidden"
@@ -694,7 +694,7 @@ export default function PropertyForm({ propertyId }: PropertyFormProps) {
                       </div>
                       <input
                         type="file"
-                        accept="image/*"
+                        accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/svg+xml"
                         onChange={(e) => handleFileChange(index, e)}
                         className="hidden"
                         disabled={uploading[index]}

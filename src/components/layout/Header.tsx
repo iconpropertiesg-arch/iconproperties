@@ -163,29 +163,58 @@ export default function Header({ locale }: HeaderProps) {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 w-full',
-          'transition-transform duration-300 ease-out',
+          'fixed top-0 left-0 right-0 w-full overflow-hidden',
+          // Smoother slide on phones; slightly snappier on large screens
+          'transition-[transform,opacity] duration-300 ease-out',
+          'max-lg:duration-500 max-lg:ease-[cubic-bezier(0.4,0,0.2,1)]',
+          // Mobile menu open: stay above dropdown overlay so Menu ↔ X stays clickable
+          isMobileMenuOpen ? 'z-[70]' : 'z-50',
           isVisible
-            ? 'translate-y-0 opacity-100'
-            : '-translate-y-full opacity-0 pointer-events-none'
+            ? 'translate-y-0 opacity-100 visible'
+            : '-translate-y-full opacity-0 pointer-events-none invisible'
         )}
-        style={
-          isScrolled && isVisible
-            ? {
-                background:
-                  'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)',
-                backdropFilter: 'blur(20px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                boxShadow:
-                  '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-              }
-            : undefined
-        }
       >
+        {/* Mobile / tablet: hero-style black + cobalt + purple (matches home hero) */}
         <div
           className={cn(
-            'transition-all duration-300',
+            'pointer-events-none absolute inset-0 z-0 lg:hidden transition-opacity duration-500 ease-out',
+            (isScrolled || isMobileMenuOpen) && isVisible ? 'opacity-100' : 'opacity-0'
+          )}
+          aria-hidden
+        >
+          <div className="absolute inset-0 bg-black" />
+          <div
+            className="absolute -top-12 -left-12 h-44 w-44 sm:h-52 sm:w-52 animate-cobalt-glow-pulse"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(19, 56, 190, 0.72) 0%, rgba(19, 56, 190, 0.35) 35%, rgba(19, 56, 190, 0.12) 55%, transparent 72%)',
+              boxShadow: '0 0 64px rgba(19, 56, 190, 0.35), 0 0 96px rgba(19, 56, 190, 0.2)',
+            }}
+          />
+          <div className="absolute -right-4 top-1/2 h-32 w-32 -translate-y-1/2 rounded-full bg-purple-500/20 blur-[40px] animate-pulse-slow animation-delay-2000 sm:h-40 sm:w-40 sm:blur-[52px]" />
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500/35 to-transparent" />
+        </div>
+
+        {/* Desktop: existing glass header when scrolled */}
+        <div
+          className={cn(
+            'pointer-events-none absolute inset-0 z-0 hidden transition-opacity duration-500 ease-out lg:block',
+            isScrolled && isVisible ? 'opacity-100' : 'opacity-0'
+          )}
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)',
+            backdropFilter: 'blur(20px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+          }}
+          aria-hidden
+        />
+
+        <div
+          className={cn(
+            'relative z-10 transition-[padding] duration-500 ease-out max-lg:duration-500',
             isScrolled ? 'py-1.5 sm:py-1.5' : 'py-1.5 sm:py-2'
           )}
         >
@@ -291,22 +320,39 @@ export default function Header({ locale }: HeaderProps) {
                   </button>
                 </div>
 
-                {/* Mobile Menu Button */}
+                {/* Mobile Menu Button — smooth Menu ↔ X */}
                 <button
+                  type="button"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   className={cn(
-                    'lg:hidden p-1.5 sm:p-2 rounded-md transition-colors flex-shrink-0',
+                    'lg:hidden relative p-1.5 sm:p-2 rounded-md flex-shrink-0 transition-colors duration-300',
                     isScrolled
                       ? 'hover:bg-gray-800 text-white'
                       : 'hover:bg-white/10 text-white'
                   )}
-                  aria-label="Toggle mobile menu"
+                  aria-expanded={isMobileMenuOpen}
+                  aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                 >
-                  {isMobileMenuOpen ? (
-                    <X className="w-5 h-5 sm:w-6 sm:h-6" />
-                  ) : (
-                    <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
-                  )}
+                  <span className="relative block w-5 h-5 sm:w-6 sm:h-6">
+                    <Menu
+                      className={cn(
+                        'absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ease-out',
+                        isMobileMenuOpen
+                          ? 'opacity-0 scale-75 rotate-90'
+                          : 'opacity-100 scale-100 rotate-0'
+                      )}
+                      aria-hidden
+                    />
+                    <X
+                      className={cn(
+                        'absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ease-out',
+                        isMobileMenuOpen
+                          ? 'opacity-100 scale-100 rotate-0'
+                          : 'opacity-0 scale-75 -rotate-90'
+                      )}
+                      aria-hidden
+                    />
+                  </span>
                 </button>
               </div>
             </div>
@@ -314,71 +360,104 @@ export default function Header({ locale }: HeaderProps) {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden m-0 p-0">
-          <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm m-0"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-          <div className="absolute top-0 right-0 h-full w-[85%] xs:w-[75%] sm:w-80 md:w-96 max-w-sm bg-gray-900 shadow-2xl overflow-y-auto transform transition-transform duration-300 ease-out m-0 p-0">
-            <div className="p-4 sm:p-5 md:p-6 pt-16 sm:pt-20 md:pt-24 m-0">
-              <nav className="space-y-3 sm:space-y-4 md:space-y-6">
-                <Link
-                  href={`/${locale}/about`}
-                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
-                  onClick={() => setIsMobileMenuOpen(false)}
+      {/* Mobile menu: top sheet (slides down), header stays above dimmed backdrop */}
+      <div
+        className={cn(
+          'fixed inset-0 z-[60] lg:hidden transition-opacity duration-300 ease-out',
+          isMobileMenuOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        )}
+        aria-hidden={!isMobileMenuOpen}
+      >
+        {/* Backdrop — below header so bar + toggle stay usable */}
+        <div
+          className="absolute left-0 right-0 top-14 sm:top-16 bottom-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+        {/* Panel slides from top — same black + cobalt + purple as HeroSection */}
+        <div
+          className={cn(
+            'absolute left-0 right-0 top-14 sm:top-16 max-h-[min(85vh,calc(100dvh-3.5rem))] overflow-y-auto',
+            'shadow-2xl rounded-b-2xl border-b border-white/10',
+            'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform',
+            isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
+          )}
+        >
+          <div className="relative min-h-full">
+            <div className="pointer-events-none absolute inset-0 z-0 min-h-full overflow-hidden rounded-b-2xl" aria-hidden>
+              <div className="absolute inset-0 bg-black" />
+              <div className="absolute inset-0 opacity-30">
+                <div className="absolute bottom-0 left-1/3 w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] rounded-full bg-purple-500/15 blur-[60px] sm:blur-[80px] animate-pulse-slow animation-delay-2000" />
+              </div>
+              <div
+                className="absolute -top-10 -left-10 h-44 w-44 sm:h-56 sm:w-56 rounded-full animate-cobalt-glow-pulse"
+                style={{
+                  background:
+                    'radial-gradient(circle, rgba(19, 56, 190, 0.8) 0%, rgba(19, 56, 190, 0.45) 35%, rgba(19, 56, 190, 0.15) 55%, transparent 72%)',
+                  boxShadow:
+                    '0 0 72px rgba(19, 56, 190, 0.45), 0 0 110px rgba(19, 56, 190, 0.28)',
+                }}
+              />
+              <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500/35 to-transparent" />
+            </div>
+            <div className="relative z-10 p-4 sm:p-5 md:p-6 pb-8">
+            <nav className="space-y-3 sm:space-y-4 md:space-y-6">
+              <Link
+                href={`/${locale}/about`}
+                className="block text-sm sm:text-base md:text-lg font-medium text-white/80 hover:text-white transition-colors py-1"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t('about')}
+              </Link>
+              <Link
+                href={`/${locale}/properties`}
+                className="block text-sm sm:text-base md:text-lg font-medium text-white/80 hover:text-white transition-colors py-1"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t('portfolio')}
+              </Link>
+              <Link
+                href={`/${locale}/sell`}
+                className="block text-sm sm:text-base md:text-lg font-medium text-white/80 hover:text-white transition-colors py-1"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t('sell')}
+              </Link>
+              <Link
+                href={`/${locale}/contact`}
+                className="block text-sm sm:text-base md:text-lg font-medium text-white/80 hover:text-white transition-colors py-1"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t('contact')}
+              </Link>
+              <Link
+                href={`/${locale}/team`}
+                className="block text-sm sm:text-base md:text-lg font-medium text-white/80 hover:text-white transition-colors py-1"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t('team')}
+              </Link>
+              <div className="pt-3 sm:pt-4 md:pt-6 space-y-2 sm:space-y-3 md:space-y-4 border-t border-white/15 mt-3 sm:mt-4 md:mt-6">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsPortfolioModalOpen(true);
+                  }}
+                  className="block w-full text-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base font-medium rounded-full transition-all duration-300"
                 >
-                  {t('about')}
-                </Link>
-                <Link
-                  href={`/${locale}/properties`}
-                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {t('portfolio')}
-                </Link>
-                <Link
-                  href={`/${locale}/sell`}
-                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {t('sell')}
-                </Link>
-                <Link
-                  href={`/${locale}/contact`}
-                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {t('contact')}
-                </Link>
-                <Link
-                  href={`/${locale}/team`}
-                  className="block text-sm sm:text-base md:text-lg font-medium text-gray-300 hover:text-white transition-colors py-1"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {t('team')}
-                </Link>
-                <div className="pt-3 sm:pt-4 md:pt-6 space-y-2 sm:space-y-3 md:space-y-4 border-t border-gray-700 mt-3 sm:mt-4 md:mt-6">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      setIsPortfolioModalOpen(true);
-                    }}
-                    className="block w-full text-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base font-medium rounded-full transition-all duration-300"
-                  >
-                    Request Private Portfolio
-                  </button>
-                  <div className="flex justify-center pt-1 sm:pt-2">
-                    <LanguageSwitcher locale={locale} />
-                  </div>
+                  Request Private Portfolio
+                </button>
+                <div className="flex justify-center pt-1 sm:pt-2">
+                  <LanguageSwitcher locale={locale} />
                 </div>
-              </nav>
+              </div>
+            </nav>
             </div>
           </div>
         </div>
-      )}
+      </div>
 
       <RequestPrivatePortfolioModal
         isOpen={isPortfolioModalOpen}

@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       }
 
       // Validate file type
-      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
       if (!allowedTypes.includes(fileContentType)) {
         return NextResponse.json(
           { error: 'Invalid file type. Only images are allowed.' },
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
       }
 
       // Validate file type
-      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
       if (!allowedTypes.includes(file.type)) {
         return NextResponse.json(
           { error: 'Invalid file type. Only images are allowed.' },
