@@ -182,7 +182,8 @@ export default function Header({ locale }: HeaderProps) {
           )}
           aria-hidden
         >
-          <div className="absolute inset-0 bg-black" />
+          <div className="absolute inset-0 bg-black/85 backdrop-blur-md" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/[0.04] to-transparent" />
           <div
             className="absolute -top-12 -left-12 h-44 w-44 sm:h-52 sm:w-52 animate-cobalt-glow-pulse"
             style={{
@@ -192,7 +193,7 @@ export default function Header({ locale }: HeaderProps) {
             }}
           />
           <div className="absolute -right-4 top-1/2 h-32 w-32 -translate-y-1/2 rounded-full bg-purple-500/20 blur-[40px] animate-pulse-slow animation-delay-2000 sm:h-40 sm:w-40 sm:blur-[52px]" />
-          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500/35 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400/45 to-transparent" />
         </div>
 
         {/* Desktop: existing glass header when scrolled */}
@@ -379,14 +380,15 @@ export default function Header({ locale }: HeaderProps) {
         <div
           className={cn(
             'absolute left-0 right-0 top-14 sm:top-16 max-h-[min(85vh,calc(100dvh-3.5rem))] overflow-y-auto',
-            'shadow-2xl rounded-b-2xl border-b border-white/10',
+            'shadow-2xl rounded-b-2xl border border-white/15 border-t-0 backdrop-blur-xl',
             'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform',
             isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
           )}
         >
           <div className="relative min-h-full">
             <div className="pointer-events-none absolute inset-0 z-0 min-h-full overflow-hidden rounded-b-2xl" aria-hidden>
-              <div className="absolute inset-0 bg-black" />
+              <div className="absolute inset-0 bg-black/80 backdrop-blur-xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/[0.03] to-transparent" />
               <div className="absolute inset-0 opacity-30">
                 <div className="absolute bottom-0 left-1/3 w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] rounded-full bg-purple-500/15 blur-[60px] sm:blur-[80px] animate-pulse-slow animation-delay-2000" />
               </div>
