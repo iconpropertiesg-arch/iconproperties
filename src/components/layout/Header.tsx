@@ -163,7 +163,7 @@ export default function Header({ locale }: HeaderProps) {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 w-full overflow-hidden',
+          'fixed top-0 left-0 right-0 w-full',
           // Smoother slide on phones; slightly snappier on large screens
           'transition-[transform,opacity] duration-300 ease-out',
           'max-lg:duration-500 max-lg:ease-[cubic-bezier(0.4,0,0.2,1)]',
