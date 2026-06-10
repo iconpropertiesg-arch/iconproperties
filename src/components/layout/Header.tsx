@@ -379,13 +379,13 @@ export default function Header({ locale }: HeaderProps) {
         {/* Panel slides from top — same black + cobalt + purple as HeroSection */}
         <div
           className={cn(
-            'absolute left-0 right-0 top-14 sm:top-16 max-h-[min(85vh,calc(100dvh-3.5rem))] overflow-y-auto',
+            'absolute left-0 right-0 top-14 sm:top-16',
             'shadow-2xl rounded-b-2xl border border-white/15 border-t-0 backdrop-blur-xl',
             'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform',
             isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
           )}
         >
-          <div className="relative min-h-full">
+          <div className="relative max-h-[min(85vh,calc(100dvh-3.5rem))] overflow-y-auto">
             <div className="pointer-events-none absolute inset-0 z-0 min-h-full overflow-hidden rounded-b-2xl" aria-hidden>
               <div className="absolute inset-0 bg-black/80 backdrop-blur-xl" />
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/[0.03] to-transparent" />

@@ -269,7 +269,7 @@ export default function HowWeWork({ locale }: HowWeWorkProps) {
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl w-full">
               <div className="relative aspect-[4/5] sm:aspect-[4/5] w-full bg-gradient-to-br from-gray-900/20 to-black/40">
                 <Image
-                  src="/images/home_section_property.jpg"
+                  src="/images/A7404675.jpg"
                   alt="Private Buying Experience"
                   fill
                   className="object-cover"
