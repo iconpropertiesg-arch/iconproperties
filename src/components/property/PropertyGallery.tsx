@@ -121,10 +121,10 @@ export default function PropertyGallery({ property, locale }: PropertyGalleryPro
 
   return (
     <>
-      <div className="relative w-full group">
+      <div className="relative w-full max-w-full mx-auto group">
         {/* Main Carousel Container */}
         <div 
-          className="relative w-[300px] md:w-full h-[350px] md:h-[600px] lg:h-[700px] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-900 to-black border border-gray-800 shadow-2xl"
+          className="relative w-full mx-auto h-[350px] md:h-[600px] lg:h-[700px] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-900 to-black border border-gray-800 shadow-2xl"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
